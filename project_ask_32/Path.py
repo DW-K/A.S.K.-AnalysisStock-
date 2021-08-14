@@ -4,8 +4,9 @@ RESULT_PATH_STOCK = r'.\dataset\stockData'
 
 
 def createFolder(directory):
-    dirs = directory.split('\\')[1:]
-    path = r"."
+    dirs = directory.split('\\')
+    path = dirs[0]
+    dirs = dirs[1:]
     for d in dirs:
         path += '/' + d
         try:

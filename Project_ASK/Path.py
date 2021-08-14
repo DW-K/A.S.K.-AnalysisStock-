@@ -7,10 +7,10 @@ RESULT_PATH_COMBINE = r'.\dataset\combine'
 RESULT_PATH_MODEL = r'.\dataset\models'  # 결과 저장된 경로
 
 
-
 def createFolder(directory):
-    dirs = directory.split('\\')[1:]
-    path = r"."
+    dirs = directory.split('\\')
+    path = dirs[0]
+    dirs = dirs[1:]
     for d in dirs:
         path += '/' + d
         try:

@@ -32,6 +32,7 @@ result = {}
 # 엑셀로 저장하기 위한 변수
 RESULT_PATH_NEWS = Path.RESULT_PATH_NEWS
 now = datetime.now()  # 파일이름 현 시간으로 저장하기
+today = now.strftime("%Y%m%d")
 
 
 # 내용 정제화 함수
@@ -101,8 +102,8 @@ def crawler(maxpage, query, sort, s_date, e_date):
 
     # 새로 만들 파일이름 지정
 
-    outputFileName = f'{query}_{now.year}{now.month}{now.day}_n.xlsx'
-    filePath = fr"{RESULT_PATH_NEWS}\{now.year}{now.month}{now.hour}"
+    outputFileName = f'{query}_{today}_n.xlsx'
+    filePath = fr"{RESULT_PATH_NEWS}\{today}"
     Path.createFolder(filePath)
     df.to_excel(fr"{filePath}\{outputFileName}", sheet_name='sheet1', index_label="index")
 
@@ -121,7 +122,7 @@ def main():
 
 
 if __name__ == "__main__":
-    arg_list = sys.argv[1:]
+    arg_list = sys.argv[1:]             # argument 받아서 실행
     maxpage = int(arg_list[0].decode())
     query = arg_list[1].decode()
     sort = arg_list[2].decode()

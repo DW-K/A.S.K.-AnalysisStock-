@@ -18,7 +18,6 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import LSTM
 
 
-
 filePath_n = "202184"
 filePath_s = "20210812"
 fileName_s = rf"와이지엔터테인먼트_20210812_s.xlsx"

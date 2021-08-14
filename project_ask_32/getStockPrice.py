@@ -43,6 +43,7 @@ def getStockPrice(date=None):
 
 
 if __name__ == "__main__":
+    print('start getStockPrice code')
     argList = sys.argv
     del argList[0]
     date = None

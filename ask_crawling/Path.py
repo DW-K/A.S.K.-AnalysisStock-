@@ -5,8 +5,9 @@ RESULT_PATH_TWEET = r'.\dataset\tweets'  # 결과 저장할 경로
 
 
 def createFolder(directory):
-    dirs = directory.split('\\')[1:]
-    path = r"."
+    dirs = directory.split('\\')
+    path = dirs[0]
+    dirs = dirs[1:]
     for d in dirs:
         path += '/' + d
         try:
