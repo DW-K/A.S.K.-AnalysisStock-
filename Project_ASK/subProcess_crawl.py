@@ -11,7 +11,7 @@ def subProcess_crawl(func, arg=[]):
         interpreter = json_data['interpreter']
 
     kwargs = {"stdin": subprocess.PIPE, "stdout": subprocess.PIPE, "env": env}
-    with subprocess.Popen([interpreter, fr'D:\IDE\workspace\ASK\ask_crawling\{func}.py'] + arg, **kwargs,
+    with subprocess.Popen([interpreter, fr'..\\ask_crawling\{func}.py'] + arg, **kwargs,
                           shell=True) as proc:
         out, err = proc.communicate()
         if err is not None:
