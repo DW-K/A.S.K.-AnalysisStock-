@@ -42,3 +42,11 @@ def getData(filePath_n=None, fileName_n=None, filePath_s=None, fileName_s=None):
     result = combDf(df_n, df_s)
 
     return result
+
+
+if __name__ == "__main__":
+    filePath_n = "210817"
+    filePath_s = "210817"
+    fileName_s = rf"와이지엔터테인먼트_210817_s.xlsx"
+    fileName_n = rf"YG엔터_210817_n.xlsx"
+    getData(filePath_n, fileName_n, filePath_s, fileName_s)

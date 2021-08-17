@@ -32,7 +32,7 @@ result = {}
 # 엑셀로 저장하기 위한 변수
 RESULT_PATH_NEWS = Path.RESULT_PATH_NEWS
 now = datetime.now()  # 파일이름 현 시간으로 저장하기
-today = now.strftime("%Y%m%d")
+today = now.strftime("%y%m%d")
 
 
 # 내용 정제화 함수

@@ -14,7 +14,7 @@ def getStockPrice(date=None):
     # codes = kospi + kosdaq
     kiwoom = connectKiwoom()
 
-    enterCodes = getStockCode(kiwoom)
+    enterCodes = getStockCode(kiwoom=kiwoom)
 
     # 문자열로 오늘 날짜 얻기
     now = datetime.datetime.now()
@@ -23,7 +23,7 @@ def getStockPrice(date=None):
     if date is None:
         date = today
 
-    path = fr'{Path.RESULT_PATH_STOCK}\{date}'
+    path = fr'{Path.RESULT_PATH_STOCK}\{date[2:]}'
     # 전 종목의 일봉 데이터
     for i, (name, code) in enumerate(enterCodes.items()):
         # print(f"{i}/{len(codes)} {name} : {code}")
@@ -35,11 +35,11 @@ def getStockPrice(date=None):
                                   next=0)
 
         Path.createFolder(path)
-        out_name = fr"{path}\{name}_{date}_s.xlsx"
+        out_name = fr"{path}\{name}_{date[2:]}_s.xlsx"
         df['일자'] = df['일자'].astype(str)
         df.to_excel(out_name, index_label="index")
         time.sleep(3.6)
-    return date
+    return date[2:]
 
 
 if __name__ == "__main__":

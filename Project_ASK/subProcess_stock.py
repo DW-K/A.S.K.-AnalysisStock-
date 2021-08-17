@@ -33,4 +33,5 @@ def getStockPrice(date=None):
 
 
 if __name__ == "__main__":
-    subProcess_stock('test', ['123', '512'])
+    # getStockPrice()
+    subProcess_stock('makeUpdown', ['210817'])
