@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
+            "outputFile": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\abnc7\\.gradle\\caches\\transforms-2\\files-2.1\\f70108d8f952e77c4f6798b2aedc23d5\\play-services-basement-17.5.0\\res\\values-zh-rTW\\values.xml",

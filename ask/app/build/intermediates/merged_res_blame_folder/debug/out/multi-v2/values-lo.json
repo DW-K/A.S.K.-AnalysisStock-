@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo\\values-lo.xml",
+            "outputFile": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lo\\values-lo.xml",
             "map": [
                 {
                     "source": "C:\\Users\\abnc7\\.gradle\\caches\\transforms-2\\files-2.1\\d4a4edd97917c04697fd2714add0e47c\\play-services-base-17.5.0\\res\\values-lo\\values.xml",

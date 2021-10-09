@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
 MERGED from [androidx.databinding:viewbinding:4.2.2] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\80b22608c0af8003089e54fd945b08dc\viewbinding-4.2.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\4291e77252f60ca6d1a1a48c13680a53\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:17:1-24:12
@@ -61,27 +61,27 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\abnc7\.gradle\caches\transform
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\ca4ee02f6db6a6e078275f81cf0476ca\annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\0a5af1d55cdad077af50335fcc9ea399\protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\2a3cff0e684721cbdaa449f00fb06084\grpc-android-1.28.0\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
 	package
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:4:5-29
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:4:5-29
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-24:12
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:1-24:12
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:6:5-22:19
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:6:5-22:19
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\397a0632e908f94d64a28d1ce882280b\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
@@ -111,47 +111,47 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ab
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.5.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\99eab6d36c15628ea6ee736253a950eb\core-1.5.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:11:9-35
 	android:label
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:9:9-41
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:9:9-41
 	android:roundIcon
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:10:9-54
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:10:9-54
 	android:icon
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:8:9-43
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:8:9-43
 	android:allowBackup
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:7:9-35
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:12:9-41
 activity#com.gachon.ask.MainActivity
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:13:9-49
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:13:9-49
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:13:19-47
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:13:19-47
 activity#com.gachon.ask.LoadingActivity
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:14:9-52
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:14:9-52
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:14:19-50
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:14:19-50
 activity#com.gachon.ask.LoginActivity
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:15:9-20:20
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:15:9-20:20
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:15:19-48
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:15:19-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:16:13-19:29
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:16:13-19:29
 action#android.intent.action.MAIN
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:17:17-69
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:17:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:18:17-77
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:18:17-77
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:18:27-74
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:18:27-74
 activity#com.gachon.ask.SignUpActivity
-ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:21:9-51
+ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:21:9-51
 	android:name
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:21:19-49
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:21:19-49
 uses-sdk
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:4.2.2] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\80b22608c0af8003089e54fd945b08dc\viewbinding-4.2.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.databinding:viewbinding:4.2.2] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\80b22608c0af8003089e54fd945b08dc\viewbinding-4.2.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\4291e77252f60ca6d1a1a48c13680a53\multidex-2.0.0\AndroidManifest.xml:20:5-43
@@ -266,16 +266,16 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\abn
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\0a5af1d55cdad077af50335fcc9ea399\protolite-well-known-types-18.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\2a3cff0e684721cbdaa449f00fb06084\grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\2a3cff0e684721cbdaa449f00fb06084\grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		INJECTED from D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.firebase:firebase-firestore:23.0.3] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\f5d15b061aaf56ff18afda028607c342\firebase-firestore-23.0.3\AndroidManifest.xml:13:5-79
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\997262d7f00118c57e855a684626a99d\firebase-auth-21.0.1\AndroidManifest.xml:24:5-79
