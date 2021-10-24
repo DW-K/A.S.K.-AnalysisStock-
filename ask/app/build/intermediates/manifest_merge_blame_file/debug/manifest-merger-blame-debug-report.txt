@@ -6,9 +6,9 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
-8-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+8-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml
+9-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 10
 11    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
 12    <!-- <uses-sdk android:minSdkVersion="14" /> -->
@@ -20,47 +20,47 @@
 14-->[com.google.firebase:firebase-firestore:23.0.3] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\f5d15b061aaf56ff18afda028607c342\firebase-firestore-23.0.3\AndroidManifest.xml:14:22-64
 15
 16    <application
-16-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:6:5-22:19
+16-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:6:5-22:19
 17        android:name="androidx.multidex.MultiDexApplication"
 18        android:allowBackup="true"
-18-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:7:9-35
+18-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:7:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 19-->[androidx.core:core:1.5.0] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\99eab6d36c15628ea6ee736253a950eb\core-1.5.0\AndroidManifest.xml:24:18-86
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
-21-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:8:9-43
+21-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:8:9-43
 22        android:label="@string/app_name"
-22-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:9:9-41
+22-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:9:9-41
 23        android:roundIcon="@mipmap/ic_launcher_round"
-23-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:10:9-54
+23-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:10:9-54
 24        android:supportsRtl="true"
-24-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:11:9-35
+24-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:11:9-35
 25        android:testOnly="true"
 26        android:theme="@style/Theme.Ask" >
-26-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:12:9-41
+26-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:12:9-41
 27        <activity android:name="com.gachon.ask.MainActivity" />
-27-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:13:9-49
-27-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:13:19-47
+27-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:13:9-49
+27-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:13:19-47
 28        <activity android:name="com.gachon.ask.LoadingActivity" />
-28-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:14:9-52
-28-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:14:19-50
+28-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:14:9-52
+28-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:14:19-50
 29        <activity android:name="com.gachon.ask.LoginActivity" >
-29-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:15:9-20:20
-29-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:15:19-48
+29-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:15:9-20:20
+29-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:15:19-48
 30            <intent-filter>
-30-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:16:13-19:29
+30-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:16:13-19:29
 31                <action android:name="android.intent.action.MAIN" />
-31-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:17:17-69
-31-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:17:25-66
+31-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:17:17-69
+31-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:17:25-66
 32
 33                <category android:name="android.intent.category.LAUNCHER" />
-33-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:18:17-77
-33-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:18:27-74
+33-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:18:17-77
+33-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:18:27-74
 34            </intent-filter>
 35        </activity>
 36        <activity android:name="com.gachon.ask.SignUpActivity" />
-36-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:21:9-51
-36-->C:\Users\abnc7\AndroidStudioProjects\ask\app\src\main\AndroidManifest.xml:21:19-49
+36-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:21:9-51
+36-->D:\ASK\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:21:19-49
 37
 38        <service
 38-->[com.google.firebase:firebase-firestore:23.0.3] C:\Users\abnc7\.gradle\caches\transforms-2\files-2.1\f5d15b061aaf56ff18afda028607c342\firebase-firestore-23.0.3\AndroidManifest.xml:17:9-23:19

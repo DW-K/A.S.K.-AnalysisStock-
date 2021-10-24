@@ -11,7 +11,7 @@ public class User {
     private Timestamp registerTime; // 가입 시간
     private int userLevel;        // 레벨
     private int userExp;          // 경험치
-    private int userMoney;        // 내 자산
+    private int userMoney;        // 내 자산 (주식, 주문 가능 금액)
     private int postAnalysisNum;  // 분석글 수
     private int postQuestionNum;  // 질문 수
     private int postAnswerNum;    // 답변 수

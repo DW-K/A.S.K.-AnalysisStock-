@@ -1746,6 +1746,11 @@ drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_menu_community
+drawable ic_menu_explore
+drawable ic_menu_home
+drawable ic_menu_mypage
+drawable ic_menu_ranking
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -1908,6 +1913,7 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id collapseActionView
+id communityItem
 id confirm_button
 id container
 id content
@@ -1961,6 +1967,7 @@ id et_password_check
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id exploreItem
 id fade
 id fill
 id fill_horizontal
@@ -1972,6 +1979,7 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
+id frameLayout
 id ghost_view
 id ghost_view_holder
 id gone
@@ -1985,6 +1993,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id homeItem
 id honorRequest
 id icon
 id icon_group
@@ -2064,6 +2073,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id myPageItem
+id navigationView
 id navigation_bar_item_icon_view
 id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
@@ -2097,6 +2108,7 @@ id postLayout
 id progress_circular
 id progress_horizontal
 id radio
+id rankItem
 id ratio
 id rectangles
 id reverseSawtooth
@@ -2319,6 +2331,11 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_community
+layout fragment_explore
+layout fragment_home
+layout fragment_mypage
+layout fragment_ranking
 layout material_chip_input_combo
 layout material_clock_display
 layout material_clock_display_divider
@@ -2387,6 +2404,7 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
+menu menu_bottomnavigationview
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
