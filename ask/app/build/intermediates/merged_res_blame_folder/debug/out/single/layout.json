@@ -1,18 +1,38 @@
 [
     {
-        "merged": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
-        "source": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\src\\main\\res\\layout\\activity_main.xml"
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_signup.xml",
-        "source": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\src\\main\\res\\layout\\activity_signup.xml"
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_explore.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_explore.xml"
     },
     {
-        "merged": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_loading.xml",
-        "source": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\src\\main\\res\\layout\\activity_loading.xml"
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_login.xml",
-        "source": "C:\\Users\\abnc7\\AndroidStudioProjects\\ask\\app\\src\\main\\res\\layout\\activity_login.xml"
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_loading.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_loading.xml"
+    },
+    {
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_mypage.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_mypage.xml"
+    },
+    {
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_signup.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_signup.xml"
+    },
+    {
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_ranking.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_ranking.xml"
+    },
+    {
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_login.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_community.xml",
+        "source": "D:\\ASK\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_community.xml"
     }
 ]

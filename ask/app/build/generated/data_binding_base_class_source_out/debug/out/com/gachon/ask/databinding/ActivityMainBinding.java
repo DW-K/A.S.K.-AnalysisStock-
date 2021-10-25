@@ -4,20 +4,32 @@ package com.gachon.ask.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import com.gachon.ask.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView) {
+  @NonNull
+  public final FrameLayout frameLayout;
+
+  @NonNull
+  public final BottomNavigationView navigationView;
+
+  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull FrameLayout frameLayout,
+      @NonNull BottomNavigationView navigationView) {
     this.rootView = rootView;
+    this.frameLayout = frameLayout;
+    this.navigationView = navigationView;
   }
 
   @Override
@@ -43,10 +55,25 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @NonNull
   public static ActivityMainBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.frameLayout;
+      FrameLayout frameLayout = rootView.findViewById(id);
+      if (frameLayout == null) {
+        break missingId;
+      }
 
-    return new ActivityMainBinding((ConstraintLayout) rootView);
+      id = R.id.navigationView;
+      BottomNavigationView navigationView = rootView.findViewById(id);
+      if (navigationView == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ConstraintLayout) rootView, frameLayout, navigationView);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

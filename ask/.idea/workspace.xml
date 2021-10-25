@@ -13,12 +13,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a1d95c3-2166-4759-9c41-10b7ebcf12d4" name="Default Changelist" comment="" />
+    <list default="true" id="9a1d95c3-2166-4759-9c41-10b7ebcf12d4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\abnc7\.android\avd\Nexus_5X_API_29_x86.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -70,15 +73,20 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1yOrPiwE1kx2PMWy5z45x9CuBSb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="D:/ASK/A.S.K.-AnalysisStock-/ask" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../se_TP/Dawaga" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -184,38 +192,38 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="575" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1633801387475">
+    <state x="575" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1635051600085">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="575" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1633801387475" />
+    <state x="575" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1635051600085" />
     <state x="60" y="278" key="AndroidCreateResourceDirectoryDialog" timestamp="1633783807814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="60" y="278" key="AndroidCreateResourceDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633783807814" />
-    <state x="540" y="275" key="AndroidCreateResourceFileDialog" timestamp="1633787036988">
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog" timestamp="1635048892197">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633787036988" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1633805192652">
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1635048892197" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1634527727768">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1633805192652" />
-    <state width="1877" height="55" key="GridCell.Tab.0.bottom" timestamp="1633802175329">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1634527727768" />
+    <state width="938" height="55" key="GridCell.Tab.0.bottom" timestamp="1635052316458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1633802175329" />
-    <state width="1877" height="55" key="GridCell.Tab.0.center" timestamp="1633802175329">
+    <state width="938" height="55" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1635052316458" />
+    <state width="938" height="55" key="GridCell.Tab.0.center" timestamp="1635052316458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1633802175329" />
-    <state width="1877" height="55" key="GridCell.Tab.0.left" timestamp="1633802175329">
+    <state width="938" height="55" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1635052316458" />
+    <state width="938" height="55" key="GridCell.Tab.0.left" timestamp="1635052316458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1633802175329" />
-    <state width="1877" height="55" key="GridCell.Tab.0.right" timestamp="1633802175329">
+    <state width="938" height="55" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1635052316458" />
+    <state width="938" height="55" key="GridCell.Tab.0.right" timestamp="1635052316458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1633802175329" />
+    <state width="938" height="55" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1635052316458" />
     <state width="254" height="198" key="RunAnythingAction_Filter_Popup" timestamp="1633798221268">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -224,6 +232,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1633804525676" />
+    <state x="754" y="297" key="chooseDestDirectoryDialog" timestamp="1635051703165">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="754" y="297" key="chooseDestDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1635051703165" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1633798221940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
