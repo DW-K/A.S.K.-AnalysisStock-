@@ -123,10 +123,11 @@ def main():
 
 if __name__ == "__main__":
     arg_list = sys.argv[1:]             # argument 받아서 실행
-    maxpage = int(arg_list[0].decode())
-    query = arg_list[1].decode()
-    sort = arg_list[2].decode()
-    s_date = arg_list[3].decode()
-    e_date = arg_list[4].decode()
+    category = arg_list[0].decode()
+    maxpage = int(arg_list[1].decode())
+    query = arg_list[2].decode()
+    sort = arg_list[3].decode()
+    s_date = arg_list[4].decode()
+    e_date = arg_list[5].decode()
     # crawler(20, "YG엔터", "0", "2021.06.01", "2021.08.00")
     crawler(maxpage, query, sort, s_date, e_date)

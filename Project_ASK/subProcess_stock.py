@@ -1,6 +1,5 @@
 import subprocess
 import json
-import os
 
 
 def subProcess_stock(func, arg=[]):
@@ -12,14 +11,25 @@ def subProcess_stock(func, arg=[]):
         interpreter = json_data['interpreter']
 
     kwargs = {"stdin": subprocess.PIPE, "stdout": subprocess.PIPE, "env": env}
-    with subprocess.Popen([interpreter, fr'..\project_ask_32\{func}.py'] + arg, **kwargs,
+    with subprocess.Popen([interpreter, fr'..\project_ask_32\{func}.py'] + arg, **kwargs, bufsize=-1,
                           shell=True) as proc:
-
         out, err = proc.communicate()
         if err is not None:
             print(err)
 
-        print(out.decode())
+    # arg_string = json.dumps(arg[0]).encode('utf-8')
+    # arg_string += b"!" + bytes(arg[1], encoding='utf-8')
+    # arg_string += b"!" + bytes(arg[2], encoding='utf-8')
+    #
+    # kwargs = {"stdin": subprocess.PIPE, "stdout": subprocess.PIPE, "env": env}
+    # with subprocess.Popen(fr'{interpreter} ..\project_ask_32\{func}.py', **kwargs, bufsize=-1,
+    #                       shell=True) as proc:
+    #
+    #     out, err = proc.communicate(input=arg_string, timeout=None)
+    #     if err is not None:
+    #         print(err)
+
+    print(out.decode())
 
     # return out.decode()
 
@@ -32,6 +42,17 @@ def getStockPrice(date=None):
     print("complete crawling stock")
 
 
+# def getStockCode(args):
+#     subProcess_stock('getStockCode', arg=args)
+
+
+def getStockCode(stockDict, filePath, fileName):
+    subProcess_stock('getStockCode', arg=[stockDict, filePath, fileName])
+
+
+def getStockCode_temp(filePath, fileName):
+    subProcess_stock('getStockCode', arg=[filePath, fileName])
+
+
 if __name__ == "__main__":
-    # getStockPrice()
-    subProcess_stock('makeUpdown', ['210817'])
+    pass

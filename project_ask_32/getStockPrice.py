@@ -7,14 +7,14 @@ from getStockCode import getStockCode
 from makeUpdown import makeUpdown
 
 
-def getStockPrice(date=None):
+def getStockPrice(date=None, stockList=None, ):
     # # 전종목 종목코드
     # kospi = kiwoom.GetCodeListByMarket('0')
     # kosdaq = kiwoom.GetCodeListByMarket('10')
     # codes = kospi + kosdaq
     kiwoom = connectKiwoom()
 
-    enterCodes = getStockCode(kiwoom=kiwoom)
+    enterCodes = getStockCode(kiwoom=kiwoom, list=stockList)
 
     # 문자열로 오늘 날짜 얻기
     now = datetime.datetime.now()

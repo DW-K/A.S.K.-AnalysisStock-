@@ -9,17 +9,16 @@ def subProcess_crawl(func, arg=[]):
         json_data = json.load(f)
         env = json_data['env']
         interpreter = json_data['interpreter']
-
     kwargs = {"stdin": subprocess.PIPE, "stdout": subprocess.PIPE, "env": env}
-    with subprocess.Popen([interpreter, fr'..\\ask_crawling\{func}.py'] + arg, **kwargs,
+    with subprocess.Popen([interpreter, fr'..\ask_crawling\{func}.py'] + arg, **kwargs,
                           shell=True) as proc:
         out, err = proc.communicate()
         if err is not None:
             print(err)
 
-        print(out)
+        # print(out)
 
-    print("complete crawling news")
+    print(f"complete crawling news: {arg[1]}")
 
 
 def crawling_news(num, query, sort, s_date, e_date, isSentiment=True):
