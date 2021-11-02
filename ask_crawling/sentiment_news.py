@@ -1,12 +1,12 @@
 import sys
 
-from ask_crawling.crawling_news import crawler
+from crawling_news import crawler
 from pororo import Pororo
 import pandas as pd
 
 
-def sentiment(filePath):
-    df = pd.read_excel(filePath, index_col="index")
+def sentiment(filePath, sheetName):
+    df = pd.read_excel(filePath, index_col="index", sheet_name=sheetName)
 
     sa = Pororo(task="sentiment", model="brainbert.base.ko.shopping", lang="ko")
     zsl = Pororo(task="zero-topic", lang="ko")
@@ -24,19 +24,24 @@ def sentiment(filePath):
         for c in categoryResult:
             df.loc[i, c] = categoryResult[c]
 
-    df.to_excel(filePath, sheet_name='sheet1')
+    df.to_excel(filePath, sheet_name=sheetName)
 
     return filePath
 
 
 if __name__ == "__main__":
-    arg_list = sys.argv[1:]
-    maxpage = int(arg_list[0])
-    query = arg_list[1]
-    sort = arg_list[2]
-    s_date = arg_list[3]
-    e_date = arg_list[4]
-    # crawler(20, "YG엔터", "0", "2021.06.01", "2021.08.00")
-    filePath = crawler(arg_list[0], arg_list[1], arg_list[2], arg_list[3], arg_list[4])
-    filePath = sentiment(filePath=filePath)
+    arg_list = sys.argv[1:]  # argument 받아서 실행
+    category = arg_list[0]
+    companyName = arg_list[1]
+    maxpage = int(arg_list[2])
+    query = arg_list[3]
+    sort = arg_list[4]
+    s_date = arg_list[5]
+    e_date = arg_list[6]
+    print(arg_list)
+    # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
+
+    filePath = crawler(category=category, companyName=companyName, maxpage=maxpage, query=query, sort=sort, s_date=s_date, e_date=e_date)
+    # query = "이수만"
+    filePath = sentiment(filePath=filePath, sheetName=query)
 

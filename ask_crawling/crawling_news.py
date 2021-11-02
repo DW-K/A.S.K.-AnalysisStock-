@@ -46,7 +46,7 @@ def contents_cleansing(contents):
 
 
 # 크롤링 시작
-def crawler(maxpage, query, sort, s_date, e_date):
+def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
     s_from = s_date.replace(".", "")
     e_to = e_date.replace(".", "")
     page = 1
@@ -102,10 +102,10 @@ def crawler(maxpage, query, sort, s_date, e_date):
 
     # 새로 만들 파일이름 지정
 
-    outputFileName = f'{query}_{today}_n.xlsx'
-    filePath = fr"{RESULT_PATH_NEWS}\{today}"
+    outputFileName = f'{companyName}_{today}_n.xlsx'
+    filePath = fr"{RESULT_PATH_NEWS}\{category}"
     Path.createFolder(filePath)
-    df.to_excel(fr"{filePath}\{outputFileName}", sheet_name='sheet1', index_label="index")
+    df.to_excel(fr"{filePath}\{outputFileName}", sheet_name=query, index_label="index")
 
     return fr'{filePath}\{outputFileName}'
 
@@ -113,21 +113,26 @@ def crawler(maxpage, query, sort, s_date, e_date):
 # 메인함수
 def main():
     info_main = input("=" * 50 + "\n" + "입력 형식에 맞게 입력해주세요." + "\n" + " 시작하시려면 Enter를 눌러주세요." + "\n" + "=" * 50)
+    category = "에스엠"
     maxpage = input("최대 크롤링할 페이지 수 입력하시오: ")  # 10,20...
     query = input("검색어 입력: ")  # 네이버, 부동산...
     sort = input("뉴스 검색 방식 입력(관련도순=0  최신순=1  오래된순=2): ")  # 관련도순=0  최신순=1  오래된순=2
     s_date = input("시작날짜 입력(2021.06.01):")  # 2021.06.01
     e_date = input("끝날짜 입력(2021.07.00):")  # 2021.07.
-    crawler(maxpage, query, sort, s_date, e_date)
+    crawler(category, maxpage, query, sort, s_date, e_date)
 
 
 if __name__ == "__main__":
-    arg_list = sys.argv[1:]             # argument 받아서 실행
-    category = arg_list[0].decode()
-    maxpage = int(arg_list[1].decode())
-    query = arg_list[2].decode()
-    sort = arg_list[3].decode()
-    s_date = arg_list[4].decode()
-    e_date = arg_list[5].decode()
-    # crawler(20, "YG엔터", "0", "2021.06.01", "2021.08.00")
-    crawler(maxpage, query, sort, s_date, e_date)
+    arg_list = sys.argv[1:]  # argument 받아서 실행
+    category = arg_list[0]
+    companyName = arg_list[1]
+    maxpage = int(arg_list[2])
+    query = arg_list[3]
+    sort = arg_list[4]
+    s_date = arg_list[5]
+    e_date = arg_list[6]
+
+    # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
+
+    filePath = crawler(category=category, companyName=companyName, maxpage=maxpage, query=query, sort=sort,
+                       s_date=s_date, e_date=e_date)

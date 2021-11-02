@@ -34,11 +34,11 @@ def subProcess_stock(func, arg=[]):
     # return out.decode()
 
 
-def getStockPrice(date=None):
+def getStockPrice(category, companyName, stockCode, date=None):
     if date is None:
-        subProcess_stock('getStockPrice')
+        subProcess_stock('getStockPrice', arg=[category, companyName, stockCode])
     else:
-        subProcess_stock('getStockPrice', arg=date)
+        subProcess_stock('getStockPrice', arg=[category, companyName, stockCode, date])
     print("complete crawling stock")
 
 

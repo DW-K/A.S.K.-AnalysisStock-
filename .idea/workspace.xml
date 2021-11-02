@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e83eff3f-89dd-4ea7-a225-69e404802e2d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Project_ASK/crawlJson.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project_ASK/preprocess.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project_ASK/pytorchPrac.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prac/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/.ipynb_checkpoints/DLmodel-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/DLmodel.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/Path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/combineDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/combineDataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project_ASK/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/predictModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/predictModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_ASK/predictModel_pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/predictModel_pytorch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project_ASK/subProcess_crawl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/subProcess_crawl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project_ASK/subProcess_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project_ASK/subProcess_stock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ask_crawling/crawling_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/ask_crawling/crawling_news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ask_crawling/sentiment_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/ask_crawling/sentiment_news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_ask_32/Path.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_ask_32/Path.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_ask_32/getStockPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_ask_32/getStockPrice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_ask_32/makeUpdown.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_ask_32/stockJson.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_ask_32/stockJson.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
