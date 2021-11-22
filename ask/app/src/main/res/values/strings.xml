@@ -2,4 +2,10 @@
     <string name="app_name">ask</string>
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
+    <string name="sentiment_analysis_info">키워드에 대한
+    뉴스/SNS의
+    감성분석 결과를
+    참고해보세요!
+    </string>
+    <string name="stock_predict_info">재무재표와뉴스/SNS를 통해주가 변동을예측해드립니다!</string>
 </resources>

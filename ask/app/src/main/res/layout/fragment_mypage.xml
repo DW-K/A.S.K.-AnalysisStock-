@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".MainActivity">
+    tools:context=".MyPageFragment">
+
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,18 +15,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/mypage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="마이페이지"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <View
-            android:id="@+id/view_mypage_top"
+            android:id="@+id/view_mypage_user"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_marginTop="48dp"
             android:background="#cedeff"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
         </View>
-
 
         <TextView
             android:id="@+id/username_title"
@@ -38,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.089"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_backgroundImage_mypage" />
+            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
 
         <TextView
             android:id="@+id/userlevel_text"
@@ -52,30 +72,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.089"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_backgroundImage_mypage" />
+            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
 
         <TextView
-            android:id="@+id/total_assets_title"
+            android:id="@+id/mypage_user_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="안녕하세요"
-            app:layout_constraintEnd_toEndOf="@+id/view_backgroundImage_mypage"
+            app:layout_constraintEnd_toEndOf="@+id/mypage_user_background_image"
             app:layout_constraintHorizontal_bias="0.092"
-            app:layout_constraintStart_toStartOf="@+id/view_backgroundImage_mypage"
+            app:layout_constraintStart_toStartOf="@+id/mypage_user_background_image"
             app:layout_constraintTop_toBottomOf="@+id/username_title" />
 
         <View
-            android:id="@+id/view_backgroundImage_mypage"
+            android:id="@+id/mypage_user_background_image"
             android:layout_width="match_parent"
             android:layout_height="180dp"
+            android:layout_marginTop="11dp"
             android:background="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view_mypage_top"></View>
+            app:layout_constraintTop_toBottomOf="@+id/mypage_title"></View>
 
 
         <LinearLayout
-            android:id="@+id/frameLayout3"
+            android:id="@+id/mypage_recent_achivement"
             android:layout_width="325dp"
             android:layout_height="268dp"
             android:layout_marginHorizontal="20dp"
@@ -89,7 +110,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_mypage_top">>
+            app:layout_constraintTop_toBottomOf="@+id/view_mypage_user">>
 
             <TextView
                 android:id="@+id/recent_achievements_title"
@@ -111,9 +132,9 @@
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
-                app:layout_constraintStart_toStartOf="@+id/frameLayout3"
-                app:layout_constraintTop_toTopOf="@+id/frameLayout3">
+                app:layout_constraintEnd_toEndOf="@+id/mypage_recent_achivement"
+                app:layout_constraintStart_toStartOf="@+id/mypage_recent_achivement"
+                app:layout_constraintTop_toTopOf="@+id/mypage_recent_achivement">
 
                 <LinearLayout
                     android:layout_margin="10dp"
@@ -188,13 +209,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/mypage_user_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_backgroundImage_mypage"
+            app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -208,7 +229,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_mypage_top"
+            app:layout_constraintBottom_toBottomOf="@+id/view_mypage_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userlevel_text" />
 
