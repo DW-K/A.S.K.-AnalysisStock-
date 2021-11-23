@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_community.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_community.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_login.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_mypage.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_mypage.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_signup.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_signup.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_explore.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_explore.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_ranking.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_ranking.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_loading.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_loading.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_main.xml"
+    }
+]
