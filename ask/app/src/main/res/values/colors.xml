@@ -7,6 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FFAAAAAA</color>
     <color name="main_color">#CEDEFF</color>
     <color name="text_color1">#2699FB</color>
+
+    <color name="themeColor">#2699FB</color>
+    <color name="skyblue_background">#CEDEFF</color>
+    <color name="skyblue_2">#BCE0FD</color>
+    <color name="blue1">#0062E7</color>
 </resources>

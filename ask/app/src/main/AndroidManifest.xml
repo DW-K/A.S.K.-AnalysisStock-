@@ -19,6 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity"/>
+        <activity android:name=".WritingActivity" />
+        <activity android:name=".community.ListDetailActivity"/>
+        <activity android:name=".community.ListActivity"/>
+        <activity android:name=".CommunityFragment"
+            tools:ignore="Instantiatable" />
+
+
     </application>
 
 </manifest>

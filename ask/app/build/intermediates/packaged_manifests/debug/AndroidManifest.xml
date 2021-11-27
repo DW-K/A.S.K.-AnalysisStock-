@@ -34,6 +34,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gachon.ask.SignUpActivity" />
+        <activity android:name="com.gachon.ask.WritingActivity" />
+        <activity android:name="com.gachon.ask.community.ListDetailActivity" />
+        <activity android:name="com.gachon.ask.community.ListActivity" />
+        <activity android:name="com.gachon.ask.CommunityFragment" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"

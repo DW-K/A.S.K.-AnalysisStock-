@@ -1006,6 +1006,7 @@ color background_floating_material_light
 color background_material_dark
 color background_material_light
 color black
+color blue1
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1080,6 +1081,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color gray
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color main_color
@@ -1188,6 +1190,8 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color skyblue_2
+color skyblue_background
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -1199,6 +1203,7 @@ color teal_700
 color test_mtrl_calendar_day
 color test_mtrl_calendar_day_selected
 color text_color1
+color themeColor
 color tooltip_background_dark
 color tooltip_background_light
 color white
@@ -1707,6 +1712,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable baseline_search_24
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1863,6 +1869,7 @@ id action_mode_close_button
 id action_text
 id actions
 id activity_chooser_view_content
+id activity_main
 id add
 id adjust_height
 id adjust_width
@@ -1891,13 +1898,21 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btn_add_post
+id btn_cancel
+id btn_community_car
+id btn_community_electronics
+id btn_community_entertainment
+id btn_community_it
 id btn_go_login
 id btn_google_login
+id btn_join
 id btn_login
 id btn_ranking_daily
 id btn_ranking_weekly
 id btn_signup
 id btn_signup_2
+id btn_upload
 id button
 id button10
 id button2
@@ -1936,6 +1951,7 @@ id community_ask_title
 id community_favorite_go1
 id community_favorite_go2
 id community_nickname
+id community_univ
 id community_univ_contents
 id community_univ_go
 id community_univ_title
@@ -1943,10 +1959,12 @@ id confirm_button
 id container
 id content
 id contentPanel
+id contents
 id contiguous
 id coordinator
 id cos
 id counterclockwise
+id created_At
 id custom
 id customPanel
 id cut
@@ -1986,9 +2004,11 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id et_contents
 id et_email
 id et_password
 id et_password_check
+id et_title
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1996,7 +2016,6 @@ id exploreItem
 id explore_quiz
 id explore_quiz_explanation
 id explore_quiz_title
-id explore_search
 id explore_stock_terms
 id explore_stock_terms_title
 id explore_title
@@ -2012,6 +2031,7 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
+id fragment_feed_container
 id frameLayout
 id frameLayout4
 id frameLayout5
@@ -2031,6 +2051,7 @@ id homeAsUp
 id homeItem
 id home_title
 id honorRequest
+id host_comment
 id icon
 id icon_group
 id icon_only
@@ -2051,6 +2072,10 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
+id lContents
+id lNickname
+id lTitle
+id lUploadTime
 id labeled
 id layout
 id left
@@ -2134,6 +2159,7 @@ id never
 id news_content
 id news_home
 id news_title
+id nickname
 id noScroll
 id none
 id normal
@@ -2166,6 +2192,7 @@ id rankItem
 id ratio
 id recent_achievements_title
 id rectangles
+id recycler_view
 id reverseSawtooth
 id right
 id rightToLeft
@@ -2261,6 +2288,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id textView10
 id textView11
 id textView12
@@ -2314,6 +2342,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_sns_login
+id tv_writing
 id unchecked
 id uniform
 id unlabeled
@@ -2407,7 +2436,9 @@ layout abc_tooltip
 layout activity_loading
 layout activity_login
 layout activity_main
+layout activity_post
 layout activity_signup
+layout activity_writing
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -2427,6 +2458,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_community
+layout fragment_community_list
 layout fragment_explore
 layout fragment_home
 layout fragment_mypage
@@ -2445,6 +2477,7 @@ layout material_time_input
 layout material_timepicker
 layout material_timepicker_dialog
 layout material_timepicker_textinput_display
+layout model_layout
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title

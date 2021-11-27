@@ -27,6 +27,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_community_car"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -36,6 +37,7 @@
             app:backgroundTint="#bed4ff"></Button>
 
         <Button
+            android:id="@+id/btn_community_entertainment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -45,6 +47,7 @@
             app:backgroundTint="#fffbc8"></Button>
 
         <Button
+            android:id="@+id/btn_community_it"
             android:layout_width="47dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -54,6 +57,7 @@
             app:backgroundTint="#beffd6"></Button>
 
         <Button
+            android:id="@+id/btn_community_electronics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -74,7 +78,7 @@
 
 
         <LinearLayout
-            android:id="@+id/mypage_recent_achivement"
+            android:id="@+id/community_univ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
