@@ -1921,6 +1921,7 @@ int id button9 0x7f080075
 int id buttonPanel 0x7f080076
 int id cache_measures 0x7f080077
 int id cancel_button 0x7f080078
+int id category_name 0x7f080238
 int id center 0x7f080079
 int id center_horizontal 0x7f08007a
 int id center_vertical 0x7f08007b
@@ -2569,6 +2570,10 @@ int string app_name 0x7f0f001b
 int string appbar_scrolling_view_behavior 0x7f0f001c
 int string bottom_sheet_behavior 0x7f0f001d
 int string bottomsheet_action_expand_halfway 0x7f0f001e
+int string category_car 0x7f0f0086
+int string category_electronics 0x7f0f0087
+int string category_entertainment 0x7f0f0088
+int string category_it 0x7f0f0089
 int string character_counter_content_description 0x7f0f001f
 int string character_counter_overflowed_content_description 0x7f0f0020
 int string character_counter_pattern 0x7f0f0021

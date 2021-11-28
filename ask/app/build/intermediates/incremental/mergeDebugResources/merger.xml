@@ -6604,7 +6604,7 @@
     뉴스/SNS의
     감성분석 결과를
     참고해보세요!
-    </string><string name="stock_predict_info">재무재표와뉴스/SNS를 통해주가 변동을예측해드립니다!</string></file><file path="D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\res\values\themes.xml" qualifiers=""><style name="Theme.Ask" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    </string><string name="stock_predict_info">재무재표와뉴스/SNS를 통해주가 변동을예측해드립니다!</string><string name="category_it">IT</string><string name="category_entertainment">엔터테인먼트</string><string name="category_car">자동차</string><string name="category_electronics">전자제품</string></file><file path="D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\res\values\themes.xml" qualifiers=""><style name="Theme.Ask" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         
         <item name="colorPrimary">@color/themeColor</item>
         <item name="colorPrimaryVariant">@color/skyblue_background</item>

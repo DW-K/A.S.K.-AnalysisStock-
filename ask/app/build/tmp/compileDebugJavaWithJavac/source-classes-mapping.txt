@@ -38,9 +38,9 @@ com/gachon/ask/MyPageFragment.java
  com.gachon.ask.MyPageFragment
 com/gachon/ask/databinding/ActivityPostBinding.java
  com.gachon.ask.databinding.ActivityPostBinding
-com/gachon/ask/MainActivity.java
- com.gachon.ask.MainActivity
- com.gachon.ask.MainActivity$ItemSelectedListener
+com/gachon/ask/CustomAdapter.java
+ com.gachon.ask.CustomAdapter
+ com.gachon.ask.CustomAdapter$1
 com/gachon/ask/databinding/FragmentHomeBinding.java
  com.gachon.ask.databinding.FragmentHomeBinding
 com/gachon/ask/databinding/FragmentCommunityBinding.java
@@ -49,8 +49,8 @@ com/gachon/ask/HomeFragment.java
  com.gachon.ask.HomeFragment
 com/gachon/ask/ExploreFragment.java
  com.gachon.ask.ExploreFragment
-com/gachon/ask/databinding/ActivityMainBinding.java
- com.gachon.ask.databinding.ActivityMainBinding
+com/gachon/ask/databinding/FragmentCommunityListBinding.java
+ com.gachon.ask.databinding.FragmentCommunityListBinding
 com/gachon/ask/databinding/ActivitySignupBinding.java
  com.gachon.ask.databinding.ActivitySignupBinding
 com/gachon/ask/databinding/FragmentMypageBinding.java
@@ -86,14 +86,12 @@ com/gachon/ask/SignUpActivity.java
  com.gachon.ask.SignUpActivity$1
  com.gachon.ask.SignUpActivity$2
  com.gachon.ask.SignUpActivity$3
-com/gachon/ask/databinding/FragmentCommunityListBinding.java
- com.gachon.ask.databinding.FragmentCommunityListBinding
-com/gachon/ask/CustomAdapter.java
- com.gachon.ask.CustomAdapter
- com.gachon.ask.CustomAdapter$1
+com/gachon/ask/databinding/ActivityMainBinding.java
+ com.gachon.ask.databinding.ActivityMainBinding
 com/gachon/ask/community/ListActivity.java
  com.gachon.ask.community.ListActivity
- com.gachon.ask.community.ListActivity$1
- com.gachon.ask.community.ListActivity$2
+com/gachon/ask/MainActivity.java
+ com.gachon.ask.MainActivity
+ com.gachon.ask.MainActivity$ItemSelectedListener
 com/gachon/ask/CommunityFragment.java
  com.gachon.ask.CommunityFragment

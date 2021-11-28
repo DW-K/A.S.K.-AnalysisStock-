@@ -37,17 +37,18 @@ import java.util.List;
 
 
 public class ListActivity extends AppCompatActivity {
-    private FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+//    private FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
     public static Context mContext;
 
     List<WriteInfo> writeInfoList = new ArrayList<>();
     RecyclerView mRecyclerView;
     //layout manager for recyclerview
     RecyclerView.LayoutManager layoutManager;
-//    Button btnAddPost;
-    FloatingActionButton btnAddPost;
+    TextView categoryName;
+    Button btnAddPost;
+    Intent intent;
     //firestore instance
-    FirebaseFirestore db;
+//    FirebaseFirestore db;
     CustomAdapter adapter;
     
     @Override
@@ -55,12 +56,18 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_community_list);
         mContext = this;
+        intent = getIntent();
+        String category = intent.getStringExtra("category");
+        categoryName = findViewById(R.id.category_name);
+        categoryName.setText(category);
+
 
         btnAddPost = findViewById(R.id.btn_add_post);
         btnAddPost.setOnClickListener(view -> {
-//            Intent intent = new Intent(getApplicationContext(), WritingActivity.class);
-//            startActivity(intent);
-            startMyActivity(WritingActivity.class);
+            intent = new Intent(getApplicationContext(), WritingActivity.class);
+            startActivity(intent);
+
+//            startMyActivity(WritingActivity.class);
         });
 
 
@@ -74,69 +81,69 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-    private void showData(int flag, String[] result) {
-        db.collection("Posts")
-                .orderBy("createdAt", Query.Direction.DESCENDING) // show from the recent posts
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        //show data
-                        for (DocumentSnapshot doc : task.getResult()) {
-
-                            WriteInfo writeInfo = new WriteInfo(
-                                    doc.getString("posts_id"),
-                                    doc.getString("nickname"),
-                                    doc.getString("title"),
-                                    doc.getString("contents"),
-                                    doc.getString("publisher"),
-                                    doc.getString("category"),
-                                    doc.getTimestamp("createdAt"));
-
-
-                        }
-
-                        //adapter
-                        adapter = new CustomAdapter(ListActivity.this, writeInfoList);
-                        //set adapter to recyclerview
-                        mRecyclerView.setAdapter(adapter);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //called when there is any error while retrieving
-                        startToast(e.getMessage());
-                    }
-                });
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setContentView(R.layout.fragment_community_list);
-        mContext = this;
+//    private void showData(int flag, String[] result) {
+//        db.collection("Posts")
+//                .orderBy("createdAt", Query.Direction.DESCENDING) // show from the recent posts
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//
+//                        //show data
+//                        for (DocumentSnapshot doc : task.getResult()) {
+//
+//                            WriteInfo writeInfo = new WriteInfo(
+//                                    doc.getString("posts_id"),
+//                                    doc.getString("nickname"),
+//                                    doc.getString("title"),
+//                                    doc.getString("contents"),
+//                                    doc.getString("publisher"),
+//                                    doc.getString("category"),
+//                                    doc.getTimestamp("createdAt"));
+//
+//
+//                        }
+//
+//                        //adapter
+//                        adapter = new CustomAdapter(ListActivity.this, writeInfoList);
+//                        //set adapter to recyclerview
+//                        mRecyclerView.setAdapter(adapter);
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        //called when there is any error while retrieving
+//                        startToast(e.getMessage());
+//                    }
+//                });
+//    }
 
 
-        //init firestore
-        db = FirebaseFirestore.getInstance();
-
-        writeInfoList.clear();
-        //initialize views
-        mRecyclerView = findViewById(R.id.recycler_view);
-
-        //set recycler view properties
-        mRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        Intent intent = getIntent();
-
-
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        setContentView(R.layout.fragment_community_list);
+//        mContext = this;
+//
+//
+//        //init firestore
+//        db = FirebaseFirestore.getInstance();
+//
+//        writeInfoList.clear();
+//        //initialize views
+//        mRecyclerView = findViewById(R.id.recycler_view);
+//
+//        //set recycler view properties
+//        mRecyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//
+//        Intent intent = getIntent();
+//
+//
+//
+//    }
 
     private void startMyActivity(Class c){
         Intent intent = new Intent(this,c);

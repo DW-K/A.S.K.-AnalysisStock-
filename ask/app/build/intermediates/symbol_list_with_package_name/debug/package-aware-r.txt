@@ -1922,6 +1922,7 @@ id button9
 id buttonPanel
 id cache_measures
 id cancel_button
+id category_name
 id center
 id center_horizontal
 id center_vertical
@@ -2570,6 +2571,10 @@ string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
+string category_car
+string category_electronics
+string category_entertainment
+string category_it
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
