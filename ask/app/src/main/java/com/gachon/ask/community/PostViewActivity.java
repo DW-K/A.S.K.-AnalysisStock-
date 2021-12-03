@@ -58,9 +58,9 @@ public class PostViewActivity extends AppCompatActivity {
 
 
 //        TextView title = (TextView) findViewById(R.id.title);
-        TextView nickname = (TextView) findViewById(R.id.nickname);
-        TextView created_at = (TextView) findViewById(R.id.created_At);
-        TextView contents = (TextView) findViewById(R.id.contents);
+        TextView nickname = (TextView) findViewById(R.id.tv_nickname);
+        TextView created_at = (TextView) findViewById(R.id.tv_created_At);
+        TextView contents = (TextView) findViewById(R.id.tv_contents);
 
 
         DocumentReference docRef = db.collection("Posts").document(posts_id);

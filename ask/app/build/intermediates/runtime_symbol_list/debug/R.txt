@@ -1083,6 +1083,7 @@ int color foreground_material_light 0x7f05006c
 int color gray 0x7f05006d
 int color highlighted_text_material_dark 0x7f05006e
 int color highlighted_text_material_light 0x7f05006f
+int color light_gray 0x7f0500eb
 int color main_color 0x7f050070
 int color material_blue_grey_800 0x7f050071
 int color material_blue_grey_900 0x7f050072
@@ -1907,11 +1908,13 @@ int id btn_community_car 0x7f080067
 int id btn_community_electronics 0x7f080068
 int id btn_community_entertainment 0x7f080069
 int id btn_community_it 0x7f08006a
+int id btn_editProfile 0x7f08023d
 int id btn_go_login 0x7f08006b
 int id btn_google_login 0x7f08006c
 int id btn_login 0x7f08006d
 int id btn_ranking_daily 0x7f08006e
 int id btn_ranking_weekly 0x7f08006f
+int id btn_send 0x7f08023e
 int id btn_signup 0x7f080070
 int id btn_signup_2 0x7f080071
 int id btn_upload 0x7f080072
@@ -1945,6 +1948,7 @@ int id clip_vertical 0x7f08008d
 int id clockwise 0x7f08008e
 int id collapseActionView 0x7f08008f
 int id comment_count 0x7f080090
+int id comment_layout 0x7f08023f
 int id communitiy_favorite_title 0x7f080091
 int id communityItem 0x7f080092
 int id community_ask_coin 0x7f080093
@@ -1963,12 +1967,10 @@ int id confirm_button 0x7f08009f
 int id container 0x7f0800a0
 int id content 0x7f0800a1
 int id contentPanel 0x7f0800a2
-int id contents 0x7f0800a3
 int id contiguous 0x7f0800a4
 int id coordinator 0x7f0800a5
 int id cos 0x7f0800a6
 int id counterclockwise 0x7f0800a7
-int id created_At 0x7f0800a8
 int id custom 0x7f0800a9
 int id customPanel 0x7f0800aa
 int id cut 0x7f0800ab
@@ -2085,6 +2087,7 @@ int id labeled 0x7f080119
 int id layout 0x7f08011a
 int id left 0x7f08011b
 int id leftToRight 0x7f08011c
+int id level 0x7f080245
 int id level_exp 0x7f08011d
 int id light 0x7f08011e
 int id line1 0x7f08011f
@@ -2165,7 +2168,6 @@ int id never 0x7f080168
 int id news_content 0x7f080169
 int id news_home 0x7f08016a
 int id news_title 0x7f08016b
-int id nickname 0x7f08016c
 int id noScroll 0x7f08016d
 int id none 0x7f08016e
 int id normal 0x7f08016f
@@ -2195,6 +2197,7 @@ int id progressBar 0x7f080186
 int id progress_circular 0x7f080187
 int id progress_horizontal 0x7f080188
 int id radio 0x7f080189
+int id rank 0x7f080240
 int id rankItem 0x7f08018a
 int id ratio 0x7f08018b
 int id recent_achievements_title 0x7f08018c
@@ -2348,8 +2351,14 @@ int id transition_scene_layoutid_cache 0x7f08021f
 int id transition_transform 0x7f080220
 int id triangle 0x7f080221
 int id tv_category 0x7f08023a
+int id tv_contents 0x7f080246
+int id tv_created_At 0x7f080247
+int id tv_level 0x7f080248
+int id tv_nickname 0x7f080242
 int id tv_no_post 0x7f08023c
+int id tv_profit 0x7f080243
 int id tv_sns_login 0x7f080222
+int id tv_university 0x7f080244
 int id tv_writing 0x7f080223
 int id unchecked 0x7f080224
 int id uniform 0x7f080225
@@ -2358,6 +2367,7 @@ int id up 0x7f080227
 int id useLogo 0x7f080228
 int id userlevel_text 0x7f080229
 int id username_title 0x7f08022a
+int id view 0x7f080249
 int id view_home_top 0x7f08022b
 int id view_mypage_user 0x7f08022c
 int id view_offset_helper 0x7f08022d
@@ -2485,7 +2495,6 @@ int layout material_time_input 0x7f0b0044
 int layout material_timepicker 0x7f0b0045
 int layout material_timepicker_dialog 0x7f0b0046
 int layout material_timepicker_textinput_display 0x7f0b0047
-int layout model_layout 0x7f0b0048
 int layout mtrl_alert_dialog 0x7f0b0049
 int layout mtrl_alert_dialog_actions 0x7f0b004a
 int layout mtrl_alert_dialog_title 0x7f0b004b
@@ -2521,6 +2530,8 @@ int layout notification_template_custom_big 0x7f0b0068
 int layout notification_template_icon_group 0x7f0b0069
 int layout notification_template_part_chronometer 0x7f0b006a
 int layout notification_template_part_time 0x7f0b006b
+int layout post_view_layout 0x7f0b0081
+int layout ranking_view_layout 0x7f0b0082
 int layout select_dialog_item_material 0x7f0b006c
 int layout select_dialog_multichoice_material 0x7f0b006d
 int layout select_dialog_singlechoice_material 0x7f0b006e
@@ -2547,6 +2558,7 @@ int mipmap baseline_star_black_48 0x7f0d0002
 int mipmap ic_launcher 0x7f0d0003
 int mipmap ic_launcher_round 0x7f0d0004
 int plurals mtrl_badge_content_description 0x7f0e0000
+int string Lv_ 0x7f0f008d
 int string abc_action_bar_home_description 0x7f0f0000
 int string abc_action_bar_up_description 0x7f0f0001
 int string abc_action_menu_overflow_description 0x7f0f0002
@@ -2578,6 +2590,7 @@ int string app_name 0x7f0f001b
 int string appbar_scrolling_view_behavior 0x7f0f001c
 int string bottom_sheet_behavior 0x7f0f001d
 int string bottomsheet_action_expand_halfway 0x7f0f001e
+int string btn_comment 0x7f0f008e
 int string category 0x7f0f008c
 int string category_car 0x7f0f001f
 int string category_electronics 0x7f0f0020
@@ -2606,8 +2619,8 @@ int string common_google_play_services_wear_update_text 0x7f0f0036
 int string common_open_on_phone 0x7f0f0037
 int string common_signin_button_text 0x7f0f0038
 int string common_signin_button_text_long 0x7f0f0039
-int string date_format 0x7f0f008a
 int string default_web_client_id 0x7f0f003a
+int string edit_profile 0x7f0f008f
 int string error_icon_content_description 0x7f0f003b
 int string exposed_dropdown_menu_content_description 0x7f0f003c
 int string fab_transformation_scrim_behavior 0x7f0f003d
@@ -2620,6 +2633,7 @@ int string google_storage_bucket 0x7f0f0043
 int string hide_bottom_view_on_scroll_behavior 0x7f0f0044
 int string icon_content_description 0x7f0f0045
 int string item_view_role_description 0x7f0f0046
+int string leave_comment 0x7f0f0090
 int string login_error 0x7f0f0047
 int string login_success 0x7f0f0048
 int string material_clock_display_divider 0x7f0f0049
@@ -2677,6 +2691,7 @@ int string mtrl_picker_toggle_to_calendar_input_mode 0x7f0f007c
 int string mtrl_picker_toggle_to_day_selection 0x7f0f007d
 int string mtrl_picker_toggle_to_text_input_mode 0x7f0f007e
 int string mtrl_picker_toggle_to_year_selection 0x7f0f007f
+int string mypage 0x7f0f0091
 int string no_post 0x7f0f008b
 int string password_toggle_content_description 0x7f0f0080
 int string path_password_eye 0x7f0f0081
@@ -2684,6 +2699,13 @@ int string path_password_eye_mask_strike_through 0x7f0f0082
 int string path_password_eye_mask_visible 0x7f0f0083
 int string path_password_strike_through 0x7f0f0084
 int string project_id 0x7f0f0085
+int string ranking 0x7f0f0092
+int string ranking_daily 0x7f0f0093
+int string ranking_monthly 0x7f0f0094
+int string ranking_personal 0x7f0f0095
+int string ranking_season 0x7f0f0096
+int string ranking_university 0x7f0f0097
+int string ranking_weekly 0x7f0f0098
 int string search_menu_title 0x7f0f0086
 int string sentiment_analysis_info 0x7f0f0087
 int string status_bar_notification_info_overflow 0x7f0f0088
