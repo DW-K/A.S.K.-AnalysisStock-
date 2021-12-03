@@ -35,7 +35,7 @@
         </activity>
         <activity android:name="com.gachon.ask.SignUpActivity" />
         <activity android:name="com.gachon.ask.WritingActivity" />
-        <activity android:name="com.gachon.ask.community.PostActivity" />
+        <activity android:name="com.gachon.ask.community.PostViewActivity" />
         <activity android:name="com.gachon.ask.community.CategoryActivity" />
         <activity android:name="com.gachon.ask.CommunityFragment" />
 

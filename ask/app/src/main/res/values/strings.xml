@@ -2,10 +2,15 @@
     <string name="app_name">ask</string>
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
+
+    <string name="category">카테고리</string>
     <string name="category_car">자동차</string>
     <string name="category_entertainment">엔터테인먼트</string>
     <string name="category_it">IT</string>
     <string name="category_electronics">전자제품</string>
+
+    <string name="date_format">yy/MM/dd HH:mm</string>
+    <string name="no_post">작성된 글이 없습니다.</string>
     <string name="sentiment_analysis_info">키워드에 대한
     뉴스/SNS의
     감성분석 결과를

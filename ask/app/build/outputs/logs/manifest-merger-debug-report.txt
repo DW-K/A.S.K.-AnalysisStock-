@@ -152,10 +152,10 @@ activity#com.gachon.ask.WritingActivity
 ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:22:9-53
 	android:name
 		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:22:19-50
-activity#com.gachon.ask.community.PostActivity
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:9-59
+activity#com.gachon.ask.community.PostViewActivity
+ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:9-63
 	android:name
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:19-57
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:19-61
 activity#com.gachon.ask.community.CategoryActivity
 ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:24:9-63
 	android:name

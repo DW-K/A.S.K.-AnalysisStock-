@@ -44,6 +44,10 @@
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_explore.xml"
     },
     {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_postview.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_postview.xml"
+    },
+    {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_home.xml"
     },

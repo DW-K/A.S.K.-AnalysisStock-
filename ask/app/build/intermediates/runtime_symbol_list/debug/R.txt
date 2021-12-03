@@ -2090,6 +2090,7 @@ int id light 0x7f08011e
 int id line1 0x7f08011f
 int id line3 0x7f080120
 int id linear 0x7f080121
+int id linearLayout 0x7f08023b
 int id listMode 0x7f080122
 int id list_item 0x7f080123
 int id masked 0x7f080124
@@ -2347,6 +2348,7 @@ int id transition_scene_layoutid_cache 0x7f08021f
 int id transition_transform 0x7f080220
 int id triangle 0x7f080221
 int id tv_category 0x7f08023a
+int id tv_no_post 0x7f08023c
 int id tv_sns_login 0x7f080222
 int id tv_writing 0x7f080223
 int id unchecked 0x7f080224
@@ -2443,7 +2445,7 @@ int layout activity_community_list 0x7f0b007f
 int layout activity_loading 0x7f0b001c
 int layout activity_login 0x7f0b001d
 int layout activity_main 0x7f0b001e
-int layout activity_post 0x7f0b001f
+int layout activity_postview 0x7f0b0080
 int layout activity_signup 0x7f0b0020
 int layout activity_writing 0x7f0b0021
 int layout browser_actions_context_menu_page 0x7f0b0022
@@ -2576,6 +2578,7 @@ int string app_name 0x7f0f001b
 int string appbar_scrolling_view_behavior 0x7f0f001c
 int string bottom_sheet_behavior 0x7f0f001d
 int string bottomsheet_action_expand_halfway 0x7f0f001e
+int string category 0x7f0f008c
 int string category_car 0x7f0f001f
 int string category_electronics 0x7f0f0020
 int string category_entertainment 0x7f0f0021
@@ -2603,6 +2606,7 @@ int string common_google_play_services_wear_update_text 0x7f0f0036
 int string common_open_on_phone 0x7f0f0037
 int string common_signin_button_text 0x7f0f0038
 int string common_signin_button_text_long 0x7f0f0039
+int string date_format 0x7f0f008a
 int string default_web_client_id 0x7f0f003a
 int string error_icon_content_description 0x7f0f003b
 int string exposed_dropdown_menu_content_description 0x7f0f003c
@@ -2673,6 +2677,7 @@ int string mtrl_picker_toggle_to_calendar_input_mode 0x7f0f007c
 int string mtrl_picker_toggle_to_day_selection 0x7f0f007d
 int string mtrl_picker_toggle_to_text_input_mode 0x7f0f007e
 int string mtrl_picker_toggle_to_year_selection 0x7f0f007f
+int string no_post 0x7f0f008b
 int string password_toggle_content_description 0x7f0f0080
 int string path_password_eye 0x7f0f0081
 int string path_password_eye_mask_strike_through 0x7f0f0082

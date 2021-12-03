@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gachon.ask.community.PostActivity;
+import com.gachon.ask.community.PostViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -78,18 +78,14 @@ public class WritingActivity extends AppCompatActivity {
 
     // check before upload the post
     private void postCheck() {
-//        String title = ((EditText) findViewById(R.id.et_title)).getText().toString();
         String contents = ((EditText) findViewById(R.id.et_contents)).getText().toString();
-
-
         Timestamp created_at = new Timestamp(new Date());
-
 
         if (contents.length() > 0) {
             user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-            nickname = "익명";
+            nickname = "익명"; // 임시 닉네임
             ArrayList participants = new ArrayList();
             String publisher = user.getUid();
             participants.add(publisher); //add writer(host)'s uid to the arraylist participants
@@ -131,7 +127,7 @@ public class WritingActivity extends AppCompatActivity {
 
 
         } else {
-            startToast("제목 또는 내용을 입력해주세요.");
+            startToast("내용을 입력해주세요.");
         }
 
     }
@@ -151,7 +147,7 @@ public class WritingActivity extends AppCompatActivity {
 
 
                         // show the post right after the writing
-                        Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), PostViewActivity.class);
                         intent.putExtra("posts_id", posts_id); // send posts_id
                         startActivityForResult(intent, UPLOAD_POST);
 

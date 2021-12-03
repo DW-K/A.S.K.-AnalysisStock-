@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_community_list.xml" value="0.2" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_login.xml" value="0.28958333333333336" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_post.xml" value="0.3567708333333333" />
-        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_writing.xml" value="0.3567708333333333" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_postView.xml" value="0.2" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_writing.xml" value="0.33" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community.xml" value="0.34814814814814815" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community_list.xml" value="0.3567708333333333" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_explore.xml" value="0.34814814814814815" />

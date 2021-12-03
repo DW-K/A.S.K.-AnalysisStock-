@@ -53,7 +53,8 @@
                     android:id="@+id/lNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
                     android:text="nickname"
                     android:textColor="@color/black"
                     android:textSize="18dp"
@@ -63,10 +64,11 @@
                     android:id="@+id/lUploadTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="right"
                     android:text="uploadtime"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
             </LinearLayout>
 
 

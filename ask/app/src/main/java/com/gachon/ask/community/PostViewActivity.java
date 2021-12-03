@@ -1,78 +1,105 @@
 package com.gachon.ask.community;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.gachon.ask.pushNoti.SendMessage;
-import com.gachon.ask.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import com.gachon.ask.R;
+
+
+// show the post right after the writing
 public class PostViewActivity extends AppCompatActivity {
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String posts_id;
-    TextView peopleNum;
-    TextView status;
-
-
+    private static final String TAG = "PostViewActivity";
+    private String posts_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
-        Intent intent = getIntent();
+        setContentView(R.layout.activity_postview);
 
-        TextView title = (TextView) findViewById(R.id.title);
+        // get posts_id from WritingActivity
+        Intent intent = getIntent();
+        posts_id = intent.getStringExtra("posts_id");
+        // add filed posts_id
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference db_post = db.collection("Posts").document(posts_id);
+        db_post
+                .update("posts_id", posts_id)// change the posts_id value from the WritingActivity
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+
+//        TextView title = (TextView) findViewById(R.id.title);
         TextView nickname = (TextView) findViewById(R.id.nickname);
         TextView created_at = (TextView) findViewById(R.id.created_At);
         TextView contents = (TextView) findViewById(R.id.contents);
-//        EditText host_comment = findViewById(R.id.host_comment);
 
 
-        String txt_title = intent.getExtras().getString("title");
-        String txt_nickname = intent.getExtras().getString("nickname");
-        String txt_contents = intent.getExtras().getString("contents");
-        String txt_publisher = intent.getExtras().getString("publisher");
-        String txt_createdAt = intent.getExtras().getString("created_at");
-        posts_id = intent.getExtras().getString("posts_id");
+        DocumentReference docRef = db.collection("Posts").document(posts_id);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+//                        String txt_title = document.getData().get("title").toString();
+                        String txt_category = document.getData().get("category").toString();
+                        String txt_nickname = document.getData().get("nickname").toString();
+                        String txt_contents = document.getData().get("contents").toString();
+                        Timestamp timestamp_createdAt = (Timestamp) document.getData().get("createdAt"); // get the timestamp
+                        Date date_createdAt = timestamp_createdAt.toDate();// change timestamp as date format
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 HH시 mm분 ss초");
+                        String txt_createdAt = formatter.format(date_createdAt);
 
-        DocumentReference postRef = db.collection("Posts").document(posts_id);
+
+//                        title.setText(txt_title);
+                        nickname.setText(txt_nickname);
+                        created_at.setText(txt_createdAt);
+                        contents.setText(txt_contents);
 
 
-        title.setText(txt_title);
-        nickname.setText(txt_nickname);
-        created_at.setText(txt_createdAt);
-        contents.setText(txt_contents);
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
 
-
+        });
 
     }
 
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-
-    private void startToast(String msg) {
+    private void toastMsg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

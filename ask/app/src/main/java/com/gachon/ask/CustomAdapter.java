@@ -9,12 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachon.ask.community.CategoryActivity;
-import com.gachon.ask.community.PostActivity;
+import com.gachon.ask.community.PostViewActivity;
 import com.google.firebase.Timestamp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
     CategoryActivity categoryActivity;
@@ -42,7 +43,7 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(view.getContext(), PostActivity.class);
+                Intent intent = new Intent(view.getContext(), PostViewActivity.class);
                 intent.putExtra("nickname",writeInfoList.get(position).getNickname());
                 intent.putExtra("contents",writeInfoList.get(position).getContents());
                 intent.putExtra("publisher",writeInfoList.get(position).getPublisher());
@@ -83,9 +84,14 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
     // getExtra cannot call the type timestamp
     // cast the type timestamp -> String
     static String getTime(Timestamp time) {
+
         Date date_createdAt = time.toDate();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 HH시 mm분 ss초");
+        SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd HH:mm");
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
+        formatter.setTimeZone(timeZone);
+
         String txt_createdAt = formatter.format(date_createdAt);
+
         return txt_createdAt;
     }
 

@@ -4,6 +4,10 @@
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable\\edit_round.xml"
     },
     {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_postview.xml.flat",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_postview.xml"
+    },
+    {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_community_list.xml.flat",
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_community_list.xml"
     },
@@ -110,10 +114,6 @@
     {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_menu_mypage.JPG.flat",
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable\\ic_menu_mypage.JPG"
-    },
-    {
-        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_post.xml.flat",
-        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_post.xml"
     },
     {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",

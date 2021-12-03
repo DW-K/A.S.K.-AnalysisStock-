@@ -2091,6 +2091,7 @@ id light
 id line1
 id line3
 id linear
+id linearLayout
 id listMode
 id list_item
 id masked
@@ -2348,6 +2349,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_category
+id tv_no_post
 id tv_sns_login
 id tv_writing
 id unchecked
@@ -2444,7 +2446,7 @@ layout activity_community_list
 layout activity_loading
 layout activity_login
 layout activity_main
-layout activity_post
+layout activity_postview
 layout activity_signup
 layout activity_writing
 layout browser_actions_context_menu_page
@@ -2577,6 +2579,7 @@ string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
+string category
 string category_car
 string category_electronics
 string category_entertainment
@@ -2604,6 +2607,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string date_format
 string default_web_client_id
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
@@ -2674,6 +2678,7 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string no_post
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
