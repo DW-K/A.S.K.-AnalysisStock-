@@ -33,7 +33,7 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //inflate layout
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.model_layout, viewGroup,false);
+                .inflate(R.layout.post_view_layout, viewGroup,false);
 
         ViewHolder viewHolder = new ViewHolder(itemView);
 
