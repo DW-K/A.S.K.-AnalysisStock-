@@ -1712,6 +1712,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable baseline_favorite_24
+drawable baseline_favorite_border_24
 drawable baseline_search_24
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -1761,6 +1763,8 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_speech_bubble_24
+drawable ic_speech_bubble_border_24
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
@@ -1906,7 +1910,6 @@ id btn_community_entertainment
 id btn_community_it
 id btn_go_login
 id btn_google_login
-id btn_join
 id btn_login
 id btn_ranking_daily
 id btn_ranking_weekly
@@ -1942,6 +1945,7 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id collapseActionView
+id comment_count
 id communitiy_favorite_title
 id communityItem
 id community_ask_coin
@@ -2009,7 +2013,6 @@ id et_contents
 id et_email
 id et_password
 id et_password_check
-id et_title
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -2046,13 +2049,15 @@ id grouping
 id groups
 id guideline
 id header_title
+id heart_count
 id hideable
 id home
 id homeAsUp
 id homeItem
 id home_title
 id honorRequest
-id host_comment
+id ic_comment
+id ic_heart
 id icon
 id icon_group
 id icon_only
@@ -2074,8 +2079,8 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id lContents
+id lLevel
 id lNickname
-id lTitle
 id lUploadTime
 id labeled
 id layout
@@ -2185,6 +2190,7 @@ id percent
 id pin
 id position
 id postLayout
+id profile_image
 id progressBar
 id progress_circular
 id progress_horizontal
@@ -2289,7 +2295,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id textView10
 id textView11
 id textView12
@@ -2342,6 +2347,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv_category
 id tv_sns_login
 id tv_writing
 id unchecked
@@ -2434,6 +2440,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_community_list
 layout activity_loading
 layout activity_login
 layout activity_main
@@ -2459,7 +2466,6 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_community
-layout fragment_community_list
 layout fragment_explore
 layout fragment_home
 layout fragment_mypage

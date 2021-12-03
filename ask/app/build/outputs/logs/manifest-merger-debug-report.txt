@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
+ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.databinding:viewbinding:4.2.2] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\80b22608c0af8003089e54fd945b08dc\viewbinding-4.2.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\4291e77252f60ca6d1a1a48c13680a53\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:17:1-24:12
@@ -61,27 +61,27 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\Minha\.gradle\caches\transform
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\ca4ee02f6db6a6e078275f81cf0476ca\annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\0a5af1d55cdad077af50335fcc9ea399\protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\2a3cff0e684721cbdaa449f00fb06084\grpc-android-1.28.0\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
 		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:4:5-29
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-32:12
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:6:5-30:19
+ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:6:5-29:19
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\744eeb02b670460d0279029f88e89b50\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Minha\.gradle\caches\transforms-2\files-2.1\397a0632e908f94d64a28d1ce882280b\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
@@ -156,20 +156,16 @@ activity#com.gachon.ask.community.PostActivity
 ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:9-59
 	android:name
 		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:23:19-57
-activity#com.gachon.ask.community.ListDetailActivity
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:24:9-65
+activity#com.gachon.ask.community.CategoryActivity
+ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:24:9-63
 	android:name
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:24:19-63
-activity#com.gachon.ask.community.ListActivity
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:25:9-59
-	android:name
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:25:19-57
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:24:19-61
 activity#com.gachon.ask.CommunityFragment
-ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:26:9-27:45
+ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:25:9-26:45
 	tools:ignore
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:27:13-42
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:26:13-42
 	android:name
-		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:26:19-52
+		ADDED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml:25:19-52
 uses-sdk
 INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Minha\GitHub\A.S.K.-AnalysisStock-\ask\app\src\main\AndroidManifest.xml

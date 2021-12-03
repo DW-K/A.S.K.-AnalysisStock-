@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachon.ask.community.ListActivity;
-import com.gachon.ask.community.ListDetailActivity;
+import com.gachon.ask.community.CategoryActivity;
+import com.gachon.ask.community.PostActivity;
 import com.google.firebase.Timestamp;
 
 import java.text.SimpleDateFormat;
@@ -17,12 +17,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
-    ListActivity listActivity;
+    CategoryActivity categoryActivity;
     List<WriteInfo> writeInfoList;
 
 
-    public CustomAdapter(ListActivity listActivity, List<WriteInfo> writeInfoList) {
-        this.listActivity = listActivity;
+    public CustomAdapter(CategoryActivity categoryActivity, List<WriteInfo> writeInfoList) {
+        this.categoryActivity = categoryActivity;
         this.writeInfoList = writeInfoList;
     }
 
@@ -42,16 +42,15 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(view.getContext(), ListDetailActivity.class);
+                Intent intent = new Intent(view.getContext(), PostActivity.class);
                 intent.putExtra("nickname",writeInfoList.get(position).getNickname());
-                intent.putExtra("title",writeInfoList.get(position).getTitle());
                 intent.putExtra("contents",writeInfoList.get(position).getContents());
                 intent.putExtra("publisher",writeInfoList.get(position).getPublisher());
                 intent.putExtra("selectedCategory",writeInfoList.get(position).getCategory());
                 intent.putExtra("created_at",getTime(writeInfoList.get(position).getCreatedAt()));
                 intent.putExtra("posts_id", writeInfoList.get(position).getPosts_id());
 
-                listActivity.startActivity(intent);
+                categoryActivity.startActivity(intent);
 
             }
 
@@ -69,7 +68,6 @@ public class CustomAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         //bind views
-        viewHolder.vTitle.setText(writeInfoList.get(i).getTitle());
         viewHolder.vContents.setText(writeInfoList.get(i).getContents());
         viewHolder.vNickname.setText(writeInfoList.get(i).getNickname());
         viewHolder.vUploadTime.setText(getTime(writeInfoList.get(i).getCreatedAt()));

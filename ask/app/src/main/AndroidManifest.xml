@@ -21,8 +21,7 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".WritingActivity" />
         <activity android:name=".community.PostActivity"/>
-        <activity android:name=".community.ListDetailActivity"/>
-        <activity android:name=".community.ListActivity"/>
+        <activity android:name=".community.CategoryActivity"/>
         <activity android:name=".CommunityFragment"
             tools:ignore="Instantiatable" />
 

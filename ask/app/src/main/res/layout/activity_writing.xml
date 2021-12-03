@@ -53,22 +53,29 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_title"
+<!--            <TextView-->
+<!--                android:id="@+id/tv_category"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="category" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_title"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:hint="제목"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textColorHint="@color/gray"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold" />-->
+
+
+            <TextView
+                android:id="@+id/tv_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                android:hint="제목"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-
-
-
-
-
+                android:text="TextView" />
 
             <EditText
                 android:id="@+id/et_contents"

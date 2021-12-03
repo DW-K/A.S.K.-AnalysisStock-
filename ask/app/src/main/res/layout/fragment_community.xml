@@ -31,7 +31,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="자동차"
+            android:text="@string/category_car"
             android:textColor="@color/black"
             android:textSize="12dp"
             app:backgroundTint="#bed4ff"></Button>
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="엔터테인먼트"
+            android:text="@string/category_entertainment"
             android:textSize="12dp"
             android:textColor="@color/black"
             app:backgroundTint="#fffbc8"></Button>
@@ -51,7 +51,7 @@
             android:layout_width="47dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="IT"
+            android:text="@string/category_it"
             android:textSize="12dp"
             android:textColor="@color/black"
             app:backgroundTint="#beffd6"></Button>
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:textColor="@color/black"
-            android:text="전자제품"
+            android:text="@string/category_electronics"
             android:textSize="12dp"
             app:backgroundTint="#ffd5f4"></Button>
 

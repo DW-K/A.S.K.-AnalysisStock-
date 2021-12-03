@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,11 +38,11 @@ public class WritingActivity extends AppCompatActivity {
     private FirebaseUser user;
     private String posts_id;
     private String nickname;
-
+    private String category;
     Button btn_upload;
     ImageButton btn_cancel;
+    Intent intent;
 
-    String category;
     Handler handler = new Handler();
 
 
@@ -49,6 +50,11 @@ public class WritingActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing);
+
+        intent = getIntent();
+        category = intent.getStringExtra("category");
+        TextView textView = findViewById(R.id.tv_category);
+        textView.setText(category);
 
         // upload button
         btn_upload = findViewById(R.id.btn_upload);
@@ -72,19 +78,18 @@ public class WritingActivity extends AppCompatActivity {
 
     // check before upload the post
     private void postCheck() {
-        String title = ((EditText) findViewById(R.id.et_title)).getText().toString();
+//        String title = ((EditText) findViewById(R.id.et_title)).getText().toString();
         String contents = ((EditText) findViewById(R.id.et_contents)).getText().toString();
+
 
         Timestamp created_at = new Timestamp(new Date());
 
 
-        if (title.length() > 0 && contents.length() > 0) {
+        if (contents.length() > 0) {
             user = FirebaseAuth.getInstance().getCurrentUser();
 
 
             nickname = "익명";
-            String status = "recruiting";
-            int curRecruits = 1;
             ArrayList participants = new ArrayList();
             String publisher = user.getUid();
             participants.add(publisher); //add writer(host)'s uid to the arraylist participants
@@ -104,6 +109,7 @@ public class WritingActivity extends AppCompatActivity {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             nickname = document.getData().get("nickname").toString();
 
+
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -117,7 +123,7 @@ public class WritingActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 public void run() {
                     startToast("업로드 중입니다...");
-                    WriteInfo writeInfo = new WriteInfo(postId, nickname, title, contents, publisher,
+                    WriteInfo writeInfo = new WriteInfo(postId, nickname, contents, publisher,
                             category, created_at);
                     postUploader(writeInfo);
                 }

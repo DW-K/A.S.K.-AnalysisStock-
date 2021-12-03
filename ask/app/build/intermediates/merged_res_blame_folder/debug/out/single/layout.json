@@ -50,5 +50,9 @@
     {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_community_list.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_community_list.xml"
     }
 ]

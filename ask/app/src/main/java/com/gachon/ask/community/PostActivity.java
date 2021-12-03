@@ -57,7 +57,7 @@ public class PostActivity extends AppCompatActivity {
                 });
 
 
-        TextView title = (TextView) findViewById(R.id.title);
+//        TextView title = (TextView) findViewById(R.id.title);
         TextView nickname = (TextView) findViewById(R.id.nickname);
         TextView created_at = (TextView) findViewById(R.id.created_At);
         TextView contents = (TextView) findViewById(R.id.contents);
@@ -71,21 +71,17 @@ public class PostActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        String txt_title = document.getData().get("title").toString();
-                        String txt_category = document.getData().get("selectedCategory").toString();
+//                        String txt_title = document.getData().get("title").toString();
+                        String txt_category = document.getData().get("category").toString();
                         String txt_nickname = document.getData().get("nickname").toString();
                         String txt_contents = document.getData().get("contents").toString();
-                        String txt_status = document.getData().get("status").toString();
-                        String txt_totalPeople = document.getData().get("numOfRecruits").toString();
-                        String txt_curPeople = document.getData().get("curRecruits").toString();
-                        String txt_people = txt_curPeople + "/" + txt_totalPeople; // participants text
                         Timestamp timestamp_createdAt = (Timestamp) document.getData().get("createdAt"); // get the timestamp
                         Date date_createdAt = timestamp_createdAt.toDate();// change timestamp as date format
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 HH시 mm분 ss초");
                         String txt_createdAt = formatter.format(date_createdAt);
 
 
-                        title.setText(txt_title);
+//                        title.setText(txt_title);
                         nickname.setText(txt_nickname);
                         created_at.setText(txt_createdAt);
                         contents.setText(txt_contents);
