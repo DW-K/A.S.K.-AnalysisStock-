@@ -16,4 +16,11 @@
     <color name="skyblue_background">#CEDEFF</color>
     <color name="skyblue_2">#BCE0FD</color>
     <color name="blue1">#0062E7</color>
+
+    <color name="_RED">#F55151</color>
+    <color name="_BLUE">#4CA4FF</color>
+    <color name="_PURPLE">#BA7DFE</color>
+    <color name="_PINK">#F567BA</color>
+    <color name="_WHITE">#FFFFFF</color>
+    <color name="_BLACK">#000000</color>
 </resources>

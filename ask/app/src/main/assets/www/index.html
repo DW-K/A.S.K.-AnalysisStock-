@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <title>Web에서 JSON test</title>
+
+        <style>
+            .jb-xx-small { font-size: xx-small; }
+            .jb-x-small { font-size: x-small; }
+            .jb-small { font-size: small; }
+            .jb-medium { font-size: medium; }
+            .jb-large { font-size: large; }
+            .jb-x-large { font-size: x-large; }
+            .jb-xx-large { font-size: xx-large; }
+        </style>
+
+        <script type="text/javascript">
+            function loginPopup(strTitle) {
+                theApp.eBestLoginPopup(strTitle);
+            }
+
+            function requestt1301() {
+                theApp.eBestdeleteRealData("S3_", theApp.curJongmokCode, theApp.curJongmokCode.length);
+                var strJongmok = document.form1.jongmok.value;
+                theApp.eBestrequestData("t1301", strJongmok, false, "", 20);
+                theApp.curJongmokCode = strJongmok;
+                document.form1.textquery.value = "";
+                document.form1.textreal.value = "";
+            }
+
+            function requestt1301JSON() {
+                theApp.eBestdeleteRealData("S3_", theApp.curJongmokCode, theApp.curJongmokCode.length);
+                var strJongmok = document.form1.jongmok.value;
+                var json = {};
+                json.t1301InBlock = [];
+                var item = {};
+                item.shcode = strJongmok;
+                item.cvolume = "";
+                item.starttime = "";
+                item.endtime = ""
+                json.t1301InBlock.push(item);
+                theApp.eBestrequestDataJSON("t1301", json, false, "");
+                theApp.curJongmokCode = strJongmok;
+                document.form1.textquery.value = "";
+                document.form1.textreal.value = "";
+
+            }
+        </script>
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="base64.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>eBest API</h1>
+            <div>
+                <form name="form1">
+
+                    <input class="jb-xx-large" type="button" value="로그인화면 띄우기" onclick='loginPopup("이베스트 로그인 테스트");'/>
+                    <br><br>
+                    <input class="jb-xx-large" type="text" name="jongmok" value="005930" size="6"/>
+                    <br><br>
+                    <input class="jb-xx-large" type="button" value="현재가" onclick='requestt1301();'/>
+                    <input class="jb-xx-large" type="button" value="현재가(JSON)" onclick='requestt1301JSON();'/>
+
+                    <br><br>
+                    <textarea id="textreal" name="textreal" rows="2" cols="80"></textarea>
+                    <br><br>
+                    <textarea id="textquery" name="txtquery" rows="20" cols="80"></textarea>
+
+                </form>
+
+            </div>
+        </div>
+    </body>
+</html>

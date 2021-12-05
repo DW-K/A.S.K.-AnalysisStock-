@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext"
+        android:gravity="center"
+        android:text="운영 서버 접속"
+        android:textSize="70px" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:background="@drawable/edittext"
+        android:gravity="center|center_vertical"
+        android:singleLine="false"
+        android:text="샘플앱용 API 로그인"
+        android:textSize="80px" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageButtonClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right" />
+
+        <Button
+            android:id="@+id/buttonCert"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="#FFEB3B"
+            android:gravity="center"
+            android:onClick="OnButtonCertClicked"
+            android:text="인증서 가져오기"
+            android:textColor="#000000"
+            android:textSize="60px" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:gravity="center"
+            android:text="공인인증서"
+            android:textSize="70px" />
+
+        <Spinner
+            android:id="@+id/combobox1"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:gravity="right"
+            android:spinnerMode="dropdown"></Spinner>
+
+        <TextView
+            android:id="@+id/textViewNot"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:gravity="center"
+            android:text="사용가능한 인증서가\n없습니다."
+            android:textSize="80px"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextPWD"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="공인인증 비밀번호를 입력하세요"
+            android:inputType="textPassword"
+            android:paddingLeft="20px"
+            android:privateImeOptions="defaultInputmode=english"
+            android:singleLine="true"
+            android:textSize="50px" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="#FFEB3B"
+            android:gravity="center"
+            android:onClick="OnButtonLoginClicked"
+            android:text="공인인증서 로그인"
+            android:textColor="#000000"
+            android:textSize="60px" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

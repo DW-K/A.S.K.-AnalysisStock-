@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="709dp" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/iptext"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Name" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/porttext"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Name" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/connectbtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Button" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView10"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="356dp"-->
+<!--        android:text="TextView" />-->
+
+</LinearLayout>

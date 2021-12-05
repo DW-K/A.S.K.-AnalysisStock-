@@ -38,4 +38,20 @@
     <string name="mypage">마이페이지</string>
     <string name="edit_profile">프로필 수정</string>
     <string name="Lv.">Lv.</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ip">IP</string>
+    <string name="port">PORT</string>
+    <string name="name">NAME</string>
+    <string name="msg">MESSAGE</string>
+    <string name="hint_port">PORT NUMBER</string>
+    <string name="hint_ip">192.168.0.1</string>
+    <string name="hint_msg">Hello, world!</string>
+    <string name="button1">Connect</string>
+    <string name="button2">Disconnect</string>
+    <string name="button3">Set Server</string>
+    <string name="button4">Close Server</string>
+    <string name="button5">View my info</string>
+    <string name="button6">Send Message</string>
 </resources>

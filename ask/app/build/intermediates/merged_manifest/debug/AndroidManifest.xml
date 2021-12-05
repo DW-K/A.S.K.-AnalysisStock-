@@ -7,23 +7,31 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="30" />
+    <!-- android:theme="@style/Theme.Ask" -->
 
-    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
-    <!-- <uses-sdk android:minSdkVersion="14" /> -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
-        android:name="androidx.multidex.MultiDexApplication"
+        android:name="com.gachon.ask.xingapi.ApplicationManager"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:preserveLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.Ask" >
+        android:theme="@style/Theme.Ask"
+        android:usesCleartextTraffic="true" >
         <activity android:name="com.gachon.ask.MainActivity" />
         <activity android:name="com.gachon.ask.LoadingActivity" />
         <activity android:name="com.gachon.ask.LoginActivity" >
@@ -38,6 +46,22 @@
         <activity android:name="com.gachon.ask.community.PostViewActivity" />
         <activity android:name="com.gachon.ask.community.CategoryActivity" />
         <activity android:name="com.gachon.ask.CommunityFragment" />
+        <activity
+            android:name="com.gachon.ask.xingapi.MainView"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.gachon.ask.xingapi.WebViewActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="com.gachon.ask.xingapi.sLoginSet"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.gachon.ask.xingapi.sLoginSample1"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.gachon.ask.xingapi.sLoginSample2"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
@@ -113,6 +137,23 @@
             android:exported="true"
             android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
             android:visibleToInstantApps="true" />
+
+        <activity
+            android:name="com.ebest.api.login.importSignActivity"
+            android:label="공동인증서 가져오기"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name="com.ebest.api.login.Login2Activity"
+            android:label="공동인증 로그인"
+            android:noHistory="true"
+            android:theme="@style/NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.ebest.api.login.Login1Activity"
+            android:label="접속 로그인"
+            android:noHistory="true"
+            android:theme="@style/NoTitleBar" >
+        </activity>
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"

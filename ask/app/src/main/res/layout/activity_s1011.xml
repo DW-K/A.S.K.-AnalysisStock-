@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/combo_acc"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_width="200dp"
+            android:spinnerMode="dropdown"></Spinner>
+
+        <EditText
+            android:id="@+id/editAccPwd"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_query"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:text="조회" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center|center_vertical"
+            android:maxLines="1"
+            android:text="조회기준[단가:평균단가, 체결:결제기준, 단일가:정규장, 제비용미포함]" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center|center_vertical"
+            android:maxLines="1"
+            android:text="추정자산" />
+        <TextView
+            android:id="@+id/txtView_sunamt"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:text=" " />
+        <TextView
+            android:id="@+id/txtView2"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center|center_vertical"
+            android:maxLines="1"
+            android:text="실현손익" />
+        <TextView
+            android:id="@+id/txtView_dtsunik"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:text=" " />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView3"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center|center_vertical"
+            android:maxLines="1"
+            android:text="매입금액" />
+        <TextView
+            android:id="@+id/txtView_mamt"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:text=" " />
+        <TextView
+            android:id="@+id/txtView4"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center|center_vertical"
+            android:maxLines="1"
+            android:text="예수금" />
+        <TextView
+            android:id="@+id/txtView_sunamt1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:text=" " />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray">
+
+        <include
+            layout="@layout/s1011_item01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
