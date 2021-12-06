@@ -20,6 +20,8 @@ public class User {
     private ArrayList<StockReport> myStockReport; // 매매 기록
     private ArrayList<Integer> challenges;        // 달성한 업적
 
+    public User(){ }
+
     public User(String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
         this.userEmail = userEmail;
         this.userNickName = userNickName;

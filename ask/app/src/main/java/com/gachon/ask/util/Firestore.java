@@ -5,6 +5,7 @@ import com.gachon.ask.util.model.StockReport;
 import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -19,6 +20,16 @@ public class Firestore {
      */
     public static FirebaseFirestore getFirestoreInstance() {
         return FirebaseFirestore.getInstance();
+    }
+
+    /**
+     * 고유 userId값으로 유저 객체를 얻어온다
+     * @author Taehyun Park
+     * @param userId
+     * @return Task<DocumentSnapshot>
+     */
+    public static Task<DocumentSnapshot> getUserData(String userId){
+        return getFirestoreInstance().collection("user").document(userId).get();
     }
 
     /**

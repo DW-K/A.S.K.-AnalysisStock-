@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
+            "outputFile": "D:\\ASK3\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Minha\\.gradle\\caches\\transforms-2\\files-2.1\\bd3676011833cf3ebd779b1ace221e62\\material-1.4.0\\res\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
+                    "source": "C:\\Users\\abnc7\\.gradle\\caches\\transforms-2\\files-2.1\\bd3676011833cf3ebd779b1ace221e62\\material-1.4.0\\res\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

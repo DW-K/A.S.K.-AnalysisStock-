@@ -1760,8 +1760,10 @@ drawable abc_vector_test
 drawable api_info
 drawable avd_hide_password
 drawable avd_show_password
+drawable baseline_account_circle_24
 drawable baseline_favorite_24
 drawable baseline_favorite_border_24
+drawable baseline_person_24
 drawable baseline_search_24
 drawable box_02
 drawable btn_c_04_n
@@ -1866,12 +1868,14 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable profile_default
 drawable rounded_edittext
 drawable sign_cert
 drawable sub_banner_07
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user_image_default
 drawable xingapi1
 id ALT
 id BOTTOM_END
@@ -2159,6 +2163,7 @@ id et_ip
 id et_ip2
 id et_ip3
 id et_ip4
+id et_nickname
 id et_password
 id et_password_check
 id et_port
