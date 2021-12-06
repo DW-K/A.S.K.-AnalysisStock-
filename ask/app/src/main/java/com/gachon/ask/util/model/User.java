@@ -8,8 +8,10 @@ public class User {
 
     private String userEmail; // 유저 이메일
     private String userNickName; // 유저 닉네임
+    private String userProfileImgURL; // 유저 프로필 URL
     private Timestamp registerTime; // 가입 시간
     private int userLevel;        // 레벨
+    private int userRank;         // 유저 랭킹
     private int userExp;          // 경험치
     private int userMoney;        // 내 자산 (주식, 주문 가능 금액)
     private int postAnalysisNum;  // 분석글 수
