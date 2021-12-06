@@ -27,9 +27,9 @@
                     android:id="@+id/profile_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-
+                    android:src="@drawable/user_image_default"
                     android:layout_gravity="center"
-                    tools:srcCompat="@tools:sample/avatars" />
+ />
 
 
                 <LinearLayout

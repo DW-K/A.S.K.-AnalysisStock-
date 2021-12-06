@@ -38,6 +38,16 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'mips', 'mips64', 'arm64-v8a'
+            universalApk true
+        }
+    }
 }
 
 repositories {

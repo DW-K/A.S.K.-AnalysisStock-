@@ -47,8 +47,9 @@ com/gachon/ask/databinding/PostViewLayoutBinding.java
  com.gachon.ask.databinding.PostViewLayoutBinding
 com/gachon/ask/databinding/FragmentCommunityBinding.java
  com.gachon.ask.databinding.FragmentCommunityBinding
-com/gachon/ask/databinding/ActivityS1011Binding.java
- com.gachon.ask.databinding.ActivityS1011Binding
+com/gachon/ask/HomeFragment.java
+ com.gachon.ask.HomeFragment
+ com.gachon.ask.HomeFragment$1
 com/gachon/ask/databinding/S1001Item01Binding.java
  com.gachon.ask.databinding.S1001Item01Binding
 com/gachon/ask/databinding/ActivityS1007Binding.java
@@ -119,8 +120,9 @@ com/gachon/ask/util/model/Stock.java
  com.gachon.ask.util.model.Stock
 com/gachon/ask/databinding/S1012Item01Binding.java
  com.gachon.ask.databinding.S1012Item01Binding
-com/gachon/ask/databinding/ActivitySignupBinding.java
- com.gachon.ask.databinding.ActivitySignupBinding
+com/gachon/ask/MainActivity.java
+ com.gachon.ask.MainActivity
+ com.gachon.ask.MainActivity$ItemSelectedListener
 com/gachon/ask/databinding/S1005Item01Binding.java
  com.gachon.ask.databinding.S1005Item01Binding
 com/gachon/ask/databinding/S1004Item02Binding.java
@@ -169,9 +171,7 @@ com/gachon/ask/xingapi/s1001_j.java
  com.gachon.ask.xingapi.s1001_j$ProcMessageHandler
 com/gachon/ask/base/BaseActivity.java
  com.gachon.ask.base.BaseActivity
-com/gachon/ask/HomeFragment.java
- com.gachon.ask.HomeFragment
- com.gachon.ask.HomeFragment$1
-com/gachon/ask/MainActivity.java
- com.gachon.ask.MainActivity
- com.gachon.ask.MainActivity$ItemSelectedListener
+com/gachon/ask/databinding/ActivitySignupBinding.java
+ com.gachon.ask.databinding.ActivitySignupBinding
+com/gachon/ask/databinding/ActivityS1011Binding.java
+ com.gachon.ask.databinding.ActivityS1011Binding

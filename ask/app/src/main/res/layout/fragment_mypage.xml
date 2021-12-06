@@ -218,7 +218,7 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/user_image_default" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -251,6 +251,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/edit_profile"
             app:layout_constraintEnd_toEndOf="@+id/view_mypage_user"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toEndOf="@+id/username_title"
             app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
 

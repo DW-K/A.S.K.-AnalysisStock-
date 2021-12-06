@@ -56,7 +56,7 @@
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community_list.xml" value="0.3567708333333333" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_explore.xml" value="0.34814814814814815" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_home.xml" value="0.34814814814814815" />
-        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_mypage.xml" value="0.33" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_mypage.xml" value="0.25" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_ranking.xml" value="0.25" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/model_layout.xml" value="0.33" />
         <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/post_view_layout.xml" value="0.2234375" />
@@ -64,7 +64,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
