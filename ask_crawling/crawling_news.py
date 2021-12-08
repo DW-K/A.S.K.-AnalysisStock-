@@ -1,3 +1,5 @@
+import os
+
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import requests
@@ -51,6 +53,12 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
     e_to = e_date.replace(".", "")
     page = 1
 
+    # 새로 만들 파일이름 지정
+    output_file_name = f'{companyName}_{e_date}_n.xlsx'
+    filePath = fr"{RESULT_PATH_NEWS}\{category}\{companyName}\news"
+    output_path = fr"{filePath}\{output_file_name}"
+    Path.createFolder(filePath)
+
     maxpage_t = (int(maxpage) - 1) * 10 + 1  # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
     while page <= maxpage_t:
         url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(
@@ -100,14 +108,11 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
         df.index.name = "index"
         page += 10
 
-    # 새로 만들 파일이름 지정
+    with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD",
+                        if_sheet_exists="replace") as writer:
+        df.to_excel(writer, index_label=df.index.name, sheet_name=query)
 
-    outputFileName = f'{companyName}_{today}_n.xlsx'
-    filePath = fr"{RESULT_PATH_NEWS}\{category}"
-    Path.createFolder(filePath)
-    df.to_excel(fr"{filePath}\{outputFileName}", sheet_name=query, index_label="index")
-
-    return fr'{filePath}\{outputFileName}'
+    return filePath, output_file_name
 
 
 # 메인함수
@@ -134,5 +139,5 @@ if __name__ == "__main__":
 
     # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
 
-    filePath = crawler(category=category, companyName=companyName, maxpage=maxpage, query=query, sort=sort,
+    filePath = crawler(category=category, companyName=companyName, maxpage=query, sort=sort,
                        s_date=s_date, e_date=e_date)

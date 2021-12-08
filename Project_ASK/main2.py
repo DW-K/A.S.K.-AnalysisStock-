@@ -42,10 +42,11 @@ def crawlingStock():
 
 
 if __name__ == "__main__":
-    # crawlingStock()
+    crawlingStock()
     # crawlingByKeyword()
-
-    for i in range(1000):
-        target_date_format = now - timedelta(days=i)
-        target_date = target_date_format.strftime(dateFormat)
-        crawlingByKeyword(target_date)
+    #
+    # for i in range(300):
+    #     print(f'date : {i}')
+    #     target_date_format = now - timedelta(days=i)
+    #     target_date = target_date_format.strftime(dateFormat)
+    #     crawlingByKeyword(target_date)

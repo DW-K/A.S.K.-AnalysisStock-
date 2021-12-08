@@ -1,12 +1,15 @@
+import os
 import sys
 
+import Path
 from crawling_news import crawler
 from pororo import Pororo
 import pandas as pd
 
 
-def sentiment(filePath, sheetName):
-    df = pd.read_excel(filePath, index_col="index", sheet_name=sheetName)
+def sentiment(filePath, output_file_name, sheetName):
+    output_path = fr'{filePath}\{output_file_name}'
+    df = pd.read_excel(output_path, index_col="index", sheet_name=sheetName)
 
     sa = Pororo(task="sentiment", model="brainbert.base.ko.shopping", lang="ko")
     zsl = Pororo(task="zero-topic", lang="ko")
@@ -24,9 +27,25 @@ def sentiment(filePath, sheetName):
         for c in categoryResult:
             df.loc[i, c] = categoryResult[c]
 
-    df.to_excel(filePath, sheet_name=sheetName)
+    print(filePath)
+    sentiment_file_path = "\\".join(filePath.split('\\')[:-1])
+    sentiment_file_path += "\\sentiment"
+    print(sentiment_file_path)
 
-    return filePath
+    sentiment_output = output_file_name.split('.')[0]   # ex) 현대차_20211203_n
+    sentiment_output += 's.xlsx'    # ex) 현대차_20211203_ns.xlsx
+
+    sentiment_output_path = fr'{sentiment_file_path}\{sentiment_output}'
+
+    Path.createFolder(sentiment_file_path)
+    if os.path.exists(sentiment_output_path):
+        with pd.ExcelWriter(sentiment_output_path, mode='a', engine='openpyxl', if_sheet_exists="replace") as writer:
+            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+    else:
+        with pd.ExcelWriter(sentiment_output_path, mode='w', engine='openpyxl', if_sheet_exists="replace") as writer:
+            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+
+    return sentiment_file_path, sentiment_output
 
 
 if __name__ == "__main__":
@@ -41,7 +60,7 @@ if __name__ == "__main__":
     print(arg_list)
     # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
 
-    filePath = crawler(category=category, companyName=companyName, maxpage=maxpage, query=query, sort=sort, s_date=s_date, e_date=e_date)
+    filePath, output_file_name = crawler(category=category, companyName=companyName, maxpage=maxpage, query=query, sort=sort, s_date=s_date, e_date=e_date)
     # query = "이수만"
-    filePath = sentiment(filePath=filePath, sheetName=query)
+    filePath, output_file_name = sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query)
 

@@ -1,9 +1,12 @@
 import datetime
+import sys
+
 import pandas as pd
 from dateutil.parser import parse
 
 import twitter
 import Path
+from Path import RESULT_PATH_TWEET
 
 twitter_consumer_key = "HO2ximfzQ99cNXP9KNVQG0wqU"
 twitter_consumer_secret = "S5bie299yxJBZJD9Ig74mMNtZ9muvJ42P1bz8eZxbZR6hnUhha"
@@ -65,89 +68,77 @@ def add_content(text, content):
     return text
 
 
-def set_file_name(keyword):
-    date = datetime.datetime.today().strftime('%Y-%m-%d ')
-    return date + keyword + '_t'
-
-
-def get_tweets(query, num):
+def tweet_crawler(category, companyName, query, num, s_date, e_date):
     datetime_list = []
     rt_list = []
     text_list = []
-    file_name_list = []
+
+    output_file_name = f'{companyName}_{e_date}_t.xlsx'
+    filePath = fr"{RESULT_PATH_TWEET}\{category}\{companyName}\tweet"
+    output_path = fr"{filePath}\{output_file_name}"
+    Path.createFolder(filePath)
 
     print('query:', query)
-    for i in range(len(query)):  # 각 키워드별로 파일 생성하기로함.
-        print('*** 현재 i:', query[i])
 
-        statuses = twitter_api.GetSearch(term=query[i], count=num, lang='ko')  # 한국어로 작성된 트윗만
+    statuses = twitter_api.GetSearch(term=query, count=num, lang='ko')  # 한국어로 작성된 트윗만
 
-        for status in statuses:
-            text = status.text
+    for status in statuses:
+        text = status.text
 
-            # RT 확인
-            rt_count = status.retweet_count
-            if status.retweeted_status:
-                # retweet_count가 0 이상이면(rt 가 존재하면) 해당 내용의 text를 text로 지정. RT @아이디를 빠진 데이터임.
-                text = status.retweeted_status.text
-            else:
-                rt_count = 0
-                continue  # rt_count가 0이면 해당 트윗은 버리고 다음 트윗으로
+        # RT 확인
+        rt_count = status.retweet_count
+        if status.retweeted_status:
+            # retweet_count가 0 이상이면(rt 가 존재하면) 해당 내용의 text를 text로 지정. RT @아이디를 빠진 데이터임.
+            text = status.retweeted_status.text
+        else:
+            rt_count = 0
+            continue  # rt_count가 0이면 해당 트윗은 버리고 다음 트윗으로
 
-            # 멘션에 아이디 제거
-            # print('status.user_mentions:', status.user_mentions)
-            # print(len(status.user_mentions))
-            if len(status.user_mentions):
-                text = clear_id(text, status.user_mentions)
+        # 멘션에 아이디 제거
+        # print('status.user_mentions:', status.user_mentions)
+        # print(len(status.user_mentions))
+        if len(status.user_mentions):
+            text = clear_id(text, status.user_mentions)
 
-            # 첨부된 이미지 제거
-            if text.find(http) != -1:
-                text = clear_link(text)
+        # 첨부된 이미지 제거
+        if text.find(http) != -1:
+            text = clear_link(text)
 
-            # 텍스트의 엔터 제거
-            text = text.replace('\n', ' ')
+        # 텍스트의 엔터 제거
+        text = text.replace('\n', ' ')
 
-            # 텍스트에 포함된 , 제거(csv 파일 저장 오류 방지)
-            text = clear_comma(text)
+        # 텍스트에 포함된 , 제거(csv 파일 저장 오류 방지)
+        text = clear_comma(text)
 
-            # text 정리 완료, list로 만들기
-            text_list.append(text)
+        # text 정리 완료, list로 만들기
+        text_list.append(text)
 
-            # RT 횟수 list로 만들기
-            rt_list.append(rt_count)
+        # RT 횟수 list로 만들기
+        rt_list.append(rt_count)
 
-            # 날짜 list로 만들기
-            datetime_list.append(get_date(status.created_at))
+        # 날짜 list로 만들기
+        datetime_list.append(get_date(status.created_at))
 
-        print('text_list:', text_list)
-        # text 정리 완료, df로 만들기
-        pd.set_option('display.max_columns', None)
         df = pd.DataFrame(list(zip(datetime_list, rt_list, text_list)), columns=['datetime', 'rt_count', 'text'])
 
         # df.columns = ['keyword', 'datetime', 'rt_count', 'text']
         df = df.drop_duplicates('text', ignore_index=True)  # 중복 제거
-        print(df)
-        file_name = set_file_name(query[i]) + '.xlsx'
-        print('*** file_name:', file_name)
 
-        # 파일 이름만 저장하기
-        file_name_list.append(file_name)
-        print('현재까지 file_name_list', file_name_list)
-
-        df.to_excel(file_name, index=False)  # 엑셀파일로 만들기
-        datetime_list.clear()
-        rt_list.clear()
-        text_list.clear()
+        with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD",
+                            if_sheet_exists="replace") as writer:
+            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
 
 
-    with open('file_name_list.txt', "w", encoding=encode_method) as f:
-        f.write('\n'.join(file_name_list))
+if __name__ == "__main__":
+    arg_list = sys.argv[1:]  # argument 받아서 실행
+    category = arg_list[0]
+    companyName = arg_list[1]
+    query = arg_list[2]
+    num = arg_list[3]
+    s_date = arg_list[4]
+    e_date = arg_list[5]
 
-
-def tweet_crawler(num):
-    keyword_trend = open('ent_trend.txt', 'r', encoding='utf-8').read().split(sep="\n")
-    print(keyword_trend)
-    get_tweets(keyword_trend, num)
+    tweet_crawler(category=category, companyName=companyName, query=query, num=num, s_date=s_date, e_date=e_date)
 
 
 # def crawling_tweet(query, date):
@@ -198,7 +189,3 @@ def tweet_crawler(num):
 #             print('####################')
 #             print(text, file=output_file, flush=True)
 #             print('### 구분선 ###', file=output_file, flush=True)
-
-
-if __name__ == "__main__":
-    tweet_crawler(num=300)
