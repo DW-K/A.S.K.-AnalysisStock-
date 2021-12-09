@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/exploreItem"
+        android:icon="@drawable/ic_menu_explore"
+        android:title="Explore" />
+    <item
+        android:id="@+id/rankItem"
+        android:icon="@drawable/ic_menu_ranking"
+        android:title="Rank" />
+    <item
+        android:id="@+id/communityItem"
+        android:icon="@drawable/ic_menu_community"
+        android:title="Community" />
+    <item
+        android:id="@+id/myPageItem"
+        android:icon="@drawable/ic_menu_mypage"
+        android:title="MyPage" />
+</menu>
