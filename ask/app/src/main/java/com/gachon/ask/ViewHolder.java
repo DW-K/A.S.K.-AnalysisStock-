@@ -37,7 +37,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-        //initialize views with post_detail_layout.xml
+        //initialize views with post_view_layout.xml
 
         vContents = itemView.findViewById(R.id.lContents);
         vNickname = itemView.findViewById(R.id.lNickname);

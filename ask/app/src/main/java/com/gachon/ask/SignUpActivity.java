@@ -112,7 +112,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
     private void createNewUserDatabase(FirebaseUser user, String userNickName) {
         // 새 유저 정보 작성
         Firestore.writeNewUser(user.getUid(), user.getEmail(), userNickName,
-                0,0,0,0,0,0,0,null,null,null)
+                0,0,0,0, 0,0,0,0,null,null,null)
                 .addOnCompleteListener(documentTask -> {
                     // 성공했다면
                     if(documentTask.isSuccessful()) {

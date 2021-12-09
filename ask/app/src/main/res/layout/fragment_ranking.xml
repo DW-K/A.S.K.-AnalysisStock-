@@ -79,14 +79,14 @@
                 android:text="@string/ranking_season" />
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/gray"
+                android:id="@+id/recycler_view_ranking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </ScrollView>
+
 
     </LinearLayout>
 

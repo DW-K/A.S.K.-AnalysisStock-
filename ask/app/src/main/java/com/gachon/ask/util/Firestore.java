@@ -41,6 +41,7 @@ public class Firestore {
      * @param userLevel
      * @param userExp
      * @param userMoney
+     * @param userRank
      * @param postAnalysisNum
      * @param postQuestionNum
      * @param postAnswerNum
@@ -50,9 +51,9 @@ public class Firestore {
      * @param challenges
      * @return Task<Void>
      */
-    public static Task<Void> writeNewUser(String userId, String userEmail, String userNickName, int userLevel, int userExp, int userMoney, int postAnalysisNum, int postQuestionNum,
+    public static Task<Void> writeNewUser(String userId, String userEmail, String userNickName, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum,
                                           int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
-        User newUser = new User(userEmail, userNickName, new Timestamp(new Date()), userLevel, userExp, userMoney, postAnalysisNum, postQuestionNum, postAnswerNum, profitRate, myStock, myStockReport, challenges);
+        User newUser = new User(userEmail, userNickName, new Timestamp(new Date()), userLevel, userExp, userMoney, userRank, postAnalysisNum, postQuestionNum, postAnswerNum, profitRate, myStock, myStockReport, challenges);
         return getFirestoreInstance().collection("user").document(userId).set(newUser);
     }
 

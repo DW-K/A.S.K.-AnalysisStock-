@@ -22,15 +22,15 @@ public class User {
     private ArrayList<StockReport> myStockReport; // 매매 기록
     private ArrayList<Integer> challenges;        // 달성한 업적
 
-    public User(){ }
 
-    public User(String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
+    public User(String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
         this.userEmail = userEmail;
         this.userNickName = userNickName;
         this.registerTime = registerTime;
         this.userLevel = userLevel;
         this.userExp = userExp;
         this.userMoney = userMoney;
+        this.userRank = userRank;
         this.postAnalysisNum = postAnalysisNum;
         this.postQuestionNum = postQuestionNum;
         this.postAnswerNum = postAnswerNum;
@@ -39,6 +39,8 @@ public class User {
         this.myStockReport = myStockReport;
         this.challenges = challenges;
     }
+
+
 
     public String getUserEmail() {
         return userEmail;
@@ -86,6 +88,14 @@ public class User {
 
     public void setUserMoney(int userMoney) {
         this.userMoney = userMoney;
+    }
+
+    public int getUserRank() {
+        return userRank;
+    }
+
+    public void setUserRank(int userRank) {
+        this.userRank = userRank;
     }
 
     public int getPostAnalysisNum() {
