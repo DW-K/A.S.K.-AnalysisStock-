@@ -12,6 +12,8 @@ import io
 
 import Path
 
+from sentiment import sentiment
+
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 
@@ -35,6 +37,8 @@ result = {}
 RESULT_PATH_NEWS = Path.RESULT_PATH_NEWS
 now = datetime.now()  # 파일이름 현 시간으로 저장하기
 today = now.strftime("%y%m%d")
+
+target_col = "contents"
 
 
 # 내용 정제화 함수
@@ -108,9 +112,13 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
         df.index.name = "index"
         page += 10
 
-    with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD",
-                        if_sheet_exists="replace") as writer:
-        df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+    if os.path.exists(output_path):
+        with pd.ExcelWriter(output_path, mode='a', engine='openpyxl',
+                            if_sheet_exists="replace") as writer:
+            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+    else:
+        with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD") as writer:
+            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
 
     return filePath, output_file_name
 
@@ -139,5 +147,7 @@ if __name__ == "__main__":
 
     # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
 
-    filePath = crawler(category=category, companyName=companyName, maxpage=query, sort=sort,
-                       s_date=s_date, e_date=e_date)
+    filePath, output_file_name = crawler(category=category, companyName=companyName, maxpage=query, sort=sort,
+                                         s_date=s_date, e_date=e_date)
+
+    sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)

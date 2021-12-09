@@ -1,6 +1,7 @@
 import os
 import time
 
+import numpy as np
 from openpyxl import load_workbook
 
 import Path
@@ -40,33 +41,39 @@ def combineData(category, company_name, target_date):
     epsilon = pow(10, -10)
     stock_index = "날짜"
     news_sentiment_logit_name = 'news_sentiment_logit'
+    isExist_file = False
 
     start = time.time()
 
     combine_filePath = rf'{Path.RESULT_PATH_COMBINE}\{category}\{company_name}'
-    combine_fileName = rf'{Path.RESULT_PATH_COMBINE}\{category}\{company_name}\{company_name}_combine.xlsx'
+    combine_outputPath = rf'{combine_filePath}\{company_name}_combine.xlsx'
     Path.createFolder(combine_filePath)
 
-    if os.path.exists(combine_fileName):
-        df_stock = pd.read_excel(combine_fileName, dtype={stock_index: str})
+    if os.path.exists(combine_outputPath):
+        isExist_file = True
+        df_stock = pd.read_excel(combine_outputPath, dtype={stock_index: str})
         df_stock.set_index(stock_index, drop=True, inplace=True)
         df_stock.dropna(how='all', inplace=True)
     else:
         df_stock = pd.read_excel(rf'{RESULT_PATH_STOCK}\{category}\{company_name}\{company_name}_s.xlsx',
                                  dtype={stock_index: str})
         df_stock.set_index(stock_index, drop=True, inplace=True)
-        df_stock[news_sentiment_logit_name] = ""    # add empty column
+        df_stock[news_sentiment_logit_name] = np.NAN    # add empty column
 
-    if target_date in df_stock.index:
-        print(df_stock.index[-120:-100])
-        print(target_date in df_stock.index)
+    if target_date in df_stock.index:   # subtract weekend (add to next day later)
         if df_stock.loc[target_date].isnull()[news_sentiment_logit_name]:      # if logit is NAN
             news_positive_mean, news_negative_mean = get_news_sentiment(category, company_name, target_date)    # add sentiment logit column to df_stock
             news_sentiment_logit = news_positive_mean / (news_negative_mean + epsilon)
             df_stock.loc[target_date, news_sentiment_logit_name] = news_sentiment_logit
 
-            with pd.ExcelWriter(combine_fileName, mode='w', engine='openpyxl') as writer:
-                df_stock.to_excel(writer, sheet_name=target_date)
+            if isExist_file:
+                print("file exist")
+                with pd.ExcelWriter(combine_outputPath, mode='a', engine='openpyxl', if_sheet_exists="replace") as writer:
+                    df_stock.to_excel(writer, sheet_name=company_name)
+            else:
+                print("file not exist")
+                with pd.ExcelWriter(combine_outputPath, mode='w', engine='openpyxl') as writer:
+                    df_stock.to_excel(writer, sheet_name=company_name)
         else:
             print(f'{company_name}: {target_date} has sentiment_logit')
             # print(df_stock[target_date])

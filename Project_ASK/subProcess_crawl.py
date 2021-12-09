@@ -22,15 +22,12 @@ def subProcess_crawl(func, arg=[]):
     print(f"complete crawling news: {arg[1]} ({arg[3]})")
 
 
-def crawling_news(category, companyName, maxpage, query, sort, s_date, e_date, isSentiment=True):
-    if isSentiment:
-        subProcess_crawl('sentiment_news', [category, companyName, maxpage, query, sort, s_date, e_date])
-    else:
-        subProcess_crawl('crawling_news', [category, companyName, maxpage, query, sort, s_date, e_date])
+def crawling_news(category, companyName, maxpage, query, sort, s_date, e_date):
+    subProcess_crawl('crawling_news', [category, companyName, maxpage, query, sort, s_date, e_date])
 
 
-def crawling_tweet():
-    subProcess_crawl('crawling_tweet')
+def crawling_tweet(category, companyName, maxpage, query, s_date, e_date):
+    subProcess_crawl('crawling_tweet', [category, companyName, maxpage, query, s_date, e_date])
 
 
 if __name__ == "__main__":
