@@ -3030,7 +3030,7 @@ string ranking
 string ranking_daily
 string ranking_monthly
 string ranking_personal
-string ranking_season
+string ranking_total
 string ranking_university
 string ranking_weekly
 string search_menu_title

@@ -3029,7 +3029,7 @@ int string ranking 0x7f0f00a3
 int string ranking_daily 0x7f0f00a4
 int string ranking_monthly 0x7f0f00a5
 int string ranking_personal 0x7f0f00a6
-int string ranking_season 0x7f0f00a7
+int string ranking_total 0x7f0f00b1
 int string ranking_university 0x7f0f00a8
 int string ranking_weekly 0x7f0f00a9
 int string search_menu_title 0x7f0f00aa

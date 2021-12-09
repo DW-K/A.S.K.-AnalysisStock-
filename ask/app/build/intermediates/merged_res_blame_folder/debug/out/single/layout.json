@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_s1006.xml",
-        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_s1006.xml"
-    },
-    {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\s1008_item01.xml",
         "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\s1008_item01.xml"
+    },
+    {
+        "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_s1006.xml",
+        "source": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_s1006.xml"
     },
     {
         "merged": "D:\\Minha\\GitHub\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\s1005_item01.xml",

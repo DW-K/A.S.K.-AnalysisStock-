@@ -28,10 +28,10 @@
     <string name="ranking">랭킹</string>
     <string name="ranking_personal">개인</string>
     <string name="ranking_university">대학</string>
-    <string name="ranking_daily">일별</string>
-    <string name="ranking_weekly">주별</string>
-    <string name="ranking_monthly">월별</string>
-    <string name="ranking_season">시즌별</string>
+    <string name="ranking_daily">일간</string>
+    <string name="ranking_weekly">주간</string>
+    <string name="ranking_monthly">월간</string>
+    <string name="ranking_total">전체</string>
 
 
 
