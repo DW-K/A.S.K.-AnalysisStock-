@@ -1,13 +1,20 @@
 import os
 import sys
 
+import numpy as np
+
 import Path
+from Path import writeToExcel
+
 from pororo import Pororo
 import pandas as pd
 
 
 def sentiment(filePath, output_file_name, sheetName, target_col):
     output_path = fr'{filePath}\{output_file_name}'
+    # df = pd.read_excel(output_path, sheet_name=sheetName)
+
+    # print(df)
     df = pd.read_excel(output_path, index_col="index", sheet_name=sheetName)
 
     sa = Pororo(task="sentiment", model="brainbert.base.ko.shopping", lang="ko")
@@ -16,15 +23,16 @@ def sentiment(filePath, output_file_name, sheetName, target_col):
     categoryList = ["스포츠", "사회", "정치", "경제", "생활/문화", "IT/과학"]
 
     for i in df.index:
-        # print(df.loc[i, target_col])
-        sentimentResult = sa(df.loc[i, target_col], show_probs=True)
-        categoryResult = zsl(df.loc[i, target_col], categoryList)
+        if df.loc[i, target_col] is not np.NAN:
+            # print(df.loc[i, target_col])
+            sentimentResult = sa(df.loc[i, target_col], show_probs=True)
+            categoryResult = zsl(df.loc[i, target_col], categoryList)
 
-        df.loc[i, "positive"] = sentimentResult['positive']
-        df.loc[i, "negative"] = sentimentResult['negative']
+            df.loc[i, "positive"] = sentimentResult['positive']
+            df.loc[i, "negative"] = sentimentResult['negative']
 
-        for c in categoryResult:
-            df.loc[i, c] = categoryResult[c]
+            for c in categoryResult:
+                df.loc[i, c] = categoryResult[c]
 
     print(filePath)
     sentiment_file_path = "\\".join(filePath.split('\\')[:-1])
@@ -37,12 +45,17 @@ def sentiment(filePath, output_file_name, sheetName, target_col):
     sentiment_output_path = fr'{sentiment_file_path}\{sentiment_output}'
 
     Path.createFolder(sentiment_file_path)
-    if os.path.exists(sentiment_output_path):
-        with pd.ExcelWriter(sentiment_output_path, mode='a', engine='openpyxl', if_sheet_exists="replace") as writer:
-            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+
+    if os.path.exists(output_path):
+        writeToExcel(output_path=sentiment_output_path, df=df, sheet_name=sheetName)
     else:
-        with pd.ExcelWriter(sentiment_output_path, mode='w', engine='openpyxl') as writer:
-            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+        writeToExcel(output_path=sentiment_output_path, df=df, sheet_name=sheetName, isWrite=False)
+    # if os.path.exists(sentiment_output_path):
+    #     with pd.ExcelWriter(sentiment_output_path, mode='a', engine='openpyxl', if_sheet_exists="replace") as writer:
+    #         df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+    # else:
+    #     with pd.ExcelWriter(sentiment_output_path, mode='w', engine='openpyxl') as writer:
+    #         df.to_excel(writer, index_label=df.index.name, sheet_name=query)
 
     return sentiment_file_path, sentiment_output
 

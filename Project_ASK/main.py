@@ -37,7 +37,6 @@ def twitterCrawlingByKeyword(target_date=today):
     for category in crawlDict.keys():
         for companyName in crawlDict[category]:
             for crawlKeyword in crawlDict[category][companyName]:
-                print(f'company: {companyName}')
                 crawling_tweet(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword,
                               s_date=target_date, e_date=target_date)
 

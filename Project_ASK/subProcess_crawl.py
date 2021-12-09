@@ -17,9 +17,8 @@ def subProcess_crawl(func, arg=[]):
         if err is not None:
             print(err)
 
-        print(out.decode())
-
     print(f"complete crawling news: {arg[1]} ({arg[3]})")
+    print(out.decode())
 
 
 def crawling_news(category, companyName, maxpage, query, sort, s_date, e_date):

@@ -11,6 +11,7 @@ import sys
 import io
 
 import Path
+from Path import writeToExcel
 
 from sentiment import sentiment
 
@@ -63,6 +64,8 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
     output_path = fr"{filePath}\{output_file_name}"
     Path.createFolder(filePath)
 
+    df_result = pd.DataFrame()
+
     maxpage_t = (int(maxpage) - 1) * 10 + 1  # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
     while page <= maxpage_t:
         url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(
@@ -110,15 +113,14 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
                   "link": link_text}
         df = pd.DataFrame(result)  # df로 변환
         df.index.name = "index"
+
+        df_result = pd.concat([df_result, df], axis=0)
         page += 10
 
     if os.path.exists(output_path):
-        with pd.ExcelWriter(output_path, mode='a', engine='openpyxl',
-                            if_sheet_exists="replace") as writer:
-            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+        writeToExcel(output_path=output_path, df=df_result, sheet_name=query, isWrite=False)
     else:
-        with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD") as writer:
-            df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+        writeToExcel(output_path=output_path, df=df_result, sheet_name=query, isWrite=True)
 
     return filePath, output_file_name
 

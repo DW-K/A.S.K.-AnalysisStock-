@@ -8,6 +8,7 @@ from dateutil.parser import parse
 import twitter
 import Path
 from Path import RESULT_PATH_TWEET
+from Path import writeToExcel
 from sentiment import sentiment
 
 twitter_consumer_key = "HO2ximfzQ99cNXP9KNVQG0wqU"
@@ -100,8 +101,8 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
     # print(statuses[0]["created_at"])
 
     for status in statuses:
+        # print(statuses)
         text = status.text
-
         # RT 확인
         rt_count = status.retweet_count
         if status.retweeted_status:
@@ -136,20 +137,23 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
         # 날짜 list로 만들기
         datetime_list.append(get_date(status.created_at))
 
+    if len(text_list) >= 1:
         df = pd.DataFrame(list(zip(datetime_list, rt_list, text_list)), columns=['datetime', 'rt_count', 'text'])
-        df.index.name = "index"
+        # print(df)
 
         # df.columns = ['keyword', 'datetime', 'rt_count', 'text']
         df = df.drop_duplicates('text', ignore_index=True)  # 중복 제거
+        df.index.name = "index"
+
+        df.dropna(axis=0, inplace=True)
+        print(df)
 
         if os.path.exists(output_path):
-            with pd.ExcelWriter(output_path, mode='a', engine='openpyxl',
-                                if_sheet_exists="replace") as writer:
-                df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+            writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=False)
         else:
-            with pd.ExcelWriter(output_path, mode='w', engine='openpyxl', date_format="YYYYMMDD",
-                                if_sheet_exists="replace") as writer:
-                df.to_excel(writer, index_label=df.index.name, sheet_name=query)
+            writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=True)
+    else:
+        return False, False
 
     return filePath, output_file_name
 
@@ -165,4 +169,5 @@ if __name__ == "__main__":
 
     filePath, output_file_name =tweet_crawler(category=category, companyName=companyName, query=query, num=num, s_date=s_date, e_date=e_date)
 
-    sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
+    if filePath is not False:
+        sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
