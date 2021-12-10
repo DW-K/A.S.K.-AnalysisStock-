@@ -52,6 +52,7 @@ com/gachon/ask/databinding/FragmentCommunityBinding.java
 com/gachon/ask/HomeFragment.java
  com.gachon.ask.HomeFragment
  com.gachon.ask.HomeFragment$1
+ com.gachon.ask.HomeFragment$2
 com/gachon/ask/databinding/S1001Item01Binding.java
  com.gachon.ask.databinding.S1001Item01Binding
 com/gachon/ask/databinding/ActivityS1007Binding.java
