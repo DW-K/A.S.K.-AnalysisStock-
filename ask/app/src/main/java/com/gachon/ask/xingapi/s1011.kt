@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,19 @@ import com.ebest.api.*
 import com.ebest.api.rm.ResourceManager
 import com.gachon.ask.datamngr.API_DEFINE
 import com.gachon.ask.R
+import com.gachon.ask.util.Auth
+import com.gachon.ask.util.Firestore
+import com.gachon.ask.util.model.Stock
+import com.gachon.ask.util.model.User
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.ArrayList
 
 class s1011 : Fragment() {
 
+    var userStock = ArrayList<Stock>();
     internal var m_nHandle = -1
     internal var handler: ProcMessageHandler? = null
     lateinit internal var manager: SocketManager
@@ -98,7 +109,6 @@ class s1011 : Fragment() {
         // 그리드 초기화
         m_gridView = root.findViewById<View>(R.id.grid_view) as GridView
         m_gridView.adapter = m_adapter
-
         // 버튼
         root.findViewById<Button>(R.id.btn_query).setOnClickListener {
             // 조회버튼 클
@@ -109,6 +119,7 @@ class s1011 : Fragment() {
 
         // 계좌 콤보박스
         m_combo_acc = root!!.findViewById(R.id.combo_acc) as Spinner
+        // 계좌를 가져와서 spinner 목록에서 보여주기 위함
         var items = getAccountList();
         val myAdapter = ArrayAdapter(root!!.context, R.layout.spinneritem, items)
         m_combo_acc.adapter = myAdapter
@@ -243,25 +254,60 @@ class s1011 : Fragment() {
         val tappamt  = manager!!.getCommaValue(s1!![0][5])
         val tdtsunik = manager!!.getCommaValue(s1!![0][6])
 
+        val temp_sunamt = sunamt
+
+        // ------------ 자산관련 부분 ------------
         (root!!.findViewById(R.id.txtView_sunamt)   as TextView).text    = sunamt
         (root!!.findViewById(R.id.txtView_dtsunik)  as TextView).text    = dtsunik
         (root!!.findViewById(R.id.txtView_mamt)     as TextView).text    = mamt
         (root!!.findViewById(R.id.txtView_sunamt1)  as TextView).text    = sunamt1
+        Log.d("s1011.kt", "총 자산 : "+sunamt)
 
+        // ASK 유저의 총 자산 데이터에 삽입, fireStore update
+        updateUserMoney(temp_sunamt.replace(",","").toInt())
+
+        // ------------ 체결내역 부분 ------------
         if (s2 != null) {
-            for (i in 0..s2.size - 1) {
+            for (i in 0..s2.size - 1) { // 거래한 종목 수만큼 반복..?
 
                 val data_record: List<Triple<TableGrid.TYPE, Any?, Int>> = listOf(
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][18]               , R.id.textView1),
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][1]                , R.id.textView2),
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][2]                , R.id.textView3),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][4])               , R.id.textView4),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][5])               , R.id.textView5),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][25], 2) , R.id.textView6)
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][18]               , R.id.textView1),  // 종목명
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][1]                , R.id.textView2),  // 잔고구분
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][2]                , R.id.textView3),  // 잔고수량
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][4])               , R.id.textView4),  // 평균단가
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][5])               , R.id.textView5),  // 매입금액
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][25], 2) , R.id.textView6)   // 수익률
+                )
+                Log.d("s1011.kt","종목명 : "+data_record[0].second.toString()+", 잔고수량 :  "+data_record[2].second.toString()+", 수익률 : "+data_record[5].second.toString())
+                // ASK 유저의 체결 내역을 삽입, fireStore update
+                updateUserStock(
+                    data_record[0].second.toString(),
+                    data_record[5].second.toString(),
+                    data_record[2].second.toString()
                 )
                 m_adapter.addItem(data_record)
             }
         }
         m_adapter.notifyDataSetChanged()   //데이터 갱신을 알린다.
+    }
+
+    // ASK 유저의 계정에 자산 동기화시키는 함수
+    private fun updateUserMoney(userMoney:Int){
+        Firestore.updateUserMoney(Auth.getCurrentUser().uid, userMoney).addOnSuccessListener(object : OnSuccessListener<Void?> {
+            override fun onSuccess(unused: Void?) {
+               //Toast.makeText(context, "자산이 성공적으로 저장됨",Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    // ASK 유저의 체결 내역을 삽입, fireStore update
+    private fun updateUserStock(stockName:String, stockYield:String, stockNum:String){
+        val stock = Stock(stockName,stockYield,stockNum)
+        userStock.add(stock) // 지속적으로 업데이트
+        Firestore.updateUserStock(Auth.getCurrentUser().uid, userStock).addOnSuccessListener(object : OnSuccessListener<Void?> {
+            override fun onSuccess(unused: Void?) {
+                //Toast.makeText(context, "보유 주식 저장됨",Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

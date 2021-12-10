@@ -5,6 +5,7 @@ import com.gachon.ask.util.model.StockReport;
 import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,6 +31,28 @@ public class Firestore {
      */
     public static Task<DocumentSnapshot> getUserData(String userId){
         return getFirestoreInstance().collection("user").document(userId).get();
+    }
+
+    /**
+     * 고유 userId값으로 유저의 자산을 update
+     * @author Taehyun Park
+     * @param userId
+     * @param userMoney
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserMoney(String userId, Integer userMoney){
+        return getFirestoreInstance().collection("user").document(userId).update("userMoney",userMoney);
+    }
+
+    /**
+     * 고유 userId값으로 유저의 보유 주식을 update
+     * @author Taehyun Park
+     * @param userId
+     * @param userStock
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserStock(String userId, ArrayList<Stock> userStock){
+        return getFirestoreInstance().collection("user").document(userId).update("myStock",userStock);
     }
 
     /**

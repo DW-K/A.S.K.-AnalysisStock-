@@ -6,9 +6,15 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.gms.google-services'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.gachon.ask"
@@ -87,4 +93,6 @@ dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation (name: 'INISAFE_Net_for_Android_JNI_SDK_v1.1.1', ext: 'aar')
     implementation (name: 'XingAPI_And_v2.0.6', ext: 'aar')
+
+    kapt "com.android.databinding:compiler:3.0.1"
 }
