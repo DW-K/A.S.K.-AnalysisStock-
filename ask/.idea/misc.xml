@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_community_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_loading.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_navview.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_postview.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1001.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1002.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1003.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1004.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1005.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1006.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1007.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1008.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1009.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1010.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1011.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1012.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_sample_login1.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_sample_login2.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_signup.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_webview.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_explore.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_mypage.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_ranking.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/item_navi_btn.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/loginset_activity.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/post_view_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/ranking_view_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1001_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1002_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1003_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1004_item02.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1005_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1007_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1008_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1010_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1011_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/s1012_item01.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK2/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/smain_navi.xml" value="0.22604166666666667" />
+        <entry key="..\:/ASK5/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_s1011.xml" value="0.36614583333333334" />
+        <entry key="..\:/ASK5/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_community_list.xml" value="0.2" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_login.xml" value="0.28958333333333336" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_main.xml" value="0.17777777777777778" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_navview.xml" value="0.3567708333333333" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_post.xml" value="0.3567708333333333" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_postView.xml" value="0.2" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_postview.xml" value="0.33" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_signup.xml" value="0.21770833333333334" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/activity_writing.xml" value="0.33" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community.xml" value="0.34814814814814815" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_community_list.xml" value="0.3567708333333333" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_explore.xml" value="0.34814814814814815" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_home.xml" value="0.34814814814814815" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_mypage.xml" value="0.25" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/fragment_ranking.xml" value="0.25" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/model_layout.xml" value="0.33" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/post_view_layout.xml" value="0.2234375" />
+        <entry key="..\:/Minha/GitHub/A.S.K.-AnalysisStock-/ask/app/src/main/res/layout/ranking_view_layout.xml" value="0.22" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

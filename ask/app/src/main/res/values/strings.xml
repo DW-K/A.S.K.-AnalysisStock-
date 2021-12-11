@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">ask</string>
+    <string name="login_error">로그인에 실패했습니다.</string>
+    <string name="login_success">로그인에 성공하였습니다.</string>
+
+    <string name="category">카테고리</string>
+    <string name="category_car">자동차</string>
+    <string name="category_entertainment">엔터테인먼트</string>
+    <string name="category_it">IT</string>
+    <string name="category_electronics">전자제품</string>
+
+
+    <string name="no_post">작성된 글이 없습니다.</string>
+    <string name="leave_comment">댓글을 남겨보세요.</string>
+    <string name="btn_comment">등록</string>
+
+    <string name="sentiment_analysis_info">키워드에 대한
+        뉴스/SNS의
+        감성분석 결과를
+        참고해보세요!
+    </string>
+    <string name="stock_predict_info">재무재표와
+        뉴스/SNS를 통해
+        주가 변동을
+        예측해드립니다!</string>
+
+
+    <string name="ranking">랭킹</string>
+    <string name="ranking_personal">개인</string>
+    <string name="ranking_university">대학</string>
+    <string name="ranking_daily">일간</string>
+    <string name="ranking_weekly">주간</string>
+    <string name="ranking_monthly">월간</string>
+    <string name="ranking_total">전체</string>
+
+
+
+    <string name="mypage">마이페이지</string>
+    <string name="edit_profile">프로필 수정</string>
+    <string name="Lv.">Lv.</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ip">IP</string>
+    <string name="port">PORT</string>
+    <string name="name">NAME</string>
+    <string name="msg">MESSAGE</string>
+    <string name="hint_port">PORT NUMBER</string>
+    <string name="hint_ip">192.168.0.1</string>
+    <string name="hint_msg">Hello, world!</string>
+    <string name="button1">Connect</string>
+    <string name="button2">Disconnect</string>
+    <string name="button3">Set Server</string>
+    <string name="button4">Close Server</string>
+    <string name="button5">View my info</string>
+    <string name="button6">Send Message</string>
+</resources>
