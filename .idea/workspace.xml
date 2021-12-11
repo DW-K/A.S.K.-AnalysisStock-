@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8599c874-f119-411b-a635-f8e02a0772dd" name="Changes" comment="네이버금융 재무제표 크롤링" />
+    <list default="true" id="8599c874-f119-411b-a635-f8e02a0772dd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/A.S.K.-AnalysisStock-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/A.S.K.-AnalysisStock-.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ask_crawling/00164742_annual.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ask_crawling/fs_analy.xlsx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +27,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -47,7 +56,7 @@
       <recent name="C:\Users\Kim So Jeong\PycharmProjects\A.S.K.-AnalysisStock-\project_ask_32" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.xing_inquiry">
+  <component name="RunManager" selected="Python.naver_finance_report (1)">
     <configuration name="crawling_news" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="A.S.K.-AnalysisStock-" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,6 +99,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="naver_finance_report (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="A.S.K.-AnalysisStock-" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ask_crawling" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ask_crawling/naver_finance_report.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="naver_finance_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="A.S.K.-AnalysisStock-" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -103,27 +133,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="C:\Users\Kim So Jeong\PycharmProjects\A.S.K.-AnalysisStock-\ask_crawling\naver_finance_report.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="news_comment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="A.S.K.-AnalysisStock-" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ask_crawling" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ask_crawling/news_comment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -155,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.naver_finance_report (1)" />
         <item itemvalue="Python.xing_inquiry" />
         <item itemvalue="Python.naver_finance_report" />
         <item itemvalue="Python.finance_report_crawling" />
         <item itemvalue="Python.crawling_news" />
-        <item itemvalue="Python.news_comment" />
       </list>
     </recent_temporary>
   </component>
@@ -221,7 +230,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639183447025</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="네이버금융 재무제표 크롤링">
+      <created>1639183981613</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1639183981613</updated>
+    </task>
+    <task id="LOCAL-00009" summary="네이버금융 재무제표 크롤링_연간, 분기">
+      <created>1639191102664</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1639191102664</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,7 +258,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/sojeong" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -271,6 +294,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="재무제표" />
     <MESSAGE value="네이버금융 재무제표 크롤링" />
-    <option name="LAST_COMMIT_MESSAGE" value="네이버금융 재무제표 크롤링" />
+    <MESSAGE value="네이버금융 재무제표 크롤링_연간, 분기" />
+    <option name="LAST_COMMIT_MESSAGE" value="네이버금융 재무제표 크롤링_연간, 분기" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ask_crawling/naver_finance_report.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
