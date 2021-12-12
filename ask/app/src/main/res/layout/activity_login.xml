@@ -24,6 +24,7 @@
         android:layout_gravity="center"
         android:textSize="13sp"
         android:textAlignment="center"
+        android:privateImeOptions="defaultInputmode=english"
         android:background="@drawable/edit_round"
         android:inputType="textEmailAddress"
         android:hint="E-mail"

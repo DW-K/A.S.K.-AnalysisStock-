@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true" />
+
+        <EditText
+            android:id="@+id/edit_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="초당전송횟수(기본 1회)"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_t1101"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T1101 초당10 누적제한없음" />
+    <Button
+        android:id="@+id/btn_t8407"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T8407 초당5 누적제한없음" />
+    <Button
+        android:id="@+id/btn_t1110"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T1110 초당2 누적제한없음" />
+    <Button
+        android:id="@+id/btn_t3111"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T3111 초당1 누적제한없음" />
+
+    <Button
+        android:id="@+id/btn_t1302"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T1302 초당1 누적제한200" />
+
+    <Button
+        android:id="@+id/btn_t1305"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="T1305 초당1 누적제한200" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_isConnectPC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="연결상태" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ip" />
+
+            <EditText
+                android:id="@+id/et_ip"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="192"
+                android:importantForAccessibility="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_ip2"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="168"
+                android:importantForAccessibility="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_ip3"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="0"
+                android:importantForAccessibility="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_ip4"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="1"
+                android:importantForAccessibility="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/port" />
+
+            <EditText
+                android:id="@+id/et_port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_port"
+                android:importantForAccessibility="no"
+                android:inputType="number"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_connectPC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PC연결" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최근 10분동안 요청한 횟수."
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_currentTR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_currentstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp" />
+    </LinearLayout>
+</LinearLayout>

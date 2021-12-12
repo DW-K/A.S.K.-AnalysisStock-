@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from subProcess_stock import getStockPrice
-from subProcess_crawl import crawling_news
+from subProcess_crawl import crawling_news, crawling_tweet
 
 from crawlJson import readJson
 import Path
@@ -14,27 +14,54 @@ jsonStockFilePath = Path.RESOURCE_PATH_STOCK_CODE
 jsonStockFileName = Path.RESOURCE_FILE_STOCK_CODE
 jsonStock = Path.RESOURCE_STOCK_CODE
 
-if __name__ == "__main__":
-    dateFormat = "%Y%m%d"
-    now = datetime.now()
-    today = now.strftime(dateFormat)
+dateFormat = "%Y%m%d"
+now = datetime.now()
+today = now.strftime(dateFormat)
 
-    yesterday = now - timedelta(days=1)
-    yesterday = yesterday.strftime(dateFormat)
+yesterday = now - timedelta(days=1)
+yesterday = yesterday.strftime(dateFormat)
 
-    # crawling_news("30", "YG엔터", "0", "20140101", today, True)    # 1시간 20분
-    # getStockPrice()     #4분
 
+def newsCrawlingByKeyword(target_date=today):
     crawlDict = readJson(filePath=jsonCrawlFilePath, fileName=jsonCrawlFileName)
-    count = 0
     for category in crawlDict.keys():
         for companyName in crawlDict[category]:
             for crawlKeyword in crawlDict[category][companyName]:
-                if count > 10:
-                    break
-                crawling_news("5", crawlKeyword, "0", yesterday, today, True)    # 1시간 20분
-                count += 1
+                print(f'company: {companyName}')
+                crawling_news(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword, sort="0",
+                              s_date=target_date, e_date=target_date)
 
 
-    # crawling_news("30", "YG엔터", "0", "20140101", today, True)    # 1시간 20분
-    # getStockPrice()     #4분
+def twitterCrawlingByKeyword(target_date=today):
+    crawlDict = readJson(filePath=jsonCrawlFilePath, fileName=jsonCrawlFileName)
+    for category in crawlDict.keys():
+        for companyName in crawlDict[category]:
+            for crawlKeyword in crawlDict[category][companyName]:
+                crawling_tweet(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword,
+                              s_date=target_date, e_date=target_date)
+
+
+def crawlingStock():
+    stockCodeDict = readJson(filePath=jsonStockFilePath, fileName=jsonStockFileName)
+
+    for category in stockCodeDict.keys():
+        for companyName, stockCode in stockCodeDict[category].items():
+            print(f'company: {companyName}')
+            getStockPrice(category=category, companyName=companyName, stockCode=stockCode)
+
+
+if __name__ == "__main__":
+    # crawlingStock()
+    # newsCrawlingByKeyword()
+    # twitterCrawlingByKeyword()
+
+    # for i in range(1000):
+    #     target_date_format = now - timedelta(days=i)
+    #     target_date = target_date_format.strftime(dateFormat)
+    #     newsCrawlingByKeyword(target_date)
+
+    date_count = 6
+    for i in range(0, date_count, 1):
+        target_date_format = now - timedelta(days=date_count - i)
+        target_date = target_date_format.strftime(dateFormat)
+        twitterCrawlingByKeyword(target_date)

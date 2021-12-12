@@ -1,59 +1,112 @@
 import sys
 
+import pandas as pd
 from pykiwoom.kiwoom import *
 import Path
+import os
+from datetime import datetime, timedelta
+
+import stockJson
 from connectKiwoom import connectKiwoom
 from getStockCode import getStockCode
-from makeUpdown import makeUpdown
+
+import time
 
 
-def getStockPrice(date=None, stockList=None, ):
-    # # 전종목 종목코드
-    # kospi = kiwoom.GetCodeListByMarket('0')
-    # kosdaq = kiwoom.GetCodeListByMarket('10')
-    # codes = kospi + kosdaq
-    kiwoom = connectKiwoom()
+def getStockPrice(category, companyName, stockCode, e_date=None):
+    s_date = "20000125"
+    start = time.time()
 
-    enterCodes = getStockCode(kiwoom=kiwoom, list=stockList)
+    index_col = '날짜'
+    dateFormat = "%Y%m%d"
 
     # 문자열로 오늘 날짜 얻기
-    now = datetime.datetime.now()
-    today = now.strftime("%Y%m%d")
+    if e_date is None:
+        now = datetime.now()
+        today = now.strftime(dateFormat)
+        e_date = today
 
-    if date is None:
-        date = today
+    path = fr'{Path.RESULT_PATH_STOCK}\{category}\{companyName}'
+    output_file_name = fr"{path}\{companyName}_s.xlsx"
 
-    path = fr'{Path.RESULT_PATH_STOCK}\{date[2:]}'
-    # 전 종목의 일봉 데이터
-    for i, (name, code) in enumerate(enterCodes.items()):
-        # print(f"{i}/{len(codes)} {name} : {code}")
-        df = kiwoom.block_request("opt10081",
-                                  종목코드=code,
-                                  기준일자=date,
-                                  수정주가구분=1,
-                                  output="주식일봉차트조회",
-                                  next=0)
+    df = pd.DataFrame()
+    if os.path.exists(output_file_name):
+        df = pd.read_excel(output_file_name, dtype={index_col: str})
+        df.set_index(index_col, drop=True, inplace=True)
+        df.dropna(how='all', inplace=True)
+        s_date = df.index.tolist()[-1]
+        print(F'{type(s_date)}_________{s_date}')
 
+    if s_date == e_date:
+        print(f"already latest data: {s_date}")
+        return False
+    else:
+        print(f"date: {s_date}   {e_date}")
+        kiwoom = connectKiwoom()
+
+        call_date = datetime.strptime(s_date, dateFormat)
+
+        while (datetime.strptime(e_date, dateFormat) - call_date).days > 0:
+            if (datetime.strptime(e_date, dateFormat) - call_date).days > 35:
+                days = 25
+            else:
+                days = 1
+            call_date = call_date + timedelta(days=days)
+            data = kiwoom.block_request("opt10086",
+                                        종목코드=stockCode,
+                                        조회일자=call_date.strftime(dateFormat),
+                                        표시구분=1,
+                                        output="일별주가",
+                                        next=0)
+
+            if data is None:
+                print(f"There is no data got: {s_date}-{e_date}")
+                return 0
+
+            data.sort_values(by=index_col, axis=0, ascending=True, inplace=True, kind='quicksort')
+            data.set_index(index_col, inplace=True)
+            df = pd.concat([df, data])
+            print(f'{call_date.strftime(dateFormat)}/{e_date}')
+            time.sleep(0.6)
+
+        df.dropna(how='all', inplace=True)
+        df.drop_duplicates(subset=None, keep='first', inplace=True, ignore_index=False)
         Path.createFolder(path)
-        out_name = fr"{path}\{name}_{date[2:]}_s.xlsx"
-        df['일자'] = df['일자'].astype(str)
-        df.to_excel(out_name, index_label="index")
-        time.sleep(3.6)
-    return date[2:]
+        with pd.ExcelWriter(output_file_name, mode='w', engine='openpyxl') as writer:
+            df.to_excel(writer, index_label=index_col)
+
+        print("time :", time.time() - start)
+
+        return path, output_file_name
 
 
 if __name__ == "__main__":
     print('start getStockPrice code')
     argList = sys.argv
-    del argList[0]
+
     date = None
 
-    if len(argList) > 0:
-        date = argList[0]
+    if len(argList) >= 2:
+        argList = argList[1:]
+    if len(argList) >= 3:
+        category = argList[0]
+        companyName = argList[1]
+        stockCode = argList[2]
 
-    if date is None:
-        date = getStockPrice()
+        if len(argList) >= 4:
+            date = argList[3]
+
+        if getStockPrice(category=category, companyName=companyName, stockCode=stockCode, e_date=date):
+            print(f'{category} / {companyName} get Stock price complete')
+
     else:
-        date = getStockPrice(date)
+        print("Error: getStockPrice has no parameter")
 
-    makeUpdown(date=date)
+    # category = "car"
+    # companyName = "현대차"
+    # index_col = '날짜'
+    # dateFormat = "%Y%m%d"
+    # stockCode = "005380"
+    # # s_date = "20000101"
+
+    getStockPrice(category, companyName, stockCode)

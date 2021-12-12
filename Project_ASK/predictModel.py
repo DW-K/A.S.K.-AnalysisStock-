@@ -8,7 +8,7 @@ import numpy as np
 
 from sklearn.model_selection import KFold
 
-from combineDataset import getData
+from combineDataset2 import getData
 
 from Path import RESULT_PATH_COMBINE, RESULT_PATH_MODEL
 

@@ -19,3 +19,10 @@ def createJsonFile(filePath, fileName):
     with open(fr'{filePath}\{fileName}', "w"):
         pass
     return True
+
+
+def readJson():
+    with open(jsonStock, 'r', encoding='UTF8') as f:
+        json_data = json.load(f)
+
+    return json_data

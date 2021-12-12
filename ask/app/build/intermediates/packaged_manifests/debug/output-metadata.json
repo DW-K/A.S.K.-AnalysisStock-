@@ -8,11 +8,16 @@
   "variantName": "debug",
   "elements": [
     {
-      "type": "SINGLE",
-      "filters": [],
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
       "versionCode": 1,
       "versionName": "1.0",
-      "outputFile": "AndroidManifest.xml"
+      "outputFile": "arm64-v8a/AndroidManifest.xml"
     }
   ]
 }

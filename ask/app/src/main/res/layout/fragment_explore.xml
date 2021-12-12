@@ -26,13 +26,13 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <SearchView
-            android:id="@+id/explore_search"
-            android:layout_width="match_parent"
+<!--        <SearchView-->
+<!--            android:id="@+id/explore_search"-->
+<!--            android:layout_width="match_parent"-->
 
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="검색어를 입력하세요" />
+<!--            android:layout_height="wrap_content"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:queryHint="검색어를 입력하세요" />-->
 
 
         <androidx.recyclerview.widget.RecyclerView

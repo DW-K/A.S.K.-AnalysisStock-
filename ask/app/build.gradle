@@ -1,7 +1,10 @@
-plugins {
-    id 'com.android.application'
-    id 'com.google.gms.google-services'
-}
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -15,9 +18,10 @@ android {
         versionName "1.0"
         multiDexEnabled true
 
-
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "x86" , "arm64-v8a" , "armeabi-v7a"
+        }
     }
 
     buildTypes {
@@ -34,11 +38,29 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'mips', 'mips64', 'arm64-v8a'
+            universalApk true
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    google()
 }
 
 dependencies {
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-firestore:21.6.0'
@@ -55,4 +77,14 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //To use VectorDrawableCompat
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true
+
+    // API
+    //include ':app'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    //implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation (name: 'INISAFE_Net_for_Android_JNI_SDK_v1.1.1', ext: 'aar')
+    implementation (name: 'XingAPI_And_v2.0.6', ext: 'aar')
 }

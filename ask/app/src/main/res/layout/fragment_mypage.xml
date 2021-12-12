@@ -23,7 +23,7 @@
             android:layout_margin="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="마이페이지"
+            android:text="@string/mypage"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -46,12 +46,12 @@
 
         </View>
 
+
         <TextView
             android:id="@+id/username_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="유저네임"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -217,7 +217,7 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/user_image_default" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -242,6 +242,17 @@
             app:layout_constraintEnd_toEndOf="@+id/progressBar"
             app:layout_constraintHorizontal_bias="0.356"
             app:layout_constraintStart_toStartOf="@+id/progressBar" />
+
+        <Button
+            android:id="@+id/btn_editProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/edit_profile"
+            app:layout_constraintEnd_toEndOf="@+id/view_mypage_user"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@+id/username_title"
+            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

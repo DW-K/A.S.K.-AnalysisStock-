@@ -55,7 +55,7 @@ class stock_LSTM(nn.Module):
         return out
 
 
-def train(num_epochs=None, lr=None, hidden_size=None, num_layers=None, num_classes=None):
+def train(num_epochs=None, lr=None, input_size=None, hidden_size=None, num_layers=None, num_classes=None):
     arr_scaled, y, arr_index_list = preprocessing()
 
     X_train = torch.Tensor(arr_scaled[:500, :, :])
@@ -63,15 +63,6 @@ def train(num_epochs=None, lr=None, hidden_size=None, num_layers=None, num_class
 
     X_test = torch.Tensor(arr_scaled[500:, :, :])
     y_test = torch.Tensor(y[500:])
-
-    # num_epochs = 30000
-    # lr = 0.0000002
-    num_epochs = 12000
-    lr = 0.000008
-    input_size = 7
-    hidden_size = 256
-    num_layers = 1
-    num_classes = 1
 
     lstm1 = stock_LSTM(num_classes, input_size, hidden_size, num_layers, X_train.shape[1]).to(device)
 
@@ -98,14 +89,11 @@ def train(num_epochs=None, lr=None, hidden_size=None, num_layers=None, num_class
         y_test[i] = make_binary(y_test[i])
         predict[i] = make_binary(predict[i])
 
-    r2 = r2_score(y_test.cpu().detach().numpy(), predict.cpu().detach().numpy())
     acc = accuracy_score(y_test.cpu().detach().numpy(), predict.cpu().detach().numpy())
 
     print()
     print(f'acc {acc}')
-    print()
-    print(f'acc {1-acc}')
 
 
 if __name__ == "__main__":
-    train()
+    train(num_epochs=12000, lr=0.000008, input_size=7, hidden_size=256, num_layers=1, num_classes=1)

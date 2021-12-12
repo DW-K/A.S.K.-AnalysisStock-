@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navi_btn_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/_BLACK"
+    android:onClick="onNaviBtnClicked"
+    android:orientation="vertical"
+    android:padding="0.4dp">
+
+    <ImageView
+        android:id="@+id/btn_icon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0.3dp"
+        android:layout_marginTop="0.1dp"
+        android:layout_marginRight="0.1dp"
+        android:layout_marginBottom="0.3dp"
+        android:layout_weight="7"
+        android:background="@color/_WHITE"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/btn_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0.3dp"
+        android:layout_marginTop="0.1dp"
+        android:layout_marginRight="0.1dp"
+        android:layout_marginBottom="0.3dp"
+        android:layout_weight="3"
+        android:background="@color/_WHITE"
+        android:gravity="center"
+        android:text="TextView" />
+</LinearLayout>

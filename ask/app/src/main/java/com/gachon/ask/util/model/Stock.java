@@ -2,11 +2,13 @@ package com.gachon.ask.util.model;
 
 public class Stock {
 
-    private String stockName; // 주식 이름
-    private int stockPrice;   // 주식 가격
-    private int stockNum;     // 보유하고 있는 해당 주식의 개수
+    private String stockName; // 종목명
+    private String stockPrice;   // 주식 가격 (평균단가)
+    private String stockNum;     // 보유하고 있는 해당 주식의 개수 (잔고수량)
 
-    public Stock(String stockName, int stockPrice, int stockNum) {
+    public Stock(){ }
+
+    public Stock(String stockName, String stockPrice, String stockNum) {
         this.stockName = stockName;
         this.stockPrice = stockPrice;
         this.stockNum = stockNum;
@@ -20,19 +22,19 @@ public class Stock {
         this.stockName = stockName;
     }
 
-    public int getStockPrice() {
+    public String getStockPrice() {
         return stockPrice;
     }
 
-    public void setStockPrice(int stockPrice) {
+    public void setStockPrice(String stockPrice) {
         this.stockPrice = stockPrice;
     }
 
-    public int getStockNum() {
+    public String getStockNum() {
         return stockNum;
     }
 
-    public void setStockNum(int stockNum) {
+    public void setStockNum(String stockNum) {
         this.stockNum = stockNum;
     }
 }

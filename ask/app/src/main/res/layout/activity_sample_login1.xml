@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext"
+        android:gravity="center"
+        android:text="모의투자서버 접속"
+        android:textSize="70px" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:background="@drawable/edittext"
+        android:gravity="center|center_vertical"
+        android:singleLine="false"
+        android:text="샘플앱용 API 로그인"
+        android:textSize="80px" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageButtonClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right" />
+
+        <EditText
+            android:id="@+id/editTextID"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+
+            android:background="@color/white"
+            android:gravity="center"
+            android:hint="아이디를 입력하세요."
+            android:inputType="textPersonName"
+
+            android:paddingLeft="20px"
+            android:singleLine="true"
+            android:textSize="50px" />
+
+        <EditText
+            android:id="@+id/editTextPWD"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+
+            android:gravity="center"
+            android:hint="접속비밀번호를 입력하세요."
+            android:inputType="textPassword"
+            android:paddingLeft="20px"
+
+            android:singleLine="true"
+            android:textSize="50px" />
+
+    </LinearLayout>
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:checked="true"
+        android:text="CheckBox"
+        android:visibility="invisible"
+        tools:text="로그인 정보 저장" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="#FFEB3B"
+        android:gravity="center"
+        android:onClick="OnButtonLoginClicked"
+        android:text="로  그  인"
+        android:textColor="#000000"
+        android:textSize="60px" />
+
+</LinearLayout>
