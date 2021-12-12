@@ -12,12 +12,12 @@
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable\\ic_speech_bubble_border_24.png"
     },
     {
-        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_s1010.xml.flat",
-        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_s1010.xml"
-    },
-    {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_home.xml.flat",
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_s1010.xml.flat",
+        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_s1010.xml"
     },
     {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_s1006.xml.flat",
@@ -124,6 +124,10 @@
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_hyundai.png.flat",
+        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable-v24\\ic_hyundai.png"
+    },
+    {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\drawable_user_image_default.png.flat",
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable\\user_image_default.png"
     },
@@ -224,6 +228,10 @@
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\s1005_item01.xml"
     },
     {
+        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_home_stock.xml.flat",
+        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\item_home_stock.xml"
+    },
+    {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_webview.xml.flat",
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_webview.xml"
     },
@@ -250,6 +258,10 @@
     {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_s1005.xml.flat",
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_s1005.xml"
+    },
+    {
+        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_home_coin.png.flat",
+        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\drawable\\ic_home_coin.png"
     },
     {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_sample_login1.xml.flat",

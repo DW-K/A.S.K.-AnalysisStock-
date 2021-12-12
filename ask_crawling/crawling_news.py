@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import requests
 import pandas as pd
 import re
+import time
 
 # 한글깨짐 방지
 import sys
@@ -12,11 +13,12 @@ import io
 
 import Path
 from Path import writeToExcel
+from make_word_count import make_word_count
 
 from sentiment import sentiment
 
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+# sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+# sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 < naver 뉴스 검색시 리스트 크롤링하는 프로그램 > _select사용
@@ -53,10 +55,11 @@ def contents_cleansing(contents):
 
 
 # 크롤링 시작
-def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
+def crawler(category, companyName, query, sort, s_date, e_date):
     s_from = s_date.replace(".", "")
     e_to = e_date.replace(".", "")
     page = 1
+    maxpage = str(5)
 
     # 새로 만들 파일이름 지정
     output_file_name = f'{companyName}_{e_date}_n.xlsx'
@@ -73,7 +76,7 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
         response = requests.get(url)
         html = response.text
 
-        # 뷰티풀소프의 인자값 지정
+        # 뷰티풀소프의 인자값 지정    page = 1
         soup = BeautifulSoup(html, 'html.parser')
 
         # <a>태그에서 제목과 링크주소 (a 태그 중 class 명이 news_tit인 것)
@@ -112,10 +115,12 @@ def crawler(category, companyName, maxpage, query, sort, s_date, e_date):
         result = {"title": title_text, "source": source_text, "span": date_list, "contents": contents_text,
                   "link": link_text}
         df = pd.DataFrame(result)  # df로 변환
-        df.index.name = "index"
 
         df_result = pd.concat([df_result, df], axis=0)
         page += 10
+
+    df_result.drop_duplicates(inplace=True, ignore_index=True)
+    df_result.index.name = "index"
 
     if os.path.exists(output_path):
         writeToExcel(output_path=output_path, df=df_result, sheet_name=query, isWrite=False)
@@ -139,6 +144,8 @@ def main():
 
 if __name__ == "__main__":
     arg_list = sys.argv[1:]  # argument 받아서 실행
+    # arg_list = ['car', '현대차', '5', '정의선', '0', '20211022', '20211022']
+
     category = arg_list[0]
     companyName = arg_list[1]
     maxpage = int(arg_list[2])
@@ -147,9 +154,20 @@ if __name__ == "__main__":
     s_date = arg_list[5]
     e_date = arg_list[6]
 
-    # filePath = crawler(category="에스엠", maxpage=20, query="이수만", sort="0", s_date="20211024", e_date="20201025")
+    start = time.time()
 
-    filePath, output_file_name = crawler(category=category, companyName=companyName, maxpage=query, sort=sort,
+    # output_file_name = f'{companyName}_{e_date}_n.xlsx'
+    # filePath = fr"{RESULT_PATH_NEWS}\{category}\{companyName}\news"
+
+    filePath, output_file_name = crawler(category=category, companyName=companyName, query=query, sort=sort,
                                          s_date=s_date, e_date=e_date)
 
-    sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
+    print("crawling complete :", time.time() - start)
+
+    sentiment_filePath, sentiment_fileName = sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
+
+    print("sentiment complete :", time.time() - start)
+
+    make_word_count(filePath=sentiment_filePath, output_file_name=sentiment_fileName, sheetName=query, target_col=target_col)
+
+    print("count complete :", time.time() - start)
