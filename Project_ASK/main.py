@@ -27,7 +27,7 @@ def newsCrawlingByKeyword(target_date=today):
     for category in crawlDict.keys():
         for companyName in crawlDict[category]:
             for crawlKeyword in crawlDict[category][companyName]:
-                print(f'company: {companyName}')
+                # print(f'company: {companyName}')
                 crawling_news(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword, sort="0",
                               s_date=target_date, e_date=target_date)
 
@@ -37,6 +37,7 @@ def twitterCrawlingByKeyword(target_date=today):
     for category in crawlDict.keys():
         for companyName in crawlDict[category]:
             for crawlKeyword in crawlDict[category][companyName]:
+                # print(f'company: {companyName}')
                 crawling_tweet(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword,
                               s_date=target_date, e_date=target_date)
 
@@ -46,7 +47,7 @@ def crawlingStock():
 
     for category in stockCodeDict.keys():
         for companyName, stockCode in stockCodeDict[category].items():
-            print(f'company: {companyName}')
+            # print(f'company: {companyName}')
             getStockPrice(category=category, companyName=companyName, stockCode=stockCode)
 
 
@@ -55,13 +56,15 @@ if __name__ == "__main__":
     # newsCrawlingByKeyword()
     # twitterCrawlingByKeyword()
 
-    # for i in range(1000):
-    #     target_date_format = now - timedelta(days=i)
-    #     target_date = target_date_format.strftime(dateFormat)
-    #     newsCrawlingByKeyword(target_date)
-
-    date_count = 6
+    date_count = 50
     for i in range(0, date_count, 1):
+        print(f'{i}/{date_count}')
         target_date_format = now - timedelta(days=date_count - i)
         target_date = target_date_format.strftime(dateFormat)
-        twitterCrawlingByKeyword(target_date)
+        newsCrawlingByKeyword(target_date)
+
+    # date_count = 6
+    # for i in range(0, date_count, 1):
+    #     target_date_format = now - timedelta(days=date_count - i)
+    #     target_date = target_date_format.strftime(dateFormat)
+    #     twitterCrawlingByKeyword(target_date)
