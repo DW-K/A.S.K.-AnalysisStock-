@@ -262,17 +262,18 @@ class s1011 : Fragment() {
             for (i in 0..s2.size - 1) {
 
                 val data_record: List<Triple<TableGrid.TYPE, Any?, Int>> = listOf(
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][18]               , R.id.textView1),
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][1]                , R.id.textView2),
-                    Triple(TableGrid.TYPE.STRING,                           s2[i][2]                , R.id.textView3),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][4])               , R.id.textView4),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][5])               , R.id.textView5),
-                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][25], 2) , R.id.textView6)
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][18]               , R.id.textView1), // 종목명
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][1]                , R.id.textView2), // 잔고구분
+                    Triple(TableGrid.TYPE.STRING,                           s2[i][2]                , R.id.textView3), // 잔고수량
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][4])               , R.id.textView4), // 평균단가
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][5])               , R.id.textView5), // 매입금액
+                    Triple(TableGrid.TYPE.STRING, manager!!.getCommaValue(  s2[i][25], 2) , R.id.textView6)   // 수익률
                 )
                 Log.d("s1011.kt","종목명 : "+data_record[0].second.toString()+", 잔고수량 :  "+data_record[2].second.toString()+", 수익률 : "+data_record[5].second.toString())
                 // ASK 유저의 체결 내역을 삽입, fireStore update
                 updateUserStock(
                     data_record[0].second.toString(),
+                    data_record[3].second.toString(),
                     data_record[5].second.toString(),
                     data_record[2].second.toString()
                 )
@@ -293,8 +294,8 @@ class s1011 : Fragment() {
     }
 
     // ASK 유저의 체결 내역을 삽입, fireStore update
-    private fun updateUserStock(stockName:String, stockYield:String, stockNum:String){
-        val stock = Stock(stockName,stockYield,stockNum)
+    private fun updateUserStock(stockName:String, stockPrice:String, stockYield:String, stockNum:String){
+        val stock = Stock(stockName,stockPrice,stockYield,stockNum)
         userStock.add(stock) // 지속적으로 업데이트
         Firestore.updateUserStock(Auth.getCurrentUser().uid, userStock).addOnSuccessListener(object :
             OnSuccessListener<Void?> {

@@ -14,11 +14,14 @@ import com.gachon.ask.base.BaseActivity;
 import com.gachon.ask.databinding.ActivitySignupBinding;
 import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.Firestore;
+import com.gachon.ask.util.model.Stock;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
 
@@ -112,7 +115,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
     private void createNewUserDatabase(FirebaseUser user, String userNickName) {
         // 새 유저 정보 작성
         Firestore.writeNewUser(user.getUid(), user.getEmail(), userNickName,
-                0,0,0,0, 0,0,0,0,null,null,null)
+                0,0,0,0, 0,0,0,0,new ArrayList<Stock>(),null,null)
                 .addOnCompleteListener(documentTask -> {
                     // 성공했다면
                     if(documentTask.isSuccessful()) {

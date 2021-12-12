@@ -112,6 +112,10 @@
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\activity_signup.xml"
     },
     {
+        "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_home_stock.xml",
+        "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\item_home_stock.xml"
+    },
+    {
         "merged": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\s1004_item02.xml",
         "source": "D:\\ASK5\\A.S.K.-AnalysisStock-\\ask\\app\\src\\main\\res\\layout\\s1004_item02.xml"
     },

@@ -1815,6 +1815,7 @@ drawable edittext
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_clock_black_24dp
+drawable ic_home_coin
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -2210,6 +2211,7 @@ id hideable
 id home
 id homeAsUp
 id homeItem
+id home_board
 id home_title
 id honorRequest
 id horizontal
@@ -2223,9 +2225,6 @@ id ignore
 id ignoreRequest
 id image
 id imageButtonClose
-id imageView
-id imageView2
-id imageView3
 id imageView4
 id imageView5
 id imageView6
@@ -2455,6 +2454,7 @@ id stretch
 id subgrid
 id submenuarrow
 id submit_area
+id swipe_board
 id switch1
 id switch2
 id tabMode
@@ -2488,13 +2488,9 @@ id textView10
 id textView11
 id textView12
 id textView13
-id textView14
-id textView15
 id textView16
-id textView17
 id textView18
 id textView180
-id textView19
 id textView2
 id textView20
 id textView21
@@ -2592,6 +2588,10 @@ id tv_nickname
 id tv_no_post
 id tv_rank
 id tv_sns_login
+id tv_stock_name
+id tv_stock_num
+id tv_stock_price
+id tv_stock_yield
 id tv_university
 id tv_writing
 id txtView
@@ -2772,6 +2772,7 @@ layout fragment_explore
 layout fragment_home
 layout fragment_mypage
 layout fragment_ranking
+layout item_home_stock
 layout item_navi_btn
 layout loginset_activity
 layout material_chip_input_combo

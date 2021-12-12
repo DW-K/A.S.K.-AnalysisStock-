@@ -5,13 +5,15 @@ public class Stock {
     private String stockName; // 종목명
     private String stockPrice;   // 주식 가격 (평균단가)
     private String stockNum;     // 보유하고 있는 해당 주식의 개수 (잔고수량)
+    private String stockYield;   // 수익률
 
     public Stock(){ }
 
-    public Stock(String stockName, String stockPrice, String stockNum) {
+    public Stock(String stockName, String stockPrice, String stockYield, String stockNum) {
         this.stockName = stockName;
         this.stockPrice = stockPrice;
         this.stockNum = stockNum;
+        this.stockYield = stockYield;
     }
 
     public String getStockName() {
@@ -37,4 +39,8 @@ public class Stock {
     public void setStockNum(String stockNum) {
         this.stockNum = stockNum;
     }
+
+    public String getStockYield() { return stockYield; }
+
+    public void setStockYield(String stockYield) { this.stockYield = stockYield; }
 }
