@@ -1815,6 +1815,7 @@ int drawable googleg_disabled_color_18 0x7f07008d
 int drawable googleg_standard_color_18 0x7f07008e
 int drawable ic_clock_black_24dp 0x7f07008f
 int drawable ic_home_coin 0x7f070090
+int drawable ic_hyundai 0x7f0700cf
 int drawable ic_keyboard_black_24dp 0x7f070091
 int drawable ic_launcher_background 0x7f070092
 int drawable ic_launcher_foreground 0x7f070093

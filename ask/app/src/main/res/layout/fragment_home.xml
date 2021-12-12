@@ -21,8 +21,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-
             </View>
 
 
@@ -374,31 +372,37 @@
 
                         <ImageView
                             android:id="@+id/imageView4"
-                            android:layout_width="0dp"
+                            android:layout_width="30dp"
                             android:layout_height="71dp"
                             android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            android:src="@drawable/ic_hyundai" />
 
                         <TextView
                             android:id="@+id/textView23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView" />
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="현대차" />
 
                         <TextView
                             android:id="@+id/textView24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView" />
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="+45%" />
 
                         <TextView
                             android:id="@+id/textView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView" />
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="-55%" />
 
 
                     </LinearLayout>

@@ -1816,6 +1816,7 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_clock_black_24dp
 drawable ic_home_coin
+drawable ic_hyundai
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
