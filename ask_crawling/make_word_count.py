@@ -22,6 +22,8 @@ def make_word_count(filePath, output_file_name, sheetName, target_col):
     count_df = pd.DataFrame()
     count_df_col = ["keyword", "title", "link", "sentiment_logit"]
 
+    Path.createFolder(filePath)
+
     row_count = 0
     for i in df.index:
         # print(df.loc[i, target_col])
@@ -53,11 +55,12 @@ def make_word_count(filePath, output_file_name, sheetName, target_col):
         count_df.reset_index(drop=True, inplace=True)
 
     if count_df.shape[0] > 0:
+        count_df.index.name = "index"
         count_file_path = "\\".join(filePath.split('\\')[:-1])
         count_file_path += "\\word_count"
 
-        count_output = output_file_name.split('.')[0]   # ex) 현대차_20211203_n
-        count_output += 'c.xlsx'    # ex) 현대차_20211203_ns.xlsx
+        count_output = output_file_name.split('.')[0]  # ex) 현대차_20211203_n
+        count_output += 'c.xlsx'  # ex) 현대차_20211203_ns.xlsx
 
         count_output_path = fr'{count_file_path}\{count_output}'
 
@@ -81,28 +84,30 @@ def integrate_word_count(category, companyName, target_date):
     counter = {}
     integrate_df = pd.DataFrame()
     if os.path.exists(output_path):
-        df_dict = pd.read_excel(output_path, sheet_name=None, index_col="Unnamed: 0")
+        df_dict = pd.read_excel(output_path, sheet_name=None, index_col="index")
         for query, df in df_dict.items():
-            for key in df["keyword"].unique():
-                if key not in counter.keys():
-                    counter[key] = 0
-                counter[key] += df[df["keyword"] == key]["count"].iloc[0]
-                integrate_df = pd.concat([integrate_df, df], axis=0)
+            if query != "total":
+                for key in df["keyword"].unique():
+                    if key not in counter.keys():
+                        counter[key] = 0
+                    counter[key] += df[df["keyword"] == key]["count"].iloc[0]
+                    integrate_df = pd.concat([integrate_df, df[df["keyword"] == key]], axis=0)
 
         integrate_df.drop("count", axis=1, inplace=True)
+        integrate_df.reset_index(drop=True, inplace=True)
+
         for i in integrate_df.index:
             key = integrate_df.loc[i, "keyword"]
             integrate_df.loc[i, "count"] = counter[key]
         integrate_df.sort_values(ascending=False, by=['count'], axis=0, inplace=True)
         integrate_df.reset_index(drop=True, inplace=True)
+        integrate_df.index.name = "index"
 
         writeToExcel(output_path=output_path, df=integrate_df, sheet_name="total", isWrite=False)
         # print(counter)
 
     else:
         print("file not exists(integrate_word_count)")
-
-
 
 
 if __name__ == "__main__":

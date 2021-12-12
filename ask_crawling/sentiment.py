@@ -11,6 +11,7 @@ import pandas as pd
 
 
 def sentiment(filePath, output_file_name, sheetName, target_col):
+    epsilon = pow(10, -10)
     output_path = fr'{filePath}\{output_file_name}'
     # df = pd.read_excel(output_path, sheet_name=sheetName)
 
@@ -30,10 +31,12 @@ def sentiment(filePath, output_file_name, sheetName, target_col):
 
             df.loc[i, "positive"] = sentimentResult['positive']
             df.loc[i, "negative"] = sentimentResult['negative']
-            df.loc[i, "sentiment_logit"] = sentimentResult['positive'] / sentimentResult['negative']
+            df.loc[i, "sentiment_logit"] = sentimentResult['positive'] / (sentimentResult['negative'] + epsilon)
 
             for c in categoryResult:
                 df.loc[i, c] = categoryResult[c]
+
+    df.index.name = "index"
 
     # print(filePath)
     sentiment_file_path = "\\".join(filePath.split('\\')[:-1])

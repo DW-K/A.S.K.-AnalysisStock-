@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 from datetime import timedelta
 
-from Path import RESULT_PATH_STOCK, RESULT_PATH_NEWS, RESOURCE_PATH_STOCK_INFO
+from Path import RESULT_PATH_STOCK, RESULT_PATH_NEWS, RESOURCE_PATH_STOCK_INFO, RESULT_PATH_TWEET
 
 infoPath = RESOURCE_PATH_STOCK_INFO
 filePath_news = Path.RESULT_PATH_NEWS
@@ -22,19 +22,33 @@ def deleteDot(df):
     return df
 
 
-def get_news_sentiment(category, company_name, target_date):
+def get_sentiment(category, company_name, target_date):
+    df_positive = 0
+    df_negative = 0
+    count = 0
+
     df_news_dict = pd.read_excel(rf'{RESULT_PATH_NEWS}\{category}\{company_name}\sentiment\{company_name}_{target_date}_ns.xlsx',
                                  index_col="index", sheet_name=None)
-
-    df_news_positive = 0
-    df_news_negative = 0
     for key, df_news_element in df_news_dict.items():
         df_news_element_positive = df_news_element['positive'].mean()
         df_news_element_negative = df_news_element['negative'].mean()
-        df_news_positive += df_news_element_positive
-        df_news_negative += df_news_element_negative
+        df_positive += df_news_element_positive
+        df_negative += df_news_element_negative
+        count += 1
 
-    return df_news_positive, df_news_negative
+    df_twitter_dict = pd.read_excel(rf'{RESULT_PATH_TWEET}\{category}\{company_name}\sentiment\{company_name}_{target_date}_ns.xlsx',
+                                    index_col="index", sheet_name=None)
+    for key, df_twitter_element in df_twitter_dict.items():
+        df_twitter_element_positive = df_twitter_element['positive'].mean()
+        df_twitter_element_negative = df_twitter_element['negative'].mean()
+        df_positive += df_twitter_element_positive
+        df_negative += df_twitter_element_negative
+        count += 1
+
+    df_positive /= count
+    df_negative /= count
+
+    return df_positive, df_negative
 
 
 def combineData(category, company_name, target_date):
@@ -62,8 +76,8 @@ def combineData(category, company_name, target_date):
 
     if target_date in df_stock.index:   # subtract weekend (add to next day later)
         if df_stock.loc[target_date].isnull()[news_sentiment_logit_name]:      # if logit is NAN
-            news_positive_mean, news_negative_mean = get_news_sentiment(category, company_name, target_date)    # add sentiment logit column to df_stock
-            news_sentiment_logit = news_positive_mean / (news_negative_mean + epsilon)
+            positive_mean, negative_mean = get_sentiment(category, company_name, target_date)    # add sentiment logit column to df_stock
+            news_sentiment_logit = positive_mean / (negative_mean + epsilon)
             df_stock.loc[target_date, news_sentiment_logit_name] = news_sentiment_logit
 
             if isExist_file:

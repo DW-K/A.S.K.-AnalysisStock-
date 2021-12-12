@@ -30,6 +30,7 @@ def newsCrawlingByKeyword(target_date=today):
                 # print(f'company: {companyName}')
                 crawling_news(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword, sort="0",
                               s_date=target_date, e_date=target_date)
+                # keywordToFirestore(category=category, companyName=companyName, target_date=target_date)
 
 
 def twitterCrawlingByKeyword(target_date=today):
