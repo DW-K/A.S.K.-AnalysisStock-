@@ -33,6 +33,29 @@ public class Firestore {
     }
 
     /**
+     * 고유 userId값으로 유저의 자산을 update
+     * @author Taehyun Park
+     * @param userId
+     * @param userMoney
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserMoney(String userId, Integer userMoney){
+        return getFirestoreInstance().collection("user").document(userId).update("userMoney",userMoney);
+    }
+
+    /**
+     * 고유 userId값으로 유저의 보유 주식을 update
+     * @author Taehyun Park
+     * @param userId
+     * @param userStock
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserStock(String userId, ArrayList<Stock> userStock){
+        return getFirestoreInstance().collection("user").document(userId).update("myStock",userStock);
+    }
+
+
+    /**
      * 새로운 유저의 정보를 DB에 추가하도록 요청한다
      * @author Taehyun Park
      * @param userId
