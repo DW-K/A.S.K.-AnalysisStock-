@@ -1,10 +1,14 @@
 import pandas as pd
 import requests
-
-
+import json
 
 code = input("코드를 입력하세요 : ")
+with open('stockCodeName.json' ,encoding="utf-8") as json_file:
+    json_data = json.load(json_file)
+    code = json_data[code]
+
 companyName = input("기업이름을 입력하세요 : ")
+
 URL = f"https://finance.naver.com/item/main.nhn?code={code}"
 
 
@@ -24,6 +28,7 @@ annual.to_excel(f'{companyName}_{code}_annual.xlsx')
 
 quarter = quarter_date
 quarter.to_excel(f'{companyName}_{code}_quarter.xlsx')
+
 
 
 
