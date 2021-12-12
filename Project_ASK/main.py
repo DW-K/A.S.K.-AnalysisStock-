@@ -30,6 +30,7 @@ def newsCrawlingByKeyword(target_date=today):
                 # print(f'company: {companyName}')
                 crawling_news(category=category, companyName=companyName, maxpage=str(5), query=crawlKeyword, sort="0",
                               s_date=target_date, e_date=target_date)
+                # keywordToFirestore(category=category, companyName=companyName, target_date=target_date)
 
 
 def twitterCrawlingByKeyword(target_date=today):
@@ -55,18 +56,16 @@ if __name__ == "__main__":
     # crawlingStock()
     # newsCrawlingByKeyword()
     # twitterCrawlingByKeyword()
-    #
-    # date_count = 50
-    # for i in range(0, date_count, 1):
-    #     print(f'{i}/{date_count}')
-    #     target_date_format = now - timedelta(days=date_count - i)
-    #     target_date = target_date_format.strftime(dateFormat)
-    #     newsCrawlingByKeyword(target_date)
+
+    date_count = 50
+    for i in range(0, date_count, 1):
+        print(f'{i}/{date_count}')
+        target_date_format = now - timedelta(days=date_count - i)
+        target_date = target_date_format.strftime(dateFormat)
+        newsCrawlingByKeyword(target_date)
 
     # date_count = 6
     # for i in range(0, date_count, 1):
     #     target_date_format = now - timedelta(days=date_count - i)
     #     target_date = target_date_format.strftime(dateFormat)
     #     twitterCrawlingByKeyword(target_date)
-
-    print("hi")

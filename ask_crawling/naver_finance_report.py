@@ -30,8 +30,8 @@ quarter = quarter_date
 quarter.to_excel(f'{companyName}_{code}_quarter.xlsx')
 
 
-if __name__ == "__main__":
-    arg_list = sys.argv[1:]
-    category = arg_list[0]
-    companyName = arg_list[1]
-    query = arg_list[3]
+# if __name__ == "__main__":
+#     arg_list = sys.argv[1:]
+#     category = arg_list[0]
+#     companyName = arg_list[1]
+#     query = arg_list[3]
