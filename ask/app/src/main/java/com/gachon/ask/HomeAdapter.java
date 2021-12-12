@@ -56,9 +56,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         ItemHomeStockBinding binding = holder.itemHomeStockBinding;
         Stock myStock = myStockList.get(position);
         binding.tvStockName.setText(myStock.getStockName());
+        myStock.setStockNum(myStock.getStockNum().replace(" ",""));
         binding.tvStockNum.setText(myStock.getStockNum()+"주");
         binding.tvStockPrice.setText(myStock.getStockPrice()+"원");
-        binding.tvStockYield.setText(myStock.getStockYield()+"%");
+        if(Integer.parseInt(myStock.getStockYield()) > 0){
+            binding.tvStockYield.setText("+"+myStock.getStockYield()+"%");
+        }else{
+            binding.tvStockYield.setText(myStock.getStockYield()+"%");
+        }
     }
 
     @Override
