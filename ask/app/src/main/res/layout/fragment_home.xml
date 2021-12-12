@@ -127,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="총 수익률" />
+                            android:text="총 수익률  :" />
 
                         <TextView
                             android:id="@+id/total_profit_value"
