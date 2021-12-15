@@ -139,6 +139,7 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
 
     if len(text_list) >= 1:
         df = pd.DataFrame(list(zip(datetime_list, rt_list, text_list)), columns=['datetime', 'rt_count', 'text'])
+        # df = pd.DataFrame(list(zip(datetime_list, text_list)), columns=['datetime', 'text'])
         # print(df)
 
         # df.columns = ['keyword', 'datetime', 'rt_count', 'text']

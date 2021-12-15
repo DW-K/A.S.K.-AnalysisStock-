@@ -1,10 +1,11 @@
 import os
 
 RESULT_PATH_NEWS = r'.\dataset\news'  # 결과 저장할 경로
-RESULT_PATH_TWEET = r'.\dataset\tweets'  # 결과 저장할 경로
+RESULT_PATH_TWEET = r'.\dataset\tweets'
 RESULT_PATH_STOCK = r'.\dataset\stockData'
 RESULT_PATH_COMBINE = r'.\dataset\combine'
-RESULT_PATH_MODEL = r'.\dataset\models'  # 결과 저장된 경로
+RESULT_PATH_FINANCE = r'.\dataset\finance'
+RESULT_PATH_MODEL = r'.\dataset\models'
 
 RESOURCE_PATH_STOCK_INFO = r'..\resource\stockInfo'  # stock 키워드 엑셀 파일 저장 경로
 RESOURCE_PATH_CRAWLING_KEYWORD = r'..\resource\crawlKeyword'  # crawling keyword json 파일 저장 경로

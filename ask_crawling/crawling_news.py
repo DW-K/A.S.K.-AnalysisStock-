@@ -168,6 +168,6 @@ if __name__ == "__main__":
 
     print("sentiment complete :", time.time() - start)
 
-    make_word_count(filePath=sentiment_filePath, output_file_name=sentiment_fileName, sheetName=query, target_col=target_col)
-
-    print("count complete :", time.time() - start)
+    # make_word_count(filePath=sentiment_filePath, output_file_name=sentiment_fileName, sheetName=query, target_col=target_col)
+    #
+    # print("count complete :", time.time() - start)
