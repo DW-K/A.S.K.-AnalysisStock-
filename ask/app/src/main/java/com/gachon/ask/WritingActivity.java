@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gachon.ask.community.PostViewActivity;
+import com.gachon.ask.community.PostViewDetailActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,11 +34,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class WritingActivity extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static final Integer UPLOAD_POST = 110;
     private FirebaseUser user;
     private String posts_id;
     private String nickname;
     private String category;
+    private int num_heart;
+    private int num_comment;
+    private ArrayList userlist_heart = new ArrayList();
     Button btn_upload;
     ImageButton btn_cancel;
     Intent intent;
@@ -72,12 +77,12 @@ public class WritingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
 
     // check before upload the post
     private void postCheck() {
+
         String contents = ((EditText) findViewById(R.id.et_contents)).getText().toString();
         Timestamp created_at = new Timestamp(new Date());
 
@@ -85,16 +90,15 @@ public class WritingActivity extends AppCompatActivity {
             user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-            nickname = "익명"; // 임시 닉네임
             ArrayList participants = new ArrayList();
             String publisher = user.getUid();
             participants.add(publisher); //add writer(host)'s uid to the arraylist participants
             String postId = "tempID";
 
-            // get user nickname from the Users
+            // get user nickname from the Users 유저 컬렉션에서 현재 유저의 닉네임 가져오기
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
-            DocumentReference docRef = db.collection("Users").document(users.getUid());
+            DocumentReference docRef = db.collection("user").document(users.getUid());
 
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -102,8 +106,9 @@ public class WritingActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
+
+                            nickname = document.getData().get("userNickName").toString();
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            nickname = document.getData().get("nickname").toString();
 
 
                         } else {
@@ -120,7 +125,7 @@ public class WritingActivity extends AppCompatActivity {
                 public void run() {
                     startToast("업로드 중입니다...");
                     WriteInfo writeInfo = new WriteInfo(postId, nickname, contents, publisher,
-                            category, created_at);
+                            category, created_at, num_heart, num_comment, userlist_heart);
                     postUploader(writeInfo);
                 }
             }, 1000); // 1sec
@@ -134,9 +139,6 @@ public class WritingActivity extends AppCompatActivity {
 
     // upload the post
     private void postUploader(WriteInfo writeInfo) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
         db.collection("Posts").add(writeInfo)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -147,7 +149,7 @@ public class WritingActivity extends AppCompatActivity {
 
 
                         // show the post right after the writing
-                        Intent intent = new Intent(getApplicationContext(), PostViewActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), PostViewDetailActivity.class);
                         intent.putExtra("posts_id", posts_id); // send posts_id
                         startActivityForResult(intent, UPLOAD_POST);
 

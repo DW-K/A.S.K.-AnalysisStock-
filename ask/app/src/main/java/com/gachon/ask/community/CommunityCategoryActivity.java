@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,15 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachon.ask.CustomAdapter;
 import com.gachon.ask.R;
 import com.gachon.ask.WriteInfo;
 import com.gachon.ask.WritingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -30,12 +26,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
-public class CategoryActivity extends AppCompatActivity {
+public class CommunityCategoryActivity extends AppCompatActivity {
     public static Context mContext;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<WriteInfo> writeInfoList = new ArrayList<>();
     RecyclerView mRecyclerView;
     //layout manager for recyclerview
@@ -44,9 +39,9 @@ public class CategoryActivity extends AppCompatActivity {
     TextView categoryName;
     Button btnAddPost;
     TextView tv_no_post;
-    CustomAdapter adapter;
+    PostViewAdapter adapter;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
 
 
 
+        showData();
 
         btnAddPost = findViewById(R.id.btn_add_post);
         btnAddPost.setOnClickListener(view -> {
@@ -80,8 +76,9 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private void showData() {
+        System.out.println("show data 실행함");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Posts")
                 .orderBy("createdAt", Query.Direction.DESCENDING) // show from the recent posts
                 .get()
@@ -98,7 +95,10 @@ public class CategoryActivity extends AppCompatActivity {
                                         doc.getString("contents"),
                                         doc.getString("publisher"),
                                         doc.getString("category"),
-                                        doc.getTimestamp("createdAt"));
+                                        doc.getTimestamp("createdAt"),
+                                        doc.getLong("num_heart").intValue(),
+                                        doc.getLong("num_comment").intValue(),
+                                        (ArrayList<String>) doc.get("userlist_heart"));
 
 
                                 if(writeInfo.getCategory().equals(category)) {
@@ -123,7 +123,7 @@ public class CategoryActivity extends AppCompatActivity {
 //                        }
 
                         //adapter
-                        adapter = new CustomAdapter(CategoryActivity.this, writeInfoList);
+                        adapter = new PostViewAdapter();
                         //set adapter to recyclerview
                         mRecyclerView.setAdapter(adapter);
                     }

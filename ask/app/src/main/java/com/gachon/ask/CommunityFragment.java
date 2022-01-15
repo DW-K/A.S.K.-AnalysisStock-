@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.gachon.ask.community.CategoryActivity;
+import com.gachon.ask.community.CommunityCategoryActivity;
 
 public class CommunityFragment extends Fragment {
     @Override
@@ -49,7 +49,7 @@ public class CommunityFragment extends Fragment {
                 break;
         }
 
-        intent = new Intent(getActivity(), CategoryActivity.class);
+        intent = new Intent(getActivity(), CommunityCategoryActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
     };

@@ -47,20 +47,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/Lv."
                             android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textSize="18sp" />
 
-                        <TextView
-                            android:id="@+id/level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="5"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/tv_nickname"
@@ -130,7 +121,7 @@
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/heart_count"
+                    android:id="@+id/tv_heart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

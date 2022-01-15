@@ -7,10 +7,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachon.ask.community.PostViewActivity;
+import com.gachon.ask.community.PostViewDetailActivity;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    TextView vContents, vNickname, vUploadTime;
+    TextView vContents, vNickname, vUploadTime, vComment, vHeart;
     View mView;
 
     public ViewHolder(@NonNull View itemView) {
@@ -23,7 +23,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 mClickListener.onItemClick(v, getAdapterPosition());
-                Intent intent = new Intent(itemView.getContext(), PostViewActivity.class);
+                Intent intent = new Intent(itemView.getContext(), PostViewDetailActivity.class);
             }
         });
 
@@ -39,9 +39,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         //initialize views with post_view_layout.xml
 
-        vContents = itemView.findViewById(R.id.lContents);
-        vNickname = itemView.findViewById(R.id.lNickname);
-        vUploadTime = itemView.findViewById(R.id.lUploadTime);
+        vContents = itemView.findViewById(R.id.tv_contents);
+        vNickname = itemView.findViewById(R.id.tv_nickname);
+        vUploadTime = itemView.findViewById(R.id.tv_created_At);
     }
 
     private ClickListener mClickListener;

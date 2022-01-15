@@ -24,7 +24,7 @@ public class ViewHolderRanking extends RecyclerView.ViewHolder {
 //            @Override
 //            public void onClick(View v) {
 //                mClickListener.onItemClick(v, getAdapterPosition());
-//                Intent intent = new Intent(itemView.getContext(), PostViewActivity.class);
+//                Intent intent = new Intent(itemView.getContext(), PostViewDetailActivity.class);
 //            }
 //        });
 //
