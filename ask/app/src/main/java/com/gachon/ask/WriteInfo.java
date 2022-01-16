@@ -70,4 +70,5 @@ public class WriteInfo {
         this.userlist_heart = userlist_heart;
     }
 
+
 }

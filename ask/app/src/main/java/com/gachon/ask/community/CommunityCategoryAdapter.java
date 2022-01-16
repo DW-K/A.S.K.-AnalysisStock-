@@ -1,12 +1,20 @@
 package com.gachon.ask.community;
 
+
+import static com.gachon.ask.community.CommunityCategoryActivity.getTime;
+
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gachon.ask.R;
 import com.gachon.ask.WriteInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,21 +32,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
 
-public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHolder> {
-    PostViewAdapter postViewAdapter;
-    private static final String TAG = "PostViewAdapter";
-    ArrayList<WriteInfo> items = new ArrayList<WriteInfo>();
+
+public class CommunityCategoryAdapter extends RecyclerView.Adapter<CommunityCategoryAdapter.ViewHolder>{
+    ArrayList<PostInfo> items = new ArrayList<PostInfo>();
+    private static final String TAG = "CC Adapter";
     ArrayList userlist_heart;
     Boolean heart_clicked = false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
 
     @NonNull
     @Override
@@ -47,17 +54,9 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //bind views
-        WriteInfo item = items.get(position);
-        holder.setItem(item);
-    }
-
-
-
-    public void addItem(WriteInfo item){ items.add(item); }
-    public void setItems(ArrayList<WriteInfo> items){
-        this.items = items;
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        PostInfo item = items.get(position);
+        viewHolder.setItem(item);
     }
 
     @Override
@@ -65,8 +64,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         return items.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         String post_id;
         String publisher_id;
         TextView vContents;
@@ -75,9 +73,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         TextView vComment;
         TextView vHeart;
         FirebaseUser user;
-        ImageButton heart;
-
-
+        ImageView heart;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             vContents = itemView.findViewById(R.id.tv_contents);
@@ -85,7 +81,9 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             vUploadTime = itemView.findViewById(R.id.tv_created_At);
             vComment = itemView.findViewById(R.id.tv_comment);
             vHeart = itemView.findViewById(R.id.tv_heart);
+            heart = (ImageView)itemView.findViewById(R.id.ic_heart);
             user = FirebaseAuth.getInstance().getCurrentUser();
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,13 +92,13 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
                     Intent intent;
                     intent = new Intent(context, PostViewActivity.class);
                     intent.putExtra("posts_id", post_id);//포스트 액티비티에 문서 id 전달
-
+                    Log.d(TAG, "posts_id: " + post_id);
                     context.startActivity(intent);
                 }
             });
         }
 
-        public void setItem(WriteInfo item) {
+        public void setItem(PostInfo item){
             post_id = item.getPosts_id();
             publisher_id = item.getPublisher();
 
@@ -120,12 +118,13 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
                         if (document.exists()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             userlist_heart = (ArrayList<String>) document.get("userlist_heart");
-                            if (userlist_heart.isEmpty()) {// 하트 리스트가 비어있다면(디폴트)
+                            if(userlist_heart.isEmpty()){// 하트 리스트가 비어있다면(디폴트)
                                 heart.setImageResource(R.drawable.baseline_favorite_border_24);
-                                heart_clicked = false;
-                            } else if (userlist_heart.contains(user.getUid())) {//현재 유저가 해당 글에 이미 하트를 눌렀다면
+                                heart_clicked=false;
+                            }
+                            else if(userlist_heart.contains(user.getUid())){//현재 유저가 해당 글에 이미 하트를 눌렀다면
                                 heart.setImageResource(R.drawable.baseline_favorite_24); //하트 채워두기
-                                heart_clicked = true;
+                                heart_clicked=true;
                             }
 
                         } else {
@@ -139,23 +138,22 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             });
 
 
+
+
         }
 
     }
-
-    // getExtra cannot call the type timestamp
-    // cast the type timestamp -> String
-    static String getTime(Timestamp time) {
-
-        Date date_createdAt = time.toDate();
-        SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd HH:mm");
-        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
-        formatter.setTimeZone(timeZone);
-
-        String txt_createdAt = formatter.format(date_createdAt);
-
-        return txt_createdAt;
+    public void addItem(PostInfo item){
+        items.add(item);
+    }
+    public void setItems(ArrayList<PostInfo> items){
+        this.items = items;
     }
 
-
+    public PostInfo getItem(int position){
+        return items.get(position);
+    }
+    public void setItem(int position, PostInfo item){
+        items.set(position, item);
+    }
 }

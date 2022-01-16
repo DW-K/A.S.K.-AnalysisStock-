@@ -32,8 +32,8 @@ import com.gachon.ask.R;
 
 
 // show the post right after the writing
-public class PostViewDetailActivity extends AppCompatActivity {
-    private static final String TAG = "PostViewDetailActivity";
+public class PostViewActivity extends AppCompatActivity {
+    private static final String TAG = "PostViewActivity";
     private FirebaseUser user;
     private String posts_id;
     int int_num_heart;
@@ -44,7 +44,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postview_detail);
+        setContentView(R.layout.activity_postview);
 
         // get posts_id from WritingActivity
         Intent intent = getIntent();

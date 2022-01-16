@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gachon.ask.community.PostViewDetailActivity;
+import com.gachon.ask.community.PostViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -149,7 +149,7 @@ public class WritingActivity extends AppCompatActivity {
 
 
                         // show the post right after the writing
-                        Intent intent = new Intent(getApplicationContext(), PostViewDetailActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), PostViewActivity.class);
                         intent.putExtra("posts_id", posts_id); // send posts_id
                         startActivityForResult(intent, UPLOAD_POST);
 

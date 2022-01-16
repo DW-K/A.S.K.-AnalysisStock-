@@ -35,7 +35,7 @@ public class RankingAdapter extends RecyclerView.Adapter<ViewHolderRanking> {
 //            @Override
 //            public void onItemClick(View view, int position) {
 //
-//                Intent intent = new Intent(view.getContext(), PostViewDetailActivity.class);
+//                Intent intent = new Intent(view.getContext(), PostViewActivity.class);
 //                intent.putExtra("rank",user.get(position).getNickname());
 //                intent.putExtra("level",user.get(position).getContents());
 //                intent.putExtra("nickname",user.get(position).getPublisher());
