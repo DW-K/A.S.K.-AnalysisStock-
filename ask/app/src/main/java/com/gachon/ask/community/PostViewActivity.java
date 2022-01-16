@@ -68,6 +68,7 @@ public class PostViewActivity extends AppCompatActivity {
                 });
 
         ImageView iv_heart = findViewById(R.id.ic_heart);
+        ImageView iv_comment = findViewById(R.id.ic_comment);
 
         TextView nickname = (TextView) findViewById(R.id.tv_nickname);
         TextView created_at = (TextView) findViewById(R.id.tv_created_At);
@@ -171,6 +172,19 @@ public class PostViewActivity extends AppCompatActivity {
                                 Log.w(TAG, "Error updating document", e);
                             }
                         });
+            }
+        });
+
+        /* comment click event */
+
+        iv_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PostViewActivity.this, CommentActivity.class);
+                intent.putExtra("posts_id", posts_id);
+//                intent.putExtra("publisher_uid", publisher_uid);
+                startActivity(intent);
+
             }
         });
 

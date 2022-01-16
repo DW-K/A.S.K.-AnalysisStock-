@@ -11,6 +11,7 @@
 
 
     <string name="no_post">작성된 글이 없습니다.</string>
+    <string name="comment">댓글</string>
     <string name="leave_comment">댓글을 남겨보세요.</string>
     <string name="btn_comment">등록</string>
 
