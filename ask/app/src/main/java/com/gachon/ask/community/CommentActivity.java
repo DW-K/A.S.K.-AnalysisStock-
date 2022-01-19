@@ -77,9 +77,6 @@ public class CommentActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         setContentView(R.layout.activity_comment);
-
-
-        setContentView(R.layout.activity_comment);
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
