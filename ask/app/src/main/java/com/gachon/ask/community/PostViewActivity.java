@@ -35,7 +35,7 @@ import com.gachon.ask.R;
 public class PostViewActivity extends AppCompatActivity {
     private static final String TAG = "PostViewActivity";
     private FirebaseUser user;
-    private String posts_id;
+    private String post_id;
     int int_num_heart;
     int int_num_comment;
     Boolean heart_clicked = false;
@@ -46,14 +46,14 @@ public class PostViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postview);
 
-        // get posts_id from WritingActivity
+        // get post_id from WritingActivity
         Intent intent = getIntent();
-        posts_id = intent.getStringExtra("posts_id");
-        // add filed posts_id
+        post_id = intent.getStringExtra("post_id");
+        // add filed post_id
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference db_post = db.collection("Posts").document(posts_id);
+        DocumentReference db_post = db.collection("Posts").document(post_id);
         db_post
-                .update("posts_id", posts_id)// change the posts_id value from the WritingActivity
+                .update("post_id", post_id)// change the post_id value from the WritingActivity
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -80,7 +80,7 @@ public class PostViewActivity extends AppCompatActivity {
 
         /* Show post data */
 
-        DocumentReference docRef = db.collection("Posts").document(posts_id);
+        DocumentReference docRef = db.collection("Posts").document(post_id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -157,7 +157,7 @@ public class PostViewActivity extends AppCompatActivity {
                     iv_heart.setImageResource(R.drawable.baseline_favorite_border_24);
                 }
                 heart.setText(String.valueOf(int_num_heart));// 텍스트 보여주기
-                DocumentReference docRef = db.collection("Posts").document(posts_id);
+                DocumentReference docRef = db.collection("Posts").document(post_id);
                 docRef
                         .update("num_heart", int_num_heart)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -181,7 +181,7 @@ public class PostViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PostViewActivity.this, CommentActivity.class);
-                intent.putExtra("posts_id", posts_id);
+                intent.putExtra("post_id", post_id);
 //                intent.putExtra("publisher_uid", publisher_uid);
                 startActivity(intent);
 

@@ -80,15 +80,15 @@ public class CommunityCategoryAdapter extends RecyclerView.Adapter<CommunityCate
                     Context context = view.getContext();
                     Intent intent;
                     intent = new Intent(context, PostViewActivity.class);
-                    intent.putExtra("posts_id", post_id);//포스트 액티비티에 문서 id 전달
-                    Log.d(TAG, "posts_id: " + post_id);
+                    intent.putExtra("post_id", post_id);//포스트 액티비티에 문서 id 전달
+                    Log.d(TAG, "post_id: " + post_id);
                     context.startActivity(intent);
                 }
             });
         }
 
         public void setItem(PostInfo item){
-            post_id = item.getPosts_id();
+            post_id = item.getPost_id();
             publisher_id = item.getPublisher();
 
             vNickname.setText(item.getNickname());//작성자 닉네임

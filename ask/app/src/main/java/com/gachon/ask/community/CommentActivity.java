@@ -62,7 +62,7 @@ public class CommentActivity extends AppCompatActivity {
         btn_submit = (Button) findViewById(R.id.btn_submit);
 
         Intent intent = getIntent();
-        post_id = intent.getStringExtra("posts_id");
+        post_id = intent.getStringExtra("post_id");
         db = FirebaseFirestore.getInstance();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -84,7 +84,7 @@ public class CommentActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        post_id = intent.getStringExtra("posts_id");
+        post_id = intent.getStringExtra("post_id");
         db = FirebaseFirestore.getInstance();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -114,7 +114,7 @@ public class CommentActivity extends AppCompatActivity {
         /* 댓글 가져오기 */
         db.collection("Comment")
                 .orderBy("time", Query.Direction.ASCENDING)
-                .whereEqualTo("posts_id", post_id)
+                .whereEqualTo("post_id", post_id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -138,7 +138,7 @@ public class CommentActivity extends AppCompatActivity {
 
         /* 포스트 댓글 수 가져오기 */
         db.collection("Posts")
-                .whereEqualTo("posts_id", post_id)
+                .whereEqualTo("post_id", post_id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -176,7 +176,7 @@ public class CommentActivity extends AppCompatActivity {
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("content", comment);
                                 data.put("nickname", nickname);
-                                data.put("posts_id", post_id);
+                                data.put("post_id", post_id);
 //                                        data.put("profile_image", profile_image);
                                 data.put("time", timestamp);
 

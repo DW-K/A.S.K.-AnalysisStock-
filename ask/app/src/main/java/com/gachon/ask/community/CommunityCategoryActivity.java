@@ -99,7 +99,7 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                             for (DocumentSnapshot doc : task.getResult()) {
 
                                 try {
-                                    String posts_id = doc.getData().get("posts_id").toString();
+                                    String post_id = doc.getData().get("post_id").toString();
                                     String nickname = doc.getData().get("nickname").toString();
                                     String contents = doc.getData().get("contents").toString();
                                     String publisher = doc.getData().get("publisher").toString();
@@ -112,7 +112,7 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                                     user = FirebaseAuth.getInstance().getCurrentUser();
 
                                     if(category.equals(selected_category)) {
-                                        adapter.addItem(new PostInfo(posts_id, nickname, contents, publisher, category, createdAt, num_heart, num_comment));
+                                        adapter.addItem(new PostInfo(post_id, nickname, contents, publisher, category, createdAt, num_heart, num_comment));
                                         mRecyclerView.setAdapter(adapter);
                                     }
 

@@ -38,7 +38,7 @@ public class WritingActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static final Integer UPLOAD_POST = 110;
     private FirebaseUser user;
-    private String posts_id;
+    private String post_id;
     private String nickname;
     private String category;
     private int num_heart;
@@ -143,14 +143,15 @@ public class WritingActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        posts_id = documentReference.getId();
+                        post_id = documentReference.getId();
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                         startToast("등록되었습니다!");
 
 
                         // show the post right after the writing
                         Intent intent = new Intent(getApplicationContext(), PostViewActivity.class);
-                        intent.putExtra("posts_id", posts_id); // send posts_id
+                        intent.putExtra("post_id", post_id); // send post_id
+
                         startActivityForResult(intent, UPLOAD_POST);
 
                         finish();
