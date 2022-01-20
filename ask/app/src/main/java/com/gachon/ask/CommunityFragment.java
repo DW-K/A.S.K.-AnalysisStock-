@@ -21,6 +21,7 @@ public class CommunityFragment extends Fragment {
         root.findViewById(R.id.btn_community_entertainment).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_it).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_electronics).setOnClickListener(onClickListener);
+        root.findViewById(R.id.community_univ).setOnClickListener(onClickListener);
 
 
         return root;
@@ -46,6 +47,10 @@ public class CommunityFragment extends Fragment {
 
             case R.id.btn_community_electronics:
                 selected_category = getString(R.string.category_electronics);
+                break;
+
+            case R.id.community_univ:
+                selected_category = getString(R.string.category_univ);
                 break;
         }
 
