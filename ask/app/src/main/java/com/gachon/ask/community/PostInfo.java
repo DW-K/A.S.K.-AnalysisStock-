@@ -1,12 +1,8 @@
-package com.gachon.ask;
-
+package com.gachon.ask.community;
 
 import com.google.firebase.Timestamp;
 
-import java.util.ArrayList;
-
-
-public class WriteInfo {
+public class PostInfo {
     private String post_id;
     private String nickname;
     private String contents;
@@ -15,11 +11,9 @@ public class WriteInfo {
     private Timestamp createdAt;
     private int num_heart;
     private int num_comment;
-    private ArrayList userlist_heart;
 
-
-    public WriteInfo(String post_id, String nickname, String contents, String publisher,
-                     String category, Timestamp createdAt, int num_heart, int num_comment, ArrayList userlist_heart){
+    public PostInfo(String post_id, String nickname, String contents, String publisher,
+                     String category, Timestamp createdAt, int num_heart, int num_comment){
         this.post_id = post_id;
         this.nickname = nickname;
         this.contents = contents;
@@ -28,7 +22,6 @@ public class WriteInfo {
         this.createdAt = createdAt;
         this.num_heart = num_heart;
         this.num_comment = num_comment;
-        this.userlist_heart = userlist_heart;
 
     }
 
@@ -62,13 +55,7 @@ public class WriteInfo {
         this.num_comment = num_comment;
     }
 
-    public ArrayList getUserlist_heart() {
-        return userlist_heart;
-    }
 
-    public void setUserlist_heart(ArrayList userlist_heart) {
-        this.userlist_heart = userlist_heart;
-    }
 
 
 }

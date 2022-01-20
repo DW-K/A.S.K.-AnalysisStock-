@@ -37,7 +37,8 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".WritingActivity" />
         <activity android:name=".community.PostViewActivity"/>
-        <activity android:name=".community.CategoryActivity"/>
+        <activity android:name=".community.CommunityCategoryActivity"/>
+        <activity android:name=".community.CommentActivity"/>
         <activity android:name=".CommunityFragment"
             tools:ignore="Instantiatable" />
 

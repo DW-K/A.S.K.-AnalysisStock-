@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gachon.ask.community.PostViewActivity;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    TextView vContents, vNickname, vUploadTime;
+    TextView vContents, vNickname, vUploadTime, vComment, vHeart;
     View mView;
 
     public ViewHolder(@NonNull View itemView) {
@@ -39,9 +39,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         //initialize views with post_view_layout.xml
 
-        vContents = itemView.findViewById(R.id.lContents);
-        vNickname = itemView.findViewById(R.id.lNickname);
-        vUploadTime = itemView.findViewById(R.id.lUploadTime);
+        vContents = itemView.findViewById(R.id.tv_contents);
+        vNickname = itemView.findViewById(R.id.tv_nickname);
+        vUploadTime = itemView.findViewById(R.id.tv_created_At);
+        vHeart = itemView.findViewById(R.id.tv_heart);
+        vComment = itemView.findViewById(R.id.tv_comment);
     }
 
     private ClickListener mClickListener;

@@ -28,13 +28,12 @@
                 android:layout_gravity="center" />
 
             <TextView
-                android:id="@+id/lLevel"
+                android:id="@+id/tv_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="level"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,36 +45,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/lNickname"
+                    android:id="@+id/tv_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_gravity="center"
-                    android:text="nickname"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/lUploadTime"
+                    android:id="@+id/tv_created_At"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="uploadtime"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/lContents"
+                android:id="@+id/tv_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="contents"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -95,11 +90,11 @@
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/comment_count"
+                    android:id="@+id/tv_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="0"
+                    android:text="  "
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -113,11 +108,11 @@
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/heart_count"
+                    android:id="@+id/tv_heart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="0"
+                    android:text="  "
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 

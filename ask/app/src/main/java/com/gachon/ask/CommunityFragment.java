@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.gachon.ask.community.CategoryActivity;
+import com.gachon.ask.community.CommunityCategoryActivity;
 
 public class CommunityFragment extends Fragment {
     @Override
@@ -26,31 +26,31 @@ public class CommunityFragment extends Fragment {
         return root;
     }
 
-    String category;
+    String selected_category;
     View.OnClickListener onClickListener = v -> {
 
         Intent intent;
         switch (v.getId()){
 
             case R.id.btn_community_car:
-                category = getString(R.string.category_car);
+                selected_category = getString(R.string.category_car);
                 break;
 
             case R.id.btn_community_entertainment:
-                category = getString(R.string.category_entertainment);
+                selected_category = getString(R.string.category_entertainment);
                 break;
 
             case R.id.btn_community_it:
-                category = getString(R.string.category_it);
+                selected_category = getString(R.string.category_it);
                 break;
 
             case R.id.btn_community_electronics:
-                category = getString(R.string.category_electronics);
+                selected_category = getString(R.string.category_electronics);
                 break;
         }
 
-        intent = new Intent(getActivity(), CategoryActivity.class);
-        intent.putExtra("category", category);
+        intent = new Intent(getActivity(), CommunityCategoryActivity.class);
+        intent.putExtra("selected_category", selected_category);
         startActivity(intent);
     };
 
