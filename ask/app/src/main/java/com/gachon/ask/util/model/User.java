@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class User {
 
+    private String uid; // uid
     private String userEmail; // 유저 이메일
     private String userNickName; // 유저 닉네임
     private String userProfileImgURL; // 유저 프로필 URL
@@ -24,7 +25,8 @@ public class User {
 
     public User(){ }
 
-    public User(String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
+    public User(String uid, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
+        this.uid = uid;
         this.userEmail = userEmail;
         this.userNickName = userNickName;
         this.registerTime = registerTime;
@@ -41,7 +43,13 @@ public class User {
         this.challenges = challenges;
     }
 
+    public String getUid() {
+        return uid;
+    }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getUserEmail() {
         return userEmail;

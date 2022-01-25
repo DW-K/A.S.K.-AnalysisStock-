@@ -1,25 +1,14 @@
 package com.gachon.ask;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachon.ask.community.CategoryActivity;
-import com.gachon.ask.community.PostViewActivity;
-import com.gachon.ask.util.model.User;
-import com.google.firebase.Timestamp;
-
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class RankingAdapter extends RecyclerView.Adapter<ViewHolderRanking> {
     RankingFragment rankingFragment;
