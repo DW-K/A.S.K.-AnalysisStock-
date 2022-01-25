@@ -129,23 +129,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:background="#e2b8b8"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:text="감성분석" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_margin="10dp"
+                    android:text="감성분석"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -156,16 +156,15 @@
                     android:text="@+id/sentiment_analysis_info" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/button_sentiment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-
                     android:text="자세히보기" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="20dp"
@@ -173,12 +172,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:text="주가예측" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_margin="10dp"
+                    android:text="주가예측"/>
 
                 <TextView
                     android:id="@+id/textView5"
