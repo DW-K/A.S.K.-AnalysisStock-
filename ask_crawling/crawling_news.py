@@ -71,8 +71,7 @@ def crawler(category, companyName, query, sort, s_date, e_date):
 
     maxpage_t = (int(maxpage) - 1) * 10 + 1  # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
     while page <= maxpage_t:
-        url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(
-            page)
+        url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(page)
         response = requests.get(url)
         html = response.text
 

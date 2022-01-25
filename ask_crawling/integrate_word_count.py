@@ -5,6 +5,7 @@ import pandas as pd
 import os
 from Path import writeToExcel
 
+
 def integrate_word_count(category, companyName, target_date):
     output_file_name = f'{companyName}_{target_date}_nsc.xlsx'
     filePath = fr"{Path.RESULT_PATH_NEWS}\{category}\{companyName}\word_count"
