@@ -57,14 +57,14 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 def news_crawler(target_date, query):
     page = 0
-    max_page = 5
+    max_page = 10
 
     df = pd.DataFrame(columns=["title", "언론사", "언론사 링크", "기사 링크", "기사 내용"])
 
     # 기사 링크 수집
     while page < max_page:
-        search_url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + "0" + "&nso=so%3Ar%2Cp%3Afrom" + target_date + "to" + target_date + "%2Ca%3A&start=" + str(
-            page*10 + 1)
+        search_url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + "0" + "&nso=so%3Ar%2Cp%3Afrom" + \
+                     target_date + "to" + target_date + "%2Ca%3A&start=" + str(page*10 + 1)
         response = requests.get(search_url)  # html 가져오기
         response.raise_for_status()
         search_html = response.text
@@ -77,6 +77,8 @@ def news_crawler(target_date, query):
             if l.get_text() in press_params.keys():
                 df_row = {"title": news.get_text(), "언론사": l.get_text(), "언론사 링크": l['href'], "기사 링크": news["href"]}
                 df = df.append(df_row, ignore_index=True)
+            else:
+                print(f'{l.get_text()} is not in press_params')
 
         df.drop_duplicates(subset=["title"], ignore_index=True, inplace=True)   # title 기준으로 중복제거
 
@@ -116,4 +118,4 @@ def get_contents(url, press):
 
 
 if __name__ == "__main__":
-    news_crawler("20201212", "기아")
+    news_crawler("20200910", "기아 자동차")
