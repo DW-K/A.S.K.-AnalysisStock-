@@ -17,16 +17,23 @@ def subProcess_crawl(func, arg=[]):
         if err is not None:
             print(err)
 
-    print(f"complete crawling news: {arg[1]} ({arg[3]})")
+    # print(f"complete crawling news: {arg[1]} ({arg[3]}): {arg[5]}-{arg[6]}")
     print(out.decode())
 
 
 def crawling_news(category, companyName, maxpage, query, sort, s_date, e_date):
     subProcess_crawl('crawling_news', [category, companyName, maxpage, query, sort, s_date, e_date])
+    print(f"complete crawling news: {companyName} ({query}): {s_date}-{e_date}")
 
 
 def crawling_tweet(category, companyName, maxpage, query, s_date, e_date):
     subProcess_crawl('crawling_tweet', [category, companyName, maxpage, query, s_date, e_date])
+    print(f"complete crawling tweet: {companyName} ({query}): {s_date}-{e_date}")
+
+
+def integrate_word_count(category, companyName, target_date):
+    subProcess_crawl('integrate_word_count', [category, companyName, target_date])
+    print(f"complete integrate word count ({companyName}_{target_date})")
 
 
 if __name__ == "__main__":

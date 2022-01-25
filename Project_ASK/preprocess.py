@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from Path import RESULT_PATH_COMBINE
 
 path = r'dataset\combine\entertainment\result.xlsx'
 
@@ -27,48 +28,58 @@ def scaling(arr):
     return arr_scaled
 
 
-def preprocessing():
-    df = pd.read_excel(path, index_col='date')
-    # df.loc[:, '시가'].plot(grid=True)
-    # plt.show()
+def preprocessing(category, companyName):
+    filePath = fr"{RESULT_PATH_COMBINE}\{category}\{companyName}"
+    fileName = f"{companyName}_combine.xlsx"
+    total_name = f"{filePath}\{fileName}"
+
+    str_col = ["개인", "기관", "외인수량", "외국계", "프로그램", "외인순매수", "기관순매수", "개인순매수"]
+
+    df = pd.read_excel(total_name, index_col='날짜')
+
+    df.drop("체결강도", axis=1, inplace=True)
+    # df.drop("news_sentiment_logit", axis=1, inplace=True)
+    df = df.iloc[-236:, :]
+
+    # for col in str_col:
+    #     for row in df.index:
+    #         if df.loc[row, col]
+
+    for col in str_col:
+        df.loc[:, col] = df.loc[:, col].str.replace("--", "-", regex=False)
+
     # 1 preprocess per batch
 
-    col_name = list(df.columns)  # df column 순서 바꾸기
-    col_name.remove('quarter')
-    col_name.remove('isUp')
-    col_name.insert(0, 'quarter')
+    # print(df.columns)
+    # print(df)
 
-    y = df['isUp'].to_numpy().reshape(-1, 1)
-    y = y[:-step_size]
+    y = df["전일비"].values
+    y = y.reshape(-1, 1)
+    X = df.drop("전일비", axis=1)
 
-    # print(y.shape)
+    train_index = 160
 
-    df = df[col_name]
-    arr_index_list = []
+    X_train = X.iloc[:train_index, :]
+    X_test = X.iloc[train_index:, :]
+    y_train = y[:train_index, :]
+    y_test = y[train_index:, :]
 
-    arr = np.zeros(shape=(1, step_size, col_size))
+    ss = StandardScaler()
 
-    for i in range(0, df.shape[0] - step_size, 1):
-        temp = df.iloc[i:i+step_size, :]
+    ss.fit(X_train)
+    X_train_scaled = ss.transform(X_train)
+    X_test_scaled = ss.transform(X_test)
 
-        arr_index_list.append(list(temp.index))
+    ss.fit(y_train)
+    y_train_scaled = ss.transform(y_train)
+    y_test_scaled = ss.transform(y_test)
 
-        temp_arr = temp.to_numpy()
-        arr = np.vstack((arr, temp_arr.reshape(1, step_size, col_size)))
-        # pre_temp = temp
-
-    arr = np.delete(arr, 0, axis=0)  # 빈 array 행 제거 (첫번째 행)
-
-    arr_scaled = scaling(arr)
-    # print(arr_scaled.shape)
-    # print(arr_index_list)
-
-    # x = 2
-    # print(pd.DataFrame(arr_scaled[x], index=date_list[x], columns=col_name))
-    # print(pd.DataFrame(recent_scaled, index=recent_date, columns=col_name))
-
-    return arr_scaled, y, arr_index_list
+    return X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled
 
 
 if __name__ == "__main__":
-    preprocessing()
+    category = "car"
+    companyName = "기아"
+    s_date = "20211014"
+    e_date = "20211203"
+    preprocessing(category=category, companyName=companyName)
