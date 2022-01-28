@@ -14,7 +14,7 @@ totaltweets = []
 # 크롤 대상에 적용된 class style
 span_class_txt = "css-901oao css-16my406 r-poiln3"
 
-# 수집되면 제거할 기본 텍스트들
+# 제거할 트위터 기본 텍스트
 twitter_text = ["최신 소식을 놓치지 마세요", "트위터를 사용하면 가장 먼저 알게 됩니다.", "로그인", "가입하기",
                 "인기", "최신", "사용자", "사진", "동영상", "새 트윗 보기", "이 스레드 보기"]
 user_at = "@"
@@ -81,27 +81,27 @@ def crawler(soup, query):
     for t in tweets:
         #  2. 기본 전처리(트위터 기본 텍스트, 유저아이디 제외(continue)
         if t.text in twitter_text:
-            print("***** 기본 텍스트입니다. continue를 진행합니다")
+            # print("***** 기본 텍스트입니다. continue를 진행합니다")
             continue
         elif t.text.startswith(user_at):
-            print("***** 유저 아이디입니다. continue를 진행합니다")
+            # print("***** 유저 아이디입니다. continue를 진행합니다")
             continue
 
         #  3. 원하는 검색어 텍스트는 bold 처리되어 하나의 element 취급되어 크롤링되므로 < 이전 + 키워드 + 이후 > 형식으로 맞춰주기
         elif is_query:
             # 키워드 + 이후
-            print("************ 이전 텍스트가 키워드입니다!")
+            # print("************ 이전 텍스트가 키워드입니다!")
             totaltweets[-1] = totaltweets[-1] + t.text
             is_query = False
         elif t.text == query:
             # 이전 + 키워드
-            print("************ 현재 텍스트가 키워드입니다! ************")
+            # print("************ 현재 텍스트가 키워드입니다! ************")
             totaltweets[-1] = totaltweets[-1] + t.text
             is_query = True
 
         #  4. 문장 첫 시작에 · 제거
         elif t.text.startswith('·'):
-            print("***** 현재 텍스트 시작이 · 입니다")
+            # print("***** 현재 텍스트 시작이 · 입니다")
             print(t.text)
             continue
 
@@ -158,11 +158,6 @@ def main():
     df_result = pd.DataFrame({"내용":result})
     print(df_result)
     # df_result.to_excel('tweet_df_result.xlsx')
-
-    # print("============================= 결과 =============================")
-    # import pprint
-    # pprint.pprint(result)
-
 
 
 if __name__ == "__main__":
