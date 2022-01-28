@@ -1,10 +1,14 @@
 package com.gachon.ask.xingapi
 
+import android.graphics.Color
+import android.graphics.Color.green
+import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +20,32 @@ import com.gachon.ask.datamngr.API_DEFINE
 import java.util.*
 import kotlin.collections.ArrayList
 import com.gachon.ask.R;
+import com.gachon.ask.databinding.ActivityS1002Binding
+import com.github.mikephil.charting.charts.CandleStickChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.CandleData
+import com.github.mikephil.charting.data.CandleDataSet
+import com.github.mikephil.charting.data.CandleEntry
+import com.github.mikephil.charting.interfaces.datasets.ICandleDataSet
+import kotlinx.android.synthetic.main.activity_s1002.*
 
 class s1002 : Fragment() {
 
     internal var m_nHandle = -1
     internal var handler: ProcMessageHandler? = null
     lateinit internal var manager: SocketManager
+
+    data class Candle(
+        val createdAt: Long,
+        val open: Float,
+        val close: Float,
+        val shadowHigh: Float,
+        val shadowLow: Float
+    )
+
+    lateinit var price_chart : CandleStickChart
+
     internal inner class ProcMessageHandler : Handler() {
 
         @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -119,9 +143,12 @@ class s1002 : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 뷰 바인딩 설정
+        // mBinding = ActivityS1002Binding.inflate(inflater, container, false)
+
         root = inflater.inflate(R.layout.activity_s1002, container, false)
         mainView = (activity as MainView)
-
+        price_chart = root.findViewById(R.id.priceChart)
 
         m_gridView = root.findViewById<View>(R.id.grid_view) as GridView
         m_gridView.adapter = m_adapter
@@ -129,6 +156,8 @@ class s1002 : Fragment() {
         //m_gridView = TableGrid2(mainView)
         //val grid_layout = root.findViewById<LinearLayout>(R.id.grid_view)
         //m_gridView.InitTableGrid(7,grid_layout,null,null,null,null)
+
+        //setCandleStickChart()
 
         root.findViewById<Button>(R.id.button).setOnClickListener {
             requestT1305()
@@ -258,7 +287,7 @@ class s1002 : Fragment() {
         // 방법 1. res 폴더에 TR정보가 담긴 *.res 파일이 있는 경우
         var map = manager!!.getOutBlockDataFromByte("t1305", "t1305OutBlock1", pData!!)
         var pArray = manager.getAttributeFromByte("t1305", "t1305OutBlock1", pData) // attribute
-
+        val candleList = ArrayList<Candle>()
 
         /*
         // 방법2. 프로젝트의 TR정보가 담긴 소스(.kt, .java ... *현재 프로젝트의 TRCODE.kt )를 사용하는 경우
@@ -307,12 +336,270 @@ class s1002 : Fragment() {
                     Triple(TableGrid.TYPE.DOUBLE,chdegree,R.id.view7),
                     Triple(TableGrid.TYPE.DAEBI,chdegree_,R.id.view7)
                 )
+                updateCandle(
+                    candleList,
+                    data_record[0].second.toString().replace(",","").toLong(),  // 날짜
+                    data_record[1].second.toString().replace(",","").toFloat(), // 시가
+                    data_record[7].second.toString().replace(",","").toFloat(), // 종가
+                    data_record[3].second.toString().replace(",","").toFloat(), // 최고가
+                    data_record[5].second.toString().replace(",","").toFloat()  // 최저가
+                )
                 m_adapter.addItem(data_record)
 
             }
+            var candleSize = candleList.size-1
+            // CandleList 원소들 확인
+            println("CandleList 원소들 확인")
+            for(index in 0..candleSize){
+                println(candleList.get(index))
+            }
+
+            //initChart()
+            setChartData(candleList)
+
             m_adapter.notifyDataSetChanged()
         }
     }
+
+    // 조회한 데이터 수량에 대한 일봉 데이터를 candleList에 업데이트
+    private fun updateCandle(candleList: ArrayList<Candle>, candleDate:Long, candleStart:Float, candleHigh:Float, candleLow:Float, candleClose:Float){
+        val candle = Candle(candleDate, candleStart, candleHigh, candleLow, candleClose)
+        candleList.add(candle) // 지속적으로 업데이트
+    }
+
+    /*
+    object DataUtil {
+        fun getCSStockData(): List<CSStock> {
+            return listOf(
+                CSStock(
+                    createdAt = 0,
+                    open = 222.8F,
+                    close = 222.9F,
+                    shadowHigh = 224.0F,
+                    shadowLow = 222.2F
+                ),
+                CSStock(
+                    createdAt = 1,
+                    open = 222.0F,
+                    close = 222.2F,
+                    shadowHigh = 222.4F,
+                    shadowLow = 222.0F
+                ),
+                CSStock(
+                    createdAt = 2,
+                    open = 222.2F,
+                    close = 221.9F,
+                    shadowHigh = 222.5F,
+                    shadowLow = 221.5F
+                ),
+                CSStock(
+                    createdAt = 3,
+                    open = 222.4F,
+                    close = 222.3F,
+                    shadowHigh = 223.7F,
+                    shadowLow = 222.1F
+                ),
+                CSStock(
+                    createdAt = 4,
+                    open = 221.6F,
+                    close = 221.9F,
+                    shadowHigh = 221.9F,
+                    shadowLow = 221.5F
+                ),
+                CSStock(
+                    createdAt = 5,
+                    open = 221.8F,
+                    close = 224.9F,
+                    shadowHigh = 225.0F,
+                    shadowLow = 221.0F
+                ),
+                CSStock(
+                    createdAt = 6,
+                    open = 225.0F,
+                    close = 220.2F,
+                    shadowHigh = 225.4F,
+                    shadowLow = 219.2F
+                ),
+                CSStock(
+                    createdAt = 7,
+                    open = 222.2F,
+                    close = 225.9F,
+                    shadowHigh = 227.5F,
+                    shadowLow = 222.2F
+                ),
+                CSStock(
+                    createdAt = 8,
+                    open = 226.0F,
+                    close = 228.1F,
+                    shadowHigh = 228.1F,
+                    shadowLow = 225.1F
+                ),
+                CSStock(
+                    createdAt = 9,
+                    open = 227.6F,
+                    close = 228.9F,
+                    shadowHigh = 230.9F,
+                    shadowLow = 226.5F
+                ),
+                CSStock(
+                    createdAt = 10,
+                    open = 228.6F,
+                    close = 228.6F,
+                    shadowHigh = 230.9F,
+                    shadowLow = 228.0F
+                )
+            )
+        }
+    }*/
+
+    private fun setChartData(candles: ArrayList<Candle>) {
+        candles.reverse() // 주가 데이터 역순으로 정렬
+        val priceEntries = ArrayList<CandleEntry>()
+        var num = 0
+        for (candle in candles) {
+            // 캔들 차트 entry 생성
+            priceEntries.add(
+                CandleEntry(
+                    num.toFloat(),     // 날짜 데이터를 개수로 변환 작업 (임시)
+                    candle.shadowHigh,
+                    candle.shadowLow,
+                    candle.open,
+                    candle.close
+                )
+            )
+            num += 1
+        }
+
+        val priceDataSet = CandleDataSet(priceEntries, "음봉,양봉").apply {
+            axisDependency = YAxis.AxisDependency.LEFT
+            // 심지 부분 설정
+            shadowColor = Color.LTGRAY
+            shadowWidth = 0.7F
+            // 음봉 설정
+            decreasingColor = Color.BLUE // open > close (시가 > 종가)인 경우 음봉이므로 파란색
+            decreasingPaintStyle = Paint.Style.FILL
+            // 양봉 설정
+            increasingColor = Color.RED // open < close (시가 < 종가)인 경우 양봉이므로 빨간색
+            increasingPaintStyle = Paint.Style.FILL
+
+            neutralColor = Color.BLACK
+            setDrawValues(false)
+            // 터치시 노란 선 제거
+            highLightColor = Color.TRANSPARENT
+        }
+
+        /*
+        // 격자선 지우고, 깔끔하게 캔들 그래프만 보이도록 설정!
+        price_chart.axisLeft.run {
+            setDrawAxisLine(false)
+            setDrawGridLines(false)
+            textColor = Color.TRANSPARENT
+        }
+
+
+        price_chart.axisRight.run {
+            isEnabled = false
+        }
+
+        // X 축
+        price_chart.xAxis.run {
+            textColor = Color.TRANSPARENT
+            setDrawAxisLine(false)
+            setDrawGridLines(false)
+            setAvoidFirstLastClipping(true)
+        }
+
+        // 범례
+        price_chart.legend.run {
+            isEnabled = false
+        }
+        */
+
+        price_chart.apply {
+            this.data = CandleData(priceDataSet)
+            invalidate()
+        }
+    }
+
+    fun initChart() {
+        price_chart.apply {
+            price_chart.description.isEnabled = false
+            price_chart.setMaxVisibleValueCount(200)
+            price_chart.setPinchZoom(false)
+            price_chart.setDrawGridBackground(false)
+            // x축 설정
+            price_chart.xAxis.apply {
+                textColor = Color.TRANSPARENT
+                position = XAxis.XAxisPosition.BOTTOM
+                // 세로선 표시 여부 설정
+                this.setDrawGridLines(true)
+                axisLineColor = Color.rgb(50, 59, 76)
+                gridColor = Color.rgb(50, 59, 76)
+            }
+            // 왼쪽 y축 설정
+            price_chart.axisLeft.apply {
+                textColor = Color.WHITE
+                isEnabled = false
+            }
+            // 오른쪽 y축 설정
+            price_chart.axisRight.apply {
+                setLabelCount(7, false)
+                textColor = Color.WHITE
+                // 가로선 표시 여부 설정
+                setDrawGridLines(true)
+                // 차트의 오른쪽 테두리 라인 설정
+                setDrawAxisLine(true)
+                axisLineColor = Color.rgb(50, 59, 76)
+                gridColor = Color.rgb(50, 59, 76)
+            }
+            price_chart.legend.isEnabled = false
+        }
+    }
+
+    /*
+    fun setCandleStickChart(){
+        // x values
+        //val entries = ArrayList<CandleEntry>()
+        val xvalue = ArrayList<String>()
+        xvalue.add("10:00 AM")
+        xvalue.add("11:00 AM")
+        xvalue.add("12:00 AM")
+        xvalue.add("3:00 PM")
+        xvalue.add("5:00 PM")
+        xvalue.add("8:00 PM")
+        xvalue.add("10:00 PM")
+        xvalue.add("12:00 PM")
+        // Y axis
+        val candlestickentry = ArrayList<CandleEntry>()
+
+        candlestickentry.add(CandleEntry(0f,225.0f,219.84f,224.94f,226.41f))
+        candlestickentry.add(CandleEntry(1f,228.0f,222.14f,223.00f,212.41f))
+        candlestickentry.add(CandleEntry(2f,226.84f,217.84f,222.9f,229.41f))
+        candlestickentry.add(CandleEntry(3f,222.0f,216.12f,214.14f,216.41f))
+        candlestickentry.add(CandleEntry(4f,226.56f,212.84f,224.33f,229.41f))
+        candlestickentry.add(CandleEntry(5f,221.12f,269.84f,228.14f,216.41f))
+        candlestickentry.add(CandleEntry(6f,220.96f,237.84f,224.94f,276.41f))
+
+        val candledataset = CandleDataSet(candlestickentry, "first")
+        candledataset.color = Color.rgb(80, 80, 80)
+        candledataset.shadowColor = Color.GREEN
+        candledataset.shadowWidth = 1f
+        candledataset.decreasingColor = Color.RED
+        candledataset.decreasingPaintStyle = Paint.Style.FILL
+
+        candledataset.increasingColor = Color.GREEN
+        candledataset.increasingPaintStyle = Paint.Style.FILL
+
+        val candledata = CandleData(xvalue, candledataset)
+        binding.priceChart.data = candledata
+        binding.priceChart.setBackgroundColor(Color.WHITE)
+        binding.priceChart.animateXY(3000,3000)
+
+        val xval = price_chart.xAxis
+        xval.position = XAxis.XAxisPosition.BOTTOM
+        xval.setDrawGridLines(false)
+
+    }*/
 
     private fun requestT8412()
     {
