@@ -51,10 +51,25 @@ class myDataset(Dataset):
         self.X = X
         self.y = y
 
-        # self.max_seq_size = -1        # for batch
-        # for q in self.X:
-        #     if self.max_seq_size < len(q):
-        #         self.max_seq_size = len(q)
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        X_output = self.X[idx]
+        y_output = self.y[idx]
+
+        return X_output, y_output
+
+
+class myDatasetSameSize(Dataset):
+    def __init__(self, X, y):
+        self.X = X
+        self.y = y
+
+        self.max_seq_size = -1        # for batch
+        for q in self.X:
+            if self.max_seq_size < len(q):
+                self.max_seq_size = len(q)
 
     def __len__(self):
         return len(self.X)
@@ -63,10 +78,10 @@ class myDataset(Dataset):
         X_output = self.X[idx]
         y_output = self.y[idx]
 
-        # add_size = self.max_seq_size - len(X_output)  # for batch
-        #
-        # X_output = torch.cat([X_output, torch.zeros(add_size, X_output.shape[-1])], dim=0)
-        # y_output = torch.cat([y_output, torch.zeros(add_size)], dim=0)
+        add_size = self.max_seq_size - len(X_output)  # for batch
+
+        X_output = torch.cat([X_output, torch.zeros(add_size, X_output.shape[-1])], dim=0)
+        y_output = torch.cat([y_output, torch.zeros(add_size)], dim=0)
 
         return X_output, y_output
 
@@ -75,10 +90,10 @@ if __name__ == "__main__":
     df = pd.read_excel(r"../dataset/stockData/car/기아/기아_s.xlsx")
     train_X, train_y, test_X, test_y = preprocess(df, get_test=True, train_bound_e=0, train_bound_s=0)
 
-    ds = myDataset(train_X, train_y)
+    ds = myDatasetSameSize(train_X, train_y)
 
     for i in range(ds.__len__()):
-        ds.__getitem__(i)
+        print(ds.__getitem__(i)[0].shape)
 
 # def scaling(df, target_col):
 #     X = df.drop(target_col, axis=1)
