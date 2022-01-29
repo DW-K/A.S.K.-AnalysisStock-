@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/guide_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="주식 가이드"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/guide_num1"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_margin="10dp"
+            android:background="#f1f9ff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/guide_1Q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Q. 주식투자가 무엇인가요?"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/guide_1A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="주식 종목에 본인이 자본을 넣어서 \n배당금이나 차익실현을 하는 것을 주식투자라고 합니다"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/guide_num2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#f1f9ff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/guide_2Q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Q. 가격이 비싼 주식이 좋은 건가요?"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/guide_2A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="단순히 한 주의 가격으로 주식을 비교할 수 없습니다.\n
+주식의 현재 가격에 총 주식 수를 곱하면\n 기업의 현재가치인 시가 총액이 나옵니다.\n
+이 시가 총액이 큰 기업이 높은 가치로 평가받는 기업입니다.
+"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/guide_num3"
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    android:layout_margin="10dp"
+                    android:background="#f1f9ff"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/guide_3Q"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Q. 주식거래는 언제 할 수 있나요?"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/guide_3A"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="국내 주식 정규 거래 시간은 평일 09:00 ~ 15:30까지입니다.\n휴일이나 국가가 지정한 휴장일 등엔 거래가 불가합니다."
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                     </LinearLayout>
+
+
+                 </LinearLayout>
+        <LinearLayout
+            android:id="@+id/guide_num4"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_margin="10dp"
+            android:background="#f1f9ff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/guide_4Q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Q. 모의주식거래를 위해 준비해야 할 것이 있나요?"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/guide_4A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="주식캠퍼스에서는 키움증권을 이용하여 모의투자를 진행하고 있습니다.\n 키움증권 계좌개설이 필요합니다."
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/guide_num5"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_margin="10dp"
+            android:background="#f1f9ff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/guide_5Q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Q. 모의주식은 어떻게 살 수 있나요?"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/guide_5A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="주식캠퍼스앱 내에서 구매하기 버튼을 부르면 주문할 수 있습니다.\n 희망가에 따라 주문을 할 수도, 바로 구매할 수도 있습니다."
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/guide_term"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_margin="10dp"
+                android:background="#EBF3FF"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/guide_term_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="주고수들의 은밀한 주식 용어"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+
+                    android:text="자세히보기" />
+
+
+
+        </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
