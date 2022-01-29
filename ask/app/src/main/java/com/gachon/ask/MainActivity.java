@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     // 5개의 fragment define
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private HomeFragment fragmentHome = new HomeFragment();
-    private ExploreFragment fragmentExplore = new ExploreFragment();
     private RankingFragment fragmentRanking = new RankingFragment();
     private CommunityFragment fragmentCommunity = new CommunityFragment();
     private MyPageFragment fragmentMyPage = new MyPageFragment();
@@ -44,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 case R.id.homeItem:
                     transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
-                    break;
-                case R.id.exploreItem:
-                    transaction.replace(R.id.frameLayout, fragmentExplore).commitAllowingStateLoss();
                     break;
                 case R.id.rankItem:
                     transaction.replace(R.id.frameLayout, fragmentRanking).commitAllowingStateLoss();

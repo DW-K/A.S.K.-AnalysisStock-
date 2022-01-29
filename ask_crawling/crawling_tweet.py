@@ -10,16 +10,12 @@ import Path
 from Path import RESULT_PATH_TWEET
 from Path import writeToExcel
 from sentiment import sentiment
+import config
 
-twitter_consumer_key = "HO2ximfzQ99cNXP9KNVQG0wqU"
-twitter_consumer_secret = "S5bie299yxJBZJD9Ig74mMNtZ9muvJ42P1bz8eZxbZR6hnUhha"
-twitter_access_token = "1071250485078720512-mw9VzarzdCIF9rvZJ4ps95NqeFWTwZ"
-twitter_access_secret = "pSw8b7nfY5dT30H9nSrnuzJsSj2AHkB9qwGz3dmuQXOdq"
-
-twitter_api = twitter.Api(consumer_key=twitter_consumer_key,
-                          consumer_secret=twitter_consumer_secret,
-                          access_token_key=twitter_access_token,
-                          access_token_secret=twitter_access_secret)
+twitter_api = twitter.Api(consumer_key=config.twitter_consumer_key,
+                          consumer_secret=config.twitter_consumer_secret,
+                          access_token_key=config.twitter_access_token,
+                          access_token_secret=config.twitter_access_secret)
 
 http = 'http'
 encode_method = 'utf-8'

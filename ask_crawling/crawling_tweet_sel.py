@@ -3,6 +3,7 @@ import time
 import datetime as dt
 from selenium import webdriver
 from bs4 import BeautifulSoup
+import pandas as pd
 
 driver = webdriver.Chrome('./chromedriver.exe')  # 크롬 드라이버 위치 -> DeprecationWarning 무시하기
 driver.set_window_size(800, 900)  # 필요없는 부분의 최소화를 위한 작은 창 설정
@@ -13,7 +14,7 @@ totaltweets = []
 # 크롤 대상에 적용된 class style
 span_class_txt = "css-901oao css-16my406 r-poiln3"
 
-# 수집되면 제거할 기본 텍스트들
+# 제거할 트위터 기본 텍스트
 twitter_text = ["최신 소식을 놓치지 마세요", "트위터를 사용하면 가장 먼저 알게 됩니다.", "로그인", "가입하기",
                 "인기", "최신", "사용자", "사진", "동영상", "새 트윗 보기", "이 스레드 보기"]
 user_at = "@"
@@ -68,7 +69,8 @@ def crawler(soup, query):
     1. span_class_txt 에 해당하는 span.text 내용을 모두 크롤링
     2. 기본 전처리(트위터 기본 텍스트, 유저아이디 제외(continue)
     3. 원하는 검색어 텍스트는 bold 처리되어 하나의 element 취급되어 크롤링되므로 < 이전 + 키워드 + 이후 > 형식으로 맞춰주기
-    4. 그 외에는 totaltweets 에 해당 text 추가
+    4. 문장 첫 시작에 · 제거
+    5. 그 외에는 totaltweets 에 해당 text 추가
     '''
 
     #  1. span_class_txt 에 해당하는 span.text 내용을 모두 크롤링
@@ -79,39 +81,64 @@ def crawler(soup, query):
     for t in tweets:
         #  2. 기본 전처리(트위터 기본 텍스트, 유저아이디 제외(continue)
         if t.text in twitter_text:
-            print("***** 기본 텍스트입니다. continue를 진행합니다")
+            # print("***** 기본 텍스트입니다. continue를 진행합니다")
             continue
         elif t.text.startswith(user_at):
-            print("***** 유저 아이디입니다. continue를 진행합니다")
+            # print("***** 유저 아이디입니다. continue를 진행합니다")
             continue
 
         #  3. 원하는 검색어 텍스트는 bold 처리되어 하나의 element 취급되어 크롤링되므로 < 이전 + 키워드 + 이후 > 형식으로 맞춰주기
         elif is_query:
             # 키워드 + 이후
-            print("************ 이전 텍스트가 키워드입니다!")
+            # print("************ 이전 텍스트가 키워드입니다!")
             totaltweets[-1] = totaltweets[-1] + t.text
             is_query = False
         elif t.text == query:
             # 이전 + 키워드
-            print("************ 현재 텍스트가 키워드입니다! ************")
+            # print("************ 현재 텍스트가 키워드입니다! ************")
             totaltweets[-1] = totaltweets[-1] + t.text
             is_query = True
 
-        #  4. 그 외에는 totaltweets 에 해당 text 추가
+        #  4. 문장 첫 시작에 · 제거
+        elif t.text.startswith('·'):
+            # print("***** 현재 텍스트 시작이 · 입니다")
+            print(t.text)
+            continue
+
+
+        #  5. 그 외에는 totaltweets 에 해당 text 추가
         else:
             totaltweets.append(t.text)
         print(t.text)
 
 
+# 전처리
 def clear_contents(tweet_list, min_length):
-    # 뉴스 기사 임베딩 등 중복 제거
+
+    # 중복 제거(뉴스 기사 임베딩 등)
     tweet_list = list(dict.fromkeys(tweet_list))
 
     cleaned_list = []
     for i in tweet_list:
-        i = re.sub(r'\n', ' ', i)  # \n 제거
-        if len(i) > min_length:  # 최소 길이 이상만 cleaned_list 에 추가
-            cleaned_list.append(i)
+        # \n 제거
+        i = re.sub(r'\n', ' ', i)
+
+        # 최소 길이 미만 제거
+        if len(i) < min_length:
+            continue
+
+        # 한글이 한글자라도 없으면 제거
+        if not bool(re.search('[가-힣]', i)):
+            continue
+
+        # .kr, .com, http~ 제거
+        page_str = [".kr", ".com", "http"]
+        if any(s in i for s in page_str):
+            continue
+
+
+
+        cleaned_list.append(i)
 
     return cleaned_list
 
@@ -119,17 +146,18 @@ def clear_contents(tweet_list, min_length):
 # 메인함수
 def main():
     query = "현대차" # 검색어
-    startdate = dt.date(year=2022, month=1, day=4)  # 시작날짜
+    startdate = dt.date(year=2022, month=1, day=20)  # 시작날짜
     untildate = startdate + dt.timedelta(days=1)  # 시작날짜 + 1
-    enddate = dt.date(year=2022, month=1, day=6)  # 끝날짜
+    enddate = dt.date(year=2022, month=1, day=25)  # 끝날짜
     min_retweet_value = 1  # 최소 1 RT 이상의 글만
     min_text_length = 10  # 크롤링 된 element중 저장할 text의 최소 길이
 
+    # result type: list
     result = crawl_start(query, startdate, untildate, enddate, min_retweet_value, min_text_length)
 
-    import pprint
-    print("============================= 결과 =============================")
-    pprint.pprint(result)
+    df_result = pd.DataFrame({"내용":result})
+    print(df_result)
+    # df_result.to_excel('tweet_df_result.xlsx')
 
 
 if __name__ == "__main__":

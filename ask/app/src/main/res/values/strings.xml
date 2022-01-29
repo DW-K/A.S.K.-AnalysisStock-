@@ -11,10 +11,20 @@
     <string name="category_univ">대학별 게시판</string>
 
 
+
     <string name="no_post">작성된 글이 없습니다.</string>
     <string name="comment">댓글</string>
     <string name="leave_comment">댓글을 남겨보세요.</string>
     <string name="btn_comment">등록</string>
+
+
+
+    <string name="sentiment_report">감성분석 리포트</string>
+    <string name="main_sentiment">대표 감성</string>
+    <string name="hot_keyword">주요 키워드</string>
+    <string name="show_url">원문보기</string>
+    <string name="show_graph">긍부정 추이</string>
+
 
     <string name="sentiment_analysis_info">키워드에 대한
         뉴스/SNS의

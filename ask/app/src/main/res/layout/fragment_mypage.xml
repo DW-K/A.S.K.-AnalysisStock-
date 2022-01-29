@@ -8,11 +8,9 @@
     tools:context=".MyPageFragment">
 
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -21,241 +19,298 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             android:text="@string/mypage"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
 
-
-        <View
-            android:id="@+id/view_mypage_user"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="48dp"
             android:background="#cedeff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
 
-        </View>
-
-
-        <TextView
-            android:id="@+id/username_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.089"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
-
-        <TextView
-            android:id="@+id/userlevel_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="Lv. 3"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.089"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
-
-        <TextView
-            android:id="@+id/mypage_user_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="안녕하세요"
-            app:layout_constraintEnd_toEndOf="@+id/mypage_user_background_image"
-            app:layout_constraintHorizontal_bias="0.092"
-            app:layout_constraintStart_toStartOf="@+id/mypage_user_background_image"
-            app:layout_constraintTop_toBottomOf="@+id/username_title" />
-
-        <View
-            android:id="@+id/mypage_user_background_image"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="11dp"
-            android:background="#ffffff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_title"></View>
-
-
-        <LinearLayout
-            android:id="@+id/mypage_recent_achivement"
-            android:layout_width="325dp"
-            android:layout_height="268dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="30dp"
-
-            android:layout_marginRight="30dp"
-            android:background="#f1f9ff"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_mypage_user">>
-
-            <TextView
-                android:id="@+id/recent_achievements_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="최근 업적"
+            <View
+                android:id="@+id/mypage_user_background_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="#ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <ImageView
+                android:id="@+id/mypage_user_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/user_image_default"
+                app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/username_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.089"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+
+
+            <TextView
+                android:id="@+id/mypage_user_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="안녕하세요"
+                app:layout_constraintEnd_toEndOf="@+id/mypage_user_background_image"
+                app:layout_constraintHorizontal_bias="0.092"
+                app:layout_constraintStart_toStartOf="@+id/mypage_user_background_image"
+                app:layout_constraintTop_toBottomOf="@+id/username_title" />
+
+
+            <TextView
+                android:id="@+id/userlevel_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="Lv. 3"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.089"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userlevel_text"
+                app:layout_constraintTop_toBottomOf="@+id/userlevel_text" />
+
+            <TextView
+                android:id="@+id/level_exp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29%"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                app:layout_constraintHorizontal_bias="0.356"
+                app:layout_constraintStart_toStartOf="@+id/progressBar" />
+
+            <Button
+                android:id="@+id/btn_editProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/edit_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.883"
+                app:layout_constraintStart_toEndOf="@+id/username_title"
+                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+
             <LinearLayout
+                android:id="@+id/mypage_recent_achivement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/mypage_recent_achivement"
-                app:layout_constraintStart_toStartOf="@+id/mypage_recent_achivement"
-                app:layout_constraintTop_toTopOf="@+id/mypage_recent_achivement">
+                android:background="#f1f9ff"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_margin="10dp"
+                <TextView
+                    android:id="@+id/recent_achievements_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:text="최근 업적"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-                    <TextView
-                        android:id="@+id/achievement_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:text="월간 출석왕" />
-
-                    <TextView
-                        android:id="@+id/achievement_explanation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="한달 간 매일 출석" />
-
-                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
                     android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:id="@+id/achievement_acquisition_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:text="2021.09.27" />
+                    android:background="@color/white"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_margin="10dp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/acquisition_rate_title"
+
+                        <TextView
+                            android:id="@+id/achievement_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="월간 출석왕"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/achievement_explanation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="한달 간 매일 출석" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="획득비율:" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/acquisition_rate_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="51%" />
+
+                        <TextView
+                            android:id="@+id/achievement_acquisition_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2021.09.27"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/acquisition_rate_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="획득비율:" />
+
+                            <TextView
+                                android:id="@+id/acquisition_rate_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="51%" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/mypage_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_margin="10dp"
+                android:background="#f1f9ff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mypage_quiz_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="경제 시사 퀴즈"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mypage_quiz_explanation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="퀴즈 풀고 보상 얻어가세요!"
+                    android:textSize="10dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="주식시장에서 'Wag the Dog'은 어떤 상황을 가리킬 때 사용되는가?"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
 
                 </LinearLayout>
 
 
             </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/stock_guide"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_margin="10dp"
+                android:background="#f1f9ff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/stock_guide_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="주식 가이드"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/mypage_user_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/user_image_default" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view_mypage_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/userlevel_text" />
-
-        <TextView
-            android:id="@+id/level_exp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="29%"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintEnd_toEndOf="@+id/progressBar"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="@+id/progressBar" />
-
-        <Button
-            android:id="@+id/btn_editProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/edit_profile"
-            app:layout_constraintEnd_toEndOf="@+id/view_mypage_user"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toEndOf="@+id/username_title"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+    </LinearLayout>
 </ScrollView>
