@@ -58,13 +58,15 @@ if __name__ == "__main__":
     # newsCrawlingByKeyword()
     # twitterCrawlingByKeyword()
 
-    date_count = 300
-    for i in range(0, date_count, 1):
-        print(f'{i}/{date_count}')
-        target_date_format = now - timedelta(days=i) - timedelta(days=360)
-        target_date = target_date_format.strftime(dateFormat)
-        # print(target_date)
-        newsCrawlingByKeyword(target_date)
+    # date_count = 300
+    # for i in range(0, date_count, 1):
+    #     print(f'{i}/{date_count}')
+    #     target_date_format = now - timedelta(days=i) - timedelta(days=360)
+    #     target_date = target_date_format.strftime(dateFormat)
+    #     # print(target_date)
+    #     newsCrawlingByKeyword(target_date)
+
+    print("hi")
 
     # date_count = 6
     # for i in range(0, date_count, 1):

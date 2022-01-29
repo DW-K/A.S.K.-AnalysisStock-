@@ -85,7 +85,13 @@
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="300dp" />
+
+    <com.github.mikephil.charting.charts.CandleStickChart
+        android:id="@+id/priceChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->

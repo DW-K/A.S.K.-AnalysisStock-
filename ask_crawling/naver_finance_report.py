@@ -40,7 +40,6 @@ def naver_finance_report(code, companyName):
     quarter = quarter_date
     quarter.to_excel(f'{companyName}_{code}_quarter.xlsx')
 
-
     financial_stmt.set_index(('주요재무정보', '주요재무정보', '주요재무정보'), inplace=True)
     financial_stmt.index.rename('주요재무정보', inplace=True)
     financial_stmt.columns = financial_stmt.columns.droplevel(2)

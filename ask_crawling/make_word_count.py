@@ -97,4 +97,4 @@ if __name__ == "__main__":
     #
     # sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
 
-    # make_word_count(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col
+    make_word_count(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
