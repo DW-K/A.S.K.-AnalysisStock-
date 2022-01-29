@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gachon.ask.base.BaseFragment;
+import com.gachon.ask.community.CommunityCategoryActivity;
 import com.gachon.ask.databinding.FragmentHomeBinding;
 import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.Firestore;
@@ -25,6 +26,7 @@ import com.gachon.ask.util.Util;
 import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.util.model.User;
 import com.gachon.ask.xingapi.MainView;
+import com.gachon.ask.StockActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,6 +73,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         return binding.getRoot();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -82,6 +85,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.setLayoutManager(layoutManager);
         getInfoData();
+
+        Button buttonStock = getView().findViewById(R.id.button_my_stock_temp);
+        buttonStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("HomeFragment", "Invest Button pressed.");
+                Intent intent = new Intent(getActivity(), StockActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     // 홈 화면 자산 표시
