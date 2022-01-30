@@ -12,6 +12,8 @@ ask_crawling/.idea/
 
 ask_crawling/test.py/
 
+ask_crawling/config.py
+
 Project_ASK/.idea/
 
 project_ask_32/.idea/
@@ -27,3 +29,5 @@ prac/
 .idea/
 
 .idea/workspace.xml
+
+

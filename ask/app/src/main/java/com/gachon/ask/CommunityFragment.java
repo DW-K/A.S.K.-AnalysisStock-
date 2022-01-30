@@ -16,13 +16,11 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_community, container, false);
 
-
         root.findViewById(R.id.btn_community_car).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_entertainment).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_it).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_electronics).setOnClickListener(onClickListener);
         root.findViewById(R.id.community_univ).setOnClickListener(onClickListener);
-
 
         return root;
     }
