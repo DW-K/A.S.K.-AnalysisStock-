@@ -86,7 +86,7 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
 
         /* 하단뷰 버튼 초기화 */
         val lstid = listOf<Triple<Int,String,Int>>(
-            Triple(R.id.navi_log,"로그인",R.color._WHITE),
+            Triple(R.id.navi_log,"로그인",R.drawable.ic_mock_login),
             subviewlst.get(0),
             subviewlst.get(1),
             subviewlst.get(2),
@@ -268,8 +268,13 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
 
             /* 로그인 화면 호출 */
             //manager.loginPopup(this@MainView, handler as Handler, "이베스트 투자증권", draw) // strTitle: 화면 상단에 띄워질 이름, draw: 화면 상단부에 출력될 이미지. null시 빈공간
-            var intent = Intent(this,sLoginSet::class.java)
+            //var intent = Intent(this,sLoginSet::class.java)
+            //startActivityForResult(intent,1);
+
+            // sLoginSet화면 생략하고 바로 sample 로그인으로 넘어가도록 수정
+            var intent = Intent(this,sLoginSample1::class.java)
             startActivityForResult(intent,1);
+
         }
         else{
             /* 로그아웃 */
@@ -294,6 +299,7 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
 
         if(loginstatus) {
             name.setText("로그아웃")
+            //Triple(R.id.navi_log,"로그아웃",R.drawable.ic_mock_logout)
             name.setTextColor(Color.rgb(210, 34, 34))
             img.setImageResource(R.drawable.ic_launcher_background)
             Toast.makeText(applicationContext, "로그인 완료", Toast.LENGTH_SHORT).show()
@@ -301,7 +307,7 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
         else{
             name.setText("로그인")
             name.setTextColor(Color.rgb(0,0,0))
-            img.setImageResource(R.color._WHITE)
+            img.setImageResource(R.drawable.ic_mock_login)
         }
         m_bLoginStatus = loginstatus
     }

@@ -44,15 +44,15 @@
             tools:ignore="Instantiatable" />
 
         <activity android:name="com.gachon.ask.xingapi.MainView"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/Theme.AskStock"></activity>
         <activity android:name="com.gachon.ask.xingapi.WebViewActivity"
-            android:theme="@style/AppTheme"> </activity>
+            android:theme="@style/Theme.AskStock"> </activity>
         <activity android:name="com.gachon.ask.xingapi.sLoginSet"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/Theme.AskStock"></activity>
         <activity android:name="com.gachon.ask.xingapi.sLoginSample1"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/Theme.AskStockLogin"></activity>
         <activity android:name="com.gachon.ask.xingapi.sLoginSample2"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/Theme.AskStock"></activity>
 
     </application>
 

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:id="@+id/textView37"
         android:layout_width="match_parent"
@@ -20,7 +19,7 @@
         android:background="@drawable/edittext"
         android:gravity="center|center_vertical"
         android:singleLine="false"
-        android:text="샘플앱용 API 로그인"
+        android:text="LOGIN"
         android:textSize="80px" />
 
     <View
@@ -47,7 +46,7 @@
 
             android:background="@color/white"
             android:gravity="center"
-            android:hint="아이디를 입력하세요."
+            android:hint="Please write your ID"
             android:inputType="textPersonName"
 
             android:paddingLeft="20px"
@@ -61,7 +60,7 @@
             android:background="@color/white"
 
             android:gravity="center"
-            android:hint="접속비밀번호를 입력하세요."
+            android:hint="Enter your password"
             android:inputType="textPassword"
             android:paddingLeft="20px"
 
@@ -88,7 +87,7 @@
         android:background="#FFEB3B"
         android:gravity="center"
         android:onClick="OnButtonLoginClicked"
-        android:text="로  그  인"
+        android:text="SIGN IN"
         android:textColor="#000000"
         android:textSize="60px" />
 
