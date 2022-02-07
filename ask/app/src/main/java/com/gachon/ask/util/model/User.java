@@ -2,6 +2,8 @@ package com.gachon.ask.util.model;
 
 import com.google.firebase.Timestamp;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 public class User {

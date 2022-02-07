@@ -49,7 +49,7 @@
 
     <string name="mypage">마이페이지</string>
     <string name="edit_profile">프로필 수정</string>
-    <string name="Lv.">Lv.</string>
+    <string name="level">Lv.</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

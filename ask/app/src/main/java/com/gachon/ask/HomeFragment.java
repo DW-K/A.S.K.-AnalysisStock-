@@ -48,6 +48,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     private SwipeRefreshLayout swipeBoard = null;
     private DocumentSnapshot last;
+    User level_user;
 
 
     @Override
@@ -97,6 +98,17 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         });
 
 
+        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
+        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LevelSystem lvlSystem = new LevelSystem();
+                lvlSystem.addExp(level_user, 30);
+                startToast("경험치를 30 추가했습니다. mypage에서 확인.");
+            }
+        });
+
+
     }
 
     // 홈 화면 자산 표시
@@ -118,6 +130,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         });
     }
 
+
+
     private void setAdapter() {
         Log.d("BoardFragment", "Set Adapter Run");
         myStockList = new ArrayList<>();
@@ -126,6 +140,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     User user = task.getResult().toObject(User.class);
+                    level_user = user;
                     myStockList = user.getMyStock();
                     if(myStockList != null){
                         int sum_yield = 0;
@@ -189,5 +204,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     @Override
     public void onClick(View v, Stock myStockList) {
 
+    }
+
+    private void startToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

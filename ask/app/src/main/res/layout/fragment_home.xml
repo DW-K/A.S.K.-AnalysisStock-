@@ -97,9 +97,16 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_addExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:text="경험치 추가" />
+
+                    <Button
                         android:id="@+id/button_investment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="모의투자 시작하기" />
                 </LinearLayout>

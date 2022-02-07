@@ -55,6 +55,27 @@ public class Firestore {
         return getFirestoreInstance().collection("user").document(userId).update("myStock",userStock);
     }
 
+    /**
+     * 고유 userId값으로 유저의 level update
+     * @author Minha Roh
+     * @param userId
+     * @param userLevel
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserLevel(String userId, Integer userLevel){
+        return getFirestoreInstance().collection("user").document(userId).update("userLevel",userLevel);
+    }
+
+    /**
+     * 고유 userId값으로 유저의 exp update
+     * @author Minha Roh
+     * @param userId
+     * @param userExp
+     * @return Task<Void>
+     */
+    public static Task<Void> updateUserExp(String userId, Integer userExp){
+        return getFirestoreInstance().collection("user").document(userId).update("userExp",userExp);
+    }
 
     /**
      * 새로운 유저의 정보를 DB에 추가하도록 요청한다
