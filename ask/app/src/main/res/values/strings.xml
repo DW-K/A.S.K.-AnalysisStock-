@@ -37,12 +37,12 @@
 
 
     <string name="ranking">랭킹</string>
-    <string name="ranking_personal">개인</string>
+    <string name="ranking_level">레벨</string>
+    <string name="ranking_yield">수익률</string>
+    <string name="ranking_rank">순위</string>
+    <string name="ranking_change">변동</string>
+    <string name="ranking_name">이름</string>
     <string name="ranking_university">대학</string>
-    <string name="ranking_daily">일간</string>
-    <string name="ranking_weekly">주간</string>
-    <string name="ranking_monthly">월간</string>
-    <string name="ranking_total">전체</string>
 
 
     <string name="yes">예</string>

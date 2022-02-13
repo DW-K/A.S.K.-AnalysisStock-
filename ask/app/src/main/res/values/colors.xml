@@ -24,4 +24,7 @@
     <color name="_PINK">#F567BA</color>
     <color name="_WHITE">#FFFFFF</color>
     <color name="_BLACK">#000000</color>
+
+    <color name="red_up">#F55151</color>
+    <color name="blue_down">#4CA4FF</color>
 </resources>

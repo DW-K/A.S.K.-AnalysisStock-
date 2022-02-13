@@ -2,40 +2,71 @@ package com.gachon.ask;
 
 
 public class RankInfo {
-    private Integer userRank;
-    private Integer userLevel;
-    private String nickname;
-    private Integer userMoney;
+    private Integer uNewRank;
+    private Integer uLastRank;
+    private Integer uRankChange;
+    private Integer uLevel;
+    private String uNickname;
+    private Integer uYield;
 
 
-    public RankInfo(Integer userRank, Integer userLevel, String nickname, int userMoney){
-        this.userRank = userRank;
-        this.userLevel = userLevel;
-        this.nickname = nickname;
-        this.userMoney = userMoney;
+    public RankInfo(Integer uNewRank, Integer uLastRank, Integer uRankChange, Integer uLevel,
+                    String uNickname, int uYield) {
+        this.uNewRank = uNewRank;
+        this.uLastRank = uLastRank;
+        this.uRankChange = uRankChange;
+        this.uLevel = uLevel;
+        this.uNickname = uNickname;
+        this.uYield = uYield;
 
     }
 
+    public Integer getuNewRank() {
+        return uNewRank;
+    }
 
-    public String getNickname(){ return this.nickname;}
-    public void setNickname(String nickname){ this.nickname = nickname;}
-    public Integer getUserRank() {
-        return userRank;
+    public void setuNewRank(Integer uNewRank) {
+        this.uNewRank = uNewRank;
     }
-    public void setUserRank(Integer userRank) {
-        this.userRank = userRank;
+
+    public Integer getuLastRank() {
+        return uLastRank;
     }
-    public Integer getUserLevel() {
-        return userLevel;
+
+    public void setuLastRank(Integer uLastRank) {
+        this.uLastRank = uLastRank;
     }
-    public void setUserLevel(Integer userLevel) {
-        this.userLevel = userLevel;
+
+    public Integer getuRankChange() {
+        return uRankChange;
     }
-    public Integer getUserMoney() {
-        return userMoney;
+
+    public void setuRankChange(Integer uRankChange) {
+        this.uRankChange = uRankChange;
     }
-    public void setUserMoney(Integer userMoney) {
-        this.userMoney = userMoney;
+
+    public Integer getuLevel() {
+        return uLevel;
+    }
+
+    public void setuLevel(Integer uLevel) {
+        this.uLevel = uLevel;
+    }
+
+    public String getuNickname() {
+        return uNickname;
+    }
+
+    public void setuNickname(String uNickname) {
+        this.uNickname = uNickname;
+    }
+
+    public Integer getuYield() {
+        return uYield;
+    }
+
+    public void setuYield(Integer uYield) {
+        this.uYield = uYield;
     }
 
 
