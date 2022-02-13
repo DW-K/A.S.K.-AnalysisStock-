@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.gachon.ask.settings.SettingActivity;
 import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.User;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class MyPageFragment extends Fragment {
     private User user;
     private TextView tv_nickname, tv_level, tv_level_exp;
+    private Button btn_editProfile;
     private ProgressBar expBar;
     int level;
 
@@ -33,6 +35,16 @@ public class MyPageFragment extends Fragment {
         tv_nickname = view.findViewById(R.id.username_title);
         tv_level = view.findViewById(R.id.userlevel_text);
         setUserData();
+
+        btn_editProfile = view.findViewById(R.id.btn_editProfile);
+        btn_editProfile.setOnClickListener(new View.OnClickListener() { // 설정 화면(SettingActivity)으로 이동
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

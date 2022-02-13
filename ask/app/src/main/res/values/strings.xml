@@ -12,12 +12,10 @@
     <string name="category_univ">대학별 게시판</string>
 
 
-
     <string name="no_post">작성된 글이 없습니다.</string>
     <string name="comment">댓글</string>
     <string name="leave_comment">댓글을 남겨보세요.</string>
     <string name="btn_comment">등록</string>
-
 
 
     <string name="sentiment_report">감성분석 리포트</string>
@@ -47,10 +45,20 @@
     <string name="ranking_total">전체</string>
 
 
-
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
     <string name="mypage">마이페이지</string>
-    <string name="edit_profile">프로필 수정</string>
+    <string name="edit_profile">설정</string>
+    <string name="mypage_edit_profile">설정</string>
     <string name="level">Lv.</string>
+    <string name="setting_info">정보</string>
+    <string name="setting_changeinfo_nickname">닉네임 변경</string>
+    <string name="setting_changeinfo_summary_nickname"></string>
+    <string name="setting_changeinfo_msg">변경할 닉네임을 입력해주세요.</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="change_nickname_success">닉네임 변경이 완료되었습니다.</string>
+    <string name="change_nickname_error">닉네임 변경에 실패하였습니다. 잠시 후 다시 시도해주세요.</string>
+    <string name="setting_logout_msg">정말로 로그아웃하시겠습니까? 다시 이용하시려면 로그인 하셔야 합니다.\n로그아웃 후 로그인 화면으로 돌아갑니다.</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -67,4 +75,6 @@
     <string name="button4">Close Server</string>
     <string name="button5">View my info</string>
     <string name="button6">Send Message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

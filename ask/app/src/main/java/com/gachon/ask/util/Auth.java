@@ -1,8 +1,11 @@
 package com.gachon.ask.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.UnicodeSetIterator;
 
+import com.gachon.ask.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,7 +32,7 @@ public class Auth {
      * Google Sign-In Client 객체를 얻어온다
      * @param context Context
      * @return GoogleSignInClient
-     * @author Minjae Seon
+     * @author Taehyun Park
      */
     public static GoogleSignInClient getGoogleSignInClient(Context context) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,6 +41,33 @@ public class Auth {
                 .build();
 
         return GoogleSignIn.getClient(context, gso);
+    }
+
+    /**
+     * 로그아웃 처리 후 LoginActivity로 이동
+     *
+     * @param activity 로그아웃을 하는 Activity
+     * @author Taehyun Park
+     */
+    public static void signOut(Activity activity) {
+        if (getCurrentUser() != null) {
+            getFirebaseAuthInstance().signOut();
+            getGoogleSignInClient(activity).signOut();
+        }
+
+        moveToLogin(activity);
+    }
+
+    /**
+     * 모든 이전 작업들을 지우고 LoginActivity로 이동
+     *
+     * @param activity 작업하는 Activity
+     */
+    public static void moveToLogin(Activity activity) {
+        Intent loginIntent = new Intent(activity, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        activity.startActivity(loginIntent);
+        activity.finishAndRemoveTask();
     }
 
 }
