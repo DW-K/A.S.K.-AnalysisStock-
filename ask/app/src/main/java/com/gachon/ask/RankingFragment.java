@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.gachon.ask.util.Firestore;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -105,11 +106,12 @@ public class RankingFragment extends Fragment {
         showData(adapter, current_category);
     }
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     private void showData(RankingAdapter adapter, String category) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("user")
-                .orderBy(category, Query.Direction.DESCENDING) // show from the recent posts
+                .orderBy(category, Query.Direction.DESCENDING) // 선택한 카테고리(수익률, 변동)에 맞게 내림차순
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -120,6 +122,7 @@ public class RankingFragment extends Fragment {
                         for (DocumentSnapshot doc : task.getResult()) {
                             position += 1;
                             try {
+                                String uid = doc.getString("uid");
                                 Integer uLastRank = doc.getLong("userLastRank").intValue();
                                 Integer uLevel = doc.getLong("userLevel").intValue();
                                 String uNickname = doc.getString("userNickName");
@@ -128,13 +131,14 @@ public class RankingFragment extends Fragment {
                                 int uNewRank = position;
                                 int uRankChange = uLastRank - uNewRank;
 
-//                                updateUserRank(uNewRank, uRankChange);
-
                                 user = FirebaseAuth.getInstance().getCurrentUser();
                                 adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname, uYield));
 
                                 //set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);
+
+                                // 파이어스토어에 rank 업데이트
+                                updateUserRank(uid, uNewRank, uRankChange);
                             } catch (NullPointerException e) {
                                 e.printStackTrace();
                             }
@@ -143,13 +147,12 @@ public class RankingFragment extends Fragment {
             }
         });
     }
-    public void updateUserRank(int userRank, int userRankChange){
-        // userLastRank, userRank, userChange 업데이트 작성
+    public void updateUserRank(String uid, int userRank, int userRankChange){
         int userLastRank = userRank; // lastRank를 현재의 새로운 rank로 변경
 
-        // document user.getUid 가 아님. 전체 document에서 각각 바꿔야함. 이부분 수정하기.
-        DocumentReference docRef = db.collection("user").document(user.getUid());
-
+        // 입력받은 uid의 데이터를 업데이트
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("user").document(uid);
         // userLastRank
         docRef
                 .update("userLastRank", userLastRank)
@@ -182,7 +185,7 @@ public class RankingFragment extends Fragment {
                     }
                 });
 
-        // userLastRank
+        // userRankChange
         docRef
                 .update("userRankChange", userRankChange)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
