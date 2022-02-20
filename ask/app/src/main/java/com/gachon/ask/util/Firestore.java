@@ -78,6 +78,18 @@ public class Firestore {
     }
 
     /**
+     * 자신의 프로필에서 닉네임을 update
+     * @author Taehyun Park
+     * @param userId
+     * @param nickName
+     * @return Task<Void>
+     */
+    public static Task<Void> updateProfileNickName(String userId, String nickName){
+        return getFirestoreInstance().collection("user").document(userId).update("userNickName",nickName);
+    }
+
+
+    /**
      * 새로운 유저의 정보를 DB에 추가하도록 요청한다
      * @author Taehyun Park
      * @param userId

@@ -1,32 +1,57 @@
 package com.gachon.ask;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.exifinterface.media.ExifInterface;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.gachon.ask.base.BaseActivity;
 import com.gachon.ask.databinding.ActivitySignupBinding;
 import com.gachon.ask.util.Auth;
+import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.Stock;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
 
+    private static final int PICK_FROM_ALBUM = 1;
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
+    private File tempFile;
 
     private EditText etNickname;
     private EditText etEmail;
@@ -34,6 +59,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
     private EditText etPassword_check;
     private Button btnSignup;
     private Button btnGoLogin;
+    private Button btnGallery;
 
     @Override
     protected ActivitySignupBinding getBinding() {
@@ -51,6 +77,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         etPassword_check = findViewById(R.id.et_password_check);
         btnSignup = findViewById(R.id.btn_signup);
         btnGoLogin = findViewById(R.id.btn_go_login);
+        btnGallery = findViewById(R.id.btn_gallery);
 
         // Initialize Firebase Auth
         mAuth = Auth.getFirebaseAuthInstance();
@@ -68,6 +95,15 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
                 startLoginActivity();
             }
         });
+
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAlbum();
+            }
+        });
+
+        tedPermission();
     }
 
     private void signUp(){
@@ -88,8 +124,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
                                     Log.d(TAG, "createUserWithEmail:success");
                                     // DB 생성 작업
                                     createNewUserDatabase(task.getResult().getUser(), nickname);
-                                    // 유저 닉네임 가져오는 테스트
-
+                                    // 프로필 이미지 업로드
+                                    uploadCloudStorage();
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -130,6 +166,77 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
                 });
     }
 
+    /**
+     * 회원가입 시 Cloud Storage에 이미지 업로드, FireStore Database에는 별도의 uri 업데이트 필요함!
+     * @author Taehyun Park
+     */
+    private void uploadCloudStorage(){
+        ImageView imageView = findViewById(R.id.imageView_signup);
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        if(imageView.getDrawable() == null){
+            // 이미지를 올리지 않을 경우
+            startToast("이미지를 선택하지 않으셨습니다!");
+        }else{
+            Bitmap bitmap = ((GlideBitmapDrawable) imageView.getDrawable()).getBitmap();
+            CloudStorage.uploadProfileImg(Auth.getCurrentUser().getUid(),bitmap).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        startToast("프로필 이미지 업로드에 성공하였습니다.");
+                    }else{
+                        startToast("프로필 이미지 업로드에 실패하였습니다.");
+                    }
+                }
+            });
+        }
+    }
+
+    // 회원가입 시 프로필 사진 관련 interaction
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM) { // 갤러리를 호출한다면
+
+            Uri photoUri = data.getData();
+
+            Cursor cursor = null;
+
+            try {
+
+                /*
+                 *  Uri 스키마를
+                 *  content:/// 에서 file:/// 로  변경한다.
+                 */
+                String[] proj = {MediaStore.Images.Media.DATA};
+
+                assert photoUri != null;
+                cursor = getContentResolver().query(photoUri, proj, null, null, null);
+
+                assert cursor != null;
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+                cursor.moveToFirst();
+
+                tempFile = new File(cursor.getString(column_index));
+
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+
+            try {
+                setImage();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
     private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -138,5 +245,57 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         startActivity(intent);
     }
 
+    // 이미지 선택하면 회원가입 프로필 이미지 뷰에 보여주는 함수
+    private void setImage() throws Exception {
+        ImageView imageView = findViewById(R.id.imageView_signup);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
+
+        // Uri uri = getImageUri(this,originalBm);
+        // String imagePath = uri.getPath();
+
+        // Glide 라이브러리를 통해 이미지 회전 문제 해결
+        Glide.with(getApplicationContext())
+                .load(tempFile.getAbsolutePath())
+                .into(imageView);
+    }
+
+    // 갤러리 접근 권한 요청 함수
+    private void tedPermission() {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                // 권한 요청 성공
+
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                // 권한 요청 실패
+            }
+        };
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage(getResources().getString(R.string.permission_2))
+                .setDeniedMessage(getResources().getString(R.string.permission_1))
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .check();
+    }
+
+    private void goToAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_FROM_ALBUM);
+    }
+
+    // 비트맵->Uri 추출 함수
+    private Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
 }
