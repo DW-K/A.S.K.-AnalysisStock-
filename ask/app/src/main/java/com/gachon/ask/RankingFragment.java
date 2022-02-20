@@ -41,7 +41,7 @@ public class RankingFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseUser user;
     int item_count;
-    String selected_rank_category = "userLevel"; //기본 카테고리 userLevel -> 추후 ProfitRate로 수정하기
+    String selected_rank_category = "profitRate";
 
     @Nullable
     @Override
@@ -57,24 +57,27 @@ public class RankingFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        // 버튼 클릭 이벤트 작성
-        View.OnClickListener onClickListener = v -> {
-            switch (v.getId()) {
-                case R.id.btn_ranking_yield:
-                    selected_rank_category = "profitRate";
-                    break;
-                case R.id.btn_ranking_level:
-                    selected_rank_category = "userLevel";
-                    break;
-                case R.id.btn_ranking_university: // 추후 수정
-                    selected_rank_category = "userLevel";
-                    break;
-            }
-            refresh(selected_rank_category);
-        };
-
+        view.findViewById(R.id.btn_ranking_yield).setOnClickListener(onClickListener);
+        view.findViewById(R.id.btn_ranking_level).setOnClickListener(onClickListener);
+        view.findViewById(R.id.btn_ranking_university).setOnClickListener(onClickListener);
         return view;
     }
+
+    // 버튼 클릭 이벤트 작성
+    View.OnClickListener onClickListener = v -> {
+        switch (v.getId()) {
+            case R.id.btn_ranking_yield:
+                selected_rank_category = "profitRate";
+                break;
+            case R.id.btn_ranking_level:
+                selected_rank_category = "userLevel";
+                break;
+            case R.id.btn_ranking_university: // 추후 수정
+                selected_rank_category = "userLevel";
+                break;
+        }
+        refresh(selected_rank_category);
+    };
 
 
     @Override
@@ -95,7 +98,6 @@ public class RankingFragment extends Fragment {
     public void onResume() {
         super.onResume();
         refresh(selected_rank_category);
-
     }
 
     public void refresh(String current_category) {
