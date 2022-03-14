@@ -148,6 +148,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
                             sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());
                         }
                         binding.totalProfitValue.setText(sum_yield+"%");
+                        /* 총 수익률 업데이트 */
+                        Firestore.updateProfitRate(Auth.getCurrentUser().getUid(), sum_yield).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                }else{
+                                    Toast.makeText(getContext(),"총 수익률 업데이트 실패", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
                     else{
                         Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();

@@ -45,6 +45,17 @@ public class Firestore {
     }
 
     /**
+     * 유저의 총 수익률 update
+     * @author Taehyun Park
+     * @param userId
+     * @param profitRate
+     * @return Task<Void>
+     */
+    public static Task<Void> updateProfitRate(String userId, Integer profitRate){
+        return getFirestoreInstance().collection("user").document(userId).update("profitRate",profitRate);
+    }
+
+    /**
      * 고유 userId값으로 유저의 보유 주식을 update
      * @author Taehyun Park
      * @param userId
