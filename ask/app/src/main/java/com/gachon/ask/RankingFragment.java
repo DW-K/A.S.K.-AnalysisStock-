@@ -3,6 +3,8 @@ package com.gachon.ask;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.gachon.ask.util.Auth;
+import com.gachon.ask.util.CloudStorage;
+import com.gachon.ask.util.Firestore;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -119,11 +125,13 @@ public class RankingFragment extends Fragment {
                         //show data
                         for (DocumentSnapshot doc : task.getResult()) {
                             position += 1;
+                            System.out.print("position : "+position);
                             try {
                                 Integer uLastRank = doc.getLong("userLastRank").intValue();
                                 Integer uLevel = doc.getLong("userLevel").intValue();
                                 String uNickname = doc.getString("userNickName");
                                 Integer uYield = doc.getLong("profitRate").intValue();
+                                String uProfileImg = doc.getString("userProfileImgURL");
 
                                 int uNewRank = position;
                                 int uRankChange = uLastRank - uNewRank;
@@ -131,7 +139,7 @@ public class RankingFragment extends Fragment {
 //                                updateUserRank(uNewRank, uRankChange);
 
                                 user = FirebaseAuth.getInstance().getCurrentUser();
-                                adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname, uYield));
+                                adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname, uProfileImg, uYield));
 
                                 //set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);

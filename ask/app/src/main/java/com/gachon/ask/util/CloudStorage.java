@@ -1,7 +1,11 @@
 package com.gachon.ask.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.media.Image;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -40,5 +44,15 @@ public class CloudStorage {
         byte[] data = byteArrayOutputStream.toByteArray();
 
         return userProfileRef.putBytes(data);
+    }
+
+    /**
+     * URL을 통해 이미지를 불러온다
+     * @param URL 이미지 URL
+     * @return Task<byte[]></byte[]>
+     */
+    public static Task<byte[]> getImageFromURL(String URL) {
+        StorageReference profileReference = getStorageInstance().getReferenceFromUrl(URL);
+        return profileReference.getBytes(1500000);
     }
 }

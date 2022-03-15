@@ -7,16 +7,17 @@ public class RankInfo {
     private Integer uRankChange;
     private Integer uLevel;
     private String uNickname;
+    private String uProfileImgURL;
     private Integer uYield;
 
-
     public RankInfo(Integer uNewRank, Integer uLastRank, Integer uRankChange, Integer uLevel,
-                    String uNickname, int uYield) {
+                    String uNickname, String uProfileImgURL, int uYield) {
         this.uNewRank = uNewRank;
         this.uLastRank = uLastRank;
         this.uRankChange = uRankChange;
         this.uLevel = uLevel;
         this.uNickname = uNickname;
+        this.uProfileImgURL = uProfileImgURL;
         this.uYield = uYield;
 
     }
@@ -59,6 +60,14 @@ public class RankInfo {
 
     public void setuNickname(String uNickname) {
         this.uNickname = uNickname;
+    }
+
+    public String getuProfileImgURL() {
+        return uProfileImgURL;
+    }
+
+    public void setuProfileImgURL(String uProfileImgURL) {
+        this.uProfileImgURL = uProfileImgURL;
     }
 
     public Integer getuYield() {

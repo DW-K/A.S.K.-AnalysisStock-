@@ -4,7 +4,10 @@ import static java.security.AccessController.getContext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +19,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.gachon.ask.databinding.ItemHomeStockBinding;
+import com.gachon.ask.databinding.ItemRankingBinding;
+import com.gachon.ask.util.Auth;
+import com.gachon.ask.util.CloudStorage;
+import com.gachon.ask.util.Firestore;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.rpc.context.AttributeContext;
 
 import java.util.ArrayList;
@@ -50,8 +64,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         RankInfo item = items.get(position);
         viewHolder.setItem(item);
-
-
     }
 
     @Override
@@ -113,7 +125,18 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
             tv_level.setText(context.getResources().getString(R.string.level) + String.valueOf(item.getuLevel())); // 레벨 ex) Lv.3
             tv_yield.setText(String.valueOf(item.getuYield())); // 수익률 ex) 32 %
             tv_nickname.setText(String.valueOf(item.getuNickname())); // 유저닉네임 ex) 민하
-
+            //System.out.print("item.getuProfileImgURL() : "+item.getuProfileImgURL());
+            /*
+            CloudStorage.getImageFromURL(String.valueOf(item.getuProfileImgURL())).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                @Override
+                public void onComplete(@NonNull Task<byte[]> task) {
+                    if(task.isSuccessful()) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                        iv_profile.setImageBitmap(bitmap);
+                    }
+                }
+            });
+            */
 
 
         }

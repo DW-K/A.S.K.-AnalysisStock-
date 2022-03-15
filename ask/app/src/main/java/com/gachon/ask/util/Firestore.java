@@ -99,6 +99,17 @@ public class Firestore {
         return getFirestoreInstance().collection("user").document(userId).update("userNickName",nickName);
     }
 
+    /**
+     * 자신의 프로필에서 사진을 수정한다.
+     * @author Taehyun Park
+     * @param userId
+     * @param userProfileImgURL
+     * @return Task<Void>
+     */
+    public static Task<Void> updateProfileImage(String userId, String userProfileImgURL){
+        return getFirestoreInstance().collection("user").document(userId).update("userProfileImgURL",userProfileImgURL);
+    }
+
 
     /**
      * 새로운 유저의 정보를 DB에 추가하도록 요청한다
@@ -121,7 +132,7 @@ public class Firestore {
      */
     public static Task<Void> writeNewUser(String userId, String userEmail, String userNickName, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum,
                                           int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
-        User newUser = new User(userId, userEmail, userNickName, new Timestamp(new Date()), userLevel, userExp, userMoney, userRank, postAnalysisNum, postQuestionNum, postAnswerNum, profitRate, myStock, myStockReport, challenges);
+        User newUser = new User(userId, null, userEmail, userNickName, new Timestamp(new Date()), userLevel, userExp, userMoney, userRank, postAnalysisNum, postQuestionNum, postAnswerNum, profitRate, myStock, myStockReport, challenges);
         return getFirestoreInstance().collection("user").document(userId).set(newUser);
     }
 

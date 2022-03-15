@@ -29,6 +29,7 @@ import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.Stock;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +37,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
@@ -182,15 +184,50 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
             Bitmap bitmap = ((GlideBitmapDrawable) imageView.getDrawable()).getBitmap();
             CloudStorage.uploadProfileImg(Auth.getCurrentUser().getUid(),bitmap).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onComplete(Task<UploadTask.TaskSnapshot> task) {
-                    if(task.isSuccessful()){
+                public void onComplete(Task<UploadTask.TaskSnapshot> task1) {
+                    if (task1.isSuccessful()) {
                         startToast("프로필 이미지 업로드에 성공하였습니다.");
-                    }else{
+                        setProfileImage(); // firebase user collection의 이미지 URL필드 업데이트
+                    } else {
                         startToast("프로필 이미지 업로드에 실패하였습니다.");
                     }
                 }
             });
         }
+    }
+
+    private void setProfileImage(){
+        Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+                User user = task2.getResult().toObject(User.class);
+                if(user != null) {
+                    CloudStorage.profileRef.child(Auth.getCurrentUser().getUid() + "/profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task3) {
+                            if(task3.isSuccessful()){
+                                Firestore.updateProfileImage(Auth.getCurrentUser().getUid(),task3.getResult().toString()).addOnCompleteListener(documentTask ->{
+                                    // 성공했다면
+                                    if(documentTask.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), R.string.change_image_success, Toast.LENGTH_LONG).show();
+                                    }
+                                    // 실패했다면
+                                    else {
+                                        // 에러 토스트
+                                        Toast.makeText(getApplicationContext(), R.string.change_image_error, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }else{
+                                // 에러 토스트
+                                Toast.makeText(getApplicationContext(), R.string.change_image_error, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }else {
+                    Log.d(this.getClass().getSimpleName(), "Profile Image NULL");
+                }
+            }
+        });
     }
 
     // 회원가입 시 프로필 사진 관련 interaction
