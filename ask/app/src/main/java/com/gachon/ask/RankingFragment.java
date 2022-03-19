@@ -33,8 +33,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class RankingFragment extends Fragment {
@@ -131,19 +129,12 @@ public class RankingFragment extends Fragment {
                                 Integer uLevel = doc.getLong("userLevel").intValue();
                                 String uNickname = doc.getString("userNickName");
                                 Integer uYield = doc.getLong("profitRate").intValue();
-                                HashMap uRanks = (HashMap) doc.getData().get("ranks");
-                                System.out.println("RankInfo에 전달하기 전 uRanks: "+uRanks);
-
-//                                Integer lastLevelRank = (Integer) uRanks.get("lastLevelRank");
-//                                Integer lastProfitRank = (Integer) uRanks.get("lastProfitRank");
-//                                Integer levelRankChange = (Integer) uRanks.get("levelRankChange");
-//                                Integer profitRankChange = (Integer) uRanks.get("profitRankChange");
 
                                 int uNewRank = position;
                                 int uRankChange = uLastRank - uNewRank;
 
                                 user = FirebaseAuth.getInstance().getCurrentUser();
-                                adapter.addItem(new RankInfo(category, uLevel, uNickname, uYield, uRanks));
+                                adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname, uYield));
 
                                 //set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);

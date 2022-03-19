@@ -25,7 +25,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.rpc.context.AttributeContext;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHolder> {
     ItemClickListener itemClickListener;
@@ -70,6 +69,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
             tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
             iv_change = itemView.findViewById(R.id.iv_change);
             iv_profile = itemView.findViewById(R.id.iv_profile);
@@ -90,27 +90,14 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
                     Toast.makeText(v.getContext() , "click한 위치의 item_pos: "+item_pos , Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
 
 
+
         public void setItem(RankInfo item) {
-            HashMap uRanks = item.getuRanks();
-            Integer lastLevelRank = Integer.parseInt(String.valueOf(uRanks.get("lastLevelRank")));
-            Integer lastProfitRank = Integer.parseInt(String.valueOf(uRanks.get("lastProfitRank")));
-            Integer levelRankChange = Integer.parseInt(String.valueOf(uRanks.get("levelRankChange")));
-            Integer profitRankChange= Integer.parseInt(String.valueOf(uRanks.get("profitRankChange")));
-
-            int rank=0, uRankChange=0;
-            String category = item.getCategory();
-            System.out.println("현재 선택한 카테고리: " + category);
-            if( category.equals("userLevel")){
-                rank = lastLevelRank;
-                uRankChange = levelRankChange - rank;
-            } else if(category.equals("profitRate")){
-                rank = lastProfitRank;
-                uRankChange = profitRankChange - rank;
-            }
-
+            int rank = item.getuNewRank();
+            int uRankChange = item.getuLastRank() - rank;
 
             // 순위 변동에 따라 화살표 그림 바꾸기
             int iv_rankChange_name;
@@ -128,7 +115,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
             tv_nickname.setText(String.valueOf(item.getuNickname())); // 유저닉네임 ex) 민하
 
 
-            System.out.println("파이어스토어 ranks입니다: username: " + String.valueOf(item.getuNickname()) + " getuRanks(): " + String.valueOf(item.getuRanks()));
 
         }
     }

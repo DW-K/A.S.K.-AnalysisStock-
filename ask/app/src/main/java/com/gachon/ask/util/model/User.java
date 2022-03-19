@@ -24,11 +24,10 @@ public class User {
     private ArrayList<Stock> myStock; // 보유 주식
     private ArrayList<StockReport> myStockReport; // 매매 기록
     private ArrayList<Integer> challenges;        // 달성한 업적
-    private ArrayList<Integer> ranks;        // 랭킹 정보
 
     public User(){ }
 
-    public User(String uid, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges, ArrayList<Integer> ranks) {
+    public User(String uid, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
         this.uid = uid;
         this.userEmail = userEmail;
         this.userNickName = userNickName;
@@ -44,7 +43,6 @@ public class User {
         this.myStock = myStock;
         this.myStockReport = myStockReport;
         this.challenges = challenges;
-        this.ranks = ranks;
     }
 
     public String getUid() {
