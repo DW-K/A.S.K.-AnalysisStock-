@@ -81,13 +81,13 @@
                 android:layout_margin="10dp"
                 android:text="@string/ranking" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="0.1"
-                android:layout_margin="10dp"
-                android:text="@string/ranking_change" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_weight="0.1"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:text="@string/ranking_change" />-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_weight="0.4"
+                android:layout_weight="0.1"
                 android:layout_margin="10dp"
                 android:text="@string/ranking_yield" />
 
