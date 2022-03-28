@@ -1,5 +1,6 @@
 package com.gachon.ask.xingapi
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.green
 import android.graphics.Paint
@@ -20,6 +21,7 @@ import com.gachon.ask.datamngr.API_DEFINE
 import java.util.*
 import kotlin.collections.ArrayList
 import com.gachon.ask.R;
+import com.gachon.ask.SentimentReportActivity
 import com.gachon.ask.databinding.ActivityS1002Binding
 import com.github.mikephil.charting.charts.CandleStickChart
 import com.github.mikephil.charting.components.XAxis
@@ -158,6 +160,15 @@ class s1002 : Fragment() {
         //m_gridView.InitTableGrid(7,grid_layout,null,null,null,null)
 
         //setCandleStickChart()
+
+        //감성분석리포트로 연결
+        val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
+        button_senti_analysis.setOnClickListener {
+            val intent = Intent(context, SentimentReportActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         root.findViewById<Button>(R.id.button).setOnClickListener {
             requestT1305()
