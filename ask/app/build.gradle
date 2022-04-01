@@ -93,7 +93,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     //implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation (name: 'INISAFE_Net_for_Android_JNI_SDK_v1.1.1', ext: 'aar')
-    implementation (name: 'XingAPI_And_v2.0.6', ext: 'aar')
+    implementation (name: 'XingAPI_And_v2.0.8', ext: 'aar')
     // MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
