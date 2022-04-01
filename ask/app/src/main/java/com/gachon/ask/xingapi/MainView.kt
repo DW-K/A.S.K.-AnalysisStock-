@@ -299,9 +299,9 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
 
         if(loginstatus) {
             name.setText("로그아웃")
-            //Triple(R.id.navi_log,"로그아웃",R.drawable.ic_mock_logout)
+            Triple(R.id.navi_log,"로그아웃",R.drawable.ic_mock_logout)
             name.setTextColor(Color.rgb(210, 34, 34))
-            img.setImageResource(R.drawable.ic_launcher_background)
+            img.setImageResource(R.drawable.ic_mock_logout)
             Toast.makeText(applicationContext, "로그인 완료", Toast.LENGTH_SHORT).show()
         }
         else{
