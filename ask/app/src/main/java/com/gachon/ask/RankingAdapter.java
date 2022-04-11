@@ -71,9 +71,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
 
 
             tv_rank = (TextView) itemView.findViewById(R.id.tv_rank);
-//            iv_change = itemView.findViewById(R.id.iv_change);
             iv_profile = itemView.findViewById(R.id.iv_profile);
-//            tv_rankChange = (TextView) itemView.findViewById(R.id.tv_change);
             tv_level = (TextView) itemView.findViewById(R.id.tv_level);
             tv_nickname = (TextView) itemView.findViewById(R.id.tv_nickname);
             tv_yield = (TextView) itemView.findViewById(R.id.tv_yield);
@@ -96,20 +94,9 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
 
 
         public void setItem(RankInfo item) {
-            int rank = item.getuNewRank();
-//            int uRankChange = item.getuLastRank() - rank;
-//
-//            // 순위 변동에 따라 화살표 그림 바꾸기
-//            int iv_rankChange_name;
-//            if(uRankChange > 0) iv_rankChange_name = R.drawable.outline_arrow_drop_up_24;
-//            else if(uRankChange < 0) iv_rankChange_name = R.drawable.outline_arrow_drop_down_24;
-//            else iv_rankChange_name = R.drawable.outline_remove_24;
-//
-//            iv_change.setImageResource(iv_rankChange_name);
-//
-//            uRankChange = Math.abs(uRankChange);
+            int rank = item.getuRank();
+
             tv_rank.setText(rank +" 위"); // 순위 ex) 1위
-//            tv_rankChange.setText(String.valueOf(uRankChange)); // 변동 ex) 4
             tv_level.setText(context.getResources().getString(R.string.level) + String.valueOf(item.getuLevel())); // 레벨 ex) Lv.3
             tv_yield.setText(String.valueOf(item.getuYield())); // 수익률 ex) 32 %
             tv_nickname.setText(String.valueOf(item.getuNickname())); // 유저닉네임 ex) 민하

@@ -125,22 +125,20 @@ public class RankingFragment extends Fragment {
                             position += 1;
                             try {
                                 String uid = doc.getString("uid");
-                                Integer uLastRank = doc.getLong("userLastRank").intValue();
                                 Integer uLevel = doc.getLong("userLevel").intValue();
                                 String uNickname = doc.getString("userNickName");
                                 Integer uYield = doc.getLong("profitRate").intValue();
 
-                                int uNewRank = position;
-                                int uRankChange = uLastRank - uNewRank;
+                                //position 기반으로 rank 재설정
+                                int uRank = position;
 
                                 user = FirebaseAuth.getInstance().getCurrentUser();
-                                adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname, uYield));
-
+                                adapter.addItem(new RankInfo(uRank, uLevel, uNickname, uYield));
                                 //set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);
 
                                 // 파이어스토어에 rank 업데이트
-                                updateUserRank(uid, uNewRank, uRankChange);
+                                updateUserRank(uid, uRank);
                             } catch (NullPointerException e) {
                                 e.printStackTrace();
                             }
@@ -149,27 +147,10 @@ public class RankingFragment extends Fragment {
             }
         });
     }
-    public void updateUserRank(String uid, int userRank, int userRankChange){
-        int userLastRank = userRank; // lastRank를 현재의 새로운 rank로 변경
-
+    public void updateUserRank(String uid, int userRank){
         // 입력받은 uid의 데이터를 업데이트
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("user").document(uid);
-        // userLastRank
-        docRef
-                .update("userLastRank", userLastRank)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + userLastRank);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating post id", e);
-                    }
-                });
 
         // userRank
         docRef
@@ -187,21 +168,6 @@ public class RankingFragment extends Fragment {
                     }
                 });
 
-        // userRankChange
-        docRef
-                .update("userRankChange", userRankChange)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + userRankChange);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating post id", e);
-                    }
-                });
 
     }
 
