@@ -48,7 +48,7 @@ import org.w3c.dom.Text;
 public class PostViewActivity extends AppCompatActivity {
     private static final String TAG = "PostViewActivity";
     private FirebaseUser user;
-    private String post_id;
+    private String post_id, publisher;
     FirebaseFirestore db;
     ImageView iv_heart, iv_comment;
     String nickname, comment, time;
@@ -246,11 +246,12 @@ public class PostViewActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 //                                profile_image = document.get("profile_image").toString();
                                 nickname = document.get("nickname").toString();
+                                publisher = document.get("publisher").toString();
                                 comment = document.get("content").toString();
                                 time = getTime((Timestamp) document.get("time"));
 
 //                                adapter.addItem(new CommentInfo(comment, nickname, post_id, profile_image, time));
-                                adapter.addItem(new CommentInfo(comment, nickname, post_id, time));
+                                adapter.addItem(new CommentInfo(comment, nickname, post_id, publisher, time));
                                 recyclerView.setAdapter(adapter);
                             }
                         } else {
@@ -262,7 +263,7 @@ public class PostViewActivity extends AppCompatActivity {
     /* 댓글 등록하기 */
     private void addComment() {
         String comment = et_comment.getText().toString();
-        String uid = user.getUid(); // 댓글 쓴 유저의 uid
+        String uid = user.getUid(); // 댓글 쓴 유저의 uid(현재 유저)
         Timestamp timestamp = new Timestamp(new Date()); // 댓글 등록한 시간
         String time = getTime(timestamp);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -281,11 +282,13 @@ public class PostViewActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String nickname = document.get("userNickName").toString();
+                                publisher = uid;
 //                                        profile_image = document.get("profileImage").toString();
                                 //Comment DB에 데이터 추가
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("content", comment);
                                 data.put("nickname", nickname);
+                                data.put("publisher", publisher);
                                 data.put("post_id", post_id);
 //                                        data.put("profile_image", profile_image);
                                 data.put("time", timestamp);
@@ -310,7 +313,7 @@ public class PostViewActivity extends AppCompatActivity {
 
                                 //어댑터에 값 전달
 //                                        adapter.addItem(new CommentInfo(comment, nickname, post_id, profile_image, time));
-                                adapter.addItem(new CommentInfo(comment, nickname, post_id, time));
+                                adapter.addItem(new CommentInfo(comment, nickname, post_id, publisher, time));
                                 recyclerView.setAdapter(adapter);
 
                             }

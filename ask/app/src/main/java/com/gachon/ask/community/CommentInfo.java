@@ -4,10 +4,11 @@ public class CommentInfo {
     String comment;
     String nickname;
     String post_id;
+    String publisher;
 //    String profile_image;
     String time;
 
-    public CommentInfo(String comment, String nickname, String post_id, String time) {
+    public CommentInfo(String comment, String nickname, String post_id, String publisher, String time) {
         this.comment = comment;
         this.nickname = nickname;
         this.post_id = post_id;
@@ -37,6 +38,14 @@ public class CommentInfo {
 
     public void setPost_id(String post_id) {
         this.post_id = post_id;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
 //    public String getProfile_image() {

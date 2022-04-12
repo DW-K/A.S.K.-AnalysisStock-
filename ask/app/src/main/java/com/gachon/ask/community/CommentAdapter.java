@@ -45,6 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         String post_id;
+        String publisher;
         TextView vContents;
         TextView vNickname;
         TextView vUploadTime;
@@ -60,6 +61,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public void setItem(CommentInfo item) {
             post_id = item.getPost_id();
+            publisher = item.getPublisher();
 //            profileImg = item.getProfile_image();
             vNickname.setText(item.getNickname());// 닉네임
             vContents.setText(item.getComment());//댓글 내용
