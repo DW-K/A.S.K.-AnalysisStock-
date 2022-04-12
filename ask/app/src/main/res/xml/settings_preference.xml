@@ -9,6 +9,11 @@
             />
 
         <Preference
+            android:key="change_info_image"
+            android:title="@string/setting_changeinfo_image"
+            android:summary="@string/setting_changeinfo_summary_image" />
+
+        <Preference
             android:key="log_out"
             android:title="@string/setting_logout"/>
 

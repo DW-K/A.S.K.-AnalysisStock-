@@ -1,5 +1,7 @@
 package com.gachon.ask.community;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.gachon.ask.R;
+import com.gachon.ask.util.CloudStorage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,26 +48,37 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         String post_id;
+        String publisher;
         TextView vContents;
         TextView vNickname;
         TextView vUploadTime;
-
+        ImageView iv_profile;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             vNickname = itemView.findViewById(R.id.nickname); // 닉네임
             vContents = (TextView) itemView.findViewById(R.id.comment); //댓글 내용
             vUploadTime = (TextView) itemView.findViewById(R.id.time);// 댓글 단 시간
-
+            iv_profile = itemView.findViewById(R.id.iv_profile);
         }
 
         public void setItem(CommentInfo item) {
             post_id = item.getPost_id();
+            publisher = item.getPublisher();
 //            profileImg = item.getProfile_image();
             vNickname.setText(item.getNickname());// 닉네임
             vContents.setText(item.getComment());//댓글 내용
             vUploadTime.setText(item.getTime());// 댓글 단 시간
 
+            CloudStorage.getImageFromURL(String.valueOf(item.getuProfileImgURL())).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                @Override
+                public void onComplete(@NonNull Task<byte[]> task) {
+                    if(task.isSuccessful()) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                        iv_profile.setImageBitmap(bitmap);
+                    }
+                }
+            });
 
 
         }

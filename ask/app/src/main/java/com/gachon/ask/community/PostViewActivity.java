@@ -1,6 +1,8 @@
 package com.gachon.ask.community;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachon.ask.WriteInfo;
+import com.gachon.ask.util.CloudStorage;
+import com.gachon.ask.util.Firestore;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,16 +53,18 @@ import org.w3c.dom.Text;
 public class PostViewActivity extends AppCompatActivity {
     private static final String TAG = "PostViewActivity";
     private FirebaseUser user;
-    private String post_id;
+    private User user_model;
+    private String post_id, publisher;
+    private String profileImgURL = null;
     FirebaseFirestore db;
     ImageView iv_heart, iv_comment;
-    String nickname, comment, time;
     int int_num_heart;
     int int_num_comment;
     Boolean heart_clicked = false;
     String sender_uid;
     EditText et_comment;
     Button btn_submit;
+    ImageView iv_profile;
     ArrayList userlist_heart;
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
@@ -104,6 +111,7 @@ public class PostViewActivity extends AppCompatActivity {
 
         iv_heart = findViewById(R.id.ic_heart);
         iv_comment = findViewById(R.id.ic_comment);
+        iv_profile = findViewById(R.id.iv_profile);
 
 
 
@@ -178,16 +186,12 @@ public class PostViewActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
 
-                        /* 프로필 이미지 코드 구상 */
-                        // postInfo 객체로 받아와서 퍼블리셔(uid)값 가져오고
-                        // 해당 uid value로 유저 컬렉션의 imgURL 값 가져온 다음, imageView에 보이기
-
                         user = FirebaseAuth.getInstance().getCurrentUser();
                         sender_uid = user.getUid(); // 알림을 보내는 사람의 uid
-
                         String txt_category = document.getData().get("category").toString();
                         String txt_nickname = document.getData().get("nickname").toString();
                         String txt_contents = document.getData().get("contents").toString();
+                        String txt_publisher = document.getData().get("publisher").toString();
                         Timestamp timestamp_createdAt = (Timestamp) document.getData().get("createdAt"); // get the timestamp
                         Date date_createdAt = timestamp_createdAt.toDate();// change timestamp as date format
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 HH시 mm분 ss초");
@@ -196,6 +200,33 @@ public class PostViewActivity extends AppCompatActivity {
                         int_num_comment = Integer.parseInt(String.valueOf(document.getData().get("num_comment")));
                         userlist_heart = (ArrayList<String>) document.get("userlist_heart");
                         int_num_heart = userlist_heart.size();
+
+                        /* 프로필 이미지 코드 구상 */
+                        // postInfo 객체로 받아와서 퍼블리셔(uid)값 가져오고
+                        // 해당 uid value로 유저 컬렉션의 imgURL 값 가져온 다음, imageView에 보이기
+                        Firestore.getUserData(txt_publisher).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    user_model = task.getResult().toObject(User.class);
+                                    if(user_model.getUserProfileImgURL() != null) {
+                                        profileImgURL = user_model.getUserProfileImgURL();
+                                        CloudStorage.getImageFromURL(profileImgURL).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<byte[]> task) {
+                                                if(task.isSuccessful()) {
+                                                    Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                                                    iv_profile.setImageBitmap(bitmap);
+                                                }
+                                            }
+                                        });
+                                    }else {
+                                        Log.d(TAG, "Profile Image NULL");
+                                    }
+                                }
+                            }
+                        });
+
 
                         post_nickname.setText(txt_nickname);
                         post_created_at.setText(txt_createdAt);
@@ -255,13 +286,22 @@ public class PostViewActivity extends AppCompatActivity {
                                 // 그리고 받아온 이미지 URL 값을 adapter 에다가 포함하여 전달
                                 // 이 때, PostInfo class에다가 url 메타 데이터 getter,setter 추가되어 있어야 함.
 
-                                nickname = document.get("nickname").toString();
-                                comment = document.get("content").toString();
-                                time = getTime((Timestamp) document.get("time"));
-
+                                String nickname = document.get("nickname").toString();
+                                publisher = document.get("publisher").toString();
+                                String comment = document.get("content").toString();
+                                String time = getTime((Timestamp) document.get("time"));
+                                Firestore.getUserData(publisher).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            user_model = task.getResult().toObject(User.class);
+                                            String profileImgURL = user_model.getUserProfileImgURL();
+                                            adapter.addItem(new CommentInfo(comment, nickname, post_id, publisher,profileImgURL, time));
+                                            recyclerView.setAdapter(adapter);
+                                        }
+                                    }
+                                });
 //                                adapter.addItem(new CommentInfo(comment, nickname, post_id, profile_image, time));
-                                adapter.addItem(new CommentInfo(comment, nickname, post_id, time));
-                                recyclerView.setAdapter(adapter);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -272,7 +312,7 @@ public class PostViewActivity extends AppCompatActivity {
     /* 댓글 등록하기 */
     private void addComment() {
         String comment = et_comment.getText().toString();
-        String uid = user.getUid(); // 댓글 쓴 유저의 uid
+        String uid = user.getUid(); // 댓글 쓴 유저의 uid(현재 유저)
         Timestamp timestamp = new Timestamp(new Date()); // 댓글 등록한 시간
         String time = getTime(timestamp);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -291,11 +331,13 @@ public class PostViewActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String nickname = document.get("userNickName").toString();
+                                publisher = uid;
 //                                        profile_image = document.get("profileImage").toString();
                                 //Comment DB에 데이터 추가
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("content", comment);
                                 data.put("nickname", nickname);
+                                data.put("publisher", publisher);
                                 data.put("post_id", post_id);
 //                                        data.put("profile_image", profile_image);
                                 data.put("time", timestamp);
@@ -318,10 +360,19 @@ public class PostViewActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                Firestore.getUserData(publisher).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            user_model = task.getResult().toObject(User.class);
+                                            String profileImgURL = user_model.getUserProfileImgURL();
+                                            adapter.addItem(new CommentInfo(comment, nickname, post_id, publisher, profileImgURL, time));
+                                            recyclerView.setAdapter(adapter);
+                                        }
+                                    }
+                                });
                                 //어댑터에 값 전달
 //                                        adapter.addItem(new CommentInfo(comment, nickname, post_id, profile_image, time));
-                                adapter.addItem(new CommentInfo(comment, nickname, post_id, time));
-                                recyclerView.setAdapter(adapter);
 
                             }
                         } else {

@@ -46,13 +46,21 @@
 <!--            android:textColor="@color/black"-->
 <!--            android:textSize="14dp" />-->
 
-        <ImageView
-            android:id="@+id/iv_profile"
+        <androidx.cardview.widget.CardView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/user_image_default" />
+            app:cardCornerRadius="75dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="10dp"
+            >
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/user_image_default"
+                tools:srcCompat="@tools:sample/avatars"/>
+        </androidx.cardview.widget.CardView>
 
 
         <LinearLayout

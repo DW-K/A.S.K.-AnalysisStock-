@@ -5,6 +5,8 @@ import static com.gachon.ask.community.CommunityCategoryActivity.getTime;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gachon.ask.R;
+import com.gachon.ask.util.CloudStorage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +66,7 @@ public class CommunityCategoryAdapter extends RecyclerView.Adapter<CommunityCate
         TextView vHeart;
         FirebaseUser user;
         ImageView heart;
+        ImageView iv_profile;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             vContents = itemView.findViewById(R.id.tv_contents);
@@ -71,6 +75,7 @@ public class CommunityCategoryAdapter extends RecyclerView.Adapter<CommunityCate
             vComment = itemView.findViewById(R.id.tv_comment);
             vHeart = itemView.findViewById(R.id.tv_heart);
             heart = (ImageView)itemView.findViewById(R.id.ic_heart);
+            iv_profile = itemView.findViewById(R.id.iv_profile);
             user = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -96,6 +101,15 @@ public class CommunityCategoryAdapter extends RecyclerView.Adapter<CommunityCate
             vContents.setText(item.getContents());//글 내용
             vHeart.setText(String.valueOf(item.getNum_heart()));//하트 개수
             vComment.setText(String.valueOf(item.getNum_comment()));//댓글 개수
+            CloudStorage.getImageFromURL(String.valueOf(item.getuProfileImgURL())).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                @Override
+                public void onComplete(@NonNull Task<byte[]> task) {
+                    if(task.isSuccessful()) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                        iv_profile.setImageBitmap(bitmap);
+                    }
+                }
+            });
 
 
             DocumentReference docRef = db.collection("Posts").document(post_id);

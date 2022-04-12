@@ -1,20 +1,15 @@
 package com.gachon.ask;
 
-
 public class RankInfo {
-    private Integer uNewRank;
-    private Integer uLastRank;
-    private Integer uRankChange;
+    private Integer uRank;
     private Integer uLevel;
     private String uNickname;
     private String uProfileImgURL;
     private Integer uYield;
 
-    public RankInfo(Integer uNewRank, Integer uLastRank, Integer uRankChange, Integer uLevel,
-                    String uNickname, String uProfileImgURL, int uYield) {
-        this.uNewRank = uNewRank;
-        this.uLastRank = uLastRank;
-        this.uRankChange = uRankChange;
+    public RankInfo(Integer uRank, Integer uLevel,
+            String uNickname, String uProfileImgURL, int uYield) {
+        this.uRank = uRank;
         this.uLevel = uLevel;
         this.uNickname = uNickname;
         this.uProfileImgURL = uProfileImgURL;
@@ -22,28 +17,12 @@ public class RankInfo {
 
     }
 
-    public Integer getuNewRank() {
-        return uNewRank;
+    public Integer getuRank() {
+        return uRank;
     }
 
-    public void setuNewRank(Integer uNewRank) {
-        this.uNewRank = uNewRank;
-    }
-
-    public Integer getuLastRank() {
-        return uLastRank;
-    }
-
-    public void setuLastRank(Integer uLastRank) {
-        this.uLastRank = uLastRank;
-    }
-
-    public Integer getuRankChange() {
-        return uRankChange;
-    }
-
-    public void setuRankChange(Integer uRankChange) {
-        this.uRankChange = uRankChange;
+    public void setuRank(Integer uRank) {
+        this.uRank = uRank;
     }
 
     public Integer getuLevel() {
@@ -77,6 +56,5 @@ public class RankInfo {
     public void setuYield(Integer uYield) {
         this.uYield = uYield;
     }
-
 
 }
