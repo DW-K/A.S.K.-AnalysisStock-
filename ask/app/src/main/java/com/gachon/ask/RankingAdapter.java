@@ -126,7 +126,9 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
             tv_yield.setText(String.valueOf(item.getuYield())); // 수익률 ex) 32 %
             tv_nickname.setText(String.valueOf(item.getuNickname())); // 유저닉네임 ex) 민하
             //System.out.print("item.getuProfileImgURL() : "+item.getuProfileImgURL());
-            /*
+            //Log.d("RankingAdapter.java", "Nickname Test : " + item.getuNickname());
+            //Log.d("RankingAdapter.java", "ImgURL Test : " + item.getuProfileImgURL());
+
             CloudStorage.getImageFromURL(String.valueOf(item.getuProfileImgURL())).addOnCompleteListener(new OnCompleteListener<byte[]>() {
                 @Override
                 public void onComplete(@NonNull Task<byte[]> task) {
@@ -136,7 +138,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
                     }
                 }
             });
-            */
+
 
 
         }

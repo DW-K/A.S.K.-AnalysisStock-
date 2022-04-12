@@ -121,6 +121,7 @@ public class RankingFragment extends Fragment {
                         for (DocumentSnapshot doc : task.getResult()) {
                             position += 1;
                             System.out.print("position : " + position);
+                            Log.d("RankingFragment.java", "Position Test : " + position);
                             try {
                                 String uid = doc.getString("uid");
                                 Integer uLastRank = doc.getLong("userLastRank").intValue();
@@ -135,6 +136,9 @@ public class RankingFragment extends Fragment {
                                 user = FirebaseAuth.getInstance().getCurrentUser();
                                 adapter.addItem(new RankInfo(uNewRank, uLastRank, uRankChange, uLevel, uNickname,
                                         uProfileImg, uYield));
+
+                                Log.d("RankingFragment.java", "Nickname Test : " + uNickname);
+                                Log.d("RankingFragment.java", "ImgURL Test : " + uProfileImg+"\n");
 
                                 // set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);

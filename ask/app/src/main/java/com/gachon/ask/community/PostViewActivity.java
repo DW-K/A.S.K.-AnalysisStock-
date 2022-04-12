@@ -178,6 +178,10 @@ public class PostViewActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
 
+                        /* 프로필 이미지 코드 구상 */
+                        // postInfo 객체로 받아와서 퍼블리셔(uid)값 가져오고
+                        // 해당 uid value로 유저 컬렉션의 imgURL 값 가져온 다음, imageView에 보이기
+
                         user = FirebaseAuth.getInstance().getCurrentUser();
                         sender_uid = user.getUid(); // 알림을 보내는 사람의 uid
 
@@ -245,6 +249,12 @@ public class PostViewActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 //                                profile_image = document.get("profile_image").toString();
+
+                                /* 프로필 이미지 코드 구상 */
+                                // comment 컬렉션에 추가된 각각의 퍼블리셔 값(uid)로 유저 컬렉션을 다시 조회
+                                // 그리고 받아온 이미지 URL 값을 adapter 에다가 포함하여 전달
+                                // 이 때, PostInfo class에다가 url 메타 데이터 getter,setter 추가되어 있어야 함.
+
                                 nickname = document.get("nickname").toString();
                                 comment = document.get("content").toString();
                                 time = getTime((Timestamp) document.get("time"));

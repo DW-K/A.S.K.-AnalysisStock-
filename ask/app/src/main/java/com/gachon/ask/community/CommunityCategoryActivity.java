@@ -108,6 +108,10 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                                     Integer num_heart = Integer.parseInt(String.valueOf(doc.getData().get("num_heart")));
                                     Integer num_comment = Integer.parseInt(String.valueOf(doc.getData().get("num_comment")));
 
+                                    /* 프로필 이미지 코드 구상 */
+                                    // 가져온 pulisher(게시물을 올린 유저의 uid)value 를 가지고 유저 컬렉션의 userProfileImgURL 값을 가져와야함.
+                                    // 그리고 이미지 URL값을 adapter에다가 포함하여 전달
+                                    // 이 때, PostInfo class에다가 url 메타 데이터 getter,setter 추가되어 있어야 함.
 
                                     user = FirebaseAuth.getInstance().getCurrentUser();
 
