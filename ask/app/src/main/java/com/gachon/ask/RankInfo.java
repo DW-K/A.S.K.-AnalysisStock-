@@ -1,14 +1,16 @@
 package com.gachon.ask;
 
 public class RankInfo {
+    private String uID;
     private Integer uRank;
     private Integer uLevel;
     private String uNickname;
     private String uProfileImgURL;
     private Integer uYield;
 
-    public RankInfo(Integer uRank, Integer uLevel,
+    public RankInfo(String uID, Integer uRank, Integer uLevel,
             String uNickname, String uProfileImgURL, int uYield) {
+        this.uID = uID;
         this.uRank = uRank;
         this.uLevel = uLevel;
         this.uNickname = uNickname;
@@ -16,6 +18,8 @@ public class RankInfo {
         this.uYield = uYield;
 
     }
+
+    public String getuID() { return uID; }
 
     public Integer getuRank() {
         return uRank;

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ import java.util.List;
 public class RankingFragment extends Fragment {
     private static RankingAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    Button btnYield, btnLevel;
     RecyclerView recyclerView;
     FirebaseUser user;
     int item_count;
@@ -58,23 +60,35 @@ public class RankingFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        view.findViewById(R.id.btn_ranking_yield).setOnClickListener(onClickListener);
-        view.findViewById(R.id.btn_ranking_level).setOnClickListener(onClickListener);
+//        view.findViewById(R.id.btn_ranking_yield).setOnClickListener(onClickListener);
+//        view.findViewById(R.id.btn_ranking_level).setOnClickListener(onClickListener);
+
+
         return view;
     }
 
-    // 버튼 클릭 이벤트 작성
-    View.OnClickListener onClickListener = v -> {
-        switch (v.getId()) {
-            case R.id.btn_ranking_yield:
-                selected_rank_category = "profitRate";
-                break;
-            case R.id.btn_ranking_level:
-                selected_rank_category = "userLevel";
-                break;
-        }
-        refresh(selected_rank_category);
-    };
+
+    boolean yield_clicked = true, level_clicked = false;
+
+
+
+
+//    View.OnClickListener onClickListener = v -> {
+//        switch (v.getId()) {
+//            case R.id.btn_ranking_yield:
+//                selected_rank_category = "profitRate";
+//                v.setBackgroundResource(R.drawable.tab_ranking_selected);
+//                yield_clicked = true;
+//                level_clicked = false;
+//                break;
+//            case R.id.btn_ranking_level:
+//                selected_rank_category = "userLevel";
+//                level_clicked = true;
+//                yield_clicked = false;
+//                break;
+//        }
+//        refresh(selected_rank_category);
+//    };
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -87,6 +101,33 @@ public class RankingFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        // 버튼 클릭 이벤트 작성
+        btnYield = getView().findViewById(R.id.btn_ranking_yield);
+        btnLevel = getView().findViewById(R.id.btn_ranking_level);
+        btnYield.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(R.drawable.tab_ranking_selected);
+                btnLevel.setBackgroundResource(R.drawable.tab_ranking);
+                selected_rank_category = "profitRate";
+                refresh(selected_rank_category);
+            }
+
+        });
+        btnLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(R.drawable.tab_ranking_selected);
+                btnYield.setBackgroundResource(R.drawable.tab_ranking);
+
+                selected_rank_category = "userLevel";
+
+                refresh(selected_rank_category);
+            }
+        });
+
+
     }
 
     @Override
@@ -128,10 +169,14 @@ public class RankingFragment extends Fragment {
                                 int uRank = position;
 
                                 user = FirebaseAuth.getInstance().getCurrentUser();
-                                adapter.addItem(new RankInfo(uRank, uLevel, uNickname, uProfileImg, uYield));
+                                adapter.addItem(new RankInfo(uid, uRank, uLevel, uNickname, uProfileImg, uYield));
 
                                 // set adapter to recyclerview
                                 recyclerView.setAdapter(adapter);
+
+                                if(uid==user.getUid()){
+
+                                }
 
                                 // 파이어스토어에 rank 업데이트
                                 updateUserRank(uid, uRank);

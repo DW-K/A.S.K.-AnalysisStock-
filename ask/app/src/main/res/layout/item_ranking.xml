@@ -25,26 +25,6 @@
             android:textColor="@color/black"
             android:textSize="14dp" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_change"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginTop="1dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:scaleType="fitXY"-->
-<!--            app:srcCompat="@drawable/outline_arrow_drop_down_24" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_change"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:text="5"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="14dp" />-->
 
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"

@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SentimentReportActivity extends AppCompatActivity {
-    private TextView textView;
+    private TextView originalText;
     String url;
 
     @Override
@@ -28,7 +28,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sentiment_report);
 
         String SERVER_URL = BuildConfig.SERVER;
-        textView = findViewById(R.id.textView);
+        originalText = findViewById(R.id.tv_original_text);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(SERVER_URL)
@@ -45,7 +45,7 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                 if (!response.isSuccessful())
                 {
-                    textView.setText("Code:" + response.code());
+                    originalText.setText("Code:" + response.code());
                     return;
                 }
 
@@ -53,20 +53,20 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                 for ( Post post : posts) {
                     String content ="";
-                    content += "ID : " + post.getId() + "\n";
+
+                    content += "company : " + post.getCompany() + "\n\n";
                     content += "rt_count : " + post.getRT_count() + "\n";
                     content += "text : " + post.getText() + "\n\n";
                     content += "date : " + post.getDate() + "\n\n";
-                    content += "company : " + post.getCompany() + "\n\n";
 
-                    textView.append(content);
+                    originalText.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
                 System.out.println("실패했습니다.");
-                textView.setText(t.getMessage());
+                originalText.setText(t.getMessage());
             }
         });
 

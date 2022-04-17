@@ -47,13 +47,19 @@
                 android:id="@+id/btn_ranking_yield"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/tab_ranking_selected"
+                app:backgroundTint="@null"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:text="@string/ranking_yield" />
 
             <Button
                 android:id="@+id/btn_ranking_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/tab_ranking"
+                app:backgroundTint="@null"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="@string/ranking_level" />
 
@@ -63,8 +69,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -73,22 +77,15 @@
                 android:gravity="center"
                 android:layout_weight="0.1"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="@string/ranking" />
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:layout_weight="0.1"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:text="@string/ranking_change" />-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1"
-
+                android:textColor="@color/black"
                 android:layout_margin="10dp"
                 android:text="프로필" />
 
@@ -96,7 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_weight="0.1"
+                android:textColor="@color/black"
+                android:layout_weight="0.2"
                 android:layout_margin="10dp"
                 android:text="@string/ranking_yield" />
 
@@ -108,7 +106,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/swipe_view_ranking">
-
 
 
             <androidx.recyclerview.widget.RecyclerView

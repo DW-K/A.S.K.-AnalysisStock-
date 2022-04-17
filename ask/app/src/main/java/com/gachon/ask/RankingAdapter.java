@@ -21,8 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.gachon.ask.databinding.ItemHomeStockBinding;
-import com.gachon.ask.databinding.ItemRankingBinding;
+//import com.gachon.ask.databinding.ItemHomeStockBinding;
+//import com.gachon.ask.databinding.ItemRankingBinding;
 import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
@@ -72,8 +72,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView iv_change, iv_profile, iv_univ;
-        TextView tv_rank, tv_rankChange, tv_level, tv_nickname, tv_yield;
+        ImageView iv_profile, iv_univ;
+        TextView tv_rank, tv_level, tv_nickname, tv_yield;
         int item_pos;
 
 
@@ -101,16 +101,21 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
                 }
             });
 
+
+
+
         }
 
 
 
         public void setItem(RankInfo item) {
             int rank = item.getuRank();
+            String uid = item.getuID();
+
 
             tv_rank.setText(rank +" 위"); // 순위 ex) 1위
             tv_level.setText(context.getResources().getString(R.string.level) + String.valueOf(item.getuLevel())); // 레벨 ex) Lv.3
-            tv_yield.setText(String.valueOf(item.getuYield())); // 수익률 ex) 32 %
+            tv_yield.setText(String.valueOf(item.getuYield() + "%")); // 수익률 ex) 32 %
             tv_nickname.setText(String.valueOf(item.getuNickname())); // 유저닉네임 ex) 민하
 
             CloudStorage.getImageFromURL(String.valueOf(item.getuProfileImgURL())).addOnCompleteListener(new OnCompleteListener<byte[]>() {
@@ -122,6 +127,11 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
                     }
                 }
             });
+
+
+            if(uid.equals(user.getUid())){
+                itemView.setBackgroundColor(context.getResources().getColor(R.color.blue_down));
+            }
 
 
 
@@ -145,6 +155,9 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
         items.set(position, item);
     }
 
+    public void setBackgroundColor(int position){
+
+    }
     public interface ItemClickListener
     {
         void onItemClick(int position);
