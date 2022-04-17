@@ -60,7 +60,6 @@ public class RankingFragment extends Fragment {
 
         view.findViewById(R.id.btn_ranking_yield).setOnClickListener(onClickListener);
         view.findViewById(R.id.btn_ranking_level).setOnClickListener(onClickListener);
-        view.findViewById(R.id.btn_ranking_university).setOnClickListener(onClickListener);
         return view;
     }
 
@@ -71,9 +70,6 @@ public class RankingFragment extends Fragment {
                 selected_rank_category = "profitRate";
                 break;
             case R.id.btn_ranking_level:
-                selected_rank_category = "userLevel";
-                break;
-            case R.id.btn_ranking_university: // 추후 수정
                 selected_rank_category = "userLevel";
                 break;
         }
