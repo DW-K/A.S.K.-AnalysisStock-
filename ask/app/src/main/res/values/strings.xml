@@ -22,6 +22,8 @@
     <string name="main_sentiment">대표 감성</string>
     <string name="hot_keyword">주요 키워드</string>
     <string name="show_url">원문보기</string>
+    <string name="tweet">트윗</string>
+    <string name="news">뉴스</string>
     <string name="show_graph">긍부정 추이</string>
 
 

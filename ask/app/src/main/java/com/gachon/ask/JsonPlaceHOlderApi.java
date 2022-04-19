@@ -8,5 +8,8 @@ import retrofit2.http.GET;
 public interface JsonPlaceHOlderApi {
 
     @GET("crawl_tweet")
-    Call<List<Post>> getPosts();
+    Call<List<Post>> getTweets();
+
+    @GET("crawl_news")
+    Call<List<Post>> getNews();
 }
