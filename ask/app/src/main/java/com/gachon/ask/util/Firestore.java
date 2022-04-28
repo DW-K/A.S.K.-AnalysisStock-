@@ -8,6 +8,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +32,16 @@ public class Firestore {
      */
     public static Task<DocumentSnapshot> getUserData(String userId){
         return getFirestoreInstance().collection("user").document(userId).get();
+    }
+
+    /**
+     * 유저가 종목명(String)을 입력했을 때 종목코드로 바꿔주기 위함
+     * @author Taehyun Park
+     * @param
+     * @return Task<DocumentSnapshot>
+     */
+    public static Task<DocumentSnapshot> getMockCode(){
+        return getFirestoreInstance().collection("mockCode").document("mockCode").get();
     }
 
     /**

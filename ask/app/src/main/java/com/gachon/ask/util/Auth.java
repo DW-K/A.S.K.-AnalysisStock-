@@ -45,7 +45,6 @@ public class Auth {
 
     /**
      * 로그아웃 처리 후 LoginActivity로 이동
-     *
      * @param activity 로그아웃을 하는 Activity
      * @author Taehyun Park
      */
@@ -60,7 +59,6 @@ public class Auth {
 
     /**
      * 모든 이전 작업들을 지우고 LoginActivity로 이동
-     *
      * @param activity 작업하는 Activity
      */
     public static void moveToLogin(Activity activity) {

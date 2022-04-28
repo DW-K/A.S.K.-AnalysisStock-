@@ -24,8 +24,11 @@ import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.Map;
 
 public class MyPageFragment extends Fragment {
     private User user;

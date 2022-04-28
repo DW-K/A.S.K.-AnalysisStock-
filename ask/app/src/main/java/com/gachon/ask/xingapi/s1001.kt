@@ -1,5 +1,7 @@
 package com.gachon.ask.xingapi
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +9,25 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import android.os.*
+import android.util.Log
 import com.ebest.api.*
 import com.gachon.ask.R
 import com.gachon.ask.datamngr.API_DEFINE
+import com.gachon.ask.util.Auth
+import com.gachon.ask.util.CloudStorage
+import com.gachon.ask.util.Firestore
+import com.gachon.ask.util.model.User
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnFailureListener
+
+import com.google.android.gms.tasks.OnSuccessListener
+
+
+
 
 class s1001 : Fragment() {
 
@@ -97,10 +115,12 @@ class s1001 : Fragment() {
         m_gridView.adapter = m_adapter
         m_adapter.setMaxCount(-1);
 
+        // 조회
         root.findViewById<Button>(R.id.button).setOnClickListener {
             OnButtonQueryClicked()
         }
 
+        // 연속조회
         m_buttonNext = root.findViewById<Button>(R.id.button2);
         m_buttonNext.setOnClickListener {
             OnButtonNextQueryClicked()
