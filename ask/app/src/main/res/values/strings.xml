@@ -3,6 +3,7 @@
     <string name="login_des">Login</string>
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
+    <string name="gachon">가천대학교</string>
 
     <string name="category">카테고리</string>
     <string name="category_car">자동차</string>
