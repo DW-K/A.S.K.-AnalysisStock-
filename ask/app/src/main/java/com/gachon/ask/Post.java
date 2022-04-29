@@ -5,6 +5,7 @@ public class Post {
 
 
     private String text, date, company;
+    private String title, press, text_news, date_news;
 
     public int getId() {
         return id;
@@ -22,4 +23,9 @@ public class Post {
     public String getCompany() {
         return company;
     }
+
+    public String getTitle() { return title;}
+    public String getPress() { return press;}
+    public String getTextNews() { return text_news;}
+    public String getDateNews() { return date_news;}
 }

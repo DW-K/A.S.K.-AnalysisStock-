@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.gachon.ask.datamngr.API_DEFINE
 import java.util.ArrayList
 import java.util.HashMap
 import com.gachon.ask.R
+import com.gachon.ask.util.Firestore
 
 class s1006 : Fragment() {
 
@@ -340,7 +342,7 @@ class s1006 : Fragment() {
 
     private fun OnButtonJumunListClicked() {
         val nLen = m_editTextJongmok!!.text.length
-        if (nLen == 6) {
+        if (nLen > 0) {
             requestData()
         }
     }
@@ -523,7 +525,20 @@ class s1006 : Fragment() {
         var bOK = manager!!.deleteRealData(m_nHandle, "S3_", m_strJongmokCode, 6)
         bOK = manager!!.deleteRealData(m_nHandle, "K3_", m_strJongmokCode, 6)
         m_strJongmokCode = m_editTextJongmok!!.text.toString()
-        val nRqID = manager!!.requestData(m_nHandle, "t1102", m_strJongmokCode, false, "", 0)
+        Log.d("s1006", "temp값 테스트(전) : " + m_strJongmokCode)
+        Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+            val mockMap = documentSnapshot.data
+            Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![m_strJongmokCode].toString())
+
+            if (mockMap[m_strJongmokCode] != null) {
+                m_strJongmokCode = mockMap!![m_strJongmokCode].toString()
+            }
+            Log.d("s1006", "temp값 테스트(함수 안) : " + m_strJongmokCode)
+
+            Log.d("s1006", "temp값 테스트(후) : " + m_strJongmokCode)
+
+            val nRqID = manager!!.requestData(m_nHandle, "t1102", m_strJongmokCode, false, "", 0)
+        }
     }
 
 

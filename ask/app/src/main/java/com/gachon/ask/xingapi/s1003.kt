@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.ebest.api.*
 import com.gachon.ask.datamngr.API_DEFINE
 import com.gachon.ask.R
+import com.gachon.ask.util.Firestore
 
 class s1003 : Fragment() {
 
@@ -151,18 +153,27 @@ class s1003 : Fragment() {
         m_adapter.notifyDataSetChanged()
 
         val edit = root.findViewById<EditText>(R.id.editText3)
-        val shcode = edit.text.toString()
-        if(shcode.length < 6)
-        {
-            Toast.makeText(
-                activity?.applicationContext,
-                "종목코드를 확인해 주십시오.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
+        var shcode = edit.text.toString()
+        Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+            val mockMap = documentSnapshot.data
+            Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![shcode].toString())
+            if (mockMap[shcode] != null){
+                shcode = mockMap!![shcode].toString()
+            }
+            Log.d("s1001_DM", "temp값 테스트(함수 안) : " + shcode)
 
-        manager.requestData(m_nHandle, "t1302", shcode, false, "", 30)
+            if(shcode.length < 6)
+            {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "종목코드를 확인해 주십시오.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //return
+            }
+
+            manager.requestData(m_nHandle, "t1302", shcode, false, "", 30)
+        }
     }
 
 

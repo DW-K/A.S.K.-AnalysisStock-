@@ -63,6 +63,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
     private Button btnGoLogin;
     private Button btnGallery;
 
+    private ImageView imageView;
+
     @Override
     protected ActivitySignupBinding getBinding() {
         return ActivitySignupBinding.inflate(getLayoutInflater());
@@ -81,13 +83,23 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         btnGoLogin = findViewById(R.id.btn_go_login);
         btnGallery = findViewById(R.id.btn_gallery);
 
+        imageView = findViewById(R.id.imageView_signup);
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+
         // Initialize Firebase Auth
         mAuth = Auth.getFirebaseAuthInstance();
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUp();
+                if(imageView.getDrawable() == null){
+                    // 이미지를 올리지 않을 경우
+                    startToast("이미지를 선택해주세요!");
+                }else{
+                    signUp();
+                }
             }
         });
 
@@ -177,12 +189,28 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         // Get the data from an ImageView as bytes
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
+        /*
         if(imageView.getDrawable() == null){
             // 이미지를 올리지 않을 경우
             startToast("이미지를 선택하지 않으셨습니다!");
         }else{
             Bitmap bitmap = ((GlideBitmapDrawable) imageView.getDrawable()).getBitmap();
             CloudStorage.uploadProfileImg(Auth.getCurrentUser().getUid(),bitmap).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(Task<UploadTask.TaskSnapshot> task1) {
+                    if (task1.isSuccessful()) {
+                        startToast("프로필 이미지 업로드에 성공하였습니다.");
+                        setProfileImage(); // firebase user collection의 이미지 URL필드 업데이트
+                    } else {
+                        startToast("프로필 이미지 업로드에 실패하였습니다.");
+                    }
+                }
+            });
+        }*/
+
+        if(imageView.getDrawable() != null) { // 이미지를 선택했다면 CloudStorage에 저장
+            Bitmap bitmap = ((GlideBitmapDrawable) imageView.getDrawable()).getBitmap();
+            CloudStorage.uploadProfileImg(Auth.getCurrentUser().getUid(), bitmap).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(Task<UploadTask.TaskSnapshot> task1) {
                     if (task1.isSuccessful()) {

@@ -59,7 +59,7 @@
             android:layout_weight="8"
             android:ems="10"
             android:hint="종목코드"
-            android:inputType="number"
+            android:inputType="none"
             android:maxLength="6"
             android:visibility="visible" />
 

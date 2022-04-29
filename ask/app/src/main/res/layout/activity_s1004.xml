@@ -15,7 +15,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="종목코드"
-            android:inputType="number" />
+            android:inputType="none" />
 
         <Button
             android:id="@+id/btn_query"

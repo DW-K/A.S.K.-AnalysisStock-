@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="none"
             android:hint="종목코드"
             android:maxLength="6" />
 
