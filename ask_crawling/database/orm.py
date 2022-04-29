@@ -6,7 +6,7 @@ from models import TbTest
 def show_tables():
     queries = db_session.query(TbTest)
     entries = [dict(id=q.id, datetime=q.datetime, string=q.string) for q in queries]
-    print(entires)
+    print(entries)
 
 
 def add_entry(datetime, string):

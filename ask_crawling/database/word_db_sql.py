@@ -1,79 +1,93 @@
+from datetime import date
+
 import pandas as pd
-import pymysql
 
 import sqlalchemy
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, insert, MetaData
+
+try:
+    from database.db_config import db_connection_address
+    from database.models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
+        get_table_obj_news_sentiment, \
+        get_table_obj_tweet_sentiment, create_tables
+except:
+    from db_config import db_connection_address
+    from models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
+        get_table_obj_news_sentiment, \
+        get_table_obj_tweet_sentiment, create_tables
+
+start_date = date(2002, 6, 1)
 
 
-# class TbCompany(Base):
-#     __tablename__ = "Company_TB"
+# def get_db_obj():
+#     ask_db = pymysql.connect(
+#         user='root',
+#         passwd='ask1234!',
+#         host='13.209.122.152',
+#         db='ASK',
+#         charset='utf8'
+#     )
 #
-#     id = Column(Integer, primary_key=True)
+#     return ask_db
 #
-#     name = Column(String(64))
 #
+# def get_word(word):
+#     ask_db = get_db_obj()
+#
+#     try:
+#         cursor = ask_db.cursor(pymysql.cursors.DictCursor)
+#
+#         sql = f'''SELECT {word} FROM {table_name}'''
+#
+#         cursor.execute(sql)
+#
+#         result = cursor.fetchall()
+#
+#     finally:
+#         ask_db.close()
+#
+#     return result
 
-
-def get_db_obj():
-    ask_db = pymysql.connect(
-        user='root',
-        passwd='ask1234!',
-        host='13.209.122.152',
-        db='ASK',
-        charset='utf8'
-    )
-
-    return ask_db
-
-
-def get_word(word):
-    ask_db = get_db_obj()
-
-    try:
-        cursor = ask_db.cursor(pymysql.cursors.DictCursor)
-
-        sql = f'''SELECT {word} FROM {table_name}'''
-
-        cursor.execute(sql)
-
-        result = cursor.fetchall()
-
-    finally:
-        ask_db.close()
-
-    return result
-
-
-def create_db():
-    conn = pymysql.connect(host='localhost',
-                           user='root',
-                           password=pw,
-                           charset='utf8mb4')
-
-    try:
-        with conn.cursor() as cursor:
-            sql = 'CREATE DATABASE ASK'
-            cursor.execute(sql)
-        conn.commit()
-    finally:
-        conn.close()
+# def insert_table_item()
 
 
 def insert_table_company(company):
     dtypesql = {
         'id': sqlalchemy.types.INTEGER(),
-        'company': sqlalchemy.types.VARCHAR(24)
+        'company': sqlalchemy.types.VARCHAR(64)
     }
 
     df_company = pd.DataFrame([company], columns=['company'])
 
     db_connection = create_engine(db_connection_address)
-    df_company.to_sql(name='company_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+    try:
+        df_company.to_sql(name='crawl_company_table', con=db_connection, if_exists='fail', index=False, dtype=dtypesql)
+    except:
+        pass
+
+
+def insert_table_log(company):
+    db_connection = create_engine(db_connection_address)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        log_table = get_table_obj_log(meta)
+
+        try:
+            result = conn.execute(
+                insert(log_table),
+                [
+                    {
+                        "company": company,
+                    }
+                ]
+            )
+        except Exception as e:
+            print(f'{e}')
 
 
 def insert_table_stock(df_stock, company):
     dtypesql = {
-        'id': sqlalchemy.types.BIGINT(),
         'company': sqlalchemy.types.VARCHAR(64),
         '날짜': sqlalchemy.types.DATE(),
         '시가': sqlalchemy.types.INTEGER(),
@@ -106,49 +120,128 @@ def insert_table_stock(df_stock, company):
     df_stock = df_stock[df_stock['날짜'] >= "2002-03-20"]
 
     db_connection = create_engine(db_connection_address)
-    df_stock.to_sql(name='stock_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+    df_stock.to_sql(name='crawl_stock_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
 
 
-def insert_table_news(df_news, company):
-    dtypesql = {
-        'id': sqlalchemy.types.BIGINT(),
-        'company': sqlalchemy.types.VARCHAR(24),
-        '날짜': sqlalchemy.types.DATE(),
-        '기사 제목': sqlalchemy.types.VARCHAR(256),
-        '언론사': sqlalchemy.types.VARCHAR(256),
-        '언론사 링크': sqlalchemy.types.VARCHAR(256),
-        '기사 링크': sqlalchemy.types.VARCHAR(256),
-        '기사 내용': sqlalchemy.types.VARCHAR(2048),
-    }
+def insert_table_news(df_news, company):  # dataframe 하나씩 넣기
+    # df_news['날짜'] = pd.to_datetime(df_news['날짜']).dt.strftime("%Y-%m-%d")
 
-    df_news['날짜'] = pd.to_datetime(df_news['날짜'], format='%Y%m%d').dt.strftime("%Y-%m-%d")
-    # df_news['날짜'] = pd.to_datetime(df_news['날짜']).dt.strftime("%Y-%m-%d") # news date format 바꾸기
     add_company_name(df_news, company)
 
     db_connection = create_engine(db_connection_address)
-    df_news.to_sql(name='news_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        news_table = get_table_obj_news(meta)
+        for idx, row in df_news.iterrows():
+            try:
+                result = conn.execute(
+                    insert(news_table),
+                    [
+                        {
+                            "date": row['날짜'],
+                            "company": row['company'],
+                            "title": row['기사 제목'],
+                            "query": row['query'],
+                            "press": row['언론사'],
+                            "press_link": row['언론사 링크'],
+                            "article_link": row['기사 링크'],
+                            "article_content": row['기사 내용']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print('error in insert_table_news')
+                print(f'{e}')
 
 
 def insert_table_tweet(df_tweet, company):
-    dtypesql = {
-        'id': sqlalchemy.types.BIGINT(),
-        'company': sqlalchemy.types.VARCHAR(24),
-        'date': sqlalchemy.types.DATE(),
-        'rt_count': sqlalchemy.types.INTEGER(),
-        'text': sqlalchemy.types.VARCHAR(1024)
-    }
+    # dtypesql = {
+    #     'id': sqlalchemy.types.BIGINT(),
+    #     'company': sqlalchemy.types.VARCHAR(64),
+    #     'date': sqlalchemy.types.DATE(),
+    #     'rt_count': sqlalchemy.types.INTEGER(),
+    #     'text': sqlalchemy.types.VARCHAR(256)
+    # }
 
     df_tweet['date'] = pd.to_datetime(df_tweet['date']).dt.strftime("%Y-%m-%d")
     add_company_name(df_tweet, company)
 
     db_connection = create_engine(db_connection_address)
-    df_tweet.to_sql(name='tweet_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        tweet_table = get_table_obj_tweet(meta)
+        for idx, row in df_tweet.iterrows():
+            try:
+                result = conn.execute(
+                    insert(tweet_table),
+                    [
+                        {
+                            "date": row['date'],
+                            "company": row['company'],
+                            "rt_count": row['rt_count'],
+                            "text": row['text']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print(e)
+
+    # try:
+    #     df_tweet.to_sql(name='crawl_tweet_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+    # except Exception as e:
+    #     print(e)
+    #     pass
+
+
+def insert_table_news_sentiment(df_news_sentiment):  # dataframe 하나씩 넣기
+    db_connection = create_engine(db_connection_address)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        news_sentiment_table = get_table_obj_news_sentiment(meta)
+        for idx, row in df_news_sentiment.iterrows():
+            try:
+                result = conn.execute(
+                    insert(news_sentiment_table),
+                    [
+                        {
+                            "id": row['id'],
+                            "positive": row['positive'],
+                            "negative": row['negative']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print(f'{e}')
+
+
+def insert_table_tweet_sentiment(df_tweet_sentiment):  # dataframe 하나씩 넣기
+    db_connection = create_engine(db_connection_address)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        tweet_sentiment_table = get_table_obj_tweet_sentiment(meta)
+        for idx, row in df_tweet_sentiment.iterrows():
+            try:
+                result = conn.execute(
+                    insert(tweet_sentiment_table),
+                    [
+                        {
+                            "id": row['id'],
+                            "positive": row['positive'],
+                            "negative": row['negative']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print(f'{e}')
 
 
 def insert_table_finance(df_fin, company):
     dtypesql = {
-        'id': sqlalchemy.types.BIGINT(),
-        'company': sqlalchemy.types.VARCHAR(24),
+        'company': sqlalchemy.types.VARCHAR(64),
         'date': sqlalchemy.types.DATE(),
         '유동자산': sqlalchemy.types.BIGINT(),
         '현금및현금성자산': sqlalchemy.types.BIGINT(),
@@ -207,33 +300,63 @@ def insert_table_finance(df_fin, company):
     add_company_name(df_fin, company)
 
     db_connection = create_engine(db_connection_address)
-    df_fin.to_sql(name='finance_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+    df_fin.to_sql(name='crawl_finance_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
 
 
-def read_table_stock():
-    SQL = "SELECT * FROM stock_table"
+def read_table_news_for_word_count(day):
+    SQL = f'SELECT * FROM crawl_news_table WHERE date="{day}"'
     db_connection = create_engine(db_connection_address)
     df = pd.read_sql(SQL, db_connection)
     return df
 
 
-def read_table_finance():
-    SQL = 'SELECT * FROM finance_table WHERE company="기아"'
+def read_table_news_for_sentiment(word):
+    SQL = f"SELECT * FROM crawl_news_table WHERE article_content LIKE '%%{word}%%'"
     db_connection = create_engine(db_connection_address)
     df = pd.read_sql(SQL, db_connection)
     return df
 
 
-def read_table_tweet():
-    SQL = "SELECT * FROM tweet_table"
+def read_table_stock(company):
+    SQL = f'SELECT * FROM crawl_stock_table WHERE company="{company}"'
     db_connection = create_engine(db_connection_address)
     df = pd.read_sql(SQL, db_connection)
+    return df
 
 
-def read_table_news():
-    SQL = "SELECT * FROM news_table"
+def read_table_finance(company):
+    SQL = f'SELECT * FROM crawl_finance_table WHERE company="{company}"'
     db_connection = create_engine(db_connection_address)
     df = pd.read_sql(SQL, db_connection)
+    return df
+
+
+def read_table_tweet(company):
+    SQL = f'SELECT * FROM crawl_tweet_table WHERE company="{company}"'
+    db_connection = create_engine(db_connection_address)
+    df = pd.read_sql(SQL, db_connection)
+    return df
+
+
+def read_table_news(company):
+    SQL = f'SELECT * FROM crawl_news_table WHERE company="{company}"'
+    db_connection = create_engine(db_connection_address)
+    df = pd.read_sql(SQL, db_connection)
+    return df
+
+
+def read_table_news_sentiment():
+    SQL = "SELECT * FROM crawl_news_sentiment_table"
+    db_connection = create_engine(db_connection_address)
+    df = pd.read_sql(SQL, db_connection)
+    return df
+
+
+def read_table_tweet_sentiment():
+    SQL = "SELECT * FROM crawl_tweet_sentiment_table"
+    db_connection = create_engine(db_connection_address)
+    df = pd.read_sql(SQL, db_connection)
+    return df
 
 
 def add_company_name(df, company):
@@ -249,15 +372,24 @@ if __name__ == "__main__":
 
     # df_stock = pd.read_excel(r'../dataset/stockData/car/기아/기아_s.xlsx')
     # insert_table_stock(df_stock, company)
+    # create_tables()
     #
     # df_news = pd.read_csv(r'../dataset/crawling.csv')
+    # print(df_news.columns)
     # insert_table_news(df_news, company)
-    #
+
+    # day = date(2021, 9, 11)
+    # df = read_table_news_for_word_count(day)
+    # print(df)
+
+    df = read_table_news_for_sentiment('계열회사')
+    print(df)
+
     # df_tweet = pd.read_excel(r'../d/tweet.xlsx')
     # insert_table_tweet(df_tweet, company)
-
-    df_fin = pd.read_excel(r'../d/fs2.xlsx')
-    insert_table_finance(df_fin, company)
+    #
+    # df_fin = pd.read_excel(r'../d/fs2.xlsx')
+    # insert_table_finance(df_fin, company)
 
     # df_stock = read_table_stock()
     # print(df_stock)
@@ -269,4 +401,3 @@ if __name__ == "__main__":
     # db_connection = create_engine(db_connection_str)
     # indata = pd.read_sql_query("select * from 기아_finance", db_connection)
     # print(indata)
-

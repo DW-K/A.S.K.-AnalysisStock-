@@ -89,16 +89,18 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
     e_dateObj = e_dateObj + datetime.timedelta(days=1)
     e_date = e_dateObj.strftime(dateFormat)
 
-    print(f'{s_date}, {e_date}')
+    # print(f'{s_date}, {e_date}')
 
     statuses = twitter_api.GetSearch(term=query, count=num, lang='ko', since=s_date, until=e_date)  # 한국어로 작성된 트윗만
 
-    # print(statuses)
+    print(statuses)
     # print(statuses[0]["created_at"])
 
     for status in statuses:
         # print(statuses)
         text = status.text
+        print(type(status))
+        print(status.keys())
         # RT 확인
         rt_count = status.retweet_count
         if status.retweeted_status:
@@ -134,7 +136,7 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
         datetime_list.append(get_date(status.created_at))
 
     if len(text_list) >= 1:
-        df = pd.DataFrame(list(zip(datetime_list, rt_list, text_list)), columns=['datetime', 'rt_count', 'text'])
+        df = pd.DataFrame(list(zip(datetime_list, rt_list, text_list)), columns=['date', 'rt_count', 'text'])
         # df = pd.DataFrame(list(zip(datetime_list, text_list)), columns=['datetime', 'text'])
         # print(df)
 
@@ -145,26 +147,35 @@ def tweet_crawler(category, companyName, query, num, s_date, e_date):
         df.dropna(axis=0, inplace=True)
         print(df)
 
-        if os.path.exists(output_path):
-            writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=False)
-        else:
-            writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=True)
-    else:
-        return False, False
+    # df.to_excel(r'./d/tweet2.xlsx')
+
+    #     if os.path.exists(output_path):
+    #         writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=False)
+    #     else:
+    #         writeToExcel(output_path=output_path, df=df, sheet_name=query, isWrite=True)
+    # else:
+    #     return False, False
 
     return filePath, output_file_name
 
 
 if __name__ == "__main__":
-    arg_list = sys.argv[1:]  # argument 받아서 실행
-    category = arg_list[0]
-    companyName = arg_list[1]
-    num = arg_list[2]
-    query = arg_list[3]
-    s_date = arg_list[4]
-    e_date = arg_list[5]
+    # arg_list = sys.argv[1:]  # argument 받아서 실행
+    # category = arg_list[0]
+    # companyName = arg_list[1]
+    # num = arg_list[2]
+    # query = arg_list[3]
+    # s_date = arg_list[4]
+    # e_date = arg_list[5]
+
+    category = 'car'
+    companyName = '기아'
+    query = '기아'
+    num = 20
+    s_date = '20200101'
+    e_date = '20220203'
 
     filePath, output_file_name =tweet_crawler(category=category, companyName=companyName, query=query, num=num, s_date=s_date, e_date=e_date)
 
-    if filePath is not False:
-        sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
+    # if filePath is not False:
+    #     sentiment(filePath=filePath, output_file_name=output_file_name, sheetName=query, target_col=target_col)
