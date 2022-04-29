@@ -11,6 +11,7 @@
     <color name="gray">#FFAAAAAA</color>
     <color name="main_color">#CEDEFF</color>
     <color name="text_color1">#2699FB</color>
+    <color name="transparent">#00000000</color>
 
     <color name="themeColor">#2699FB</color>
     <color name="skyblue_background">#CEDEFF</color>

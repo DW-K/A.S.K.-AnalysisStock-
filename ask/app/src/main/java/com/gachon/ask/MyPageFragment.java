@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class MyPageFragment extends Fragment {
     private User user;
     private ImageView iv_profile;
     private TextView tv_nickname, tv_level, tv_level_exp;
-    private Button btn_editProfile;
+    private ImageButton btn_editProfile;
     private ProgressBar expBar;
     int level;
 
@@ -101,17 +102,18 @@ public class MyPageFragment extends Fragment {
         expBar = getView().findViewById(R.id.progressBar);
         setUserData();
 
-        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
-        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LevelSystem lvlSystem = new LevelSystem();
-                int exp = lvlSystem.addExp(user, 30);
-                tv_level_exp.setText(exp + " %");
-                tv_level.setText(getString(R.string.level) + lvlSystem.level);
-                expBar.setProgress(exp);
-            }
-        });
+        /* 경험치 임시 추가 버튼 */
+//        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
+//        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LevelSystem lvlSystem = new LevelSystem();
+//                int exp = lvlSystem.addExp(user, 30);
+//                tv_level_exp.setText(exp + " %");
+//                tv_level.setText(getString(R.string.level) + lvlSystem.level);
+//                expBar.setProgress(exp);
+//            }
+//        });
 
     }
 }

@@ -13,16 +13,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/mypage_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="@string/mypage"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:src="@drawable/baseline_settings_24"
+                android:focusable="false"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/transparent"
+                app:tint="@color/transparent" />
+            <TextView
+                android:id="@+id/mypage_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="@string/mypage"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_editProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/baseline_settings_24" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,19 +120,13 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="안녕하세요"/>-->
 
-                <Button
-                    android:id="@+id/btn_addExp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|right"
-                    android:text="경험치 추가" />
+<!--                <Button-->
+<!--                    android:id="@+id/btn_addExp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center|right"-->
+<!--                    android:text="경험치 추가" />-->
 
-                <Button
-                    android:id="@+id/btn_editProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|right"
-                    android:text="@string/edit_profile" />
 
             </LinearLayout>
 
@@ -288,53 +305,6 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/mypage_quiz"
-                android:layout_width="match_parent"
-                android:layout_height="92dp"
-                android:layout_margin="10dp"
-                android:background="#f1f9ff"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/mypage_quiz_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="경제 시사 퀴즈"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mypage_quiz_explanation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="퀴즈 풀고 보상 얻어가세요!"
-                    android:textSize="10dp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="주식시장에서 'Wag the Dog'은 어떤 상황을 가리킬 때 사용되는가?"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-
-                </LinearLayout>
 
 
             </LinearLayout>
@@ -362,5 +332,5 @@
 
 
         </LinearLayout>
-    </LinearLayout>
+
 </ScrollView>
