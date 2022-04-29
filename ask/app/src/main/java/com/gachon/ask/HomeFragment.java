@@ -28,6 +28,7 @@ import com.gachon.ask.util.model.User;
 import com.gachon.ask.xingapi.MainView;
 import com.gachon.ask.StockActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeAdapter.onItemClickListener {
     private RecyclerView RecyclerView;
@@ -48,6 +50,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     private SwipeRefreshLayout swipeBoard = null;
     private DocumentSnapshot last;
+    User level_user;
 
 
     @Override
@@ -118,6 +121,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         });
     }
 
+
+
     private void setAdapter() {
         Log.d("BoardFragment", "Set Adapter Run");
         myStockList = new ArrayList<>();
@@ -126,15 +131,27 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     User user = task.getResult().toObject(User.class);
+                    level_user = user;
                     myStockList = user.getMyStock();
-                    if(myStockList != null){
+                    if(myStockList != null && myStockList.size() > 0){
+                        binding.buttonInvestment.setVisibility(View.GONE); // 주식 거래 내역이 있다면 모의투자 버튼 활성화 X
                         int sum_yield = 0;
                         for(int i = 0; i < myStockList.size(); i++){
                             sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());
                         }
                         binding.totalProfitValue.setText(sum_yield+"%");
-                    }
-                    else{
+                        /* 총 수익률 업데이트 */
+                        Firestore.updateProfitRate(Auth.getCurrentUser().getUid(), sum_yield).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                }else{
+                                    Toast.makeText(getContext(),"총 수익률 업데이트 실패", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }else if(myStockList.size() == 0){
+                        binding.buttonInvestment.setVisibility(View.VISIBLE); // 주식 거래 내역이 없다면 모의투자 버튼 활성화 O
                         Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                     // homeAdapter.notifyDataSetChanged();
@@ -189,5 +206,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     @Override
     public void onClick(View v, Stock myStockList) {
 
+    }
+
+    private void startToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

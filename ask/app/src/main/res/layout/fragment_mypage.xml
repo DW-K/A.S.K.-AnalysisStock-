@@ -13,23 +13,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/mypage_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="@string/mypage"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:src="@drawable/baseline_settings_24"
+                android:focusable="false"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/transparent"
+                app:tint="@color/transparent" />
+            <TextView
+                android:id="@+id/mypage_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="@string/mypage"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_editProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/baseline_settings_24" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:background="#cedeff"
             android:orientation="vertical">
-
 
             <View
                 android:id="@+id/mypage_user_background_image"
@@ -40,94 +62,139 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <ImageView
-                android:id="@+id/mypage_user_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/user_image_default"
-                app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="75dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/mypage_user_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user_image_default"
+                    tools:srcCompat="@tools:sample/avatars"
+                    app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cedeff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
 
             <TextView
                 android:id="@+id/username_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
+                android:layout_gravity="center|left"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.089"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+                android:textStyle="bold" />
 
 
-            <TextView
-                android:id="@+id/mypage_user_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="안녕하세요"
-                app:layout_constraintEnd_toEndOf="@+id/mypage_user_background_image"
-                app:layout_constraintHorizontal_bias="0.092"
-                app:layout_constraintStart_toStartOf="@+id/mypage_user_background_image"
-                app:layout_constraintTop_toBottomOf="@+id/username_title" />
+<!--            <TextView-->
+<!--                android:id="@+id/mypage_user_message"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="안녕하세요"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btn_addExp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center|right"-->
+<!--                    android:text="경험치 추가" />-->
 
 
-            <TextView
-                android:id="@+id/userlevel_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:text="Lv. 3"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.089"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+            </LinearLayout>
 
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/userlevel_text"
-                app:layout_constraintTop_toBottomOf="@+id/userlevel_text" />
-
-            <TextView
-                android:id="@+id/level_exp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="29%"
-                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar"
-                app:layout_constraintHorizontal_bias="0.356"
-                app:layout_constraintStart_toStartOf="@+id/progressBar" />
-
-            <Button
-                android:id="@+id/btn_editProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/edit_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.883"
-                app:layout_constraintStart_toEndOf="@+id/username_title"
-                app:layout_constraintTop_toBottomOf="@+id/mypage_user_background_image" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/userlevel_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="Lv. "
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="#cedeff"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:max="100"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:progressDrawable="@drawable/progressbar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/level_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" %"
+                        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressBar" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -238,53 +305,6 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/mypage_quiz"
-                android:layout_width="match_parent"
-                android:layout_height="92dp"
-                android:layout_margin="10dp"
-                android:background="#f1f9ff"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/mypage_quiz_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="경제 시사 퀴즈"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mypage_quiz_explanation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="퀴즈 풀고 보상 얻어가세요!"
-                    android:textSize="10dp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="주식시장에서 'Wag the Dog'은 어떤 상황을 가리킬 때 사용되는가?"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-
-                </LinearLayout>
 
 
             </LinearLayout>
@@ -293,7 +313,7 @@
             <LinearLayout
                 android:id="@+id/stock_guide"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:background="#f1f9ff"
                 android:orientation="vertical">
@@ -312,5 +332,5 @@
 
 
         </LinearLayout>
-    </LinearLayout>
+
 </ScrollView>

@@ -4,13 +4,18 @@ public class CommentInfo {
     String comment;
     String nickname;
     String post_id;
+    String publisher;
 //    String profile_image;
+    String profileImgURL;
     String time;
 
-    public CommentInfo(String comment, String nickname, String post_id, String time) {
+
+    public CommentInfo(String comment, String nickname, String post_id, String publisher, String profileImgURL, String time) {
         this.comment = comment;
         this.nickname = nickname;
         this.post_id = post_id;
+        this.profileImgURL = profileImgURL;
+        this.publisher = publisher;
 //        this.profile_image = profile_image;
         this.time = time;
     }
@@ -35,8 +40,20 @@ public class CommentInfo {
         return post_id;
     }
 
+    public String getuProfileImgURL() { return profileImgURL; }
+
+    public void setuProfileImgURL(String profileImgURL) { this.profileImgURL = profileImgURL; }
+
     public void setPost_id(String post_id) {
         this.post_id = post_id;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
 //    public String getProfile_image() {

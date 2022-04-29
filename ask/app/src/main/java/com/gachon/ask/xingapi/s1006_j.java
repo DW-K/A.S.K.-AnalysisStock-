@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.ebest.api.SocketManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.gachon.ask.R;
+import com.gachon.ask.util.Firestore;
 
 // 자바 관련은 2020.02 이후로 수정하지 않았음.
 

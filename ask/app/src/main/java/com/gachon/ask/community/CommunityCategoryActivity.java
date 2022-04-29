@@ -1,5 +1,6 @@
 package com.gachon.ask.community;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gachon.ask.MyPageFragment;
 import com.gachon.ask.R;
 import com.gachon.ask.WritingActivity;
+import com.gachon.ask.util.Firestore;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -34,10 +38,12 @@ import java.util.List;
 
 public class CommunityCategoryActivity extends AppCompatActivity {
     final String TAG = "CC Activity";
+    private User user;
+    private String profileImgURL = null;
     public static Context mContext;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<PostInfo> postInfoList = new ArrayList<>();
-    FirebaseUser user;
+    //FirebaseUser user;
     RecyclerView mRecyclerView;
     //layout manager for recyclerview
     RecyclerView.LayoutManager layoutManager;
@@ -46,6 +52,7 @@ public class CommunityCategoryActivity extends AppCompatActivity {
     Button btnAddPost;
     TextView tv_no_post;
     CommunityCategoryAdapter adapter;
+
 
 
     @Override
@@ -108,15 +115,36 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                                     Integer num_heart = Integer.parseInt(String.valueOf(doc.getData().get("num_heart")));
                                     Integer num_comment = Integer.parseInt(String.valueOf(doc.getData().get("num_comment")));
 
+                                    /* 프로필 이미지 코드 구상 */
+                                    // 1번. 가져온 pulisher(게시물을 올린 유저의 uid)value 를 가지고 유저 컬렉션의 userProfileImgURL 값을 가져와야함.
+                                    // 2번. 그리고 이미지 URL값을 adapter에다가 포함하여 전달
+                                    // 이 때, PostInfo class에다가 url 메타 데이터 getter,setter 추가되어 있어야 함.
 
-                                    user = FirebaseAuth.getInstance().getCurrentUser();
+                                    // 1번
+                                    Firestore.getUserData(publisher).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                Log.d(TAG, "Entry task successful!!!");
+                                                user = task.getResult().toObject(User.class);
 
-                                    if(category.equals(selected_category)) {
-                                        adapter.addItem(new PostInfo(post_id, nickname, contents, publisher, category, createdAt, num_heart, num_comment));
-                                        mRecyclerView.setAdapter(adapter);
-                                    }
-
-
+                                                if(user.getUserProfileImgURL() != null) {
+                                                    profileImgURL = user.getUserProfileImgURL();
+                                                    Log.d(TAG, "Profile Image value1 : "+profileImgURL);
+                                                    if(category.equals(selected_category)) {
+                                                        // 2번
+                                                        adapter.addItem(new PostInfo(post_id, nickname, contents, publisher, category, profileImgURL, createdAt, num_heart, num_comment));
+                                                        Log.d(TAG, "Profile Image value2 : "+ profileImgURL);
+                                                        mRecyclerView.setAdapter(adapter);
+                                                    }
+                                                }else {
+                                                    Log.d(TAG, "Profile Image NULL");
+                                                }
+                                            }else{
+                                                Log.d(TAG,"Error from getUserData");
+                                            }
+                                        }
+                                    });
                                 } catch (RuntimeException e) {
                                     System.out.println(e);
                                 }

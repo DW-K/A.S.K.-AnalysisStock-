@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-
+    android:background="#CEDEFF"
     android:orientation="vertical">
 
     <TextView
@@ -21,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CEDEFF"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
 
@@ -30,20 +29,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/ranking_personal" />
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/ranking_university" />
+                android:background="@color/white"
+                android:id="@+id/spinner_ranking" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,41 +44,76 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_ranking_daily"
+                android:id="@+id/btn_ranking_yield"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/tab_ranking_selected"
+                app:backgroundTint="@null"
                 android:layout_weight="1"
-                android:text="@string/ranking_daily" />
+                android:textColor="@color/black"
+                android:text="@string/ranking_yield" />
 
             <Button
-                android:id="@+id/btn_ranking_weekly"
+                android:id="@+id/btn_ranking_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/tab_ranking"
+                app:backgroundTint="@null"
+                android:textColor="@color/black"
                 android:layout_weight="1"
-                android:text="@string/ranking_weekly" />
+                android:text="@string/ranking_level" />
 
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/ranking_monthly" />
 
-            <Button
-                android:id="@+id/button10"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="0.1"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:text="@string/ranking" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:text="@string/ranking_total" />
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:text="프로필" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_weight="0.2"
+                android:layout_margin="10dp"
+                android:text="@string/ranking_yield" />
+
+
         </LinearLayout>
 
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_view_ranking">
+
 
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/gray"
                 android:id="@+id/recycler_view_ranking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </LinearLayout>

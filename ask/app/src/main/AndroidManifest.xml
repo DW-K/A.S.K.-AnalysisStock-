@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.gachon.ask">
-    <!--android:theme="@style/Theme.Ask"-->
-
+    <!-- android:theme="@style/Theme.Ask" -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -12,48 +11,59 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- camera, gallery -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.gachon.ask.xingapi.ApplicationManager"
+        android:name=".xingapi.ApplicationManager"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:preserveLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
-        android:preserveLegacyExternalStorage = "true"
         android:theme="@style/Theme.Ask"
         tools:replace="android:theme"
         tools:targetApi="r">
-
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LoadingActivity"/>
+        <activity
+            android:name=".settings.SettingActivity"
+            android:exported="false" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoadingActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".WritingActivity" />
         <activity android:name=".StockActivity" />
-        <activity android:name=".SentimentReportActivity"/>
-        <activity android:name=".community.PostViewActivity"/>
-        <activity android:name=".community.CommunityCategoryActivity"/>
-        <activity android:name=".CommunityFragment"
+        <activity android:name=".SentimentReportActivity" />
+        <activity android:name=".community.PostViewActivity" />
+        <activity android:name=".community.CommunityCategoryActivity" />
+        <activity
+            android:name=".CommunityFragment"
             tools:ignore="Instantiatable" />
-
-        <activity android:name="com.gachon.ask.xingapi.MainView"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name="com.gachon.ask.xingapi.WebViewActivity"
-            android:theme="@style/AppTheme"> </activity>
-        <activity android:name="com.gachon.ask.xingapi.sLoginSet"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name="com.gachon.ask.xingapi.sLoginSample1"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name="com.gachon.ask.xingapi.sLoginSample2"
-            android:theme="@style/AppTheme"></activity>
-
+        <activity
+            android:name=".xingapi.MainView"
+            android:theme="@style/Theme.AskStock" />
+        <activity
+            android:name=".xingapi.WebViewActivity"
+            android:theme="@style/Theme.AskStock"></activity>
+        <activity
+            android:name=".xingapi.sLoginSet"
+            android:theme="@style/Theme.AskStock" />
+        <activity
+            android:name=".xingapi.sLoginSample1"
+            android:theme="@style/Theme.AskStockLogin" />
+        <activity
+            android:name=".xingapi.sLoginSample2"
+            android:theme="@style/Theme.AskStock" />
     </application>
 
 </manifest>

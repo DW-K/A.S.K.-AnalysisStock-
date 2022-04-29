@@ -138,6 +138,10 @@ class sLoginSample1: AppCompatActivity()  {
 
         setContentView(R.layout.activity_sample_login1)
 
+        // 상태바 텍스트 설정 ()
+        // supportActionBar?.setDisplayShowTitleEnabled(false)
+        // supportActionBar?.title = "Login"
+
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         // get SocketManager instance

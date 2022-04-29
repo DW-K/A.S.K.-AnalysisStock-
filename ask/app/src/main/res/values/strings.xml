@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">ask</string>
+    <string name="login_des">Login</string>
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
 
     <string name="category">카테고리</string>
     <string name="category_car">자동차</string>
     <string name="category_entertainment">엔터테인먼트</string>
+    <string name="category_ent">엔터</string>
     <string name="category_it">IT</string>
     <string name="category_electronics">전자제품</string>
     <string name="category_univ">대학별 게시판</string>
-
 
 
     <string name="no_post">작성된 글이 없습니다.</string>
@@ -18,11 +19,12 @@
     <string name="btn_comment">등록</string>
 
 
-
     <string name="sentiment_report">감성분석 리포트</string>
     <string name="main_sentiment">대표 감성</string>
     <string name="hot_keyword">주요 키워드</string>
     <string name="show_url">원문보기</string>
+    <string name="tweet">트윗</string>
+    <string name="news">뉴스</string>
     <string name="show_graph">긍부정 추이</string>
 
 
@@ -38,18 +40,33 @@
 
 
     <string name="ranking">랭킹</string>
-    <string name="ranking_personal">개인</string>
+    <string name="ranking_level">레벨</string>
+    <string name="ranking_yield">수익률</string>
+    <string name="ranking_rank">순위</string>
+    <string name="ranking_change">변동</string>
+    <string name="ranking_name">이름</string>
     <string name="ranking_university">대학</string>
-    <string name="ranking_daily">일간</string>
-    <string name="ranking_weekly">주간</string>
-    <string name="ranking_monthly">월간</string>
-    <string name="ranking_total">전체</string>
 
 
-
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
     <string name="mypage">마이페이지</string>
-    <string name="edit_profile">프로필 수정</string>
-    <string name="Lv.">Lv.</string>
+    <string name="edit_profile">설정</string>
+    <string name="mypage_edit_profile">설정</string>
+    <string name="level">Lv.</string>
+    <string name="setting_info">정보</string>
+    <string name="setting_changeinfo_nickname">닉네임 수정</string>
+    <string name="setting_changeinfo_summary_nickname"></string>
+    <string name="setting_changeinfo_msg">변경할 닉네임을 입력해주세요.</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_changeinfo_image">프로필 사진 수정</string>
+    <string name="setting_changeinfo_summary_image"></string>
+    <string name="change_image_success">사진 변경에 성공하였습니다.</string>
+    <string name="change_image_error">사진 변경에 실패하였습니다. 닉네임 변경에 실패하였습니다. 잠시 후 다시 시도해주세요.</string>
+    <string name="change_nickname_success">닉네임 변경이 완료되었습니다.</string>
+    <string name="change_nickname_error">닉네임 변경에 실패하였습니다. 잠시 후 다시 시도해주세요.</string>
+    <string name="setting_logout_msg">정말로 로그아웃하시겠습니까? 다시 이용하시려면 로그인 하셔야 합니다.\n로그아웃 후 로그인 화면으로 돌아갑니다.</string>
+    <string name="error">에러가 발생했습니다. 잠시 후 다시 시도해주세요.</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -66,4 +83,11 @@
     <string name="button4">Close Server</string>
     <string name="button5">View my info</string>
     <string name="button6">Send Message</string>
+
+    <!-- Ted Permission -->
+    <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
+    <string name="permission_2">사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

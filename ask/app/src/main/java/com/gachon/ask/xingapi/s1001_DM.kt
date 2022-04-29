@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import android.os.*
+import android.util.Log
 import com.ebest.api.*
 
 import com.gachon.ask.datamngr.DataMngr
@@ -15,6 +16,8 @@ import com.gachon.ask.datamngr.RealHandler
 
 import com.gachon.ask.R
 import com.gachon.ask.datamngr.API_DEFINE
+import com.gachon.ask.util.Firestore
+import kotlinx.coroutines.*
 
 class s1001_DM : Fragment() {
 
@@ -38,6 +41,41 @@ class s1001_DM : Fragment() {
     var m_strNextKey = ""
     var m_bNextQuery = false
     lateinit internal var m_buttonNext:Button
+
+    /*
+    var temp : String = ""
+
+    val job = CoroutineScope(Dispatchers.Default).async {
+        val job1 = async{
+            delay(500)
+            Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+                val mockMap = documentSnapshot.data
+                Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![temp].toString())
+                temp = mockMap!![temp].toString()
+                Log.d("s1001_DM", "temp값 테스트(함수 안) : " + temp)
+            }
+        }
+    }*/
+
+    /*
+    class MyThread: Runnable {
+
+        var temp : String = ""
+
+        constructor(temp : String){
+            this.temp = temp
+        }
+
+        public override fun run() {
+            Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+                val mockMap = documentSnapshot.data
+                Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![temp].toString())
+                temp = mockMap!![temp].toString()
+                Log.d("s1001_DM", "temp값 테스트(함수 안) : " + temp)
+            }
+            Log.d("s1001_DM", "리스너 끝난 temp값 : " + temp)
+        }
+    }*/
 
 
     internal inner class ProcMessageHandler : Handler() {
@@ -139,150 +177,172 @@ class s1001_DM : Fragment() {
     }
 
     fun OnButtonQueryClicked() {
-
         queryT1301(false)
     }
 
     fun OnButtonNextQueryClicked(){
-
         queryT1301(true)
     }
 
     fun queryT1301(bNext : Boolean = false){
 
-        val temp = root.findViewById<EditText>(R.id.editText2).text.toString()
-        if (temp.length < 6) {
-            Toast.makeText(
-                activity?.applicationContext,
-                "종목코드를 확인해 주십시오.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
+        var temp = root.findViewById<EditText>(R.id.editText2).text.toString()
 
-        if( bNext == true ) {
-            if( m_strNextKey.length <= 0 ) return
+        Log.d("s1001_DM", "temp값 테스트(전) : " + temp)
 
-            if( m_strJongmokCode.length > 0 && m_strJongmokCode != temp ){
-                Toast.makeText( activity?.applicationContext, "최초 조회한 종목코드와 다릅니다.", Toast.LENGTH_LONG ).show()
-                return
+        //val myThread = Thread(MyThread(temp))
+        //myThread.start()
+        //myThread.join()
+
+        // ######################################################################
+
+        Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+            val mockMap = documentSnapshot.data
+            Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![temp].toString())
+
+            if (mockMap[temp] != null){
+                temp = mockMap!![temp].toString()
             }
-        }
-        else {
-            m_adapter.items.clear()
-            m_adapter.notifyDataSetChanged()
+            Log.d("s1001_DM", "temp값 테스트(함수 안) : " + temp)
 
-            // 현재 수신받고 있는 종목의 실시간정보를 삭제한다.
-            if (m_strJongmokCode.length > 0) {
-                m_S3_.removeItems(manager, m_nHandle, m_strJongmokCode)
-                m_K3_.removeItems(manager, m_nHandle, m_strJongmokCode)
+            Log.d("s1001_DM", "temp값 테스트(후) : " + temp)
+            // ######################################################################
+
+            if (temp.length < 6) {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "종목코드를 확인해 주십시오.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //return
             }
 
-            m_strJongmokCode = temp
-        }
+            if( bNext == true ) {
+                if( m_strNextKey.length <= 0 ) //return
+
+                if( m_strJongmokCode.length > 0 && m_strJongmokCode != temp ){
+                    Toast.makeText( activity?.applicationContext, "최초 조회한 종목코드와 다릅니다.", Toast.LENGTH_LONG ).show()
+                    //return
+                }
+            }
+            else {
+                m_adapter.items.clear()
+                m_adapter.notifyDataSetChanged()
+
+                // 현재 수신받고 있는 종목의 실시간정보를 삭제한다.
+                if (m_strJongmokCode.length > 0) {
+                    m_S3_.removeItems(manager, m_nHandle, m_strJongmokCode)
+                    m_K3_.removeItems(manager, m_nHandle, m_strJongmokCode)
+                }
+
+                m_strJongmokCode = temp
+            }
 
 //================================================================================================//
 // 데이터 메니저를 사용하는 방법
 //================================================================================================//
-        var t1301 = DataMngr.getInstance(manager, "t1301")!!
+            var t1301 = DataMngr.getInstance(manager, "t1301")!!
 
-        //------------------------------------------------------------------------------------------
-        // 입력
-        t1301.writeFieldData( "t1301InBlock", "shcode   ", m_strJongmokCode  )
-        t1301.writeFieldData( "t1301InBlock", "cvolume  ", ""  )
-        t1301.writeFieldData( "t1301InBlock", "starttime", ""  )
-        t1301.writeFieldData( "t1301InBlock", "endtime  ", ""  )
-        t1301.writeFieldData( "t1301InBlock", "cts_time ", if(bNext) m_strNextKey else  ""  )
+            //------------------------------------------------------------------------------------------
+            // 입력
+            t1301.writeFieldData( "t1301InBlock", "shcode   ", m_strJongmokCode  )
+            t1301.writeFieldData( "t1301InBlock", "cvolume  ", ""  )
+            t1301.writeFieldData( "t1301InBlock", "starttime", ""  )
+            t1301.writeFieldData( "t1301InBlock", "endtime  ", ""  )
+            t1301.writeFieldData( "t1301InBlock", "cts_time ", if(bNext) m_strNextKey else  ""  )
 
-        //------------------------------------------------------------------------------------------
-        //   전송
-        //   TR 전송 제한으로 인해 조회시 시간을 입력받아 초당전송 제한에 걸리는 문제를 최소화 하기 위해 request에 기능 추가
-        //   nLastSec -> -1:즉시전송, 0:초당전송시간이 지난 후에 전송, < 0 : nLastSec초가 지난 후에 전송
-        //   fun request( sm : SocketManager, nHandler : Int, bNext: Boolean = false, strContinueKey: String = "", nLaterSec : Int = -1, nTimeOut: Int = 30 ) : Int
-        var nRqID = t1301.request( manager, m_nHandle, bNext )
-        if( nRqID < 0 ) {
-            Toast.makeText( activity?.applicationContext, "TR전송실패(" + nRqID + ")", Toast.LENGTH_LONG ).show()
-            return
-        }
-
-        m_buttonNext.setEnabled(false)
-
-        //------------------------------------------------------------------------------------------
-        // 수신
-        t1301.setOnRecvListener( object : DataMngr.OnRecvListener {
-            /**
-             * 조회 응답
-             */
-            override fun onData(dm : DataMngr, sBlockName : String){
-
+            //------------------------------------------------------------------------------------------
+            //   전송
+            //   TR 전송 제한으로 인해 조회시 시간을 입력받아 초당전송 제한에 걸리는 문제를 최소화 하기 위해 request에 기능 추가
+            //   nLastSec -> -1:즉시전송, 0:초당전송시간이 지난 후에 전송, < 0 : nLastSec초가 지난 후에 전송
+            //   fun request( sm : SocketManager, nHandler : Int, bNext: Boolean = false, strContinueKey: String = "", nLaterSec : Int = -1, nTimeOut: Int = 30 ) : Int
+            var nRqID = t1301.request( manager, m_nHandle, bNext )
+            if( nRqID < 0 ) {
+                Toast.makeText( activity?.applicationContext, "TR전송실패(" + nRqID + ")", Toast.LENGTH_LONG ).show()
+                //return
             }
-            /**
-             * 데이터 메세지
-             */
-            override fun onMsg(dm : DataMngr, sCode : String, sMsg : String, bCriticalError : Boolean){
 
-            }
-            /**
-             * 조회한 서비스가 모두 종료되었을 때
-             */
-            override fun onComplete(dm: DataMngr) {
+            m_buttonNext.setEnabled(false)
 
-                if( dm == t1301 ){
-                    // 그리드 데이터
-                    var nCount = dm.getBlockCount( "t1301OutBlock1" )
-                    for( i in 0 .. nCount-1 ) {
+            //------------------------------------------------------------------------------------------
+            // 수신
+            t1301.setOnRecvListener( object : DataMngr.OnRecvListener {
+                /**
+                 * 조회 응답
+                 */
+                override fun onData(dm : DataMngr, sBlockName : String){
 
-                        val data_record: List<Triple<TableGrid.TYPE, Any?, Int>> = listOf(
+                }
+                /**
+                 * 데이터 메세지
+                 */
+                override fun onMsg(dm : DataMngr, sCode : String, sMsg : String, bCriticalError : Boolean){
 
-                            Triple( TableGrid.TYPE.STRING, manager.getTimeFormat(dm.readFieldData    ( "t1301OutBlock1","chetime", i)), R.id.view1  ),
-                            Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","price"  , i)), R.id.view2  ),
-                            Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","price"  , i ), R.id.view2  ),
-                            Triple( TableGrid.TYPE.ICON,                         dm.readFieldData    ( "t1301OutBlock1","sign"   , i ), R.id.view3_1),
-                            Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","change" , i)), R.id.view3_2),
- //                           Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","change" , i ), R.id.view3_2),
-                            Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","cvolume"   , i)), R.id.view4  ),
- //                           Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","cvolume"   , i ), R.id.view4  ),
-                            Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","volume" , i)), R.id.view5  )
-                        )
-                        m_adapter.addItem(data_record)
-                    }
-                    m_adapter.notifyDataSetChanged()   //데이터 갱신을 알린다.
+                }
+                /**
+                 * 조회한 서비스가 모두 종료되었을 때
+                 */
+                override fun onComplete(dm: DataMngr) {
 
-                    if( dm.isContinue() == true ){
-                        // 연속키
-                        m_strNextKey = dm.readFieldData( "t1301OutBlock","cts_time").trim()
-                        if (m_strNextKey.length > 0) m_buttonNext.setEnabled(true)
-                        else                         m_buttonNext.setEnabled(false)
-                    }
+                    if( dm == t1301 ){
+                        // 그리드 데이터
+                        var nCount = dm.getBlockCount( "t1301OutBlock1" )
+                        for( i in 0 .. nCount-1 ) {
 
-                    if( bNext == false ){
-                        // 실시간을 등록한다.
+                            val data_record: List<Triple<TableGrid.TYPE, Any?, Int>> = listOf(
+
+                                Triple( TableGrid.TYPE.STRING, manager.getTimeFormat(dm.readFieldData    ( "t1301OutBlock1","chetime", i)), R.id.view1  ),
+                                Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","price"  , i)), R.id.view2  ),
+                                Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","price"  , i ), R.id.view2  ),
+                                Triple( TableGrid.TYPE.ICON,                         dm.readFieldData    ( "t1301OutBlock1","sign"   , i ), R.id.view3_1),
+                                Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","change" , i)), R.id.view3_2),
+                                //                           Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","change" , i ), R.id.view3_2),
+                                Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","cvolume"   , i)), R.id.view4  ),
+                                //                           Triple( TableGrid.TYPE.DAEBI ,                       dm.readFieldAttrData( "t1301OutBlock1","cvolume"   , i ), R.id.view4  ),
+                                Triple( TableGrid.TYPE.STRING, manager.getCommaValue(dm.readFieldData    ( "t1301OutBlock1","volume" , i)), R.id.view5  )
+                            )
+                            m_adapter.addItem(data_record)
+                        }
+                        m_adapter.notifyDataSetChanged()   //데이터 갱신을 알린다.
+
+                        if( dm.isContinue() == true ){
+                            // 연속키
+                            m_strNextKey = dm.readFieldData( "t1301OutBlock","cts_time").trim()
+                            if (m_strNextKey.length > 0) m_buttonNext.setEnabled(true)
+                            else                         m_buttonNext.setEnabled(false)
+                        }
+
+                        if( bNext == false ){
+                            // 실시간을 등록한다.
 //================================================================================================//
 // 실시간 데이터 메니저를 사용하는 방법
 //================================================================================================//
-                        m_S3_.addItems(manager, m_nHandle, m_strJongmokCode)
-                        m_S3_.setOnRecvListener( object : RealDataMngr.OnRecvListener {
+                            m_S3_.addItems(manager, m_nHandle, m_strJongmokCode)
+                            m_S3_.setOnRecvListener( object : RealDataMngr.OnRecvListener {
 
-                            override fun onData( rdm : RealDataMngr) {
-                                if( rdm == m_S3_ ) {
-                                    processReal_S3_K3_(rdm)
+                                override fun onData( rdm : RealDataMngr) {
+                                    if( rdm == m_S3_ ) {
+                                        processReal_S3_K3_(rdm)
+                                    }
                                 }
-                            }
-                        })
+                            })
 
-                        m_K3_.addItems(manager, m_nHandle, m_strJongmokCode)
-                        m_K3_.setOnRecvListener( object : RealDataMngr.OnRecvListener {
+                            m_K3_.addItems(manager, m_nHandle, m_strJongmokCode)
+                            m_K3_.setOnRecvListener( object : RealDataMngr.OnRecvListener {
 
-                            override fun onData( rdm : RealDataMngr) {
-                                if( rdm == m_K3_ ) {
-                                    processReal_S3_K3_(rdm)
+                                override fun onData( rdm : RealDataMngr) {
+                                    if( rdm == m_K3_ ) {
+                                        processReal_S3_K3_(rdm)
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
-            }
-        } )
+            } )
+        }
+
+
     }
 
 

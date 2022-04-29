@@ -1,5 +1,6 @@
 package com.gachon.ask.xingapi
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.green
 import android.graphics.Paint
@@ -20,7 +21,9 @@ import com.gachon.ask.datamngr.API_DEFINE
 import java.util.*
 import kotlin.collections.ArrayList
 import com.gachon.ask.R;
+import com.gachon.ask.SentimentReportActivity
 import com.gachon.ask.databinding.ActivityS1002Binding
+import com.gachon.ask.util.Firestore
 import com.github.mikephil.charting.charts.CandleStickChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -159,6 +162,15 @@ class s1002 : Fragment() {
 
         //setCandleStickChart()
 
+        //감성분석리포트로 연결
+        val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
+        button_senti_analysis.setOnClickListener {
+            val intent = Intent(context, SentimentReportActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         root.findViewById<Button>(R.id.button).setOnClickListener {
             requestT1305()
             //requestT8412()
@@ -222,55 +234,65 @@ class s1002 : Fragment() {
 
         val edit = root.findViewById<EditText>(R.id.editText)
         /* size 6 */
-        val shcode = edit.text.toString()
-        if(shcode.length < 6)
-        {
-            Toast.makeText(
-                activity?.applicationContext,
-                "종목코드를 확인해 주십시오.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
+        var shcode = edit.text.toString()
+
+        Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
+            val mockMap = documentSnapshot.data
+            Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![shcode].toString())
+            if (mockMap[shcode] != null){
+                shcode = mockMap!![shcode].toString()
+            }
+            Log.d("s1001_DM", "temp값 테스트(함수 안) : " + shcode)
+            if(shcode.length < 6)
+            {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "종목코드를 확인해 주십시오.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                // return
+            }
+
+            /* size 1*/
+            val dwmcode = m_dwm.toString()
+
+            val dateed = root.findViewById<EditText>(R.id.date_edit)
+            /* size 8*/
+            val date = dateed.text.toString()
+            if(date.length < 8)
+            {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "날짜를 확인해 주십시오.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                // return
+            }
+
+            /* size 4 */
+            val idx = "    "
+
+            /* size 4 */
+            val cnt = root.findViewById<EditText>(R.id.cnt_edit).text.toString().toInt()
+
+            if( (cnt < 0) or (cnt > 10000))
+            {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "조회수량을 확인해 주십시오.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                // return
+            }
+            val cnt_string = String.format("%04d",cnt)
+
+            /* inblock 데이터 필드값 사이 빈칸(" ") 필요 */
+            val inblock = shcode + " " + dwmcode + " "+ date + " " + idx + " " + cnt_string
+
+            /* TR 요청 */
+            manager.requestData(m_nHandle, "t1305", inblock, false, "", 200)
         }
 
-        /* size 1*/
-        val dwmcode = m_dwm.toString()
-
-        val dateed = root.findViewById<EditText>(R.id.date_edit)
-        /* size 8*/
-        val date = dateed.text.toString()
-        if(date.length < 8)
-        {
-            Toast.makeText(
-                activity?.applicationContext,
-                "날짜를 확인해 주십시오.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
-        /* size 4 */
-        val idx = "    "
-
-        /* size 4 */
-        val cnt = root.findViewById<EditText>(R.id.cnt_edit).text.toString().toInt()
-
-        if( (cnt < 0) or (cnt > 10000))
-        {
-            Toast.makeText(
-                activity?.applicationContext,
-                "조회수량을 확인해 주십시오.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-        val cnt_string = String.format("%04d",cnt)
-
-        /* inblock 데이터 필드값 사이 빈칸(" ") 필요 */
-        val inblock = shcode + " " + dwmcode + " "+ date + " " + idx + " " + cnt_string
-
-        /* TR 요청 */
-        manager.requestData(m_nHandle, "t1305", inblock, false, "", 200)
     }
     private fun processT1305(strBlockName: String, pData: ByteArray) {
         if (strBlockName == "t1305OutBlock" == true) {
@@ -279,7 +301,6 @@ class s1002 : Fragment() {
         } else if (strBlockName == "t1305OutBlock1" == true) {
             processT1305OutBlock1(pData)
         }
-
     }
 
     private fun processT1305OutBlock1(pData: ByteArray){

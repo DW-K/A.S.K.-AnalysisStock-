@@ -1,42 +1,64 @@
 package com.gachon.ask;
 
-
 public class RankInfo {
-    private Integer userRank;
-    private Integer userLevel;
-    private String nickname;
-    private Integer userMoney;
+    private String uID;
+    private Integer uRank;
+    private Integer uLevel;
+    private String uNickname;
+    private String uProfileImgURL;
+    private Integer uYield;
 
+    public RankInfo(String uID, Integer uRank, Integer uLevel,
+            String uNickname, String uProfileImgURL, int uYield) {
+        this.uID = uID;
+        this.uRank = uRank;
+        this.uLevel = uLevel;
+        this.uNickname = uNickname;
+        this.uProfileImgURL = uProfileImgURL;
+        this.uYield = uYield;
 
-    public RankInfo(Integer userRank, Integer userLevel, String nickname, int userMoney){
-        this.userRank = userRank;
-        this.userLevel = userLevel;
-        this.nickname = nickname;
-        this.userMoney = userMoney;
-
-    }
-
-
-    public String getNickname(){ return this.nickname;}
-    public void setNickname(String nickname){ this.nickname = nickname;}
-    public Integer getUserRank() {
-        return userRank;
-    }
-    public void setUserRank(Integer userRank) {
-        this.userRank = userRank;
-    }
-    public Integer getUserLevel() {
-        return userLevel;
-    }
-    public void setUserLevel(Integer userLevel) {
-        this.userLevel = userLevel;
-    }
-    public Integer getUserMoney() {
-        return userMoney;
-    }
-    public void setUserMoney(Integer userMoney) {
-        this.userMoney = userMoney;
     }
 
+    public String getuID() { return uID; }
+
+    public Integer getuRank() {
+        return uRank;
+    }
+
+    public void setuRank(Integer uRank) {
+        this.uRank = uRank;
+    }
+
+    public Integer getuLevel() {
+        return uLevel;
+    }
+
+    public void setuLevel(Integer uLevel) {
+        this.uLevel = uLevel;
+    }
+
+    public String getuNickname() {
+        return uNickname;
+    }
+
+    public void setuNickname(String uNickname) {
+        this.uNickname = uNickname;
+    }
+
+    public String getuProfileImgURL() {
+        return uProfileImgURL;
+    }
+
+    public void setuProfileImgURL(String uProfileImgURL) {
+        this.uProfileImgURL = uProfileImgURL;
+    }
+
+    public Integer getuYield() {
+        return uYield;
+    }
+
+    public void setuYield(Integer uYield) {
+        this.uYield = uYield;
+    }
 
 }

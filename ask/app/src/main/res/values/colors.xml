@@ -11,11 +11,13 @@
     <color name="gray">#FFAAAAAA</color>
     <color name="main_color">#CEDEFF</color>
     <color name="text_color1">#2699FB</color>
+    <color name="transparent">#00000000</color>
 
     <color name="themeColor">#2699FB</color>
     <color name="skyblue_background">#CEDEFF</color>
     <color name="skyblue_2">#BCE0FD</color>
     <color name="blue1">#0062E7</color>
+    <color name="mock_stock">#9cbee2</color>
 
     <color name="_RED">#F55151</color>
     <color name="_BLUE">#4CA4FF</color>
@@ -23,4 +25,7 @@
     <color name="_PINK">#F567BA</color>
     <color name="_WHITE">#FFFFFF</color>
     <color name="_BLACK">#000000</color>
+
+    <color name="red_up">#F55151</color>
+    <color name="blue_down">#4CA4FF</color>
 </resources>

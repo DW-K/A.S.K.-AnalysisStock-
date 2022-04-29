@@ -23,10 +23,11 @@ public class User {
     private ArrayList<StockReport> myStockReport; // 매매 기록
     private ArrayList<Integer> challenges;        // 달성한 업적
 
-    public User(){ }
+    public User() { }
 
-    public User(String uid, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
+    public User(String uid, String userProfileImgURL, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
         this.uid = uid;
+        this.userProfileImgURL = userProfileImgURL;
         this.userEmail = userEmail;
         this.userNickName = userNickName;
         this.registerTime = registerTime;
@@ -50,6 +51,10 @@ public class User {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    public String getUserProfileImgURL() { return userProfileImgURL; }
+
+    public void setUserProfileImgURL(String userProfileImgURL) { this.userProfileImgURL = userProfileImgURL; }
 
     public String getUserEmail() {
         return userEmail;
