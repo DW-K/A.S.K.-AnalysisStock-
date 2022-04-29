@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/setting_info">
+        <EditTextPreference
+            android:key="change_info_nickname"
+            android:title="@string/setting_changeinfo_nickname"
+            android:summary="@string/setting_changeinfo_summary_nickname"
+            android:dialogMessage="@string/setting_changeinfo_msg"
+            />
+
+        <Preference
+            android:key="change_info_image"
+            android:title="@string/setting_changeinfo_image"
+            android:summary="@string/setting_changeinfo_summary_image" />
+
+        <Preference
+            android:key="log_out"
+            android:title="@string/setting_logout"/>
+
+    </PreferenceCategory>
+    <!-- 앱 정보 & 개발자 정보 -->
+    <PreferenceCategory android:title="어플 정보" >
+
+        <Preference
+            android:key="check_info_developers"
+            android:summary="개발자 정보를 확인합니다"
+            android:title="개발자 정보" >
+        </Preference>
+
+        <Preference
+            android:summary="개발자에게 메일을 보냅니다"
+            android:title="메일 보내기" >
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:abnc7800@gmail.com" />
+        </Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>
