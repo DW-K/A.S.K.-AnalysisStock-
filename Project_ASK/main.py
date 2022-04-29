@@ -5,6 +5,8 @@ from subProcess_crawl import crawling_news, crawling_tweet, integrate_word_count
 
 from crawlJson import readJson
 import Path
+import schedule
+import time
 
 jsonCrawlFilePath = Path.RESOURCE_PATH_CRAWLING_KEYWORD
 jsonCrawlFileName = Path.RESOURCE_FILE_CRAWLING_KEYWORD
@@ -53,7 +55,22 @@ def crawlingStock():
             getStockPrice(category=category, companyName=companyName, stockCode=stockCode)
 
 
+def start_crawl():
+    newsCrawlingByKeyword()
+    twitterCrawlingByKeyword()
+    crawlingStock()
+    train()
+
+
 if __name__ == "__main__":
+    schedule.every().day.at("23:59").do(start_crawl)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+
+
+
     # crawlingStock()
     # newsCrawlingByKeyword()
     # twitterCrawlingByKeyword()
@@ -65,8 +82,6 @@ if __name__ == "__main__":
     #     target_date = target_date_format.strftime(dateFormat)
     #     # print(target_date)
     #     newsCrawlingByKeyword(target_date)
-
-    print("hi")
 
     # date_count = 6
     # for i in range(0, date_count, 1):

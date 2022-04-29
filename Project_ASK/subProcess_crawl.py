@@ -21,12 +21,18 @@ def subProcess_crawl(func, arg=[]):
     print(out.decode())
 
 
-def crawling_news(category, companyName, maxpage, query, sort, s_date, e_date):
-    subProcess_crawl('crawling_news', [category, companyName, maxpage, query, sort, s_date, e_date])
+def crawling_news(companyName, query, s_date, e_date=None):
+    if e_date is None:
+        e_date = s_date
+
+    subProcess_crawl('crawling_news', [category, companyName, maxpage, query, s_date, e_date])
     print(f"complete crawling news: {companyName} ({query}): {s_date}-{e_date}")
 
 
-def crawling_tweet(category, companyName, maxpage, query, s_date, e_date):
+def crawling_tweet(companyName, query, s_date, e_date=None):
+    if e_date is None:
+        e_date = s_date
+
     subProcess_crawl('crawling_tweet', [category, companyName, maxpage, query, s_date, e_date])
     print(f"complete crawling tweet: {companyName} ({query}): {s_date}-{e_date}")
 

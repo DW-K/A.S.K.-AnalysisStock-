@@ -39,12 +39,15 @@ class RNNBaseModel(nn.Module):
         self.hidden_size = hidden_size
         self.output_size = output_size
 
+        self.layerNorm = nn.LayerNorm(input_size)
+
         self.rnn = getattr(nn, rnn_type)(input_size, hidden_size, num_layers=1,
                                          batch_first=True, dtype=torch.float64, bidirectional=True)
 
         self.out = nn.Linear(hidden_size*2, output_size, dtype=torch.float64)
 
     def forward(self, inputs, hidden=None):
+        inputs = self.layerNorm(inputs)
         output, hidden = self.rnn(inputs, hidden)
         output = self.out(output)
         return output, hidden
