@@ -1,3 +1,5 @@
+from datetime import date
+
 import numpy as np
 import pandas as pd
 
@@ -6,9 +8,30 @@ from konlpy.tag import Hannanum
 from konlpy.tag import Kkma
 from konlpy.tag import Komoran
 
+from database.word_db_sql import read_table_news, read_table_news_for_count, insert_table_news_count
 
-def make_word_count(df):
-    target_col = '기사 내용'
+
+def make_word_count(company, day):
+    df_news = read_table_news(company, day)
+    wc_counter = make_word_count_counter(df_news)
+    sorted_wc = wc_counter.most_common()
+
+    cols = ['date', 'word', 'count', 'company', 'positive', 'negative']
+    df_result = pd.DataFrame(columns=cols)
+
+    for i in range(10):
+        word = sorted_wc[i][0]
+        count = sorted_wc[i][1]
+        df_count = read_table_news_for_count(company, day, word)
+
+        new_row = {'date': day, 'word': word, 'count': count, 'company': company, 'positive':df_count['positive'].mean(), 'negative': df_count['negative'].mean()}
+        df_result = df_result.append(new_row, ignore_index=True)
+
+    insert_table_news_count(df_result)
+
+
+def make_word_count_counter(df):
+    target_col = 'article_content'
 
     han = Kkma()
 
@@ -30,13 +53,9 @@ def make_word_count(df):
 
             countResult = Counter(countResult) + Counter(wordCount)
 
-    return dict(countResult)
+    return countResult
 
 
 if __name__ == "__main__":
-    df = pd.read_csv(r'../dataset/crawling.csv')
-    make_word_count(df=df)
-
-    # w = '2025'
-    # print(w.isdigit())
+    make_word_count('기아', date(2022, 4, 29))
 
