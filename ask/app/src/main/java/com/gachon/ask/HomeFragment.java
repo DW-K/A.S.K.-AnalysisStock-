@@ -51,6 +51,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     private SwipeRefreshLayout swipeBoard = null;
     private DocumentSnapshot last;
     User level_user;
+    static boolean isStockListExist;
 
 
     @Override
@@ -134,7 +135,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
                     level_user = user;
                     myStockList = user.getMyStock();
                     if(myStockList != null && myStockList.size() > 0){
+                        isStockListExist = true;
                         binding.buttonInvestment.setVisibility(View.GONE); // 주식 거래 내역이 있다면 모의투자 버튼 활성화 X
+
                         int sum_yield = 0;
                         for(int i = 0; i < myStockList.size(); i++){
                             sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());

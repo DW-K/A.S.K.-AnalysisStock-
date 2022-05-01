@@ -3,6 +3,7 @@
     <string name="login_des">Login</string>
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
+    <string name="gachon">가천대학교</string>
 
     <string name="category">카테고리</string>
     <string name="category_car">자동차</string>
@@ -26,17 +27,10 @@
     <string name="tweet">트윗</string>
     <string name="news">뉴스</string>
     <string name="show_graph">긍부정 추이</string>
+    <string name="challenge_the_first_trade">최초의 거래</string>
+    <string name="challenge_the_first_trade_detail">모의투자 매매 1회 성공</string>
 
 
-    <string name="sentiment_analysis_info">키워드에 대한
-        뉴스/SNS의
-        감성분석 결과를
-        참고해보세요!
-    </string>
-    <string name="stock_predict_info">재무재표와
-        뉴스/SNS를 통해
-        주가 변동을
-        예측해드립니다!</string>
 
 
     <string name="ranking">랭킹</string>

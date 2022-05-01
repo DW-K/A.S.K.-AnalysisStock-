@@ -45,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_margin="10dp"
             android:orientation="horizontal" >
 
 
@@ -58,7 +57,7 @@
                 android:drawableTint="@color/black"
                 android:text="@string/category_car"
                 android:textColor="@color/black"
-                android:textSize="36dp"
+                android:textSize="30dp"
                 android:elevation="10dp"
                 app:backgroundTint="#bed4ff"></Button>
 
@@ -72,7 +71,7 @@
             android:text="@string/category_ent"
             android:elevation="10dp"
             android:textColor="@color/black"
-            android:textSize="36dp"
+            android:textSize="30dp"
             app:backgroundTint="#fffbc8"></Button>
 
         <Button
@@ -81,7 +80,7 @@
             android:layout_height="220dp"
             android:layout_margin="5dp"
             android:text="@string/category_it"
-            android:textSize="36dp"
+            android:textSize="30dp"
             android:textColor="@color/black"
             android:elevation="10dp"
             android:drawableBottom="@drawable/it"
@@ -95,7 +94,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/black"
             android:text="@string/category_electronics"
-            android:textSize="36dp"
+            android:textSize="30dp"
             android:elevation="10dp"
             android:drawableBottom="@drawable/appliance"
             android:drawableTint="@color/black"
@@ -106,6 +105,47 @@
     </HorizontalScrollView>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/community_univ_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/category_univ"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/community_univ_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="퀴즈 풀고 보상 얻어가세요!"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/btn_community_univ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/univ_logo"
+            android:text="가천대학교"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:elevation="10dp"
+            app:backgroundTint="@color/light_gray"></Button>
+
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
