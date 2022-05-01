@@ -8,9 +8,15 @@ from datetime import datetime, timedelta
 
 import stockJson
 from connectKiwoom import connectKiwoom
+from db import insert_table_stock
 from getStockCode import getStockCode
 
 import time
+
+# row 생략 없이 출력
+pd.set_option('display.max_rows', None)
+# col 생략 없이 출력
+pd.set_option('display.max_columns', None)
 
 
 def getStockPrice(company, stockCode, s_date, e_date=None):
@@ -37,16 +43,25 @@ def getStockPrice(company, stockCode, s_date, e_date=None):
         df = df.append(data)
 
     df.drop_duplicates(subset=None, keep='first', inplace=True, ignore_index=True)
+    df['날짜'] = df['날짜'].map(lambda x: datetime.strptime(x, date_format))
+
+    numeric_cols = ['시가', '고가', '저가', '종가', '전일비', '등락률', '거래량', '금액(백만)', '신용비', '외인비', '체결강도', '외인보유', '외인비중', '신용잔고율']
+
+    df.loc[:, numeric_cols] = df.loc[:, numeric_cols].apply(pd.to_numeric)
+    df = df.where(pd.notnull(df), 0)
+
     df.sort_values(by='날짜', axis=0, ascending=True, inplace=True, kind='quicksort')
     df['company'] = company
-    print(df)
+    insert_table_stock(df)
+    print(df.info())
+    df.to_excel('test.xlsx')
 
 
 if __name__ == "__main__":
-    print('start getStockPrice code')
+    print('start getStockPrice')
 
     # argList = sys.argv[1:]
-    argList = ['기아', '000270', '20220101', '20220430']
+    argList = ['현대차', '005380', '20220101', '20220430']
     company = argList[0]
     stockCode = argList[1]
     start_date_str = argList[2]

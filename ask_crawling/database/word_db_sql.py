@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, insert, MetaData
 try:
     from database.db_config import db_connection_address
     from database.models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
-        get_table_obj_news_count, create_tables
+    get_table_obj_news_count, create_tables, get_table_obj_company
 except:
     from db_config import db_connection_address
     from models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
@@ -18,18 +18,22 @@ start_date = date(2002, 6, 1)
 
 
 def insert_table_company(company):
-    dtypesql = {
-        'id': sqlalchemy.types.INTEGER(),
-        'company': sqlalchemy.types.VARCHAR(64)
-    }
-
-    df_company = pd.DataFrame([company], columns=['company'])
-
     db_connection = create_engine(db_connection_address)
-    try:
-        df_company.to_sql(name='crawl_company_table', con=db_connection, if_exists='fail', index=False, dtype=dtypesql)
-    except:
-        pass
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        company_table = get_table_obj_company(meta)
+
+        try:
+            result = conn.execute(
+                insert(company_table),
+                [
+                    {
+                        "company": company,
+                    }
+                ]
+            )
+        except Exception as e:
+            print(f'{e}')
 
 
 def insert_table_log(company):
@@ -111,6 +115,7 @@ def insert_table_news(df_news):  # dataframe 하나씩 넣기
                             "press_link": row['언론사 링크'],
                             "article_link": row['기사 링크'],
                             "article_content": row['기사 내용'],
+                            "content_abs": row['content_abs'],
                             "positive": row['positive'],
                             "negative": row['negative']
                         }

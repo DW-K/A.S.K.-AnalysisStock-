@@ -170,6 +170,7 @@ def get_table_obj_news(db_meta=meta):
         Column('press_link', VARCHAR(256)),
         Column('article_link', VARCHAR(256)),
         Column('article_content', VARCHAR(4096)),
+        Column('content_abs', VARCHAR(2048)),
         Column('positive', FLOAT, nullable=False),
         Column('negative', FLOAT, nullable=False)
     )

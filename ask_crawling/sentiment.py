@@ -17,13 +17,15 @@ def sentiment(df):
         # print(df.loc[i, target_col])
         if df.loc[i, target_col] is not np.NAN:
             # print(df.loc[i, target_col])
+            abs = abs_summ(df.loc[i, target_col])
             if len(df.loc[i, target_col]) > 500:
-                text = abs_summ(df.loc[i, target_col])
+                text = abs
             else:
                 text = df.loc[i, target_col]
 
             sentimentResult = sa(text, show_probs=True)
 
+            df.loc[i, "content_abs"] = abs
             df.loc[i, "positive"] = sentimentResult['positive']
             df.loc[i, "negative"] = sentimentResult['negative']
 

@@ -28,11 +28,16 @@ def getStockPrice(company, stockCode, day):
                                 output="일별주가",
                                 next=0)
 
-    print(data)
-
     if data is not None:
         data['company'] = company
-        insert_table_stock(data)
+        data['날짜'] = data['날짜'].map(lambda x: datetime.strptime(x, date_format))
+
+        numeric_cols = ['시가', '고가', '저가', '종가', '전일비', '등락률', '거래량', '금액(백만)', '신용비', '외인비', '체결강도', '외인보유', '외인비중',
+                        '신용잔고율']
+
+        df = data.where(pd.notnull(data), None)
+        df.loc[:, numeric_cols] = df.loc[:, numeric_cols].apply(pd.to_numeric)
+        insert_table_stock(df)
 
 
 if __name__ == "__main__":
@@ -40,7 +45,7 @@ if __name__ == "__main__":
 
     # argList = sys.argv[1:]
 
-    argList = ['기아', '000270', '20220101', '20220430']
+    argList = ['현대차', '005380', '20220101', '20220430']
 
     company = argList[0]
     stockCode = argList[1]
