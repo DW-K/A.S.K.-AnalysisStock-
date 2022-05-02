@@ -162,11 +162,10 @@ class s1002 : Fragment() {
 
         //setCandleStickChart()
 
-        //감성분석리포트로 연결
-
         // 종목 검색창
         val edit = root.findViewById<EditText>(R.id.editText)
 
+        //감성분석리포트로 연결
         val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
         button_senti_analysis.setOnClickListener {
             val intent = Intent(context, SentimentReportActivity::class.java)
