@@ -163,14 +163,19 @@ class s1002 : Fragment() {
         //setCandleStickChart()
 
         //감성분석리포트로 연결
+
+        // 종목 검색창
+        val edit = root.findViewById<EditText>(R.id.editText)
+
         val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
         button_senti_analysis.setOnClickListener {
             val intent = Intent(context, SentimentReportActivity::class.java)
+            intent.putExtra("stock_name",edit.text.toString())
             startActivity(intent)
         }
 
 
-
+        // 조회 버튼 클릭 event
         root.findViewById<Button>(R.id.button).setOnClickListener {
             requestT1305()
             //requestT8412()
@@ -232,7 +237,11 @@ class s1002 : Fragment() {
         m_adapter.items.clear()
         m_adapter.notifyDataSetChanged()
 
+
         val edit = root.findViewById<EditText>(R.id.editText)
+        val stock_name = root.findViewById<TextView>(R.id.tv_stock_name_mock)
+        val stock_info = root.findViewById<LinearLayout>(R.id.stock_info)
+
         /* size 6 */
         var shcode = edit.text.toString()
 
@@ -241,17 +250,24 @@ class s1002 : Fragment() {
             Log.d("s1001_DM", "mockMap.get(삼성전자) : " + mockMap!![shcode].toString())
             if (mockMap[shcode] != null){
                 shcode = mockMap!![shcode].toString()
+
             }
             Log.d("s1001_DM", "temp값 테스트(함수 안) : " + shcode)
             if(shcode.length < 6)
             {
                 Toast.makeText(
                     activity?.applicationContext,
-                    "종목코드를 확인해 주십시오.",
+                    "종목이름 또는 코드를 확인해 주세요.",
                     Toast.LENGTH_SHORT
                 ).show()
                 // return
+            }else {
+                // 입력한 종목 이름, 감성분석리포트 보이게하기
+                stock_info.visibility = View.VISIBLE
+                stock_name.setText(edit.text.toString() + " [" + shcode + "]")
             }
+
+
 
             /* size 1*/
             val dwmcode = m_dwm.toString()

@@ -1,6 +1,7 @@
 package com.gachon.ask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,15 +25,22 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SentimentReportActivity extends AppCompatActivity {
-    private TextView originalText;
+    private TextView originalText, companyName;
     private Button btnTweet, btnNews;
     String url, selected_media="tweet";
+    String stockName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentiment_report);
         originalText = findViewById(R.id.tv_original_text);
+        companyName = findViewById(R.id.tv_company_name);
+
+        // 모의투자에서 받은 intent data
+        Intent intent = getIntent();
+        String stockName = intent.getExtras().getString("stock_name");
+        companyName.setText(stockName);
 
         getData(selected_media);
 
@@ -104,7 +112,7 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                     String company = post.getCompany();
                     String date = post.getDate();
-                    if(!company.equals("기아")) continue;
+                    if(!company.equals(stockName)) continue;
                     if(!compareDate(date)) continue;
 
                     content += "" + post.getText() + "\n";

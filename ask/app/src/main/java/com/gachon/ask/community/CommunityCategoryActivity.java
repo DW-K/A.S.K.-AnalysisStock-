@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class CommunityCategoryActivity extends AppCompatActivity {
     Button btnAddPost;
     TextView tv_no_post;
     CommunityCategoryAdapter adapter;
+    int postCount;
 
 
 
@@ -69,11 +71,8 @@ public class CommunityCategoryActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         adapter = new CommunityCategoryAdapter();
 
-
-
         tv_no_post = findViewById(R.id.tv_no_post);
-        tv_no_post.setText(R.string.no_post);
-
+        postCount = 0;
 
         btnAddPost = findViewById(R.id.btn_add_post);
         btnAddPost.setOnClickListener(view -> {
@@ -136,6 +135,16 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                                                         adapter.addItem(new PostInfo(post_id, nickname, contents, publisher, category, profileImgURL, createdAt, num_heart, num_comment));
                                                         Log.d(TAG, "Profile Image value2 : "+ profileImgURL);
                                                         mRecyclerView.setAdapter(adapter);
+                                                        postCount = adapter.getItemCount();
+
+                                                        tv_no_post = findViewById(R.id.tv_no_post);
+                                                        System.out.println("postCount:"+postCount);
+                                                        if(postCount==0 && postCount>0){
+                                                            tv_no_post.setVisibility(View.VISIBLE);
+                                                        }else tv_no_post.setVisibility(View.INVISIBLE);
+
+
+//                                                        System.out.println("itemcount:"+postCount);
                                                     }
                                                 }else {
                                                     Log.d(TAG, "Profile Image NULL");
@@ -147,6 +156,7 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                                     });
                                 } catch (RuntimeException e) {
                                     System.out.println(e);
+
                                 }
                             }
                             Log.v("TAG", String.valueOf(postInfoList.size()));
@@ -164,6 +174,8 @@ public class CommunityCategoryActivity extends AppCompatActivity {
                         startToast(e.getMessage());
                     }
                 });
+        System.out.println("adapter.getItemCount():"+adapter.getItemCount());
+
     }
 
 
@@ -198,6 +210,8 @@ public class CommunityCategoryActivity extends AppCompatActivity {
 //        adapter.notifyDataSetChanged();
         adapter = new CommunityCategoryAdapter();
         showData();
+
+
 
     }
 

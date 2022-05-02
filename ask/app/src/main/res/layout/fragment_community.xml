@@ -122,13 +122,7 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/community_univ_exp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="퀴즈 풀고 보상 얻어가세요!"
-            android:textSize="10dp" />
+
 
         <Button
             android:id="@+id/btn_community_univ"
@@ -148,7 +142,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
@@ -158,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="경제 시사 퀴즈"
+            android:text="@string/category_quiz"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -167,40 +161,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="퀴즈 풀고 보상 얻어가세요!"
+            android:text="주식 퀴즈로 기초 지식을 쌓아보세요!"
             android:textSize="10dp" />
 
         <LinearLayout
-            android:id="@+id/mypage_quiz"
             android:layout_width="match_parent"
-            android:layout_height="92dp"
-            android:layout_margin="10dp"
-            android:background="#f1f9ff"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_quiz"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="주식시장에서 'Wag the Dog'은 어떤 상황을 가리킬 때 사용되는가?"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
-
-
-            </LinearLayout>
-
+                android:text="퀴즈풀기"
+                android:textSize="18dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:elevation="10dp"
+                app:backgroundTint="@color/light_gray"/>
+            <Button
+                android:id="@+id/btn_community_ask"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="@string/category_ask"
+                android:textSize="18dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:elevation="10dp"
+                app:backgroundTint="@color/light_gray"/>
 
         </LinearLayout>
+
+
+
+
+
     </LinearLayout>
 
 

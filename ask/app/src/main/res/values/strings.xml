@@ -12,6 +12,8 @@
     <string name="category_it">IT</string>
     <string name="category_electronics">전자제품</string>
     <string name="category_univ">대학별 게시판</string>
+    <string name="category_quiz">경제 시사 퀴즈</string>
+    <string name="category_ask">퀴즈 ASK 게시판</string>
 
 
     <string name="no_post">작성된 글이 없습니다.</string>
