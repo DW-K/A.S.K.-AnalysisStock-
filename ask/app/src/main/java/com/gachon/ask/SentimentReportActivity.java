@@ -86,50 +86,88 @@ public class SentimentReportActivity extends AppCompatActivity {
 
         JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
 
-        Call<List<Post>> call = jsonPlaceHOlderApi.getTweets();
+        Call<List<Post>> call = jsonPlaceHOlderApi.getNews();
         if(current_category.equals("tweet")) {
             call = jsonPlaceHOlderApi.getTweets();
+            call.enqueue(new Callback<List<Post>>() {
+                @Override
+                public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+
+                    if (!response.isSuccessful())
+                    {
+                        originalText.setText("Code:" + response.code());
+                        return;
+                    }
+
+                    List<Post> posts = response.body();
+
+                    for ( Post post : posts) {
+                        String content ="";
+
+
+                        String company = post.getCompany();
+                        String date = post.getDate();
+                        if(!company.equals(stockName)) continue;
+                        if(!compareDate(date)) continue;
+
+                        content += "" + post.getText() + "\n";
+                        content += "날짜: " + date + "\n\n";
+
+
+
+                        originalText.append(content);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Post>> call, Throwable t) {
+                    System.out.println("실패했습니다.");
+                    originalText.setText(t.getMessage());
+                }
+            });
         }
-//        else{
-//            call = jsonPlaceHOlderApi.getNews();
-//        }
+        else{
+            call = jsonPlaceHOlderApi.getNews();
+            call = jsonPlaceHOlderApi.getTweets();
+            call.enqueue(new Callback<List<Post>>() {
+                @Override
+                public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                    if (!response.isSuccessful())
+                    {
+                        originalText.setText("Code:" + response.code());
+                        return;
+                    }
 
-                if (!response.isSuccessful())
-                {
-                    originalText.setText("Code:" + response.code());
-                    return;
+                    List<Post> posts = response.body();
+
+                    for ( Post post : posts) {
+                        String content ="";
+
+
+                        String company = post.getCompany();
+                        String date = post.getDateNews();
+                        if(!company.equals(stockName)) continue;
+                        if(!compareDate(date)) continue;
+
+                        content += "" + post.getTitle() + "\n";
+                        content += "날짜: " + date + "\n\n";
+
+
+
+                        originalText.append(content);
+                    }
                 }
 
-                List<Post> posts = response.body();
-
-                for ( Post post : posts) {
-                    String content ="";
-
-
-                    String company = post.getCompany();
-                    String date = post.getDate();
-                    if(!company.equals(stockName)) continue;
-                    if(!compareDate(date)) continue;
-
-                    content += "" + post.getText() + "\n";
-                    content += "날짜: " + date + "\n\n";
-
-
-
-                    originalText.append(content);
+                @Override
+                public void onFailure(Call<List<Post>> call, Throwable t) {
+                    System.out.println("실패했습니다.");
+                    originalText.setText(t.getMessage());
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                System.out.println("실패했습니다.");
-                originalText.setText(t.getMessage());
-            }
-        });
+
 
     }
 

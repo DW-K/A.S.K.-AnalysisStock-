@@ -95,7 +95,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             @Override
             public void onClick(View v) {
                 Log.i("HomeFragment", "Invest Button pressed.");
-                Intent intent = new Intent(getActivity(), StockActivity.class);
+                Intent intent = new Intent(getActivity(), SentimentReportActivity.class);
+                intent.putExtra("stock_name","삼성전자");
                 startActivity(intent);
             }
         });
