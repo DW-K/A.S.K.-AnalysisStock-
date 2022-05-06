@@ -2,6 +2,8 @@ package com.gachon.ask.xingapi
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -27,6 +29,8 @@ class sLoginSample1: AppCompatActivity()  {
     internal var m_id = ""
     internal var m_password = ""
     lateinit var m_buttonLogin: Button
+    lateinit var btn_signup_ebest: Button
+    lateinit var btn_apply_mock_investment: Button
     lateinit var m_imageButtonClose: ImageView
 
     internal var handler: ProcMessageHandler? = null
@@ -130,12 +134,6 @@ class sLoginSample1: AppCompatActivity()  {
 
         Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
 
-        // 타이틀바 없애기
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-
-        // 상태바 없애기
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-
         setContentView(R.layout.activity_sample_login1)
 
         // 상태바 텍스트 설정 ()
@@ -168,6 +166,24 @@ class sLoginSample1: AppCompatActivity()  {
                 //setConfig(false)
             }
         })
+
+        btn_signup_ebest =  this.findViewById(R.id.btn_signup_ebest) as Button
+        btn_apply_mock_investment =  this.findViewById(R.id.btn_apply_mock_investment) as Button
+        btn_signup_ebest.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.ebestsec.co.kr/login?redirect=%2F"))
+            startActivity(intent)
+
+            }
+        })
+        btn_apply_mock_investment.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.ebestsec.co.kr/info/simulate-invest"))
+            startActivity(intent)
+
+            }
+        })
+
 
         /*
         m_editTextID.setOnClickListener(View.OnClickListener {

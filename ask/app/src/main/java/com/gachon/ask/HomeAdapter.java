@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gachon.ask.databinding.ItemHomeStockBinding;
 import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.xingapi.MainView;
+import com.gachon.ask.xingapi.sLoginSample1;
 
 import java.util.ArrayList;
 
@@ -41,9 +42,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             itemHomeStockBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 주식 리스트 클릭하면 모의투자 화면으로 이동
+                    // 주식 리스트 클릭하면 모의투자 로그인 화면으로 이동
                     listener.onClick(v, myStockList.get(getAdapterPosition()));
-                    Intent intent = new Intent(v.getContext(), MainView.class);
+                    Intent intent = new Intent(v.getContext(), sLoginSample1.class);
                     context.startActivity(intent);
                 }
             });

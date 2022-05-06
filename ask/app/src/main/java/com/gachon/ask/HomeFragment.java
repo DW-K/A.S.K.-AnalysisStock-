@@ -27,6 +27,7 @@ import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.util.model.User;
 import com.gachon.ask.xingapi.MainView;
 import com.gachon.ask.StockActivity;
+import com.gachon.ask.xingapi.sLoginSample1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -70,7 +71,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             @Override
             public void onClick(View v) {
                 Log.i("HomeFragment", "Invest Button pressed.");
-                Intent intent = new Intent(getActivity(), MainView.class);
+                Intent intent = new Intent(getActivity(), sLoginSample1.class);
                 startActivity(intent);
             }
         });

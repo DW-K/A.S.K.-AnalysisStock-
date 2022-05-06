@@ -1,6 +1,34 @@
 <resources>
     <string name="app_name">ask</string>
     <string name="login_des">Login</string>
+
+
+
+    <string name="login">로그인</string>
+    <string name="signup"><u>회원가입</u></string>
+    <string name="signup_logo">회원가입</string>
+    <string name="profile_image">프로필 사진</string>
+    <string name="gallery">갤러리</string>
+    <string name="camera">카메라</string>
+    <string name="nickname">닉네임</string>
+    <string name="id">아이디 (이메일형식)</string>
+    <string name="pw">비밀번호</string>
+    <string name="pw_check">비밀번호 확인</string>
+    <string name="signup_by_google">구글로 로그인</string>
+    <string name="signin_mock_investment">모의투자서버 로그인</string>
+    <string name="signin_save_id">아이디 저장</string>
+    <string name="signin_mock_investment_guide">이베스트 모의투자 계정으로 로그인하세요.</string>
+    <string name="mock_investment_guide">모의투자 이용을 위해\n이베스트 모의투자 계정이 필요합니다.\n이베스트 계정 생성 후 모의투자 신청을 완료 해 주세요.</string>
+
+    <string name="guide">모의투자 안내</string>
+
+    <string name="no_ebest">이베스트 계정이 없으신가요?</string>
+    <string name="no_mock_account">모의투자 신청이 필요하신가요?</string>
+    <string name="signup_ebest"><u>이베스트 회원가입</u></string>
+    <string name="mock_investment_apply"><u>모의투자 신청</u></string>
+    <string name="signup_by_another_id">다른 아이디로 로그인</string>
+    <string name="signup_guide">아직 회원이 아니신가요?</string>
+
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
     <string name="gachon">가천대학교</string>
