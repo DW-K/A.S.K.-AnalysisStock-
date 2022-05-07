@@ -44,7 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 public void onClick(View v) {
                     // 주식 리스트 클릭하면 모의투자 로그인 화면으로 이동
                     listener.onClick(v, myStockList.get(getAdapterPosition()));
-                    Intent intent = new Intent(v.getContext(), sLoginSample1.class);
+                    Intent intent = new Intent(v.getContext(), MainView.class);
                     context.startActivity(intent);
                 }
             });

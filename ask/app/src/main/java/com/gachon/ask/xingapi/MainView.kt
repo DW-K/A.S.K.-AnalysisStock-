@@ -114,6 +114,8 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
         val img = main.findViewById<ImageView>(R.id.btn_icon)
         name.setTextColor(Color.rgb(210,34,34))
 
+        LoginProcess()
+
     }
     // 퍼미션관련 콜백
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)

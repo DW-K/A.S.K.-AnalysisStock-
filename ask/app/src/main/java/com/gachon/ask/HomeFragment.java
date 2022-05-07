@@ -71,7 +71,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             @Override
             public void onClick(View v) {
                 Log.i("HomeFragment", "Invest Button pressed.");
-                Intent intent = new Intent(getActivity(), sLoginSample1.class);
+                Intent intent = new Intent(getActivity(), MainView.class);
                 startActivity(intent);
             }
         });
