@@ -6,7 +6,7 @@
 
     <string name="login">로그인</string>
     <string name="signup"><u>회원가입</u></string>
-    <string name="signup_logo">회원가입</string>
+    <string name="signup_logo">회원가입 및 인증</string>
     <string name="profile_image">프로필 사진</string>
     <string name="gallery">갤러리</string>
     <string name="camera">카메라</string>
@@ -83,6 +83,7 @@
     <string name="setting_changeinfo_summary_nickname"></string>
     <string name="setting_changeinfo_msg">변경할 닉네임을 입력해주세요.</string>
     <string name="setting_logout">로그아웃</string>
+    <string name="setting_remove_account">회원탈퇴</string>
     <string name="setting_changeinfo_image">프로필 사진 수정</string>
     <string name="setting_changeinfo_summary_image"></string>
     <string name="change_image_success">사진 변경에 성공하였습니다.</string>
@@ -90,6 +91,7 @@
     <string name="change_nickname_success">닉네임 변경이 완료되었습니다.</string>
     <string name="change_nickname_error">닉네임 변경에 실패하였습니다. 잠시 후 다시 시도해주세요.</string>
     <string name="setting_logout_msg">정말로 로그아웃하시겠습니까? 다시 이용하시려면 로그인 하셔야 합니다.\n로그아웃 후 로그인 화면으로 돌아갑니다.</string>
+    <string name="setting_remove_account_msg">정말로 회원 탈퇴를 하시겠습니까? \n회원 탈퇴 후 로그인 화면으로 돌아갑니다.</string>
     <string name="error">에러가 발생했습니다. 잠시 후 다시 시도해주세요.</string>
 
     <string name="hello_world">Hello world!</string>

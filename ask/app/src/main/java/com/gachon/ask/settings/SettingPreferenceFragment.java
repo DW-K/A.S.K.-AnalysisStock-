@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 
 
 public class SettingPreferenceFragment extends PreferenceFragmentCompat {
+    private static final String TAG = "PreferenceFragment";
     SharedPreferences prefs;
 
     @Override
@@ -101,6 +102,44 @@ public class SettingPreferenceFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        // 회원탈퇴 이벤트 리스너
+        Preference myPref_remove_account = (Preference) findPreference("remove_account");
+        myPref_remove_account.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.setting_logout);
+                builder.setMessage(R.string.setting_remove_account_msg);
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Firestore.deleteUser(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getContext(), "기능 점검 중 입니다.",Toast.LENGTH_SHORT).show();
+                                // 게시물, 댓글, 사진도 삭제해야함.
+                                /*
+                                Log.d(TAG,"DB 삭제 성공");
+                                Auth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Log.d(TAG,"실질적 회원 삭제 성공");
+                                        Toast.makeText(getContext(), "회원 탈퇴가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                                        Auth.moveToLogin(getActivity());
+                                    }
+                                });*/
+                            }
+                        });
+
+                    }
+                });
+                builder.setNegativeButton(R.string.no, null);
+                builder.create().show();
+                return true;
+            }
+        });
+
 
         // 어플 정보
         Preference checkInfoDevelopers = findPreference("check_info_developers");

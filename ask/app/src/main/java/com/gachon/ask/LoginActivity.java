@@ -140,9 +140,22 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
                     if(task.isSuccessful()){
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
-                        startToast("Success to login.");
-                        startMainActivity();  // MainActivity로 이동
-                        finish();
+                        if(Auth.getCurrentUser().isEmailVerified()){ // 현재 회원가입 한 계정의 이메일 인증이 제대로 되어야 로그인이 가능! , (지울 예정)
+                            Log.d(TAG, "이메일 인증 성공");
+                            startToast("Success to login.");
+                            startMainActivity();  // MainActivity로 이동
+                            finish();
+                        }else{
+                            Log.d(TAG, "이메일 인증 실패");
+                            startToast("이메일 인증 실패, 다시 회원가입 해주세요 :(");
+                            deleteUserDatabase(); // Fire-store에서 유저 삭제
+                            Auth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() { // Authentification 에서도 유저 삭제
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Log.d(TAG, "메일 인증 못한 유저 삭제 완료");
+                                }
+                            });
+                        }
                     }else{
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -201,12 +214,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     }
 
     /**
+     * 구글 로그인 용도
      * 새로운 사용자의 DB 정보를 생성한다
      * @author Taehyun Park
      */
     private void createNewUserDatabase(FirebaseUser user) {
         // 새 유저 정보 작성
-        Firestore.writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(),
+        Firestore.writeNewUser(user.getUid(), "무소속", user.getEmail(), user.getDisplayName(),
                 0,0,0,0, 0,0,0,0,null,null,null)
                 .addOnCompleteListener(documentTask -> {
                     // 성공했다면
@@ -235,5 +249,22 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     private void startMainActivity(){
         Intent intent = new Intent (this, MainActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * 새로운 사용자의 DB 정보를 삭제한다
+     * @author Taehyun Park
+     */
+    private void deleteUserDatabase(){
+        Firestore.deleteUser(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Log.d(TAG, "firestore user 성공적으로 삭제");
+                }else{
+                    Log.d(TAG, "firestore user 삭제 실패");
+                }
+            }
+        });
     }
 }

@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +34,7 @@ import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.util.model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,10 +52,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
-
+    private GoogleSignInClient mGoogleSignInClient;
     private static final int PICK_FROM_ALBUM = 1;
+    private int isVerification = 0;
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
     private File tempFile;
@@ -62,6 +69,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
     private Button btnSignup;
     private Button btnGoLogin;
     private Button btnGallery;
+    private Button btnCamera;
+    private Button btnEmailRight;
 
     private ImageView imageView;
 
@@ -82,6 +91,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         btnSignup = findViewById(R.id.btn_signup);
         btnGoLogin = findViewById(R.id.btn_go_login);
         btnGallery = findViewById(R.id.btn_gallery);
+        btnCamera = findViewById(R.id.btn_camera);
+        btnEmailRight = findViewById(R.id.btn_email_right);
 
         imageView = findViewById(R.id.imageView_signup);
         // Get the data from an ImageView as bytes
@@ -94,11 +105,16 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(imageView.getDrawable() == null){
-                    // 이미지를 올리지 않을 경우
-                    startToast("이미지를 선택해주세요!");
-                }else{
-                    signUp();
+                if(imageView.getDrawable() == null || etNickname.getText().toString().equals("") || etEmail.getText().toString().equals("") ||
+                        etPassword.getText().toString().equals("") || etPassword_check.getText().toString().equals("")){
+                       // 회원가입 필드 중 하나라도 채워져 있지 않다면
+                    startToast("모든 정보를 입력해주세요!");
+                }else{ // 모든 정보가 입력되었다면 회원가입 진행
+                    if(btnEmailRight.getText().toString().equals("○")){
+                        signUp();
+                    }else{
+                        startToast("이메일 형식 확인을 해주세요!");
+                    }
                 }
             }
         });
@@ -117,6 +133,57 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
             }
         });
 
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(i, 0);
+            }
+        });
+
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG,"onTextChanged TEST!");
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // 입력이 끝났을 때 조치
+                Log.d(TAG,"afterTextChanged TEST!");
+                // 입력난에 변화가 있을 시 조치
+                Pattern pattern = android.util.Patterns.EMAIL_ADDRESS;
+                // 이메일 형식 확인
+                if(pattern.matcher(etEmail.getText().toString()).matches()){
+                    //이메일 맞음!
+                    // startToast("올바른 형식입니다!");
+                    btnEmailRight.setText("○");
+                } else {
+                    //이메일 아님!
+                    // startToast("이메일 형식이 올바르지 않습니다!");
+                    btnEmailRight.setText("X");
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // 입력하기 전에 조치
+            }
+        });
+
+        btnEmailRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 이메일 발송 버튼 눌렀을 때, 이메일 링크를 클릭하여 인증을 완료해주세요!
+                if(etEmail.getText().toString().equals("") || etEmail.getText().toString().equals(null)){
+                    startToast("이메일을 입력해주세요!");
+                }else{
+                    Log.d(TAG,"이메일 필드 값 확인 : "+etEmail.getText().toString());
+                }
+            }
+        });
+
+
         tedPermission();
     }
 
@@ -125,10 +192,23 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String passwordCheck = etPassword_check.getText().toString();
+        String userGroup = "";
+
+        boolean isGachonMail = Pattern.matches("^[a-zA-Z0-9._%+-]+@gachon.ac.kr$", email); // 가천대학교
+        boolean isGatholicMail = Pattern.matches("^[a-zA-Z0-9._%+-]+@csj.ac.kr$", email); // 가톨릭상지대학교
+
+        if (isGachonMail == true){
+            userGroup = "가천대학교";
+        }else if (isGatholicMail == true){
+            userGroup = "가톨릭상지대학교";
+        }else{
+            userGroup = "무소속";
+        }
 
         if (nickname.length()>0 && email.length()>0 && password.length()>0 && passwordCheck.length()>0) {
 
             if (password.equals(passwordCheck)) {
+                final String user_group = userGroup;
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -136,9 +216,11 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
+                                    // 메일 전송
+                                    emailSend();
                                     // DB 생성 작업
-                                    createNewUserDatabase(task.getResult().getUser(), nickname);
-                                    // 프로필 이미지 업로드
+                                    createNewUserDatabase(task.getResult().getUser(), nickname, user_group);
+                                    // 사진 업로드
                                     uploadCloudStorage();
                                     finish();
                                 } else {
@@ -162,9 +244,9 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
      * 새로운 사용자의 DB 정보를 생성한다
      * @author Taehyun Park
      */
-    private void createNewUserDatabase(FirebaseUser user, String userNickName) {
+    private void createNewUserDatabase(FirebaseUser user, String userNickName, String userGroup) {
         // 새 유저 정보 작성
-        Firestore.writeNewUser(user.getUid(), user.getEmail(), userNickName,
+        Firestore.writeNewUser(user.getUid(), userGroup, user.getEmail(), userNickName,
                 0,0,0,0, 0,0,0,0,new ArrayList<Stock>(),null,null)
                 .addOnCompleteListener(documentTask -> {
                     // 성공했다면
@@ -264,11 +346,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FROM_ALBUM) { // 갤러리를 호출한다면
-
             Uri photoUri = data.getData();
-
             Cursor cursor = null;
-
             try {
 
                 /*
@@ -292,13 +371,22 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
                     cursor.close();
                 }
             }
-
             try {
                 setImage();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if(requestCode == 0){ // 카메라 클릭 시
+            /*
+            ImageView imageView = findViewById(R.id.imageView_signup);
 
+            // Bundle로 데이터를 입력
+            Bundle extras = data.getExtras();
+            // Bitmap으로 컨버전
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // 이미지뷰에 Bitmap으로 이미지를 입력
+            imageView.setImageBitmap(imageBitmap);*/
+            startToast("준비중입니다.");
         }
     }
 
@@ -324,6 +412,21 @@ public class SignUpActivity extends BaseActivity<ActivitySignupBinding> {
         Glide.with(getApplicationContext())
                 .load(tempFile.getAbsolutePath())
                 .into(imageView);
+    }
+
+    private void emailSend(){
+        Auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d(TAG, "이메일 전송 성공");
+                    Toast.makeText(getApplicationContext(),"로그인을 위한 인증 이메일이 전송되었습니다. 확인해주세요!",Toast.LENGTH_LONG).show();
+                }else{
+                    Log.d(TAG, "이메일 전송 실패: "+task.getException().toString());
+                    //startToast("이메일 전송을 실패하였습니다!");
+                }
+            }
+        });
     }
 
     // 갤러리 접근 권한 요청 함수

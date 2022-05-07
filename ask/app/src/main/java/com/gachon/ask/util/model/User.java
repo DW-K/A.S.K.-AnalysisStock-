@@ -10,6 +10,7 @@ public class User {
     private String userEmail; // 유저 이메일
     private String userNickName; // 유저 닉네임
     private String userProfileImgURL; // 유저 프로필 URL
+    private String userGroup; // 유저 소속 (ex: 가천대학교)
     private Timestamp registerTime; // 가입 시간
     private int userLevel;        // 레벨
     private int userRank;         // 유저 랭킹
@@ -25,9 +26,10 @@ public class User {
 
     public User() { }
 
-    public User(String uid, String userProfileImgURL, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
+    public User(String uid, String userProfileImgURL, String userGroup, String userEmail, String userNickName, Timestamp registerTime, int userLevel, int userExp, int userMoney, int userRank, int postAnalysisNum, int postQuestionNum, int postAnswerNum, float profitRate, ArrayList<Stock> myStock, ArrayList<StockReport> myStockReport, ArrayList<Integer> challenges) {
         this.uid = uid;
         this.userProfileImgURL = userProfileImgURL;
+        this.userGroup = userGroup;
         this.userEmail = userEmail;
         this.userNickName = userNickName;
         this.registerTime = registerTime;
@@ -51,6 +53,10 @@ public class User {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    public String getUserGroup() { return userGroup; }
+
+    public void setUserGroup(String userGroup) { this.userGroup = userGroup; }
 
     public String getUserProfileImgURL() { return userProfileImgURL; }
 
