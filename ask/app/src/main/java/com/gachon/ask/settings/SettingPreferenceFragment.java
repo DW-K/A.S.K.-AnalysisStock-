@@ -109,17 +109,18 @@ public class SettingPreferenceFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.setting_logout);
+                builder.setTitle(R.string.setting_remove_account);
                 builder.setMessage(R.string.setting_remove_account_msg);
                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "기능 점검 중 입니다.",Toast.LENGTH_SHORT).show();
+                        /*
                         Firestore.deleteUser(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getContext(), "기능 점검 중 입니다.",Toast.LENGTH_SHORT).show();
                                 // 게시물, 댓글, 사진도 삭제해야함.
-                                /*
+
                                 Log.d(TAG,"DB 삭제 성공");
                                 Auth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -128,10 +129,9 @@ public class SettingPreferenceFragment extends PreferenceFragmentCompat {
                                         Toast.makeText(getContext(), "회원 탈퇴가 완료되었습니다.",Toast.LENGTH_SHORT).show();
                                         Auth.moveToLogin(getActivity());
                                     }
-                                });*/
+                                });
                             }
-                        });
-
+                        });*/
                     }
                 });
                 builder.setNegativeButton(R.string.no, null);
