@@ -40,13 +40,14 @@
         android:layout_height="match_parent"
         android:text="TextView" />
 
+    <!--
     <include
         android:id="@+id/navi_5"
         layout="@layout/item_navi_btn"
         android:layout_width="65dp"
         android:layout_height="match_parent"
         android:text="TextView"
-        android:visibility="visible" />
+        android:visibility="visible" />-->
 
     <include
         android:id="@+id/navi_6"
@@ -55,7 +56,7 @@
         android:layout_height="match_parent"
         android:text="TextView"
         android:visibility="visible" />
-
+    <!--
     <include
         android:id="@+id/navi_7"
         layout="@layout/item_navi_btn"
@@ -70,7 +71,7 @@
         android:layout_width="65dp"
         android:layout_height="match_parent"
         android:text="TextView"
-        android:visibility="visible" />
+        android:visibility="visible" />-->
 
     <include
         android:id="@+id/navi_9"
@@ -80,7 +81,7 @@
         android:layout_weight="1"
         android:text="TextView"
         android:visibility="visible" />
-
+    <!--
     <include
         android:id="@+id/navi_10"
         layout="@layout/item_navi_btn"
@@ -97,6 +98,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="TextView"
-        android:visibility="visible" />
+        android:visibility="visible" />-->
 
 </LinearLayout>
