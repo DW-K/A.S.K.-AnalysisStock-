@@ -102,6 +102,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             }
         });
 
+        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
+        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LevelSystem lvlSystem = new LevelSystem();
+                lvlSystem.addExp(level_user, 30);
+                startToast("경험치를 30 추가했습니다. mypage에서 확인.");
+            }
+        });
+
 
     }
 

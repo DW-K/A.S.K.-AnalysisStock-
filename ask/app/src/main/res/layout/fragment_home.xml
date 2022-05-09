@@ -105,6 +105,13 @@
                         android:text="모의투자 시작하기"
                         android:visibility="visible"/>
 
+                    <Button
+                        android:id="@+id/btn_addExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="경험치 추가"
+                        android:visibility="visible"/>
 
                 </LinearLayout>
 
