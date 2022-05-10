@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeAdapter.onItemClickListener {
+    private static final String TAG = "HomeFragment";
     private RecyclerView RecyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -152,7 +153,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
                         int sum_yield = 0;
                         for(int i = 0; i < myStockList.size(); i++){
-                            sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());
+                            if(myStockList.get(i).getStockNum().trim().equals("0")){
+                                myStockList.remove(i); // 수량이 0이면 recyclerView에서 제거하여 보여줘야함.
+                            }else{ // 어떤 종목이 매도되어서 수량이 0이라면 수익률을 계산 포함 X
+                                sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());
+                            }
                         }
                         binding.totalProfitValue.setText(sum_yield+"%");
                         /* 총 수익률 업데이트 */
