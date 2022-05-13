@@ -91,7 +91,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.setLayoutManager(layoutManager);
         getInfoData();
-
+        setAdapter();
         Button buttonStock = getView().findViewById(R.id.button_my_stock_temp);
         buttonStock.setOnClickListener(new View.OnClickListener() {
             @Override

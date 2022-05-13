@@ -164,7 +164,7 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
         layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.setLayoutManager(layoutManager);
         getInfoData();
-
+        setAdapter();
         tv_nickname =  getView().findViewById(R.id.username_title);
         tv_level =  getView().findViewById(R.id.userlevel_text);
         tv_level_exp =  getView().findViewById(R.id.level_exp);
