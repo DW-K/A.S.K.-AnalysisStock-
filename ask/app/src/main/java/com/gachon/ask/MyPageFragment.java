@@ -230,7 +230,7 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
                 }
 
                 //adapter
-                myPageAdapter = new MyPageAdapter(getContext(),myStockList,MyPageFragment.this);
+                myPageAdapter = new MyPageAdapter(getContext(),myStockList, MyPageFragment.this);
 
                 //set adapter to recyclerview
                 RecyclerView.setAdapter(myPageAdapter);

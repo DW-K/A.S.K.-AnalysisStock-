@@ -39,13 +39,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeAdapter.onItemClickListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeAdapter.onItemClickListener, HomeHotAdapter.onItemClickListener {
     private static final String TAG = "HomeFragment";
     private RecyclerView RecyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
+    private RecyclerView RecyclerView2;
+    private RecyclerView.LayoutManager layoutManager2;
+
     private ArrayList<Stock> myStockList;
+    private ArrayList<Post> myPostList;
     private HomeAdapter homeAdapter;
+    private HomeHotAdapter homeHotAdapter;
 
     private Boolean isScrolling = false;
     private Boolean isLastItemReached = false;
@@ -67,6 +84,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         setUserMoney();
         setAdapter();
         setRefresh();
+        getData();
         // 모의투자 화면으로 이동!
         binding.buttonInvestment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +108,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         RecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.setLayoutManager(layoutManager);
+
+        //initialize views 2
+        RecyclerView2 = getView().findViewById(R.id.home_board2);
+
+        //set recycler view properties 2
+        RecyclerView2.setHasFixedSize(true);
+        layoutManager2 = new LinearLayoutManager(getActivity());
+        RecyclerView2.setLayoutManager(layoutManager2);
+
         getInfoData();
         setAdapter();
+        getData();
         Button buttonStock = getView().findViewById(R.id.button_my_stock_temp);
         buttonStock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,16 +128,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
                 Intent intent = new Intent(getActivity(), SentimentReportActivity.class);
                 intent.putExtra("stock_name","삼성전자");
                 startActivity(intent);
-            }
-        });
-
-        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
-        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LevelSystem lvlSystem = new LevelSystem();
-                lvlSystem.addExp(level_user, 30);
-                startToast("경험치를 30 추가했습니다. mypage에서 확인.");
             }
         });
 
@@ -138,7 +156,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
 
     private void setAdapter() {
-        Log.d("BoardFragment", "Set Adapter Run");
         myStockList = new ArrayList<>();
         Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -223,6 +240,61 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         });
     }
 
+    public void getData() {
+        String SERVER_URL = BuildConfig.SERVER;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
+
+        Call<List<Post>> call = jsonPlaceHOlderApi.getNewsCount();
+        call = jsonPlaceHOlderApi.getNewsCount();
+        myPostList = new ArrayList<>();
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                myPostList.clear();
+                if (!response.isSuccessful()) return;
+                //myPostList = new ArrayList<>();
+                List<Post> posts = response.body();
+
+                // 상위 5개만 보여주기 위해 뒤의 5개 데이터는 지움
+                for(int index = 23; index > 4; index--){
+                    posts.remove(index);
+                }
+                myPostList.addAll(posts); // 상위 5개의 post만 저장
+
+                Log.d(TAG, "myPostList 데이터 테스트 : "+ myPostList.size());
+                for ( Post post : posts) {
+                    String content ="";
+
+                    String company = post.getCompany();
+                    String date = post.getDate();
+
+                    //if(!company.equals(stockName)) continue;
+                    //if(!compareDate(date)) continue;
+
+                    Log.d(TAG, "keyword : "+post.getWord());
+                    Log.d(TAG, "news_count_id : "+post.getNewsCountId());
+                    Log.d(TAG, "\n");
+                }
+                // adapter
+                homeHotAdapter = new HomeHotAdapter(getContext(), myPostList, HomeFragment.this);
+                // set adapter to recyclerview
+                RecyclerView2.setAdapter(homeHotAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                System.out.println("실패했습니다.");
+            }
+
+        });
+    }
+
     @Override
     public void onClick(View v, Stock myStockList) {
 
@@ -230,5 +302,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     private void startToast(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v, Post myPostList) {
+
     }
 }

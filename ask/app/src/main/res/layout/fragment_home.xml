@@ -105,14 +105,6 @@
                         android:text="모의투자 시작하기"
                         android:visibility="visible"/>
 
-                    <Button
-                        android:id="@+id/btn_addExp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="경험치 추가"
-                        android:visibility="visible"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -171,32 +163,80 @@
             android:text="감성분석레포트 Quick" />
 
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:layout_margin="20dp"
-            android:orientation="vertical">
+            android:background="#f1f9ff">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/recent_achievements_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="핫 키워드"
-                    android:textStyle="bold" />
+                    android:layout_margin="10dp"
+                    android:text="핫키워드"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="30dp"
+                    />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="순위" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="키워드" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="회사" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="감성분석" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/home_board2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
-        </LinearLayout>
+        </FrameLayout>
 
 
 

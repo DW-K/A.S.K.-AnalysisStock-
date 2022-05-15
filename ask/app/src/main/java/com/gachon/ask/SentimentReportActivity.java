@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         String stockName = intent.getExtras().getString("stock_name");
         companyName.setText(stockName);
 
-        getData(selected_media);
+        getData(selected_media, stockName);
 
 
         // 버튼 클릭 이벤트
@@ -56,7 +57,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                 v.setBackgroundColor(getResources().getColor(R.color.blue_down));
                 btnNews.setBackgroundColor(getResources().getColor(R.color.skyblue_background));
                 selected_media = "tweet";
-                getData(selected_media);
+                getData(selected_media, stockName);
             }
 
         });
@@ -66,7 +67,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                 v.setBackgroundColor(getResources().getColor(R.color.blue_down));
                 btnTweet.setBackgroundColor(getResources().getColor(R.color.skyblue_background));
                 selected_media = "news";
-                getData(selected_media);
+                getData(selected_media, stockName);
             }
         });
 
@@ -76,7 +77,7 @@ public class SentimentReportActivity extends AppCompatActivity {
 
     }
 
-    public void getData(String current_category) {
+    public void getData(String current_category, String stockName) {
         String SERVER_URL = BuildConfig.SERVER;
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -92,7 +93,7 @@ public class SentimentReportActivity extends AppCompatActivity {
             call.enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-
+                    originalText.setText("");
                     if (!response.isSuccessful())
                     {
                         originalText.setText("Code:" + response.code());
@@ -107,15 +108,16 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                         String company = post.getCompany();
                         String date = post.getDate();
-                        if(!company.equals(stockName)) continue;
-                        if(!compareDate(date)) continue;
 
-                        content += "" + post.getText() + "\n";
-                        content += "날짜: " + date + "\n\n";
+                        //if(!company.equals(stockName)) continue;
+                        //if(!compareDate(date)) continue;
 
+                        if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
+                            content += "" + post.getText() + "\n";
+                            content += "날짜: " + date + "\n\n";
 
-
-                        originalText.append(content);
+                            originalText.append(content);
+                        }
                     }
                 }
 
@@ -128,11 +130,11 @@ public class SentimentReportActivity extends AppCompatActivity {
         }
         else{
             call = jsonPlaceHOlderApi.getNews();
-            call = jsonPlaceHOlderApi.getTweets();
+            //call = jsonPlaceHOlderApi.getTweets();
             call.enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-
+                    originalText.setText("");
                     if (!response.isSuccessful())
                     {
                         originalText.setText("Code:" + response.code());
@@ -143,19 +145,19 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                     for ( Post post : posts) {
                         String content ="";
-
+                        Log.d("SentimentReport","TEST");
 
                         String company = post.getCompany();
-                        String date = post.getDateNews();
-                        if(!company.equals(stockName)) continue;
-                        if(!compareDate(date)) continue;
+                        String date = post.getDate();
+                        //if(!company.equals(stockName)) continue;
+                        //if(!compareDate(date)) continue;
 
-                        content += "" + post.getTitle() + "\n";
-                        content += "날짜: " + date + "\n\n";
+                        if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
+                            content += "" + post.getTitle() + "\n";
+                            content += "날짜: " + date + "\n\n";
 
-
-
-                        originalText.append(content);
+                            originalText.append(content);
+                        }
                     }
                 }
 
@@ -166,9 +168,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                 }
             });
         }
-
-
-
     }
 
     public boolean compareDate(String inputDate) {
