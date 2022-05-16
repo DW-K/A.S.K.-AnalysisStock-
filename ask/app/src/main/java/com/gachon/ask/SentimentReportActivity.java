@@ -32,8 +32,9 @@ public class SentimentReportActivity extends AppCompatActivity {
     private ArrayList<Post> myPostList;
     private SentimentReportHotAdapter sentimentReportHotAdapter;
     private RecyclerView RecyclerView_hot_keyword;
-    private TextView originalText, companyName;
+    private TextView originalText, companyName, sentimentPercent;
     private Button btnTweet, btnNews;
+    private Double totalSentiment;
     String url, selected_media="tweet";
     String stockName;
 
@@ -42,6 +43,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentiment_report);
         originalText = findViewById(R.id.tv_original_text);
+        sentimentPercent = findViewById(R.id.tv_main_sentiment_percent);
         companyName = findViewById(R.id.tv_company_name);
         RecyclerView_hot_keyword = findViewById(R.id.hot_keyword);
 
@@ -51,6 +53,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         stockName = intent.getExtras().getString("stock_name");
         companyName.setText(stockName);
 
+        // get data
         getOriginalData(selected_media, stockName);
         getKeywordData();
 
@@ -85,6 +88,7 @@ public class SentimentReportActivity extends AppCompatActivity {
     }
 
     public void getKeywordData() {
+        totalSentiment = 0.0;
         String SERVER_URL = BuildConfig.SERVER;
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -97,6 +101,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         Call<List<Post>> call = jsonPlaceHOlderApi.getNewsCount();
         call = jsonPlaceHOlderApi.getNewsCount();
         myPostList = new ArrayList<>();
+        totalSentiment = 0.0;
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -115,6 +120,8 @@ public class SentimentReportActivity extends AppCompatActivity {
                     String content ="";
 
                     String company = post.getCompany();
+                    Double sentiment = Double.parseDouble(post.getPositive());
+                    totalSentiment += sentiment;
 //                    String date = post.getDate();
 
                     if(!company.equals(stockName)) continue;
@@ -129,6 +136,17 @@ public class SentimentReportActivity extends AppCompatActivity {
                 sentimentReportHotAdapter = new SentimentReportHotAdapter(myPostList);
                 // set adapter to recyclerview
                 RecyclerView_hot_keyword.setAdapter(sentimentReportHotAdapter);
+
+                int avg = (int)((totalSentiment/5)*100);
+//                sentimentPercent.setText("긍정 " + avg +" %  부정 " + (100-avg) + "% ");
+                if(avg > 50){
+                    sentimentPercent.setText("긍정 " + avg +" %");
+                    sentimentPercent.setTextColor(getResources().getColor(R.color.red_up));
+                }else{
+                    sentimentPercent.setText("부정 "+ avg + "% ");
+                    sentimentPercent.setTextColor(getResources().getColor(R.color.blue_down));
+                }
+
             }
 
             @Override
