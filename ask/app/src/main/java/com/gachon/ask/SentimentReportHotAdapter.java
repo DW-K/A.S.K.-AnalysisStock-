@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gachon.ask.databinding.ItemHotkeywordBinding;
+import com.gachon.ask.databinding.ItemSentiReportHotkeywordBinding;
 
 import java.util.ArrayList;
 
@@ -23,23 +24,23 @@ public class SentimentReportHotAdapter extends RecyclerView.Adapter<SentimentRep
 
 
     public static class SentiReportHotViewHolder extends RecyclerView.ViewHolder {
-        private ItemHotkeywordBinding itemHotkeywordBinding;
+        private ItemSentiReportHotkeywordBinding itemsentireporthotkeywordBinding;
 
-        public SentiReportHotViewHolder(@NonNull ItemHotkeywordBinding binding) {
+        public SentiReportHotViewHolder(@NonNull ItemSentiReportHotkeywordBinding binding) {
             super(binding.getRoot());
-            this.itemHotkeywordBinding = binding;
+            this.itemsentireporthotkeywordBinding = binding;
         }
     }
 
     @NonNull
     @Override
     public SentimentReportHotAdapter.SentiReportHotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SentimentReportHotAdapter.SentiReportHotViewHolder(ItemHotkeywordBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new SentimentReportHotAdapter.SentiReportHotViewHolder(ItemSentiReportHotkeywordBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull SentiReportHotViewHolder holder, int position) {
-        ItemHotkeywordBinding binding = holder.itemHotkeywordBinding;
+        ItemSentiReportHotkeywordBinding binding = holder.itemsentireporthotkeywordBinding;
         Post myPost = myPostList.get(position);
         binding.tvRank.setText(myPost.getNewsCountId()+""); // Int->String 변환 필요해보임
         binding.tvKeyword.setText(myPost.getWord());

@@ -148,21 +148,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:layout_marginHorizontal="20dp"
                             android:text="키워드" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="회사" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="감성분석" />
+                            android:text="감성" />
 
                     </LinearLayout>
 
