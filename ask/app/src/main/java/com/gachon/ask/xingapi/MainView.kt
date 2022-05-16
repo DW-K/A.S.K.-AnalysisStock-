@@ -44,13 +44,13 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
         Triple(R.id.navi_2,"기간주가",R.drawable.l_icon_01),
         Triple(R.id.navi_3,"분별주가",R.drawable.l_icon_01),
         Triple(R.id.navi_4,"주식호가",R.drawable.l_icon_01),
-        Triple(R.id.navi_5,"현물계좌주문체결",R.drawable.l_icon_01),
+        //Triple(R.id.navi_5,"현물계좌주문체결",R.drawable.l_icon_01),
         Triple(R.id.navi_6,"주문",R.drawable.l_icon_01),
-        Triple(R.id.navi_7,"TR조회 테스트",R.drawable.l_icon_01),
-        Triple(R.id.navi_8,"관심종목 테스트",R.drawable.l_icon_01),
-        Triple(R.id.navi_9,"잔고조회",R.drawable.l_icon_01),
-        Triple(R.id.navi_10,"체결내역",R.drawable.l_icon_01),
-        Triple(R.id.navi_11,"종목검색",R.drawable.l_icon_01)
+        //Triple(R.id.navi_7,"TR조회 테스트",R.drawable.l_icon_01),
+        //Triple(R.id.navi_8,"관심종목 테스트",R.drawable.l_icon_01),
+        Triple(R.id.navi_9,"잔고조회",R.drawable.l_icon_01)
+        //Triple(R.id.navi_10,"체결내역",R.drawable.l_icon_01),
+        //Triple(R.id.navi_11,"종목검색",R.drawable.l_icon_01)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,13 +91,13 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
             subviewlst.get(1),
             subviewlst.get(2),
             subviewlst.get(3),
-            subviewlst.get(4),
-            subviewlst.get(5),
-            subviewlst.get(6),
-            subviewlst.get(7),
-            subviewlst.get(8),
-            subviewlst.get(9),
-            subviewlst.get(10),
+            //subviewlst.get(4), // 현물계좌
+            subviewlst.get(4),   // 주문
+            //subviewlst.get(6), // TR 조회
+            //subviewlst.get(7),   // 관심 종목
+            subviewlst.get(5),   // 잔고 조회
+            //subviewlst.get(9),   // 체결 내역
+            //subviewlst.get(10),  // 종목 검색
             Triple(R.id.navi_webview,"WebPage",R.drawable.l_icon_01)
         )
 
@@ -113,6 +113,8 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
         val name = main.findViewById<TextView>(R.id.btn_name)
         val img = main.findViewById<ImageView>(R.id.btn_icon)
         name.setTextColor(Color.rgb(210,34,34))
+
+        LoginProcess()
 
     }
     // 퍼미션관련 콜백
@@ -166,15 +168,16 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
             subviewlst.get(3).first->{
                 fragment = s1004()
                 title = subviewlst.get(3).second;
-            }
+            }/*
             subviewlst.get(4).first->{
                 fragment = s1005()
                 title = subviewlst.get(4).second;
-            }
-            subviewlst.get(5).first->{
+            }*/
+            subviewlst.get(4).first->{
                 fragment = s1006()//s1006_j()
-                title = subviewlst.get(5).second;
+                title = subviewlst.get(4).second;
             }
+            /*
             subviewlst.get(6).first->{
 
                 fragment = s1009();
@@ -186,11 +189,12 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
             subviewlst.get(7).first->{
                 fragment =  s1008() //SocketTest()
                 title = subviewlst.get(7).second;
-            }
-            subviewlst.get(8).first->{
+            }*/
+            subviewlst.get(5).first->{ // 잔고조회
                 fragment =  s1011() //SocketTest()
-                title = subviewlst.get(8).second;
+                title = subviewlst.get(5).second;
             }
+            /*
             subviewlst.get(9).first->{
                 fragment =  s1012() //SocketTest()
                 title = subviewlst.get(9).second;
@@ -199,7 +203,7 @@ class MainView : AppCompatActivity() , ActivityCompat.OnRequestPermissionsResult
                 fragment =  s1010() //SocketTest()
                 manager.removeServiceAll(m_nHandle);
                 title = subviewlst.get(10).second;
-            }
+            }*/
             R.id.navi_webview->{
 
                 val intent = Intent(this, WebViewActivity::class.java)

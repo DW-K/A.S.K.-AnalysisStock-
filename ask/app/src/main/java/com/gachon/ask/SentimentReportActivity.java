@@ -1,10 +1,12 @@
 package com.gachon.ask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,17 +26,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SentimentReportActivity extends AppCompatActivity {
-    private TextView originalText;
+    private TextView originalText, companyName;
     private Button btnTweet, btnNews;
     String url, selected_media="tweet";
+    String stockName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentiment_report);
         originalText = findViewById(R.id.tv_original_text);
+        companyName = findViewById(R.id.tv_company_name);
 
-        getData(selected_media);
+        // 모의투자에서 받은 intent data
+        Intent intent = getIntent();
+        String stockName = intent.getExtras().getString("stock_name");
+        companyName.setText(stockName);
+
+        getData(selected_media, stockName);
 
 
         // 버튼 클릭 이벤트
@@ -48,7 +57,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                 v.setBackgroundColor(getResources().getColor(R.color.blue_down));
                 btnNews.setBackgroundColor(getResources().getColor(R.color.skyblue_background));
                 selected_media = "tweet";
-                getData(selected_media);
+                getData(selected_media, stockName);
             }
 
         });
@@ -58,7 +67,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                 v.setBackgroundColor(getResources().getColor(R.color.blue_down));
                 btnTweet.setBackgroundColor(getResources().getColor(R.color.skyblue_background));
                 selected_media = "news";
-                getData(selected_media);
+                getData(selected_media, stockName);
             }
         });
 
@@ -68,7 +77,7 @@ public class SentimentReportActivity extends AppCompatActivity {
 
     }
 
-    public void getData(String current_category) {
+    public void getData(String current_category, String stockName) {
         String SERVER_URL = BuildConfig.SERVER;
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -78,51 +87,87 @@ public class SentimentReportActivity extends AppCompatActivity {
 
         JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
 
-        Call<List<Post>> call = jsonPlaceHOlderApi.getTweets();
+        Call<List<Post>> call = jsonPlaceHOlderApi.getNews();
         if(current_category.equals("tweet")) {
             call = jsonPlaceHOlderApi.getTweets();
+            call.enqueue(new Callback<List<Post>>() {
+                @Override
+                public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                    originalText.setText("");
+                    if (!response.isSuccessful())
+                    {
+                        originalText.setText("Code:" + response.code());
+                        return;
+                    }
+
+                    List<Post> posts = response.body();
+
+                    for ( Post post : posts) {
+                        String content ="";
+
+
+                        String company = post.getCompany();
+                        String date = post.getDate();
+
+                        //if(!company.equals(stockName)) continue;
+                        //if(!compareDate(date)) continue;
+
+                        if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
+                            content += "" + post.getText() + "\n";
+                            content += "날짜: " + date + "\n\n";
+
+                            originalText.append(content);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Post>> call, Throwable t) {
+                    System.out.println("실패했습니다.");
+                    originalText.setText(t.getMessage());
+                }
+            });
         }
-//        else{
-//            call = jsonPlaceHOlderApi.getNews();
-//        }
+        else{
+            call = jsonPlaceHOlderApi.getNews();
+            //call = jsonPlaceHOlderApi.getTweets();
+            call.enqueue(new Callback<List<Post>>() {
+                @Override
+                public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                    originalText.setText("");
+                    if (!response.isSuccessful())
+                    {
+                        originalText.setText("Code:" + response.code());
+                        return;
+                    }
 
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                    List<Post> posts = response.body();
 
-                if (!response.isSuccessful())
-                {
-                    originalText.setText("Code:" + response.code());
-                    return;
+                    for ( Post post : posts) {
+                        String content ="";
+                        Log.d("SentimentReport","TEST");
+
+                        String company = post.getCompany();
+                        String date = post.getDate();
+                        //if(!company.equals(stockName)) continue;
+                        //if(!compareDate(date)) continue;
+
+                        if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
+                            content += "" + post.getTitle() + "\n";
+                            content += "날짜: " + date + "\n\n";
+
+                            originalText.append(content);
+                        }
+                    }
                 }
 
-                List<Post> posts = response.body();
-
-                for ( Post post : posts) {
-                    String content ="";
-
-
-                    String company = post.getCompany();
-                    String date = post.getDate();
-                    if(!company.equals("기아")) continue;
-                    if(!compareDate(date)) continue;
-
-                    content += "" + post.getText() + "\n";
-                    content += "날짜: " + date + "\n\n";
-
-
-
-                    originalText.append(content);
+                @Override
+                public void onFailure(Call<List<Post>> call, Throwable t) {
+                    System.out.println("실패했습니다.");
+                    originalText.setText(t.getMessage());
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                System.out.println("실패했습니다.");
-                originalText.setText(t.getMessage());
-            }
-        });
-
+            });
+        }
     }
 
     public boolean compareDate(String inputDate) {

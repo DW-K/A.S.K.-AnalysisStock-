@@ -2,7 +2,6 @@ package com.gachon.ask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gachon.ask.databinding.ItemHomeStockBinding;
 import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.xingapi.MainView;
-import com.gachon.ask.xingapi.sLoginSample1;
 
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
+public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.MyPageViewHolder>{
     private Context context;
     private ArrayList<Stock> myStockList;
 
@@ -27,16 +25,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     private onItemClickListener listener = null;
 
-    public HomeAdapter(Context context, ArrayList<Stock> myStockList, onItemClickListener listener) {
+    public MyPageAdapter(Context context, ArrayList<Stock> myStockList, MyPageAdapter.onItemClickListener listener) {
         this.context = context;
         this.myStockList = myStockList;
         this.listener = listener;
     }
 
-    public class HomeViewHolder extends RecyclerView.ViewHolder {
+    public class MyPageViewHolder extends RecyclerView.ViewHolder{
         private ItemHomeStockBinding itemHomeStockBinding;
 
-        public HomeViewHolder(@NonNull ItemHomeStockBinding binding) {
+        public MyPageViewHolder(@NonNull ItemHomeStockBinding binding) {
             super(binding.getRoot());
             this.itemHomeStockBinding = binding;
 
@@ -54,12 +52,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @NonNull
     @Override
-    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HomeViewHolder(ItemHomeStockBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    public MyPageAdapter.MyPageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MyPageAdapter.MyPageViewHolder(ItemHomeStockBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyPageViewHolder holder, int position) {
         ItemHomeStockBinding binding = holder.itemHomeStockBinding;
         Stock myStock = myStockList.get(position);
         binding.tvStockName.setText(myStock.getStockName());
@@ -78,7 +76,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         // 새로 가입한 계정의 경우 이 부분에서 null 에러 발생
         return myStockList.size();
     }
-
 
     public void clear() {
         myStockList.clear();

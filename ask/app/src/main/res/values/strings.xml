@@ -1,6 +1,34 @@
 <resources>
     <string name="app_name">ask</string>
     <string name="login_des">Login</string>
+
+
+
+    <string name="login">로그인</string>
+    <string name="signup"><u>회원가입</u></string>
+    <string name="signup_logo">회원가입 및 인증</string>
+    <string name="profile_image">프로필 사진</string>
+    <string name="gallery">갤러리</string>
+    <string name="camera">카메라</string>
+    <string name="nickname">닉네임</string>
+    <string name="id">아이디 (이메일형식)</string>
+    <string name="pw">비밀번호</string>
+    <string name="pw_check">비밀번호 확인</string>
+    <string name="signup_by_google">구글로 로그인</string>
+    <string name="signin_mock_investment">모의투자서버 로그인</string>
+    <string name="signin_save_id">아이디 저장</string>
+    <string name="signin_mock_investment_guide">이베스트 모의투자 계정으로 로그인하세요.</string>
+    <string name="mock_investment_guide">모의투자 이용을 위해\n이베스트 모의투자 계정이 필요합니다.\n이베스트 계정 생성 후 모의투자 신청을 완료 해 주세요.</string>
+
+    <string name="guide">모의투자 안내</string>
+
+    <string name="no_ebest">이베스트 계정이 없으신가요?</string>
+    <string name="no_mock_account">모의투자 신청이 필요하신가요?</string>
+    <string name="signup_ebest"><u>이베스트 회원가입</u></string>
+    <string name="mock_investment_apply"><u>모의투자 신청</u></string>
+    <string name="signup_by_another_id">다른 아이디로 로그인</string>
+    <string name="signup_guide">아직 회원이 아니신가요?</string>
+
     <string name="login_error">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공하였습니다.</string>
     <string name="gachon">가천대학교</string>
@@ -12,6 +40,8 @@
     <string name="category_it">IT</string>
     <string name="category_electronics">전자제품</string>
     <string name="category_univ">대학별 게시판</string>
+    <string name="category_quiz">경제 시사 퀴즈</string>
+    <string name="category_ask">퀴즈 ASK 게시판</string>
 
 
     <string name="no_post">작성된 글이 없습니다.</string>
@@ -53,6 +83,7 @@
     <string name="setting_changeinfo_summary_nickname"></string>
     <string name="setting_changeinfo_msg">변경할 닉네임을 입력해주세요.</string>
     <string name="setting_logout">로그아웃</string>
+    <string name="setting_remove_account">회원탈퇴</string>
     <string name="setting_changeinfo_image">프로필 사진 수정</string>
     <string name="setting_changeinfo_summary_image"></string>
     <string name="change_image_success">사진 변경에 성공하였습니다.</string>
@@ -60,6 +91,7 @@
     <string name="change_nickname_success">닉네임 변경이 완료되었습니다.</string>
     <string name="change_nickname_error">닉네임 변경에 실패하였습니다. 잠시 후 다시 시도해주세요.</string>
     <string name="setting_logout_msg">정말로 로그아웃하시겠습니까? 다시 이용하시려면 로그인 하셔야 합니다.\n로그아웃 후 로그인 화면으로 돌아갑니다.</string>
+    <string name="setting_remove_account_msg">정말로 회원 탈퇴를 하시겠습니까? \n회원 탈퇴 후 로그인 화면으로 돌아갑니다.</string>
     <string name="error">에러가 발생했습니다. 잠시 후 다시 시도해주세요.</string>
 
     <string name="hello_world">Hello world!</string>

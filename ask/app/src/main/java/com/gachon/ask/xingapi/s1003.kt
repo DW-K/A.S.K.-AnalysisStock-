@@ -1,5 +1,6 @@
 package com.gachon.ask.xingapi
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -8,15 +9,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.GridView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.ebest.api.*
 import com.gachon.ask.datamngr.API_DEFINE
 import com.gachon.ask.R
+import com.gachon.ask.SentimentReportActivity
 import com.gachon.ask.util.Firestore
 
 class s1003 : Fragment() {
@@ -153,6 +152,17 @@ class s1003 : Fragment() {
         m_adapter.notifyDataSetChanged()
 
         val edit = root.findViewById<EditText>(R.id.editText3)
+
+        //감성분석리포트로 연결
+        val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
+        button_senti_analysis.setOnClickListener {
+            val intent = Intent(context, SentimentReportActivity::class.java)
+            intent.putExtra("stock_name",edit.text.toString())
+            startActivity(intent)
+        }
+
+        val stock_name = root.findViewById<TextView>(R.id.tv_stock_name_mock)
+        val stock_info = root.findViewById<LinearLayout>(R.id.stock_info)
         var shcode = edit.text.toString()
         Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
             val mockMap = documentSnapshot.data
@@ -170,6 +180,10 @@ class s1003 : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 //return
+            }else {
+                // 입력한 종목 이름, 감성분석리포트 보이게하기
+                stock_info.visibility = View.VISIBLE
+                stock_name.setText(edit.text.toString() + " [" + shcode + "]")
             }
 
             manager.requestData(m_nHandle, "t1302", shcode, false, "", 30)

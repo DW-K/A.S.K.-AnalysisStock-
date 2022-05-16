@@ -21,13 +21,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.gachon.ask.base.BaseFragment;
+import com.gachon.ask.databinding.FragmentMypageBinding;
 import com.gachon.ask.settings.SettingActivity;
 import com.gachon.ask.util.Auth;
 import com.gachon.ask.util.CloudStorage;
 import com.gachon.ask.util.Firestore;
 import com.gachon.ask.util.model.Stock;
 import com.gachon.ask.util.model.User;
+import com.gachon.ask.xingapi.MainView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -35,10 +41,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
 
-public class MyPageFragment extends Fragment {
+public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implements MyPageAdapter.onItemClickListener {
+    private static final String TAG = "MyPageFragment";
+    private androidx.recyclerview.widget.RecyclerView RecyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private MyPageAdapter myPageAdapter;
+    static boolean isStockListExist;
+
     private User user;
     private ImageView iv_profile;
     private TextView tv_nickname, tv_level, tv_level_exp, tv_challenge_name, tv_challenge_detail, tv_challenge_date;
@@ -47,6 +57,11 @@ public class MyPageFragment extends Fragment {
     private ArrayList<Stock> myStockList;
     private LinearLayout no_challenge, recent_challenge;
     int level;
+
+    @Override
+    protected FragmentMypageBinding getBinding() {
+        return FragmentMypageBinding.inflate(getLayoutInflater());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +76,10 @@ public class MyPageFragment extends Fragment {
         tv_challenge_date = view.findViewById(R.id.achievement_acquisition_date);
 
         setUserData();
+        setAdapter();
+        setRefresh();
 
-        btn_editProfile = view.findViewById(R.id.btn_editProfile);
-        btn_editProfile.setOnClickListener(new View.OnClickListener() { // 설정 화면(SettingActivity)으로 이동
+        binding.btnEditProfile.setOnClickListener(new View.OnClickListener() { // 설정 화면(SettingActivity)으로 이동
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SettingActivity.class);
@@ -71,7 +87,17 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        return view;
+        // 모의투자 화면으로 이동!
+        binding.buttonInvestment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MyPageFragment", "Invest Button pressed.");
+                Intent intent = new Intent(getActivity(), MainView.class);
+                startActivity(intent);
+            }
+        });
+
+        return binding.getRoot();
     }
 
     // 프로필  표시
@@ -90,18 +116,18 @@ public class MyPageFragment extends Fragment {
                     expBar.setProgress(user.getUserExp());
 
 
-                    System.out.println("HomeFragment.isStockListExist: "+HomeFragment.isStockListExist);
-                    if(HomeFragment.isStockListExist){
-                        tv_challenge_name.setText(R.string.challenge_the_first_trade);
-                        tv_challenge_detail.setText(R.string.challenge_the_first_trade_detail);
-                        no_challenge.setVisibility(View.GONE);
-                        recent_challenge.setVisibility(View.VISIBLE);
+                    System.out.println("MyPageFragment.isStockListExist: "+MyPageFragment.isStockListExist);
+                    if(MyPageFragment.isStockListExist){
+                        binding.tvChallenge.setText(R.string.challenge_the_first_trade);
+                        binding.tvChallengeDetail.setText(R.string.challenge_the_first_trade_detail);
+                        binding.noChallenge.setVisibility(View.GONE);
+                        binding.challengeItem.setVisibility(View.VISIBLE);
                         LocalDate today = LocalDate.now();
-                        tv_challenge_date.setText(today.toString());
+                        binding.achievementAcquisitionDate.setText(today.toString());
 
                     }else{
-                        no_challenge.setVisibility(View.VISIBLE);
-                        recent_challenge.setVisibility(View.GONE);
+                        binding.noChallenge.setVisibility(View.VISIBLE);
+                        binding.challengeItem.setVisibility(View.GONE);
                     }
 
                     if(user.getUserProfileImgURL() != null) {
@@ -130,6 +156,15 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //initialize views
+        RecyclerView = getView().findViewById(R.id.home_board);
+
+        //set recycler view properties
+        RecyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.setLayoutManager(layoutManager);
+        getInfoData();
+        setAdapter();
         tv_nickname =  getView().findViewById(R.id.username_title);
         tv_level =  getView().findViewById(R.id.userlevel_text);
         tv_level_exp =  getView().findViewById(R.id.level_exp);
@@ -149,6 +184,94 @@ public class MyPageFragment extends Fragment {
 //                expBar.setProgress(exp);
 //            }
 //        });
+
+    }
+
+    private void setAdapter() {
+        Log.d("BoardFragment", "Set Adapter Run");
+        myStockList = new ArrayList<>();
+        Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    User user = task.getResult().toObject(User.class);
+                    myStockList = user.getMyStock();
+                    if(myStockList != null && myStockList.size() > 0){
+                        isStockListExist = true;
+                        binding.buttonInvestment.setVisibility(View.GONE); // 주식 거래 내역이 있다면 모의투자 버튼 활성화 X
+
+                        int sum_yield = 0;
+                        for(int i = 0; i < myStockList.size(); i++){
+                            if(myStockList.get(i).getStockNum().trim().equals("0")){
+                                myStockList.remove(i); // 수량이 0이면 recyclerView에서 제거하여 보여줘야함.
+                            }else{ // 어떤 종목이 매도되어서 수량이 0이라면 수익률을 계산 포함 X
+                                sum_yield = sum_yield + Integer.parseInt(myStockList.get(i).getStockYield());
+                            }
+                        }
+                        binding.totalProfitValue.setText(sum_yield+"%");
+                        /* 총 수익률 업데이트 */
+                        Firestore.updateProfitRate(Auth.getCurrentUser().getUid(), sum_yield).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                }else{
+                                    Toast.makeText(getContext(),"총 수익률 업데이트 실패", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }else if(myStockList.size() == 0){
+                        binding.buttonInvestment.setVisibility(View.VISIBLE); // 주식 거래 내역이 없다면 모의투자 버튼 활성화 O
+                        Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    // MyPageAdapter.notifyDataSetChanged();
+                    // last
+                }else{
+                    Log.d("MyPageFragment", "getUserData task is failed.");
+                }
+
+                //adapter
+                myPageAdapter = new MyPageAdapter(getContext(),myStockList, MyPageFragment.this);
+
+                //set adapter to recyclerview
+                RecyclerView.setAdapter(myPageAdapter);
+            }
+        });
+    }
+
+    private void setRefresh() {
+        binding.swipeBoard.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getInfoData();
+            }
+        });
+    }
+
+    private void getInfoData() {
+        // TODO : TYPE 설정
+
+        Firestore.getUserData(Auth.getCurrentUser().getUid()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    User user = task.getResult().toObject(User.class);
+                    myStockList = user.getMyStock();
+                    if(myStockList != null){ }
+                    else{
+                        Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    // homeAdapter.notifyDataSetChanged();
+                    // last
+                }else{
+                    Log.d("MyPageFragment", "getUserData task is failed.");
+                }
+                binding.swipeBoard.setRefreshing(false);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v, Stock myStockList) {
 
     }
 }

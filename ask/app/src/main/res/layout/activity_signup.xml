@@ -21,7 +21,7 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="Sign Up"
+                android:text="@string/signup_logo"
                 android:textColor="@color/main_color"
                 android:textSize="50dp"
                 android:textStyle="bold" />
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile Image"
+                android:text="@string/profile_image"
                 android:textSize="15sp"
                 android:layout_gravity="center">
 
@@ -51,7 +51,7 @@
 
                 <Button
                     android:id="@+id/btn_gallery"
-                    android:text="Gallery"
+                    android:text="@string/gallery"
                     android:backgroundTint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
                 <Button
                     android:id="@+id/btn_camera"
-                    android:text="Camera"
+                    android:text="@string/camera"
                     android:backgroundTint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -72,17 +72,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ems="10"
-                android:hint="Nickname"
+                android:hint="@string/nickname"
                 android:inputType="text" />
 
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:ems="10"
-                android:hint="E-mail"
-                android:inputType="textEmailAddress" />
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/id"
+                    android:inputType="textEmailAddress"
+                    android:layout_weight="3"
+                    android:layout_marginRight="30dp"
+                    />
+
+                <Button
+                    android:id="@+id/btn_email_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="확인"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_password"
@@ -90,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/pw"
                 android:inputType="textPassword" />
 
 
@@ -100,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ems="10"
-                android:hint="Check password"
+                android:hint="@string/pw_check"
                 android:inputType="textPassword" />
 
             <Button
@@ -109,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_round"
-                android:text="Register" />
+                android:text="@string/signup_logo" />
 
             <Button
                 android:id="@+id/btn_go_login"
@@ -117,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_round"
-                android:text="Sign in" />
+                android:text="@string/login" />
         </LinearLayout>
     </ScrollView>
 

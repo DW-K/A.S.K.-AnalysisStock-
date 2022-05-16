@@ -12,4 +12,7 @@ public interface JsonPlaceHOlderApi {
 
     @GET("crawl_news")
     Call<List<Post>> getNews();
+
+    @GET("crawl_news_count")
+    Call<List<Post>> getNewsCount();
 }

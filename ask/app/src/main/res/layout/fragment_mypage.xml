@@ -16,15 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:src="@drawable/baseline_settings_24"
-                android:focusable="false"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/transparent"
-                app:tint="@color/transparent" />
+
+
             <TextView
                 android:id="@+id/mypage_title"
                 android:layout_width="wrap_content"
@@ -85,7 +78,12 @@
                     app:layout_constraintBottom_toBottomOf="@+id/mypage_user_background_image"
                     app:layout_constraintStart_toStartOf="parent" />
 
+
+
             </androidx.cardview.widget.CardView>
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -150,9 +148,10 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:background="#cedeff"
                     android:orientation="vertical">
@@ -189,6 +188,7 @@
 
 
 
+
             </LinearLayout>
 
 
@@ -213,7 +213,7 @@
 
 
             <TextView
-                android:id="@+id/recent_achievements_title"
+                android:id="@+id/recent_achievements_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -301,6 +301,99 @@
             </LinearLayout>
 
 
+            <FrameLayout
+                android:id="@+id/mypage_recent_achivement2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#f1f9ff">
+
+                <LinearLayout
+                    android:id="@+id/my_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/recent_achievements_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="내 주식"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/button_investment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="모의투자 시작하기"
+                            android:visibility="visible"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/my_stock_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="내 주식" />
+
+                        <TextView
+                            android:id="@+id/total_profit_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="총 수익률  :" />
+
+                        <TextView
+                            android:id="@+id/total_profit_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/swipe_board"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/home_board"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+
             <LinearLayout
                 android:id="@+id/stock_guide"
                 android:layout_width="match_parent"
@@ -320,6 +413,8 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
+
 
 
         </LinearLayout>

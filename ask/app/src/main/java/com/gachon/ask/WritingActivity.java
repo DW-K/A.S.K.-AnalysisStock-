@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gachon.ask.community.CommunityCategoryActivity;
 import com.gachon.ask.community.PostViewActivity;
+import com.gachon.ask.LevelSystem;
+import com.gachon.ask.util.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +50,7 @@ public class WritingActivity extends AppCompatActivity {
     ImageButton btn_cancel;
     Intent intent;
     Handler handler = new Handler();
+    User level_user;
 
 
     @Override
@@ -99,6 +102,7 @@ public class WritingActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
+                        level_user = task.getResult().toObject(User.class);
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
 
@@ -134,6 +138,8 @@ public class WritingActivity extends AppCompatActivity {
 
     // upload the post
     private void postUploader(WriteInfo writeInfo) {
+
+        LevelSystem lvlSystem = new LevelSystem();
         db.collection("Posts").add(writeInfo)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -141,6 +147,9 @@ public class WritingActivity extends AppCompatActivity {
                         post_id = documentReference.getId();
                         updatePostId(post_id);
                         startToast("등록되었습니다!");
+
+                        lvlSystem.addExp(level_user, 30); //경험치 30 추가 확인
+                        startToast("30 경험치를 획득하였습니다!");
 
                         finish();
                     }

@@ -19,18 +19,18 @@
             android:layout_weight="1"
             android:layout_gravity="center">
             <TextView
+                android:id="@+id/tv_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"/>
 
             <TextView
+                android:id="@+id/tv_keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="삼성"/>
+                android:layout_marginLeft="40dp"
+                android:text="전기차"/>
         </LinearLayout>
-
-
 
         <View
             android:layout_width="0dp"
@@ -45,18 +45,14 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="▼"/>
+                android:layout_marginRight="30dp"
+                android:text="현대차"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="5"/>
-
-            <TextView
+                android:id="@+id/tv_sentiment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

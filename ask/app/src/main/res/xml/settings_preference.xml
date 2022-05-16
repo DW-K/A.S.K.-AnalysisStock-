@@ -17,6 +17,10 @@
             android:key="log_out"
             android:title="@string/setting_logout"/>
 
+        <Preference
+            android:key="remove_account"
+            android:title="@string/setting_remove_account"/>
+
     </PreferenceCategory>
     <!-- 앱 정보 & 개발자 정보 -->
     <PreferenceCategory android:title="어플 정보" >

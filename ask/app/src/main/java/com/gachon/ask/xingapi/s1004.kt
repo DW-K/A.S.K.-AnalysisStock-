@@ -1,5 +1,6 @@
 package com.gachon.ask.xingapi
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.ebest.api.*
 import com.gachon.ask.datamngr.API_DEFINE
 import com.gachon.ask.R
+import com.gachon.ask.SentimentReportActivity
 import com.gachon.ask.util.Firestore
 
 class s1004 : Fragment() {
@@ -149,6 +151,17 @@ class s1004 : Fragment() {
     private var m_shcode = ""
     private fun requestT1101() {
         val edit = root.findViewById<EditText>(R.id.editText4)
+
+        //감성분석리포트로 연결
+        val button_senti_analysis = root.findViewById<Button>(R.id.button_senti_analysis)
+        button_senti_analysis.setOnClickListener {
+            val intent = Intent(context, SentimentReportActivity::class.java)
+            intent.putExtra("stock_name",edit.text.toString())
+            startActivity(intent)
+        }
+
+        val stock_name = root.findViewById<TextView>(R.id.tv_stock_name_mock)
+        val stock_info = root.findViewById<LinearLayout>(R.id.stock_info)
         var shcode = edit.text.toString()
 
         Firestore.getMockCode().addOnSuccessListener { documentSnapshot ->
@@ -166,6 +179,10 @@ class s1004 : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 // return
+            }else {
+                // 입력한 종목 이름, 감성분석리포트 보이게하기
+                stock_info.visibility = View.VISIBLE
+                stock_name.setText(edit.text.toString() + " [" + shcode + "]")
             }
             if (m_shcode.length > 0) {
                 var bOK = manager.deleteRealData(m_nHandle, "H1_", m_shcode, 6)

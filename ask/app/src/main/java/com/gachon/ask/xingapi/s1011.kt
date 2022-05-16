@@ -198,7 +198,7 @@ class s1011 : Fragment() {
         // 레이블 데이터 삭제
         (root!!.findViewById(R.id.txtView_sunamt)   as TextView).text    = ""
         (root!!.findViewById(R.id.txtView_dtsunik)  as TextView).text    = ""
-        (root!!.findViewById(R.id.txtView_mamt)     as TextView).text    = ""
+        (root!!.findViewById(R.id.txtView_mamt)     as TextView).text    = "" // 매입금액
         (root!!.findViewById(R.id.txtView_sunamt1)  as TextView).text    = ""
 
         // 그리드 데이터 삭제
@@ -250,12 +250,12 @@ class s1011 : Fragment() {
         val temp_sunamt = sunamt
         (root!!.findViewById(R.id.txtView_sunamt)   as TextView).text    = sunamt
         (root!!.findViewById(R.id.txtView_dtsunik)  as TextView).text    = dtsunik
-        (root!!.findViewById(R.id.txtView_mamt)     as TextView).text    = mamt
+        (root!!.findViewById(R.id.txtView_mamt)     as TextView).text    = mamt  // 매입금액
         (root!!.findViewById(R.id.txtView_sunamt1)  as TextView).text    = sunamt1
         Log.d("s1011.kt", "총 자산 : "+sunamt)
 
         // ASK 유저의 총 자산 데이터에 삽입, fireStore update
-        updateUserMoney(temp_sunamt.replace(",","").toInt())
+        updateUserMoney(temp_sunamt.replace(",","").toInt() - mamt.replace(",","").toInt()) // 현재 자산은 추정자산-매입금액을 빼야 함.
 
         // ------------ 체결내역 부분 ------------
         if (s2 != null) {
@@ -279,6 +279,7 @@ class s1011 : Fragment() {
                 )
                 m_adapter.addItem(data_record)
             }
+            userStock.clear() // 조회버튼 중복 방지를 위해 리스트 초기화
         }
         m_adapter.notifyDataSetChanged()   //데이터 갱신을 알린다.
     }
