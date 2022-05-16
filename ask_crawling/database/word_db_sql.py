@@ -1,3 +1,4 @@
+import traceback
 from datetime import date
 
 import pandas as pd
@@ -7,11 +8,11 @@ from sqlalchemy import create_engine, insert, MetaData
 
 try:
     from database.db_config import db_connection_address
-    from database.models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
+    from database.models import get_table_obj_tweet, get_table_obj_news, \
     get_table_obj_news_count, create_tables, get_table_obj_company
 except:
     from db_config import db_connection_address
-    from models import get_table_obj_tweet, get_table_obj_news, get_table_obj_log, \
+    from models import get_table_obj_tweet, get_table_obj_news, \
         get_table_obj_news_count, create_tables
 
 start_date = date(2002, 6, 1)
@@ -36,61 +37,68 @@ def insert_table_company(company):
             print(f'{e}')
 
 
-def insert_table_log(company):
-    db_connection = create_engine(db_connection_address)
+# def insert_table_log(company):
+#     db_connection = create_engine(db_connection_address)
+#
+#     with db_connection.connect() as conn:
+#         meta = MetaData(bind=conn)
+#         log_table = get_table_obj_log(meta)
+#
+#         try:
+#             result = conn.execute(
+#                 insert(log_table),
+#                 [
+#                     {
+#                         "company": company,
+#                     }
+#                 ]
+#             )
+#         except Exception as e:
+#             print(f'{e}')
 
+
+def insert_table_stock(df_stock):
+    db_connection = create_engine(db_connection_address)
     with db_connection.connect() as conn:
         meta = MetaData(bind=conn)
-        log_table = get_table_obj_log(meta)
-
-        try:
-            result = conn.execute(
-                insert(log_table),
-                [
-                    {
-                        "company": company,
-                    }
-                ]
-            )
-        except Exception as e:
-            print(f'{e}')
-
-
-def insert_table_stock(df_stock, company):
-    dtypesql = {
-        'company': sqlalchemy.types.VARCHAR(64),
-        '날짜': sqlalchemy.types.DATE(),
-        '시가': sqlalchemy.types.INTEGER(),
-        '고가': sqlalchemy.types.INTEGER(),
-        '저가': sqlalchemy.types.INTEGER(),
-        '종가': sqlalchemy.types.INTEGER(),
-        '전일비': sqlalchemy.types.INTEGER(),
-        '등락률': sqlalchemy.types.FLOAT(),
-        '거래량': sqlalchemy.types.INTEGER(),
-        '금액(백만)': sqlalchemy.types.INTEGER(),
-        '신용비': sqlalchemy.types.FLOAT(),
-        '개인': sqlalchemy.types.VARCHAR(16),
-        '기관': sqlalchemy.types.VARCHAR(16),
-        '외인수량': sqlalchemy.types.VARCHAR(16),
-        '외국계': sqlalchemy.types.VARCHAR(16),
-        '프로그램': sqlalchemy.types.VARCHAR(16),
-        '외인비': sqlalchemy.types.FLOAT(),
-        '체결강도': sqlalchemy.types.FLOAT(),
-        '외인보유': sqlalchemy.types.FLOAT(),
-        '외인비중': sqlalchemy.types.FLOAT(),
-        '외인순매수': sqlalchemy.types.VARCHAR(16),
-        '기관순매수': sqlalchemy.types.VARCHAR(16),
-        '개인순매수': sqlalchemy.types.VARCHAR(16),
-        '신용잔고율': sqlalchemy.types.FLOAT(),
-    }
-
-    df_stock['날짜'] = pd.to_datetime(df_stock['날짜'], format='%Y%m%d').dt.strftime("%Y-%m-%d")
-    add_company_name(df_stock, company)
-
-    df_stock = df_stock[df_stock['날짜'] >= "2002-03-20"]
-
-    db_connection = create_engine(db_connection_address)
-    df_stock.to_sql(name='crawl_stock_table', con=db_connection, if_exists='append', index=False, dtype=dtypesql)
+        news_table = get_table_obj_news(meta)
+        for idx, row in df_stock.iterrows():
+            try:
+                result = conn.execute(
+                    insert(news_table),
+                    [
+                        {
+                            "company": row['company'],
+                            "날짜": row['날짜'],
+                            "시가": row['시가'],
+                            "고가": row['고가'],
+                            "저가": row['저가'],
+                            "종가": row['종가'],
+                            "전일비": row['전일비'],
+                            "등락률": row['등락률'],
+                            "거래량": row['거래량'],
+                            "금액(백만)": row['금액(백만)'],
+                            "신용비": row['신용비'],
+                            "개인": row['개인'],
+                            "기관": row['기관'],
+                            "외인수량": row['외인수량'],
+                            "외국계": row['외국계'],
+                            "프로그램": row['프로그램'],
+                            "외인비": row['외인비'],
+                            "체결강도": row['체결강도'],
+                            "외인보유": row['외인보유'],
+                            "외인비중": row['외인비중'],
+                            "외인순매수": row['외인순매수'],
+                            "기관순매수": row['기관순매수'],
+                            "개인순매수": row['개인순매수'],
+                            "신용잔고율": row['신용잔고율']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print('error in insert_table_news')
+                print(f'{traceback.format_exc()}')
+                print(f'{e}')
 
 
 def insert_table_news(df_news):  # dataframe 하나씩 넣기
@@ -123,12 +131,12 @@ def insert_table_news(df_news):  # dataframe 하나씩 넣기
                 )
             except Exception as e:
                 print('error in insert_table_news')
+                print(f'{traceback.format_exc()}')
                 print(f'{e}')
 
 
-def insert_table_tweet(df_tweet, company):
+def insert_table_tweet(df_tweet):
     df_tweet['date'] = pd.to_datetime(df_tweet['date']).dt.strftime("%Y-%m-%d")
-    add_company_name(df_tweet, company)
 
     db_connection = create_engine(db_connection_address)
 

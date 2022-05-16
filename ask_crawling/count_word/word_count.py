@@ -8,6 +8,7 @@ from konlpy.tag import Hannanum
 from konlpy.tag import Kkma
 from konlpy.tag import Komoran
 
+from database.models import create_tables
 from database.word_db_sql import read_table_news, read_table_news_for_count, insert_table_news_count
 
 
@@ -19,15 +20,18 @@ def make_word_count(company, day):
     cols = ['date', 'word', 'count', 'company', 'positive', 'negative']
     df_result = pd.DataFrame(columns=cols)
 
-    for i in range(10):
+    for i in range(len(sorted_wc)):
         word = sorted_wc[i][0]
         count = sorted_wc[i][1]
         df_count = read_table_news_for_count(company, day, word)
 
-        new_row = {'date': day, 'word': word, 'count': count, 'company': company, 'positive':df_count['positive'].mean(), 'negative': df_count['negative'].mean()}
-        df_result = df_result.append(new_row, ignore_index=True)
+        if count > 1:
+            new_row = {'date': day, 'word': word, 'count': count, 'company': company, 'positive':df_count['positive'].mean(), 'negative': df_count['negative'].mean()}
+            df_result = df_result.append(new_row, ignore_index=True)
 
-    insert_table_news_count(df_result)
+    print('make df')
+
+    insert_table_news_count(df_result.iloc[:5, :])
 
 
 def make_word_count_counter(df):
@@ -35,7 +39,7 @@ def make_word_count_counter(df):
 
     han = Kkma()
 
-    countResult = {}
+    countResult = Counter()
 
     for i in df.index:
         if df.loc[i, target_col] is not np.NAN:
@@ -57,5 +61,6 @@ def make_word_count_counter(df):
 
 
 if __name__ == "__main__":
-    make_word_count('기아', date(2022, 4, 29))
+    create_tables()
+    make_word_count('현대차', date(2021, 1, 1))
 

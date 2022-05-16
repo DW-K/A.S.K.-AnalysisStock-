@@ -169,8 +169,8 @@ if __name__ == "__main__":
     # e_date = arg_list[5]
 
     category = 'car'
-    companyName = '기아'
-    query = '기아'
+    companyName = '현대차'
+    query = '현대차'
     num = 20
     s_date = '20200101'
     e_date = '20220203'

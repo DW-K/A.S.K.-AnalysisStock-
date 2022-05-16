@@ -53,15 +53,13 @@ def getStockPrice(company, stockCode, s_date, e_date=None):
     df.sort_values(by='날짜', axis=0, ascending=True, inplace=True, kind='quicksort')
     df['company'] = company
     insert_table_stock(df)
-    print(df.info())
-    df.to_excel('test.xlsx')
 
 
 if __name__ == "__main__":
     print('start getStockPrice')
 
     # argList = sys.argv[1:]
-    argList = ['현대차', '005380', '20220101', '20220430']
+    argList = ['현대차', '005380', '20120101', '20220430']
     company = argList[0]
     stockCode = argList[1]
     start_date_str = argList[2]

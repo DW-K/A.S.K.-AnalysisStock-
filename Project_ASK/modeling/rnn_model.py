@@ -1,7 +1,7 @@
 import random
 import time
 
-from getDataset import preprocess, myDataset, myDatasetSameSize
+from getDataset_old import preprocess, myDataset, myDatasetSameSize
 import pandas as pd
 import torch
 from torch import nn, optim
@@ -42,9 +42,9 @@ class RNNBaseModel(nn.Module):
         self.layerNorm = nn.LayerNorm(input_size)
 
         self.rnn = getattr(nn, rnn_type)(input_size, hidden_size, num_layers=1,
-                                         batch_first=True, dtype=torch.float64, bidirectional=True)
+                                         batch_first=True, dtype=torch.float32, bidirectional=True)
 
-        self.out = nn.Linear(hidden_size*2, output_size, dtype=torch.float64)
+        self.out = nn.Linear(hidden_size*2, output_size, dtype=torch.float32)
 
     def forward(self, inputs, hidden=None):
         inputs = self.layerNorm(inputs)

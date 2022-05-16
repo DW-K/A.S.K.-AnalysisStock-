@@ -33,8 +33,9 @@ def create_db():
 
 
 def create_table_date(db_meta=meta):
-    get_table_obj_date(db_meta)
+    obj = get_table_obj_date(db_meta)
     meta.create_all(engine)
+    return obj
 
 
 def create_table_company(db_meta=meta):
@@ -42,9 +43,9 @@ def create_table_company(db_meta=meta):
     meta.create_all(engine)
 
 
-def create_table_crawl_log(db_meta=meta):
-    get_table_obj_log(db_meta)
-    meta.create_all(engine)
+# def create_table_crawl_log(db_meta=meta):
+#     get_table_obj_log(db_meta)
+#     meta.create_all(engine)
 
 
 def create_table_stock(db_meta=meta):
@@ -126,31 +127,31 @@ def get_table_obj_date(db_meta=meta):
 def get_table_obj_company(db_meta=meta):
     company_table = Table(
         'crawl_company_table', db_meta,
-        Column('id', BigInteger, primary_key=True, autoincrement=True),
+        Column('company_id', BigInteger, primary_key=True, autoincrement=True),
         Column('company', VARCHAR(64), unique=True, nullable=False),
     )
 
     return company_table
 
 
-def get_table_obj_log(db_meta=meta):
-    log_table = Table(
-        'crawl_log_table', db_meta,
-        Column('company', VARCHAR(64), ForeignKey("crawl_company_table.company"), primary_key=True),
-        Column('progress', DATE)
-    )
-
-    return log_table
+# def get_table_obj_log(db_meta=meta):
+#     log_table = Table(
+#         'crawl_log_table', db_meta,
+#         Column('company', VARCHAR(64), ForeignKey("crawl_company_table.company"), primary_key=True),
+#         Column('progress', DATE)
+#     )
+#
+#     return log_table
 
 
 def get_table_obj_tweet(db_meta=meta):
     tweet_table = Table(
         'crawl_tweet_table', db_meta,
-        Column('id', BigInteger, primary_key=True, autoincrement=True),
+        Column('tweet_id', BigInteger, primary_key=True, autoincrement=True),
         Column('date', DATE, ForeignKey("crawl_date_table.date"), nullable=False),
         Column('company', VARCHAR(64), ForeignKey("crawl_company_table.company"), nullable=False),
         Column('rt_count', Integer),
-        Column('text', VARCHAR(256), unique=True),
+        Column('text', VARCHAR(256), unique=True),  # 512
         Column('positive', FLOAT, nullable=False),
         Column('negative', FLOAT, nullable=False)
     )
@@ -161,7 +162,7 @@ def get_table_obj_tweet(db_meta=meta):
 def get_table_obj_news(db_meta=meta):
     news_table = Table(
         'crawl_news_table', db_meta,
-        Column('id', BigInteger, primary_key=True, autoincrement=True),
+        Column('news_id', BigInteger, primary_key=True, autoincrement=True),
         Column('date', DATE, ForeignKey("crawl_date_table.date"), nullable=False),
         Column('company', VARCHAR(64), ForeignKey("crawl_company_table.company"), nullable=False),
         Column('query', VARCHAR(64), nullable=False),
@@ -169,7 +170,7 @@ def get_table_obj_news(db_meta=meta):
         Column('press', VARCHAR(64)),
         Column('press_link', VARCHAR(256)),
         Column('article_link', VARCHAR(256)),
-        Column('article_content', VARCHAR(4096)),
+        Column('article_content', VARCHAR(8192)),
         Column('content_abs', VARCHAR(2048)),
         Column('positive', FLOAT, nullable=False),
         Column('negative', FLOAT, nullable=False)
@@ -203,7 +204,7 @@ def get_table_obj_news(db_meta=meta):
 def get_table_obj_news_count(db_meta=meta):
     news_count_table = Table(
         'crawl_news_count_table', db_meta,
-        Column('id', BigInteger, primary_key=True, autoincrement=True),
+        Column('news_count_id', BigInteger, primary_key=True, autoincrement=True),
         Column('date', DATE, ForeignKey("crawl_date_table.date"), nullable=False),
         Column('word', VARCHAR(32), nullable=False),
         Column('count', Integer, nullable=False),
@@ -318,8 +319,8 @@ def create_tables():
 
 
 if __name__ == "__main__":
-    # date_table = create_table_date()
-    # init_table_date(date_table)
-    # update_trading_date(date_table)
+    date_table = create_table_date()
+    init_table_date(date_table)
+    update_trading_date(date_table)
 
     create_tables()

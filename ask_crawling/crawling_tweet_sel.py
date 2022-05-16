@@ -8,6 +8,7 @@ import pandas as pd
 
 from database.models import create_tables
 from database.word_db_sql import insert_table_tweet, insert_table_company
+from sentiment_tweet import sentiment_tweet
 
 driver = webdriver.Chrome('./chromedriver.exe')  # 크롬 드라이버 위치 -> DeprecationWarning 무시하기
 driver.set_window_size(800, 900)  # 필요없는 부분의 최소화를 위한 작은 창 설정
@@ -28,10 +29,14 @@ user_at = "@"
 input_date_format = "%Y%m%d"
 date_format = "%Y-%m-%d"
 
+# row 생략 없이 출력
+pd.set_option('display.max_rows', None)
+# col 생략 없이 출력
+pd.set_option('display.max_columns', None)
 
 def url_setting(query, start_date):
     since = '%20since%3A' + start_date.strftime(date_format)
-    until = '%20until%3A' + (start_date + timedelta(days=100)).strftime(date_format)  # since + 1일 = 다음날, 즉 그날 하루만 검색
+    until = '%20until%3A' + (start_date + timedelta(days=1)).strftime(date_format)  # since + 1일 = 다음날, 즉 그날 하루만 검색
     # min_retweets = '%20min_retweets%3A' + str(min_retweet_value)
     lang = '%20lang%3A' + 'ko'
     url = 'https://twitter.com/search?q=' + query + since + until + lang
@@ -86,7 +91,6 @@ def tweet_crawler(company: str, query: str, start_date: datetime, end_date: date
                 df_to_insert['date'] = start_date
 
                 df = pd.concat([df, df_to_insert], ignore_index=True)
-                print(df)
 
             else:
                 break
@@ -96,8 +100,9 @@ def tweet_crawler(company: str, query: str, start_date: datetime, end_date: date
         # end of the while
         start_date = start_date + timedelta(days=1)
 
-    insert_table_tweet(df, company)
-    return df
+    driver.quit()
+    print(f'{df.shape[0]} is crawled')
+    sentiment_tweet(df)
 
 
 def crawler(soup, query):
@@ -140,12 +145,15 @@ def crawler(soup, query):
             # print("totaltweets[-1]:", totaltweets[-1])
             # totaltweets.append(t.text)
 
-
         elif is_last_query:
             # 키워드 + 이후
             # print("************ 이전 텍스트가 키워드입니다!")
-            totaltweets[-1] = totaltweets[-1] + t.text
-            is_last_query = False
+            if len(totaltweets) > 0:
+                totaltweets[-1] = totaltweets[-1] + t.text
+                is_last_query = False
+            else:
+                totaltweets.append(t.text)
+                is_last_query = False
 
         # elif span_bold_tag in t:
         #     # 이전 + 키워드
@@ -224,36 +232,36 @@ def clear_contents(tweet_list, min_length) -> list:
     return cleaned_list
 
 
-# 메인함수
-def main():
-    company = "기아"
-    query = "기아 자동차"  # 검색어
-    # until_date = start_date  # 시작날짜 + 1
-    start_date = datetime(year=2021, month=11, day=1)  # 시작날짜
-    end_date = datetime(year=2022, month=3, day=28)  # 끝날짜
-    result = tweet_crawler(company, query, start_date, end_date)  # dataframe
-
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    print(result)
-
-    # 엑셀로 출력해보자.
-    # result.to_excel('tweet_df_result_sel2.xlsx')
-    insert_table_tweet(result, company)
-
+# # 메인함수
+# def main():
+#     company = "기아"
+#     query = "기아 자동차"  # 검색어
+#     # until_date = start_date  # 시작날짜 + 1
+#     start_date = datetime(year=2021, month=11, day=1)  # 시작날짜
+#     end_date = datetime(year=2022, month=3, day=28)  # 끝날짜
+#     result = tweet_crawler(company, query, start_date, end_date)  # dataframe
+#
+#     pd.set_option('display.max_rows', None)
+#     pd.set_option('display.max_columns', None)
+#     print(result)
+#
+#     # 엑셀로 출력해보자.
+#     # result.to_excel('tweet_df_result_sel2.xlsx')
+#     insert_table_tweet(result, company)
 
 if __name__ == "__main__":
-    arg_list = sys.argv[1:]  # argument 받아서 실행
-    # arg_list = ['기아', '자동차', '20211101', '20211130']
+    # arg_list = sys.argv[1:]  # argument 받아서 실행
+    arg_list = ['LG전자', 'LG전자', '20211103', '20211109']
 
     company = arg_list[0]
     query = arg_list[1]
     start_date_str = arg_list[2]
     end_date_str = arg_list[3]
 
+    create_tables()
+    insert_table_company(company)
+
     start_date = datetime.strptime(start_date_str, input_date_format)
     end_date = datetime.strptime(end_date_str, input_date_format)
 
-    create_tables()
-
-    result = tweet_crawler(company, query, start_date, end_date)  # dataframe
+    tweet_crawler(company, query, start_date, end_date)  # dataframe
