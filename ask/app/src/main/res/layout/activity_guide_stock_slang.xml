@@ -12,14 +12,14 @@
 
 
         <TextView
-            android:id="@+id/guide_title"
+            android:id="@+id/term_guide_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="주식 용어 가이드"
+            android:text="주식 은어 가이드"
             android:textColor="#000000"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -33,7 +33,7 @@
 
 
             <LinearLayout
-                android:id="@+id/term_1"
+                android:id="@+id/term_num1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 매수"
+                    android:text="Q. 주포"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -67,7 +67,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="주식을 사는 것\n일명 Long이라고 표현"
+                        android:text="세력과 비슷한 의미로 \n종목의 주가를
+오르락내리락 할수 있는 세력중에 세력
+"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -78,7 +80,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/term_2"
+                android:id="@+id/term_num2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -91,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 매도"
+                    android:text="Q. 따상"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -112,7 +114,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="주식을 파는 것\n 일명 Short라고 표현"
+                        android:text="신규상장 종목이 첫날에 공목 가격에 2배에 시초가가 형성되고\n 이후 상한가까지 기록하는것"
+
                         android:textColor="@color/black"
                         android:textSize="12dp" />
                 </LinearLayout>
@@ -121,7 +124,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/term_3"
+                android:id="@+id/term_num3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -134,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 손절"
+                    android:text="Q. 개미털기"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -155,7 +158,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="매수한 가격보다 낮은 가격에 매도 하는 것"
+                        android:text="세력들이 물량확보를 위해 주가를 하락시켜 \n개미(개인투자자)들의 매도를 유도하는 행위"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -165,7 +168,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/term_4"
+                android:id="@+id/term_num4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -178,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 익절"
+                    android:text="Q. 설거지"
                     android:textColor="@color/black"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -199,7 +202,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="구매한 금액보다 높은 가격에서 판매하는 것"
+                        android:text="세력들이 미처 처리하지 못한 물량을 \n개미들에게 넘기기 위해 주가를 살짝 올려 개미들을 꼬시는 행위"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -209,7 +212,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/term_5"
+                android:id="@+id/term_num5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -222,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 공매도"
+                    android:text="Q. 뇌동매매"
                     android:textColor="@color/black"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -243,17 +246,14 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="주식을 보유하고 있지 않지만, 없는 주식을 파는 것\n
-주가가 하락할 것을 미리 예측하고,\n 없는 주식을 매도하고 주식이 하락하면 수익을 얻는 방법
-"
+                        android:text="부화뇌동에서 파생된 말로 \n남들이 하는대로 따라 사고 따라 파는 것"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
-
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/term_6"
+                android:id="@+id/term_num6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -266,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Q. 시가"
+                    android:text="Q. 외계인"
                     android:textColor="@color/black"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -287,7 +287,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="주식시장 개장 후 최초로 거래된 가격"
+                        android:text="외국인투자자의 별칭\n 진정한 개미털기 주범일지도!"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
