@@ -110,21 +110,22 @@ public class SentimentReportActivity extends AppCompatActivity {
                 //myPostList = new ArrayList<>();
                 List<Post> posts = response.body();
 
-                // 상위 5개만 보여주기 위해 뒤의 5개 데이터는 지움
-                for(int index = 23; index > 4; index--){
-                    posts.remove(index);
-                }
+
                 myPostList.addAll(posts); // 상위 5개의 post만 저장
 
                 for ( Post post : posts) {
                     String content ="";
 
                     String company = post.getCompany();
-                    Double sentiment = Double.parseDouble(post.getPositive());
-                    totalSentiment += sentiment;
 //                    String date = post.getDate();
 
-                    if(!company.equals(stockName)) continue;
+                    if(!company.equals(stockName)){
+                        myPostList.remove(post);
+                        continue;}
+                    else{
+                        Double sentiment = Double.parseDouble(post.getPositive());
+                        totalSentiment += sentiment;
+                    }
                     //if(!compareDate(date)) continue;
 
                     Log.d(TAG, "keyword : "+post.getWord());

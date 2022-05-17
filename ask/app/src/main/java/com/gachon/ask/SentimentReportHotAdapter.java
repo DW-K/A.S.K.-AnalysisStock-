@@ -42,7 +42,7 @@ public class SentimentReportHotAdapter extends RecyclerView.Adapter<SentimentRep
     public void onBindViewHolder(@NonNull SentiReportHotViewHolder holder, int position) {
         ItemSentiReportHotkeywordBinding binding = holder.itemsentireporthotkeywordBinding;
         Post myPost = myPostList.get(position);
-        binding.tvRank.setText(myPost.getNewsCountId()+""); // Int->String 변환 필요해보임
+        binding.tvRank.setText((position+1)+""); // Int->String 변환 필요해보임
         binding.tvKeyword.setText(myPost.getWord());
 
         if(Double.parseDouble(myPost.getPositive()) > 0.5) { // 긍정의 비율이 더 높다면 긍정으로 표시.
