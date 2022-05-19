@@ -17,6 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/baseline_settings_24"
+                app:tint="@color/transparent" />
 
             <TextView
                 android:id="@+id/mypage_title"
@@ -394,29 +402,58 @@
 
             </FrameLayout>
 
-            <LinearLayout
-                android:id="@+id/stock_guide"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="#f1f9ff"
-                android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/stock_guide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#f1f9ff"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/stock_guide_title"
+            <TextView
+                android:id="@+id/stock_guide_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="주식 가이드"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_term"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="주식 가이드"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/baseline_chevron_right_24"
+                    android:elevation="10dp"
+                    android:text="주식 용어"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    app:backgroundTint="@color/white"></Button>
+
+                <Button
+                    android:id="@+id/btn_slang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/baseline_chevron_right_24"
+                    android:elevation="10dp"
+                    android:text="주식 은어"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/skyblue_background"></Button>
 
             </LinearLayout>
 
-
-
-
         </LinearLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>

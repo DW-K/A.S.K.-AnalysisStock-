@@ -80,10 +80,12 @@
                         android:id="@+id/tv_company_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:textColor="@color/black"
-                        android:text=""/>
+                        android:text="현대차"/>
 
 
                     <TextView
@@ -126,14 +128,48 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:layout_margin="10dp">
 
-                    <ListView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="순위" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="20dp"
+                            android:text="키워드" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="감성" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/hot_keyword"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
 
 
 

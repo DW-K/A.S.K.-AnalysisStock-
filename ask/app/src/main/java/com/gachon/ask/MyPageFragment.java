@@ -87,6 +87,24 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
             }
         });
 
+
+        binding.btnTerm.setOnClickListener(new View.OnClickListener() { // 주식 용어 화면으로 이동
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GuideActivity.class);
+                intent.putExtra("guide_info", "term");
+                startActivity(intent);
+            }
+        });
+
+        binding.btnSlang.setOnClickListener(new View.OnClickListener() { // 주식 은어 화면으로 이동
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GuideActivity.class);
+                intent.putExtra("guide_info", "slang");
+                startActivity(intent);
+            }
+        });
         // 모의투자 화면으로 이동!
         binding.buttonInvestment.setOnClickListener(new View.OnClickListener() {
             @Override

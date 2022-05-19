@@ -163,16 +163,12 @@
             android:text="감성분석레포트 Quick" />
 
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="20dp"
-            android:background="#f1f9ff">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
+                android:layout_height="400dp"
+                android:background="#f1f9ff"
+                android:layout_margin="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -236,11 +232,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </FrameLayout>
-
-
-
-
 
 
     </LinearLayout>

@@ -6,30 +6,21 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="5dp"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="10dp"
-            android:layout_weight="1"
             android:layout_gravity="center">
-
-
             <TextView
                 android:id="@+id/tv_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginHorizontal="10dp"
                 android:text="1"/>
 
             <TextView
@@ -38,18 +29,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:text="전기차"/>
-
-            <TextView
-                android:id="@+id/tv_company"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:text="현대차"/>
 
             <TextView
                 android:id="@+id/tv_sentiment"
@@ -63,11 +45,6 @@
         </LinearLayout>
 
 
-
-
-
-
-    </LinearLayout>
 
 
 
