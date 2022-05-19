@@ -71,17 +71,13 @@ def fit(df, rnn_type):
     # model = RNNBaseModel(train_ds[0][0].shape[1], 16, 1)
     model = RNNBaseModel(rnn_type, train_ds[0][0].shape[1], 16, 1)
     loss_func = nn.MSELoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.01)
+    optimizer = optim.Adam(model.parameters(), lr=0.01)
 
-    epochs = 200
+    epochs = 100
 
     for epoch in range(epochs):
         model.train()
         for X, y in train_dl:
-            # print(X.shape)
-            # X = X.unsqueeze(0)
-            # print(X.shape)
-            # print(y.shape)
             outputs, hidden = model(X, None)
             outputs = outputs.squeeze(2)
             # print(outputs.shape)
@@ -116,12 +112,16 @@ def fit(df, rnn_type):
                     print(f'{epoch + 1}/{epochs}: loss: {loss}, acc: {acc.item()}, test size: {test_size}')
 
     print(f'Run time: {time.time() - start}')
+    torch.save(model, '1.pt')
+    torch.save(model.state_dict(), '1_s.pt')
 
 
 if __name__ == "__main__":
-    df = pd.read_excel(r"../dataset/stockData/car/기아/기아_s.xlsx")
+    # df = pd.read_excel(r"../dataset/stockData/car/기아/기아_s.xlsx")
 
     rnn_type_list = ["RNN", "LSTM", "GRU"]
 
-    for rnn_type in rnn_type_list:
-        fit(df, rnn_type)
+    # for rnn_type in rnn_type_list:
+    # rnn_type = "RNN"
+    # model = RNNBaseModel(rnn_type, 23, 23, 1)
+    # torch.save(model, '1.pt')

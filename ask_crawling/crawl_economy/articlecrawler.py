@@ -220,7 +220,7 @@ class ArticleCrawler(object):
         e_year = self.date['end_year']
         e_month = self.date['end_month']
         e_day = self.date['end_day']
-        df.to_csv(f'../output/{s_year}{s_month}{s_day}_{e_year}{e_month}{e_day}')
+        df.to_csv(f'./output/{s_year}{s_month}{s_day}_{e_year}{e_month}{e_day}.csv')
 
     def start(self):
         # MultiProcess 크롤링 시작

@@ -88,3 +88,6 @@ def sentiment(df):
 #     df = pd.DataFrame(df)
 #     print(len(df['기사 내용']))
 #     sentiment(df)
+
+if __name__ == "__main__":
+    pass

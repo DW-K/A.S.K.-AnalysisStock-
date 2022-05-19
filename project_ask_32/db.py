@@ -1,3 +1,5 @@
+import traceback
+
 from sqlalchemy import Table, Column, ForeignKey, Integer, BigInteger, FLOAT, VARCHAR, DATE, BOOLEAN, MetaData, \
     create_engine
 from sqlalchemy import insert, update
@@ -5,23 +7,25 @@ import sqlalchemy
 import pandas as pd
 
 pw = 'ask1234!'
-# db_connection_address = f'mysql+pymysql://root:{pw}@localhost:3306/ASK'
-db_connection_address = f'mysql+pymysql://root:{pw}@13.209.122.152:3306/ASK'
+db_connection_address = f'mysql+pymysql://root:{pw}@localhost:3306/ASK'
+# db_connection_address = f'mysql+pymysql://root:{pw}@13.209.122.152:3306/ASK'
 
 meta = MetaData()
 engine = create_engine(db_connection_address)
 
 
 def create_table_stock(db_meta=meta):
+    get_table_obj_date(db_meta)
+    get_table_obj_company(db_meta)
     get_table_obj_stock(db_meta)
-    meta.create_all(engine)
+    db_meta.create_all(engine)
 
 
 def get_table_obj_company(db_meta=meta):
     company_table = Table(
         'crawl_company_table', db_meta,
         Column('id', BigInteger, primary_key=True, autoincrement=True),
-        Column('company', VARCHAR(64), unique=True, nullable=False),
+        Column('company', VARCHAR(64), unique=True, nullable=False)
     )
 
     return company_table
@@ -38,8 +42,6 @@ def get_table_obj_date(db_meta=meta):
 
 
 def get_table_obj_stock(db_meta=meta):
-    get_table_obj_company()
-    get_table_obj_date()
     stock_table = Table(
         'crawl_stock_table', db_meta,
         Column('날짜', DATE, ForeignKey("crawl_date_table.date"), primary_key=True, nullable=False),
@@ -79,7 +81,6 @@ def read_table_stock(company):
 
 
 def insert_table_stock(df_stock):
-    # create_table_stock()
     db_connection = create_engine(db_connection_address)
 
     with db_connection.connect() as conn:
@@ -120,6 +121,7 @@ def insert_table_stock(df_stock):
                 )
             except Exception as e:
                 print(e)
+                print(f'{traceback.format_exc()}')
 
 
 if __name__ == '__main__':

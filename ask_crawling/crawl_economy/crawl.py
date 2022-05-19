@@ -15,8 +15,9 @@ if __name__ == "__main__":
 
     while s_date < e_date:
         # print(f's_date: {s_date.strftime(date_format)}, e_date: {(s_date + relativedelta(months=1)).strftime(date_format)}')
-        Crawler.set_date_range(s_date.strftime(date_format), (s_date + relativedelta(months=6)).strftime(date_format))
+        Crawler.set_date_range(s_date.strftime(date_format), (s_date + relativedelta(months=2)).strftime(date_format))
         # Crawler.set_date_range(s_date.strftime(date_format), s_date.strftime(date_format))
         Crawler.start()
-        s_date = s_date + relativedelta(months=6)
+        s_date = s_date + relativedelta(months=2)
         # s_date = s_date + timedelta(days=1)
+        time.sleep(600)
