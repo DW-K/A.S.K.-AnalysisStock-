@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/skyblue_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/quize_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="주식 퀴즈"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+
+
+        <!--Question 1-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_round"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:text="Q1. 주식 장 오픈 시간은?" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/radiogrp_1"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_question_1_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8시 30분" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_1_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9시"/>
+
+                <RadioButton
+                    android:id="@+id/radio_question_1_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9시 30분" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_1_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10시" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_round"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:text="Q2. 주식 장 마감 시간은?" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/radiogrp_2"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_question_2_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3시" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_2_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3시 30분" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_2_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4시" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_2_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4시 30분" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_round"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:text="Q3. 양봉은 시가 보다 주가가 상승해 종가가 높게 끝나는 경우를 말합니다. 음봉은 그 반대죠. 그럼 양봉의 크기가 매우 커서 상승 폭이 매우 큰 경우를 차트에서는 뭐라고 부를까요?" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/radiogrp_3"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_question_3_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="거대양봉" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_3_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="거봉 장대양봉" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_3_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="장대양봉" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_3_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="매직스틱" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_round"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:text="Q4. 외국인과 기관 등이 공모해서 발행한 주식은 무엇일까요?" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/radiogrp_4"
+                >
+
+                <RadioButton
+                    android:id="@+id/radio_question_4_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공모주" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_4_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="배당주" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_4_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="잡주" />
+
+                <RadioButton
+                    android:id="@+id/radio_question_4_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="연기금" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_round"
+            android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="Q5. 주석 거래에 맛 들인 이지선은 하루에도 수십번씩 초 단위로 거래를 하며 단기차익을 거두는 초단타 매매를 하고 있습니다. 이런 매매 기법을 무엇이라 할까요?" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/radiogrp_5"
+            >
+
+            <RadioButton
+                android:id="@+id/radio_question_5_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="얍삽이 매매" />
+
+            <RadioButton
+                android:id="@+id/radio_question_5_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="스켈핑 매매" />
+
+            <RadioButton
+                android:id="@+id/radio_question_5_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피말리기 매매" />
+
+            <RadioButton
+                android:id="@+id/radio_question_5_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="말아먹기 매매" />
+        </RadioGroup>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:onClick="reset"
+                android:textColor="@color/black"
+                android:backgroundTint="#EEEEEE"
+                android:id="@+id/button_reset"
+                android:text="리셋" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:id="@+id/button_submit"
+                android:textColor="@color/black"
+                android:onClick="submit"
+                android:text="제출" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

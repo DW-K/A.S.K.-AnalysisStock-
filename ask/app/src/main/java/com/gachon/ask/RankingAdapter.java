@@ -72,7 +72,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView iv_profile, iv_univ;
+        ImageView iv_profile;
         TextView tv_rank, tv_level, tv_nickname, tv_yield;
         int item_pos;
 
@@ -84,7 +84,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
             tv_level = (TextView) itemView.findViewById(R.id.tv_level);
             tv_nickname = (TextView) itemView.findViewById(R.id.tv_nickname);
             tv_yield = (TextView) itemView.findViewById(R.id.tv_yield);
-            iv_univ= itemView.findViewById(R.id.iv_univ);
             user = FirebaseAuth.getInstance().getCurrentUser();
             item_pos = getAdapterPosition() + 1;
 

@@ -22,6 +22,7 @@ public class CommunityFragment extends Fragment {
         root.findViewById(R.id.btn_community_electronics).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_univ).setOnClickListener(onClickListener);
         root.findViewById(R.id.btn_community_ask).setOnClickListener(onClickListener);
+        root.findViewById(R.id.btn_quiz).setOnClickListener(onClickListener);
 
         return root;
     }
@@ -55,11 +56,20 @@ public class CommunityFragment extends Fragment {
             case R.id.btn_community_ask:
                 selected_category = getString(R.string.category_ask);
                 break;
+
+            case R.id.btn_quiz:
+                selected_category = "btnQuiz";
+                break;
         }
 
-        intent = new Intent(getActivity(), CommunityCategoryActivity.class);
-        intent.putExtra("selected_category", selected_category);
-        startActivity(intent);
+        if(selected_category!="btnQuiz") {
+            intent = new Intent(getActivity(), CommunityCategoryActivity.class);
+            intent.putExtra("selected_category", selected_category);
+            startActivity(intent);
+        }else{
+            intent = new Intent(getActivity(), QuizActivity.class);
+            startActivity(intent);
+        }
     };
 
 }

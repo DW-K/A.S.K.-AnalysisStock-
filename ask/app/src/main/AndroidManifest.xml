@@ -47,6 +47,7 @@
         <activity android:name=".community.PostViewActivity" />
         <activity android:name=".community.CommunityCategoryActivity" />
         <activity android:name=".GuideActivity" />
+        <activity android:name=".QuizActivity" />
         <activity
             android:name=".CommunityFragment"
             tools:ignore="Instantiatable" />
