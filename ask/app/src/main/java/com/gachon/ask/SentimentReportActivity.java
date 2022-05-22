@@ -107,9 +107,7 @@ public class SentimentReportActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 myPostList.clear();
                 if (!response.isSuccessful()) return;
-                //myPostList = new ArrayList<>();
                 List<Post> posts = response.body();
-
 
                 myPostList.addAll(posts); // 상위 5개의 post만 저장
 
@@ -117,7 +115,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                     String content ="";
 
                     String company = post.getCompany();
-//                    String date = post.getDate();
 
                     if(!company.equals(stockName)){
                         myPostList.remove(post);
@@ -126,8 +123,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                         Double sentiment = Double.parseDouble(post.getPositive());
                         totalSentiment += sentiment;
                     }
-                    //if(!compareDate(date)) continue;
-
                     Log.d(TAG, "keyword : "+post.getWord());
                     Log.d(TAG, "news_count_id : "+post.getNewsCountId());
                     Log.d(TAG, "\n");
@@ -139,7 +134,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                 RecyclerView_hot_keyword.setAdapter(sentimentReportHotAdapter);
 
                 int avg = (int)((totalSentiment/5)*100);
-//                sentimentPercent.setText("긍정 " + avg +" %  부정 " + (100-avg) + "% ");
                 if(avg > 50){
                     sentimentPercent.setText("긍정 " + avg +" %");
                     sentimentPercent.setTextColor(getResources().getColor(R.color.red_up));
@@ -169,6 +163,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
 
         Call<List<Post>> call = jsonPlaceHOlderApi.getNews();
+        // get tweet data
         if(current_category.equals("tweet")) {
             call = jsonPlaceHOlderApi.getTweets();
             call.enqueue(new Callback<List<Post>>() {
@@ -190,9 +185,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                         String company = post.getCompany();
                         String date = post.getDate();
 
-                        //if(!company.equals(stockName)) continue;
-                        //if(!compareDate(date)) continue;
-
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getText() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -210,8 +202,8 @@ public class SentimentReportActivity extends AppCompatActivity {
             });
         }
         else{
+            //get news data
             call = jsonPlaceHOlderApi.getNews();
-            //call = jsonPlaceHOlderApi.getTweets();
             call.enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -230,8 +222,6 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                         String company = post.getCompany();
                         String date = post.getDate();
-                        //if(!company.equals(stockName)) continue;
-                        //if(!compareDate(date)) continue;
 
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getTitle() + "\n";

@@ -32,7 +32,6 @@
             android:name=".settings.SettingActivity"
             android:exported="false" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoadingActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SplashActivity"

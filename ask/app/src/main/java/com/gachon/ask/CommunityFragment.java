@@ -62,8 +62,4 @@ public class CommunityFragment extends Fragment {
         startActivity(intent);
     };
 
-
-    private void startToast(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-    }
 }
