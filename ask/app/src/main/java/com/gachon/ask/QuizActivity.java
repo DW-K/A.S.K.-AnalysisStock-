@@ -1,5 +1,6 @@
 package com.gachon.ask;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,8 +76,9 @@ public class QuizActivity extends AppCompatActivity {
         if (question5_answer.isChecked()) {
             score++;
         }
-        //    Intent shareIntent = new Intent(MainActivity.this, QuizShareActivity.class);
-        //    shareIntent.putExtra("score", score);
-        //    startActivity(shareIntent);
+
+        Intent shareIntent = new Intent(this, QuizShareActivity.class);
+        shareIntent.putExtra("score", score);
+        startActivity(shareIntent);
     }
 }
