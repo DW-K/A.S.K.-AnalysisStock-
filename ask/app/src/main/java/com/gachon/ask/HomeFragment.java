@@ -36,6 +36,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     private SwipeRefreshLayout swipeBoard = null;
     private DocumentSnapshot last;
+
+    private int itemCount;
+    private ArrayList<String> keywordLists;
     User level_user;
     static boolean isStockListExist;
 
@@ -84,7 +88,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         setUserMoney();
         setAdapter();
         setRefresh();
-        getData();
+        getKeywordData();
         // 모의투자 화면으로 이동!
         binding.buttonInvestment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +123,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
         getInfoData();
         setAdapter();
-        getData();
         Button buttonStock = getView().findViewById(R.id.button_my_stock_temp);
         buttonStock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +243,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         });
     }
 
-    public void getData() {
+    public void getKeywordData() {
         String SERVER_URL = BuildConfig.SERVER;
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -253,34 +256,37 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         Call<List<Post>> call = jsonPlaceHOlderApi.getNewsCount();
         call = jsonPlaceHOlderApi.getNewsCount();
         myPostList = new ArrayList<>();
+        keywordLists = new ArrayList<>();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 myPostList.clear();
+                keywordLists.clear();
+                itemCount = 0;
                 if (!response.isSuccessful()) return;
-                //myPostList = new ArrayList<>();
+
                 List<Post> posts = response.body();
+                String[] badKeyword = {"국내","기자","업계","최근","서울","뉴시스","시스","제공", "현대차", "기업",
+                        "21일", "달러", "이번", "이날", "17일", "증권", "그룹", "올해", "지난해", "4일", "5일",
+                        "7일", "10일", "시장", "13일", "14일", "15일", "18일", "19일", "20일", "22일", "3일", "24일", "26일", "28일", "29일", "때문", "1일"};
+                ArrayList<String>  badKeywords = new ArrayList<>(Arrays.asList(badKeyword));
 
-                // 상위 5개만 보여주기 위해 뒤의 5개 데이터는 지움
-                for(int index = 23; index > 4; index--){
-                    posts.remove(index);
-                }
-                myPostList.addAll(posts); // 상위 5개의 post만 저장
 
-                Log.d(TAG, "myPostList 데이터 테스트 : "+ myPostList.size());
+
                 for ( Post post : posts) {
-                    String content ="";
 
-                    String company = post.getCompany();
-                    String date = post.getDate();
+                    String keyword = post.getWord();
 
-                    //if(!company.equals(stockName)) continue;
-                    //if(!compareDate(date)) continue;
-
-                    Log.d(TAG, "keyword : "+post.getWord());
-                    Log.d(TAG, "news_count_id : "+post.getNewsCountId());
-                    Log.d(TAG, "\n");
+                    if(!keywordLists.contains(keyword) && !badKeywords.contains(keyword)){
+                        myPostList.add(post);
+                        keywordLists.add(keyword);
+                        itemCount+=1;
+                    }
+                    if(itemCount>=10) {
+                        break;
+                    }
                 }
+
                 // adapter
                 homeHotAdapter = new HomeHotAdapter(getContext(), myPostList, HomeFragment.this);
                 // set adapter to recyclerview

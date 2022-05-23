@@ -46,6 +46,7 @@
 
     <string name="sentiment_report">감성분석 리포트</string>
     <string name="main_sentiment">대표 감성</string>
+    <string name="stock_prediction">AI 주가예측</string>
     <string name="hot_keyword">주요 키워드</string>
     <string name="show_url">원문보기</string>
     <string name="tweet">트윗</string>

@@ -49,7 +49,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.HomeHotV
     public void onBindViewHolder(@NonNull HomeHotViewHolder holder, int position) {
         ItemHotkeywordBinding binding = holder.itemHotkeywordBinding;
         Post myPost = myPostList.get(position);
-        binding.tvRank.setText(myPost.getNewsCountId()+""); // Int->String 변환 필요해보임
+        binding.tvRank.setText((position+1)+"");
         binding.tvKeyword.setText(myPost.getWord());
         binding.tvCompany.setText(myPost.getCompany());
         if(Double.parseDouble(myPost.getPositive()) > 0.5) { // 긍정의 비율이 더 높다면 긍정으로 표시.
