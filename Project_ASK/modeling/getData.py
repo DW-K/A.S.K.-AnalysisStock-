@@ -8,11 +8,15 @@ except:
 import pandas as pd
 from datetime import date
 
+from datetime import date
+
 
 def get_data(company, s_date, e_date):
     df_stock = read_table_stock(company, s_date, e_date)
-    df_news = read_table_news(company, s_date, e_date)
-    df_tweet = read_table_tweet(company, s_date, e_date)
+    # df_news = read_table_news(company, s_date, e_date)
+    # df_tweet = read_table_tweet(company, s_date, e_date)
+
+    print(df_stock)
 
     df_stock = df_stock.set_index("날짜")
     df_news = df_news.set_index("date")
@@ -41,4 +45,8 @@ def get_data(company, s_date, e_date):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     result = get_data("현대차", date(2022, 1, 1), date(2022, 4, 30))
+=======
+    get_data("현대차", date(4, 1, 2021), date(4, 1, 2022))
+>>>>>>> c85876a (no message)
