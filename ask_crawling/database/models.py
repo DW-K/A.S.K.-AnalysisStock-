@@ -78,6 +78,12 @@ def create_table_obj_news_count(db_meta=meta):
     meta.create_all(engine)
 
 
+def create_table_obj_result(db_meta=meta):
+    get_table_obj_result(db_meta)
+    meta.create_all(engine)
+
+
+
 # def create_table_finance(db_meta=meta):
 #     get_table_obj_finance(db_meta)
 #     meta.create_all(engine)
@@ -178,6 +184,17 @@ def get_table_obj_news(db_meta=meta):
 
     return news_table
 
+
+def get_table_obj_result(db_meta=meta):
+    result_table = Table(
+        'result_table', db_meta,
+        Column('id', BigInteger, primary_key=True, autoincrement=True),
+        Column('date', DATE, ForeignKey("crawl_date_table.date"), nullable=False),
+        Column('company', VARCHAR(64), ForeignKey("crawl_company_table.company"), nullable=False),
+        Column('result', FLOAT),
+    )
+
+    return result_table
 
 # def get_table_obj_tweet_sentiment(db_meta=meta):
 #     tweet_sentiment_table = Table(
@@ -316,6 +333,7 @@ def create_tables():
     create_table_tweet()
     create_table_obj_news_count()
     # create_table_finance()
+    create_table_obj_result()
 
 
 if __name__ == "__main__":

@@ -25,13 +25,11 @@ def make_word_count(company, day):
         count = sorted_wc[i][1]
         df_count = read_table_news_for_count(company, day, word)
 
-        if count > 1:
+        if count > 2:
             new_row = {'date': day, 'word': word, 'count': count, 'company': company, 'positive':df_count['positive'].mean(), 'negative': df_count['negative'].mean()}
             df_result = df_result.append(new_row, ignore_index=True)
 
-    print('make df')
-
-    insert_table_news_count(df_result.iloc[:5, :])
+    insert_table_news_count(df_result)
 
 
 def make_word_count_counter(df):

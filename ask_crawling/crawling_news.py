@@ -174,24 +174,23 @@ def get_contents(url, press, request_headers):
 if __name__ == "__main__":
     date_format = "%Y%m%d"
     # arg_list = sys.argv[1:]  # argument 받아서 실행
-    # arg_list = ['현대차', '현대차', '20210101', '20210130']
-    # arg_list = ['LG전자', 'LG전자', '20210101', '20210130']
-    # arg_list = ['카카오', '카카오', '20210102', '20210130']
-    arg_list = ['하이브', 'bts', '20210101', '20210104']
+    arg_list1 = ['현대차', '현대차', '20220420', '20220430']
+    arg_list2 = ['LG전자', 'LG전자', '20220420', '20220430']
+    arg_list3 = ['카카오', '카카오', '20220420', '20220430']
+    arg_list4 = ['하이브', '하이브', '20220420', '20220430']
 
-    company = arg_list[0]
-    query_list = arg_list[1]
-    start_date_str = arg_list[2]
-    end_date_str = arg_list[3]
+    arg_list_list = [arg_list1, arg_list2, arg_list3, arg_list4]
 
-    create_tables()
-    insert_table_company(company)
+    for arg_list in arg_list_list:
+        company = arg_list[0]
+        query_list = arg_list[1]
+        start_date_str = arg_list[2]
+        end_date_str = arg_list[3]
 
-    start_date = datetime.strptime(start_date_str, date_format)
-    end_date = datetime.strptime(end_date_str, date_format)
+        create_tables()
+        insert_table_company(company)
 
-    # 현대차 query
-    # query_list = ["아반떼", "팰리세이드", "제네시스", "GV80",
-    #               "현대차", "코나EV", "아이오닉5"]
+        start_date = datetime.strptime(start_date_str, date_format)
+        end_date = datetime.strptime(end_date_str, date_format)
 
-    news_crawler(company, query_list, start_date, end_date)
+        news_crawler(company, query_list, start_date, end_date)

@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, insert, MetaData
 try:
     from database.db_config import db_connection_address
     from database.models import get_table_obj_tweet, get_table_obj_news, \
-    get_table_obj_news_count, create_tables, get_table_obj_company
+    get_table_obj_news_count, create_tables, get_table_obj_company, get_table_obj_result
 except:
     from db_config import db_connection_address
     from models import get_table_obj_tweet, get_table_obj_news, \
@@ -126,6 +126,30 @@ def insert_table_news(df_news):  # dataframe 하나씩 넣기
                             "content_abs": row['content_abs'],
                             "positive": row['positive'],
                             "negative": row['negative']
+                        }
+                    ]
+                )
+            except Exception as e:
+                print('error in insert_table_news')
+                print(f'{traceback.format_exc()}')
+                print(f'{e}')
+
+
+def insert_table_result(df_result):  # dataframe 하나씩 넣기
+    db_connection = create_engine(db_connection_address)
+
+    with db_connection.connect() as conn:
+        meta = MetaData(bind=conn)
+        result_table = get_table_obj_result(meta)
+        for idx, row in df_result.iterrows():
+            try:
+                result = conn.execute(
+                    insert(result_table),
+                    [
+                        {
+                            "date": row['날짜'],
+                            "company": row['company'],
+                            "result": row['result']
                         }
                     ]
                 )

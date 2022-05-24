@@ -34,3 +34,7 @@ def createFolder(directory):
 def getFolderList(directory):
     fileList = os.listdir(directory)
     return fileList
+
+
+if __name__ == "__main__":
+    print('hihi')

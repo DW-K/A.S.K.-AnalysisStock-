@@ -1,127 +1,346 @@
-import random
-import time
-
-from getDataset_old import preprocess, myDataset, myDatasetSameSize
-import pandas as pd
 import torch
-from torch import nn, optim
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
-from sklearn.metrics import accuracy_score
+from torch import nn
+
+torch.manual_seed(777)
 
 
-# rnn_type='LSTM'
-# lstm = getattr(nn, rnn_type)(60, 20, 1, batch_first=True, dropout=0.2, bidirectional=1)
-
-class GRUmodel(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
-        super(GRUmodel, self).__init__()
-
+class lstm_ln_h4_m1(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
-        self.output_size = output_size
+        self.num_layers = num_layers
+        self.device = device
 
-        self.rnn = nn.GRU(input_size=input_size, hidden_size=hidden_size,
-                          num_layers=1, batch_first=True, dtype=torch.float64)
-        self.out = nn.Linear(hidden_size, output_size, dtype=torch.float64)
+        self.ln = nn.LayerNorm(input_size, device=device)
 
-    def forward(self, inputs, hidden=None):
-        output, hidden = self.rnn(inputs, hidden)
-        output = self.out(output)
-        return output, hidden
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
+
+        m_hidden = hidden_size * 4
+        m1 = nn.Linear(m_hidden, m_hidden)
+
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
+
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
+
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu
+                                )
+
+        self.S2 = nn.Sequential(m1, lRelu)
+
+        self.S3 = nn.Sequential(d3, lRelu,
+                                d2, lRelu, d1, tanh)
+
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
+
+        # get last sequence
+        out = out[:, -1, :].squeeze()
+
+        return out
 
 
-class RNNBaseModel(nn.Module):
-    def __init__(self, rnn_type, input_size, hidden_size, output_size):
-        super(RNNBaseModel, self).__init__()
-
+class lstm_ln_h4_m2(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
-        self.output_size = output_size
+        self.num_layers = num_layers
+        self.device = device
 
-        self.layerNorm = nn.LayerNorm(input_size)
+        self.ln = nn.LayerNorm(input_size, device=device)
 
-        self.rnn = getattr(nn, rnn_type)(input_size, hidden_size, num_layers=1,
-                                         batch_first=True, dtype=torch.float32, bidirectional=True)
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
 
-        self.out = nn.Linear(hidden_size*2, output_size, dtype=torch.float32)
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
 
-    def forward(self, inputs, hidden=None):
-        inputs = self.layerNorm(inputs)
-        output, hidden = self.rnn(inputs, hidden)
-        output = self.out(output)
-        return output, hidden
+        m_hidden = hidden_size * 4
+        m1 = nn.Linear(m_hidden, m_hidden)
+        m2 = nn.Linear(m_hidden, m_hidden)
 
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
 
-def fit(df, rnn_type):
-    start = time.time()
-    train_X, train_y, test_X, test_y = preprocess(df, get_test=True, train_bound_e=0, train_bound_s=0)
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
 
-    train_ds = myDatasetSameSize(train_X, train_y)
-    test_ds = myDatasetSameSize(test_X, test_y)
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu)
 
-    # train_ds = myDataset(train_X, train_y)
-    # test_ds = myDataset(test_X, test_y)
+        self.S2 = nn.Sequential(m1, lRelu, m2, lRelu)
 
-    bs = 5
+        self.S3 = nn.Sequential(d3, lRelu,
+                                d2, lRelu, d1, tanh)
 
-    train_dl = DataLoader(train_ds, batch_size=bs, shuffle=False)
-    test_dl = DataLoader(test_ds, batch_size=bs, shuffle=False)
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
 
-    # model = RNNBaseModel(train_ds[0][0].shape[1], 16, 1)
-    model = RNNBaseModel(rnn_type, train_ds[0][0].shape[1], 16, 1)
-    loss_func = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.01)
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
 
-    epochs = 100
+        # get last sequence
+        out = out[:, -1, :].squeeze()
 
-    for epoch in range(epochs):
-        model.train()
-        for X, y in train_dl:
-            outputs, hidden = model(X, None)
-            outputs = outputs.squeeze(2)
-            # print(outputs.shape)
-            # print(hidden.shape)
-            # print(y.shape)
-
-            optimizer.zero_grad()
-            loss = loss_func(outputs, y)
-            loss.backward()
-            optimizer.step()
-
-        if (epoch + 1) % 10 == 0:
-            model.eval()
-            with torch.no_grad():
-                acc = torch.zeros(1)
-                for test_X, test_y in test_dl:
-                    # test_X = test_X.unsqueeze(0)
-                    # print(test_X.shape)
-                    outputs, hidden = model(test_X, None)
-                    outputs = outputs.squeeze(2)
-
-                    # print(outputs.shape)
-                    # print(test_y.shape)
-
-                    loss = loss_func(outputs, test_y)
-
-                    acc += (outputs * test_y > 0).sum() / test_y.shape[1]
-
-                    test_size = len(test_ds)
-                    acc = acc / test_size
-
-                    print(f'{epoch + 1}/{epochs}: loss: {loss}, acc: {acc.item()}, test size: {test_size}')
-
-    print(f'Run time: {time.time() - start}')
-    torch.save(model, '1.pt')
-    torch.save(model.state_dict(), '1_s.pt')
+        return out
 
 
-if __name__ == "__main__":
-    # df = pd.read_excel(r"../dataset/stockData/car/기아/기아_s.xlsx")
+class lstm_ln_h4_m4(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.device = device
 
-    rnn_type_list = ["RNN", "LSTM", "GRU"]
+        self.ln = nn.LayerNorm(input_size, device=device)
 
-    # for rnn_type in rnn_type_list:
-    # rnn_type = "RNN"
-    # model = RNNBaseModel(rnn_type, 23, 23, 1)
-    # torch.save(model, '1.pt')
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
+
+        m_hidden = hidden_size * 4
+        m1 = nn.Linear(m_hidden, m_hidden)
+        m2 = nn.Linear(m_hidden, m_hidden)
+        m3 = nn.Linear(m_hidden, m_hidden)
+        m4 = nn.Linear(m_hidden, m_hidden)
+
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
+
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
+
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu)
+
+        self.S2 = nn.Sequential(m1, lRelu, m2, lRelu, m3, lRelu, m4, lRelu)
+
+        self.S3 = nn.Sequential(d3, lRelu,
+                                d2, lRelu, d1, tanh)
+
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
+
+        # get last sequence
+        out = out[:, -1, :].squeeze()
+
+        return out
+
+
+class lstm_ln_h8_m1(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.device = device
+
+        self.ln = nn.LayerNorm(input_size, device=device)
+
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
+        i3 = nn.Linear(hidden_size * 4, hidden_size * 8)
+
+        m_hidden = hidden_size * 8
+        m1 = nn.Linear(m_hidden, m_hidden)
+
+        d4 = nn.Linear(hidden_size * 8, hidden_size * 4)
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
+
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
+
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu, i3, lRelu
+                                )
+
+        self.S2 = nn.Sequential(m1, lRelu)
+
+        self.S3 = nn.Sequential(d4, lRelu, d3, lRelu,
+                                d2, lRelu, d1, tanh)
+
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
+
+        # get last sequence
+        out = out[:, -1, :].squeeze()
+
+        return out
+
+
+class lstm_ln_h8_m2(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.device = device
+
+        self.ln = nn.LayerNorm(input_size, device=device)
+
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
+        i3 = nn.Linear(hidden_size * 4, hidden_size * 8)
+
+        m_hidden = hidden_size * 8
+        m1 = nn.Linear(m_hidden, m_hidden)
+        m2 = nn.Linear(m_hidden, m_hidden)
+
+        d4 = nn.Linear(hidden_size * 8, hidden_size * 4)
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
+
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
+
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu, i3, lRelu
+                                )
+
+        self.S2 = nn.Sequential(m1, lRelu, m2, lRelu)
+
+        self.S3 = nn.Sequential(d4, lRelu, d3, lRelu,
+                                d2, lRelu, d1, tanh)
+
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
+
+        # get last sequence
+        out = out[:, -1, :].squeeze()
+
+        return out
+
+
+class lstm_ln_h8_m4(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, device):
+        super().__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.device = device
+
+        self.ln = nn.LayerNorm(input_size, device=device)
+
+        # (batch_size, sequence_size, input_size)
+        # => (batch_size, hidden_size)
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
+        # (batch_size, hidden_size)
+        # => (batch_size, num_classes)
+        i1 = nn.Linear(hidden_size, hidden_size * 2)
+        i2 = nn.Linear(hidden_size * 2, hidden_size * 4)
+        i3 = nn.Linear(hidden_size * 4, hidden_size * 8)
+
+        m_hidden = hidden_size * 8
+        m1 = nn.Linear(m_hidden, m_hidden)
+        m2 = nn.Linear(m_hidden, m_hidden)
+        m3 = nn.Linear(m_hidden, m_hidden)
+        m4 = nn.Linear(m_hidden, m_hidden)
+
+        d4 = nn.Linear(hidden_size * 8, hidden_size * 4)
+        d3 = nn.Linear(hidden_size * 4, hidden_size * 2)
+        d2 = nn.Linear(hidden_size * 2, hidden_size)
+        d1 = nn.Linear(hidden_size, 1)
+
+        lRelu = nn.LeakyReLU()
+        tanh = nn.Tanh()
+
+        self.S1 = nn.Sequential(i1, lRelu, i2, lRelu, i3, lRelu
+                                )
+
+        self.S2 = nn.Sequential(m1, lRelu, m2, lRelu, m3, lRelu, m4, lRelu)
+
+        self.S3 = nn.Sequential(d4, lRelu, d3, lRelu,
+                                d2, lRelu, d1, tanh)
+
+    def forward(self, x):
+        # initialize first hidden state
+        h0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+        c0 = torch.zeros(self.num_layers, x.size()[0], self.hidden_size).to(self.device)
+
+        x = self.ln(x)
+        # drop last hidden state
+        out, _ = self.lstm(x, (h0, c0))
+        out = self.S1(out)
+        out = self.S2(out)
+        out = self.S3(out)
+
+        # get last sequence
+        out = out[:, -1, :].squeeze()
+
+        return out

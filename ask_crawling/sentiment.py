@@ -19,27 +19,41 @@ def sentiment(df):
         sa = Pororo(task="sentiment", model="brainbert.base.ko.shopping", lang="ko")
         abs_summ = Pororo(task="text_summarization", lang="ko", model="abstractive")
         # print(df.loc[i, target_col])
-        abs = abs_summ(new_df.loc[i, target_col])
-        print(abs)
+        
         if len(new_df.loc[i, target_col]) > 500:
-            text = abs
+            try:
+                abs = abs_summ(new_df.loc[i, target_col])
+                text = abs
+            except:
+                time.sleep(5)
+                try:
+                    abs = abs_summ(new_df.loc[i, target_col])
+                    text = abs
+                except:
+                    text = " "
+                    pass
         else:
             text = new_df.loc[i, target_col]
 
-        sentimentResult = sa(text, show_probs=True)
+        try:
+            sentimentResult = sa(text, show_probs=True)
+            new_df.loc[i, "content_abs"] = " "
+            new_df.loc[i, "positive"] = sentimentResult['positive']
+            new_df.loc[i, "negative"] = sentimentResult['negative']
+        except:
+            new_df.loc[i, "content_abs"] = " "
+            new_df.loc[i, "positive"] = 0
+            new_df.loc[i, "negative"] = 0
 
-        new_df.loc[i, "content_abs"] = abs
-        new_df.loc[i, "positive"] = sentimentResult['positive']
-        new_df.loc[i, "negative"] = sentimentResult['negative']
 
         del sa
         del abs_summ
-        if i != 0 and i % 10 == 0:
+        if i != 0 and i % 2 == 0:
             time.sleep(2)
 
     if new_df.shape[0] > 0:
         insert_table_news(new_df)
-        make_word_count(new_df.iloc[0, :].loc['company'], new_df.iloc[0, :].loc['날짜'])
+        # make_word_count(new_df.iloc[0, :].loc['company'], new_df.iloc[0, :].loc['날짜'])
 
 
 # if __name__ == "__main__":
