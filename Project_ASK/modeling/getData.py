@@ -8,6 +8,8 @@ except:
 import pandas as pd
 from datetime import date
 
+from datetime import date
+
 
 def get_data(company, s_date, e_date):
     df_stock = read_table_stock(company, s_date, e_date)

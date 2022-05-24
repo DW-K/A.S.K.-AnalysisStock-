@@ -31,3 +31,10 @@ prac/
 .idea/workspace.xml
 
 
+Project_ASK/db/__pycache__/db.cpython-38.pyc
+Project_ASK/modeling/__pycache__/getData.cpython-38.pyc
+Project_ASK/modeling/__pycache__/gru_model.cpython-38.pyc
+Project_ASK/modeling/__pycache__/preprocess.cpython-38.pyc
+Project_ASK/modeling/__pycache__/rnn_model.cpython-38.pyc
+Project_ASK/modeling/models/scaler/1_se.pkl
+Project_ASK/modeling/models/scaler/1_st.pkl
