@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from preprocess import myDataset
 from datetime import date
 from rnn_model import *
+from gru_model import *
 import torch
 import torch.nn as nn
 from torch.optim import Adam, lr_scheduler
@@ -18,7 +19,7 @@ def mk_dir(path):
 
 
 class info_manager(object):
-    def __init__(self, model_name, non_sentiment, seq_size, keep_num=5, allow_increase=5):
+    def __init__(self, model_name, company, non_sentiment, seq_size, keep_num=5, allow_increase=5):
         self.info_list = []
         self.keep_num = keep_num
         # self.last_train_loss = 1e+10
@@ -28,6 +29,9 @@ class info_manager(object):
         self.allow_increase = allow_increase
 
         path = "./models"
+        mk_dir(path)
+
+        path = f"./models/{company}"
         mk_dir(path)
 
         dir_path = path + f'/{model_name}'
@@ -46,7 +50,7 @@ class info_manager(object):
         #     self.last_train_loss = info['train_loss']
         #     self.train_increase_count = 0
 
-        if info['loss'] >= self.last_val_loss:
+        if info['loss'] >= self.last_val_loss and info['epoch'] > 100:
             self.val_increase_count += 1
         else:
             self.val_increase_count = 0
@@ -62,7 +66,7 @@ class info_manager(object):
 
         info['path'] = f'{self.dir_path}/{self.base_file_name}_{info["loss"]:.7f}.pt'
         self.info_list.append(info)
-        self.info_list.sort(key=lambda x: x["loss"])
+        self.info_list.sort(key=lambda x: x["f1"])
 
         if len(self.info_list) > self.keep_num:
             del self.info_list[-1]
@@ -80,9 +84,9 @@ class info_manager(object):
             torch.save(info, info['path'])
 
 
-def train(model, opt, loss_func, schedular, train_dl, val_dl, test_dl, epochs, allow_increase, device, model_name, seq_size, non_sentiment):
+def train(model, opt, loss_func, schedular, train_dl, val_dl, test_dl, epochs, allow_increase, device, model_name, seq_size, non_sentiment, company):
     model.to(device)
-    im = info_manager(model_name, non_sentiment, seq_size, keep_num=5, allow_increase=allow_increase)
+    im = info_manager(model_name, company, non_sentiment, seq_size, keep_num=5, allow_increase=allow_increase)
 
     writer = SummaryWriter()
 
@@ -122,7 +126,7 @@ def train(model, opt, loss_func, schedular, train_dl, val_dl, test_dl, epochs, a
             description = f"epoch_{epoch}__seq_{seq_size}__{model_name}"
 
             info = {"loss": val_loss, "train_loss": train_loss, "model": model.state_dict(),
-                    "optim": opt.state_dict(), "description": description}
+                    "optim": opt.state_dict(), "description": description, "f1": f1, "epoch": epoch}
             if not im.add_info(info):
                 print(f'early stopping, epoch: {epoch}, seq: {seq_size}, model_name: {model_name}')
                 early_stop_flag = True
@@ -188,11 +192,11 @@ def validation(model, loss_func, val_dl, device):
     return val_loss, r2, f1, acc
 
 
-def main1():
+def main1(model, model_name, company):
     seq_size = 5
-    train_ds = myDataset("현대차", date(2021, 1, 1), date(2021, 10, 31), seq_size=seq_size, is_train=True)
-    val_ds = myDataset("현대차", date(2021, 11, 1), date(2022, 1, 31), seq_size=seq_size)
-    test_ds = myDataset("현대차", date(2022, 2, 1), date(2022, 4, 30), seq_size=seq_size)
+    train_ds = myDataset(company, date(2021, 1, 1), date(2021, 10, 31), seq_size=seq_size, is_train=True)
+    val_ds = myDataset(company, date(2021, 11, 1), date(2022, 1, 31), seq_size=seq_size)
+    test_ds = myDataset(company, date(2022, 2, 1), date(2022, 4, 30), seq_size=seq_size)
 
     train_dl = DataLoader(train_ds, batch_size=8, shuffle=False)
     val_dl = DataLoader(val_ds, batch_size=8, shuffle=False)
@@ -200,7 +204,7 @@ def main1():
 
     device = "cuda" if torch.cuda.is_available() else 'cpu'
 
-    model = lstm_ln_h4_m2(3, 6, 3, device)
+    # model = rnn_ln_h8_m4(3, 6, 3, device)
 
     lr = 1e-3
 
@@ -215,10 +219,27 @@ def main1():
                                       last_epoch=-1)
 
     train(model=model, opt=opt, loss_func=loss_func, schedular=scheduler, train_dl=train_dl,
-          val_dl=val_dl, test_dl=test_dl, epochs=epochs, allow_increase=3, device=device, model_name="lstm_h4_m1",
-          seq_size=seq_size, non_sentiment=False)
+          val_dl=val_dl, test_dl=test_dl, epochs=epochs, allow_increase=3, device=device, model_name=model_name,
+          seq_size=seq_size, non_sentiment=False, company=company)
+
+
+def get_h8():
+    model_list = [gru_ln_h8_m2(3, 6, 3, device), gru_ln_h8_m4(3, 6, 3, device), lstm_ln_h8_m2(3, 6, 3, device),
+                  lstm_ln_h8_m4(3, 6, 3, device),
+                  rnn_ln_h8_m2(3, 6, 3, device), rnn_ln_h8_m4(3, 6, 3, device)]
+
+    model_name_list = ["gru_ln_h8_m2", "gru_ln_h8_m4", "lstm_ln_h8_m2", "lstm_ln_h8_m4", "rnn_ln_h8_m2", "rnn_ln_h8_m4"]
+
+    return model_list, model_name_list
 
 
 if __name__ == "__main__":
-    main1()
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
+    company_list = ["현대차", "하이브", "카카오", "LG전자"]
+
+    for company in company_list:
+        model_list, model_name_list = get_h8()
+
+        for model, model_name in zip(model_list, model_name_list):
+            main1(model, model_name, company)
