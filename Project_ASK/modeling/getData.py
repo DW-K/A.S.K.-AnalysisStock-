@@ -30,7 +30,6 @@ def get_data(company, s_date, e_date):
     for i in df_stock.index:
         if i in df_sentiment.index:
             for col in sent_cols:
-                df_sentiment_avg.loc[i, col] = df_sentiment.loc[i, col].sum()/df_sentiment.loc[i, col].shape[0]
                 if type(df_sentiment.loc[i, col]) is not float:
                     df_sentiment_avg.loc[i, col] = df_sentiment.loc[i, col].sum()/df_sentiment.loc[i, col].shape[0]
                 else:
