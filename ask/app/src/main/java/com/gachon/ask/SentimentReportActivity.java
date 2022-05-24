@@ -190,16 +190,17 @@ public class SentimentReportActivity extends AppCompatActivity {
                     String date = post.getDate();
                     Double result = post.getResult();
 
-                    if(company.equals(stockName) && (date.equals("2022-04-28"))){ // 회사 이름이 일치해야 가져오도록
+                    if(company.equals(stockName) && (date.equals("2022-04-29"))){ // 회사 이름이 일치해야 가져오도록
                         content += "날짜: " + date + "\n\n";
                         content += "result: " + result + "\n\n";
 
                         results = (int)(result*100);
 
-                        if(result >= 1){
+                        if(result >= 0){
                             predictValue.setText(results +" % 상승");
                             predictValue.setTextColor(getResources().getColor(R.color.red_up));
                         }else{
+                            results *= -1;
                             predictValue.setText(results + "% 하락");
                             predictValue.setTextColor(getResources().getColor(R.color.blue_down));
                         }
@@ -251,6 +252,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                         String company = post.getCompany();
                         String date = post.getDate();
 
+                        if(!compareDate(date)) continue;
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getText() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -288,7 +290,8 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                         String company = post.getCompany();
                         String date = post.getDate();
-
+                        
+                        if(!compareDate(date)) continue;
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getTitle() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -322,7 +325,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         showingDate.setTime(new Date());
         showingDate.add(Calendar.DATE, -30);
 
-        Boolean result = inputCalendar.compareTo(showingDate) == 1;
+        Boolean result = inputCalendar.compareTo(showingDate) == 1; // inputCalendar가 더 클 경우 1 리턴.
         return result;
     }
 
