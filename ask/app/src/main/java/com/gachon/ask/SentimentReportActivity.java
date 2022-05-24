@@ -190,16 +190,17 @@ public class SentimentReportActivity extends AppCompatActivity {
                     String date = post.getDate();
                     Double result = post.getResult();
 
-                    if(company.equals(stockName) && (date.equals("2022-04-28"))){ // 회사 이름이 일치해야 가져오도록
+                    if(company.equals(stockName) && (date.equals("2022-04-29"))){ // 회사 이름이 일치해야 가져오도록
                         content += "날짜: " + date + "\n\n";
                         content += "result: " + result + "\n\n";
 
                         results = (int)(result*100);
 
-                        if(result >= 1){
+                        if(result >= 0){
                             predictValue.setText(results +" % 상승");
                             predictValue.setTextColor(getResources().getColor(R.color.red_up));
                         }else{
+                            results *= -1;
                             predictValue.setText(results + "% 하락");
                             predictValue.setTextColor(getResources().getColor(R.color.blue_down));
                         }
