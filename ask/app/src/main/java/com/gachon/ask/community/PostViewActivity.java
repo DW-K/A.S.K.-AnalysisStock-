@@ -82,10 +82,6 @@ public class PostViewActivity extends AppCompatActivity {
         post_id = intent.getStringExtra("post_id");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-
-
-
     }
 
     @Override
@@ -97,7 +93,6 @@ public class PostViewActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
-//        post_id = intent.getStringExtra("post_id");
         PostRef = db.collection("Posts").document(post_id);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(PostViewActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -332,14 +327,12 @@ public class PostViewActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String nickname = document.get("userNickName").toString();
                                 publisher = uid;
-//                                        profile_image = document.get("profileImage").toString();
                                 //Comment DB에 데이터 추가
                                 Map<String, Object> data = new HashMap<>();
                                 data.put("content", comment);
                                 data.put("nickname", nickname);
                                 data.put("publisher", publisher);
                                 data.put("post_id", post_id);
-//                                        data.put("profile_image", profile_image);
                                 data.put("time", timestamp);
 
                                 db.collection("Comment")
@@ -349,7 +342,6 @@ public class PostViewActivity extends AppCompatActivity {
                                             public void onSuccess(DocumentReference documentReference) {
                                                 int_num_comment++;
                                                 updateNumComment();
-//                                                num_comment = (long) document.get("num_comment");
                                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                                             }
                                         })
@@ -371,9 +363,6 @@ public class PostViewActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                                //어댑터에 값 전달
-//                                        adapter.addItem(new CommentInfo(comment, nickname, post_id, profile_image, time));
-
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

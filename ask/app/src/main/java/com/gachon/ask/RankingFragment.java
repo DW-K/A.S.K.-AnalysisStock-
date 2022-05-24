@@ -60,35 +60,11 @@ public class RankingFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-//        view.findViewById(R.id.btn_ranking_yield).setOnClickListener(onClickListener);
-//        view.findViewById(R.id.btn_ranking_level).setOnClickListener(onClickListener);
 
 
         return view;
     }
 
-
-    boolean yield_clicked = true, level_clicked = false;
-
-
-
-
-//    View.OnClickListener onClickListener = v -> {
-//        switch (v.getId()) {
-//            case R.id.btn_ranking_yield:
-//                selected_rank_category = "profitRate";
-//                v.setBackgroundResource(R.drawable.tab_ranking_selected);
-//                yield_clicked = true;
-//                level_clicked = false;
-//                break;
-//            case R.id.btn_ranking_level:
-//                selected_rank_category = "userLevel";
-//                level_clicked = true;
-//                yield_clicked = false;
-//                break;
-//        }
-//        refresh(selected_rank_category);
-//    };
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -102,7 +78,7 @@ public class RankingFragment extends Fragment {
             }
         });
 
-        // 버튼 클릭 이벤트 작성
+        // 버튼 클릭 이벤트
         btnYield = getView().findViewById(R.id.btn_ranking_yield);
         btnLevel = getView().findViewById(R.id.btn_ranking_level);
         btnYield.setOnClickListener(new View.OnClickListener() {
@@ -120,13 +96,10 @@ public class RankingFragment extends Fragment {
             public void onClick(View v) {
                 v.setBackgroundResource(R.drawable.tab_ranking_selected);
                 btnYield.setBackgroundResource(R.drawable.tab_ranking);
-
                 selected_rank_category = "userLevel";
-
                 refresh(selected_rank_category);
             }
         });
-
 
     }
 

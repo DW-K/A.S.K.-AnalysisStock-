@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,9 +33,10 @@ public class SentimentReportActivity extends AppCompatActivity {
     private ArrayList<Post> myPostList;
     private SentimentReportHotAdapter sentimentReportHotAdapter;
     private RecyclerView RecyclerView_hot_keyword;
-    private TextView originalText, companyName, sentimentPercent;
+    private TextView originalText, companyName, sentimentPercent, predictValue;
     private Button btnTweet, btnNews;
     private Double totalSentiment;
+    private int itemCount, results;
     String url, selected_media="tweet";
     String stockName;
 
@@ -46,7 +48,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         sentimentPercent = findViewById(R.id.tv_main_sentiment_percent);
         companyName = findViewById(R.id.tv_company_name);
         RecyclerView_hot_keyword = findViewById(R.id.hot_keyword);
-
+        predictValue = findViewById(R.id.tv_stock_prediction_value);
 
         // 모의투자에서 받은 intent data
         Intent intent = getIntent();
@@ -56,6 +58,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         // get data
         getOriginalData(selected_media, stockName);
         getKeywordData();
+        getStockPrediction();
 
 
         // 버튼 클릭 이벤트
@@ -102,44 +105,41 @@ public class SentimentReportActivity extends AppCompatActivity {
         call = jsonPlaceHOlderApi.getNewsCount();
         myPostList = new ArrayList<>();
         totalSentiment = 0.0;
+        itemCount = 0;
+        String[] badKeyword = {"국내","기자","업계","최근","서울","뉴시스","시스","제공", "현대차", "기업",
+                "21일", "달러", "이번", "이날", "17일", "증권", "그룹", "올해", "지난해", "4일", "5일",
+        "7일", "10일", "시장", "13일", "14일", "15일", "18일", "19일", "20일", "22일", "3일", "24일", "26일", "28일", "29일", "때문", "1일"};
+        ArrayList<String>  badKeywords = new ArrayList<>(Arrays.asList(badKeyword));
+        ArrayList<String>  keywordList = new ArrayList<>();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 myPostList.clear();
                 if (!response.isSuccessful()) return;
-                //myPostList = new ArrayList<>();
                 List<Post> posts = response.body();
 
-
-                myPostList.addAll(posts); // 상위 5개의 post만 저장
-
                 for ( Post post : posts) {
-                    String content ="";
-
                     String company = post.getCompany();
-//                    String date = post.getDate();
+                    String keyword = post.getWord();
 
-                    if(!company.equals(stockName)){
-                        myPostList.remove(post);
-                        continue;}
-                    else{
+                    if(!company.equals(stockName)) continue;
+                    if(!keywordList.contains(keyword) && !badKeywords.contains(keyword)){
+                        myPostList.add(post);
                         Double sentiment = Double.parseDouble(post.getPositive());
                         totalSentiment += sentiment;
+                        keywordList.add(keyword);
+                        itemCount+=1;
                     }
-                    //if(!compareDate(date)) continue;
-
-                    Log.d(TAG, "keyword : "+post.getWord());
-                    Log.d(TAG, "news_count_id : "+post.getNewsCountId());
-                    Log.d(TAG, "\n");
-
+                    if(itemCount>=10) {
+                        break;
+                    }
                 }
                 // adapter
                 sentimentReportHotAdapter = new SentimentReportHotAdapter(myPostList);
                 // set adapter to recyclerview
                 RecyclerView_hot_keyword.setAdapter(sentimentReportHotAdapter);
 
-                int avg = (int)((totalSentiment/5)*100);
-//                sentimentPercent.setText("긍정 " + avg +" %  부정 " + (100-avg) + "% ");
+                int avg = (int)((totalSentiment*100)/itemCount);
                 if(avg > 50){
                     sentimentPercent.setText("긍정 " + avg +" %");
                     sentimentPercent.setTextColor(getResources().getColor(R.color.red_up));
@@ -158,6 +158,66 @@ public class SentimentReportActivity extends AppCompatActivity {
         });
     }
 
+    public void getStockPrediction() {
+        String SERVER_URL = BuildConfig.SERVER;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
+
+        Call<List<Post>> call = jsonPlaceHOlderApi.getResult();
+        // get data
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                predictValue.setText("");
+                if (!response.isSuccessful())
+                {
+                    predictValue.setText("Code:" + response.code());
+                    return;
+                }
+
+                List<Post> posts = response.body();
+
+                for ( Post post : posts) {
+                    String content ="";
+
+
+                    String company = post.getCompany();
+                    String date = post.getDate();
+                    Double result = post.getResult();
+
+                    if(company.equals(stockName) && (date.equals("2022-04-28"))){ // 회사 이름이 일치해야 가져오도록
+                        content += "날짜: " + date + "\n\n";
+                        content += "result: " + result + "\n\n";
+
+                        results = (int)(result*100);
+
+                        if(result >= 1){
+                            predictValue.setText(results +" % 상승");
+                            predictValue.setTextColor(getResources().getColor(R.color.red_up));
+                        }else{
+                            predictValue.setText(results + "% 하락");
+                            predictValue.setTextColor(getResources().getColor(R.color.blue_down));
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                System.out.println("실패했습니다.");
+                originalText.setText(t.getMessage());
+            }
+        });
+
+    }
+
+
     public void getOriginalData(String current_category, String stockName) {
         String SERVER_URL = BuildConfig.SERVER;
 
@@ -169,6 +229,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
 
         Call<List<Post>> call = jsonPlaceHOlderApi.getNews();
+        // get tweet data
         if(current_category.equals("tweet")) {
             call = jsonPlaceHOlderApi.getTweets();
             call.enqueue(new Callback<List<Post>>() {
@@ -190,9 +251,6 @@ public class SentimentReportActivity extends AppCompatActivity {
                         String company = post.getCompany();
                         String date = post.getDate();
 
-                        //if(!company.equals(stockName)) continue;
-                        //if(!compareDate(date)) continue;
-
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getText() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -210,8 +268,8 @@ public class SentimentReportActivity extends AppCompatActivity {
             });
         }
         else{
+            //get news data
             call = jsonPlaceHOlderApi.getNews();
-            //call = jsonPlaceHOlderApi.getTweets();
             call.enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -230,8 +288,6 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                         String company = post.getCompany();
                         String date = post.getDate();
-                        //if(!company.equals(stockName)) continue;
-                        //if(!compareDate(date)) continue;
 
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getTitle() + "\n";

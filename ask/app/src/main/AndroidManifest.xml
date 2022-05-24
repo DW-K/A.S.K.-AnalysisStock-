@@ -32,7 +32,6 @@
             android:name=".settings.SettingActivity"
             android:exported="false" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoadingActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SplashActivity"
@@ -48,6 +47,8 @@
         <activity android:name=".community.PostViewActivity" />
         <activity android:name=".community.CommunityCategoryActivity" />
         <activity android:name=".GuideActivity" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".QuizShareActivity" />
         <activity
             android:name=".CommunityFragment"
             tools:ignore="Instantiatable" />

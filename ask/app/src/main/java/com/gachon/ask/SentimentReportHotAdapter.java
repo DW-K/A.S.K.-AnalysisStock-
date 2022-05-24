@@ -50,6 +50,7 @@ public class SentimentReportHotAdapter extends RecyclerView.Adapter<SentimentRep
         }else{
             binding.tvSentiment.setText("부정");
         }
+
     }
 
     @Override

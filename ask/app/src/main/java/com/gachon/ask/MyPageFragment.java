@@ -190,18 +190,6 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
         expBar = getView().findViewById(R.id.progressBar);
         setUserData();
 
-        /* 경험치 임시 추가 버튼 */
-//        Button tempAddExpBtn =  getView().findViewById(R.id.btn_addExp);
-//        tempAddExpBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                LevelSystem lvlSystem = new LevelSystem();
-//                int exp = lvlSystem.addExp(user, 30);
-//                tv_level_exp.setText(exp + " %");
-//                tv_level.setText(getString(R.string.level) + lvlSystem.level);
-//                expBar.setProgress(exp);
-//            }
-//        });
 
     }
 
@@ -241,7 +229,6 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
                         binding.buttonInvestment.setVisibility(View.VISIBLE); // 주식 거래 내역이 없다면 모의투자 버튼 활성화 O
                         Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
-                    // MyPageAdapter.notifyDataSetChanged();
                     // last
                 }else{
                     Log.d("MyPageFragment", "getUserData task is failed.");
@@ -278,7 +265,6 @@ public class MyPageFragment extends BaseFragment<FragmentMypageBinding> implemen
                     else{
                         Toast.makeText(getContext(), "현재 주식 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
-                    // homeAdapter.notifyDataSetChanged();
                     // last
                 }else{
                     Log.d("MyPageFragment", "getUserData task is failed.");

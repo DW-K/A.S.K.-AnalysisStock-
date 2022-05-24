@@ -107,6 +107,63 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_prediction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="15dp"
+                android:padding="10dp"
+                android:background="@drawable/round_sentiment"
+                android:elevation="10dp"
+                android:backgroundTint="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_stock_predict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="@string/stock_prediction"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_margin="10dp">
+
+
+
+
+                    <TextView
+                        android:id="@+id/tv_stock_prediction_value"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:text="30% 상승"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="내일의 주가 예상"/>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:id="@+id/layout_hot_keyword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
