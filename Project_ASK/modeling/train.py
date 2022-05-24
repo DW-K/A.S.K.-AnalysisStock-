@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from preprocess import myDataset
 from datetime import date
 from rnn_model import *
+from gru_model import *
 import torch
 import torch.nn as nn
 from torch.optim import Adam, lr_scheduler
@@ -169,10 +170,10 @@ def validation(model, loss_func, val_dl, device):
             #
             # r2 += r2_score(y.cpu(), output.cpu())
             for out in output:
-                output_list.append(out)
+                output_list.append(out.cpu())
 
             for t in y:
-                y_list.append(t)
+                y_list.append(t.cpu())
 
             val_loss += loss.item()
 
@@ -188,7 +189,7 @@ def validation(model, loss_func, val_dl, device):
     return val_loss, r2, f1, acc
 
 
-def main1():
+def main1(model, model_name):
     seq_size = 5
     train_ds = myDataset("현대차", date(2021, 1, 1), date(2021, 10, 31), seq_size=seq_size, is_train=True)
     val_ds = myDataset("현대차", date(2021, 11, 1), date(2022, 1, 31), seq_size=seq_size)
@@ -197,10 +198,6 @@ def main1():
     train_dl = DataLoader(train_ds, batch_size=8, shuffle=False)
     val_dl = DataLoader(val_ds, batch_size=8, shuffle=False)
     test_dl = DataLoader(test_ds, batch_size=8, shuffle=False)
-
-    device = "cuda" if torch.cuda.is_available() else 'cpu'
-
-    model = lstm_ln_h4_m2(3, 6, 3, device)
 
     lr = 1e-3
 
@@ -215,10 +212,16 @@ def main1():
                                       last_epoch=-1)
 
     train(model=model, opt=opt, loss_func=loss_func, schedular=scheduler, train_dl=train_dl,
-          val_dl=val_dl, test_dl=test_dl, epochs=epochs, allow_increase=3, device=device, model_name="lstm_h4_m1",
+          val_dl=val_dl, test_dl=test_dl, epochs=epochs, allow_increase=3, device=device, model_name=model_name,
           seq_size=seq_size, non_sentiment=False)
 
 
 if __name__ == "__main__":
-    main1()
+    device = "cuda" if torch.cuda.is_available() else 'cpu'
+
+    model_list = [gru_ln_h4_m1(3, 6, 3, device), gru_ln_h4_m2(3, 6, 3, device), gru_ln_h4_m4]
+    h_list = [1, 2, 4]
+
+    for model, h in zip(model_list, h_list):
+        main1(model, f"gru_h4_m{h}")
 

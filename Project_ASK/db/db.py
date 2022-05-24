@@ -79,16 +79,5 @@ def insert_table_result(df_result):  # dataframe 하나씩 넣기
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    # df = read_table_stock(company='현대차', s_date=date(2021, 1, 1), e_date=date(2022, 4, 30))
-    # print(df)
-
-    df = pd.DataFrame([[date(2021, 5, 5), "현대차", 0.5], [date(2021, 6, 6), "현대차", -0.1]], columns=["date", "company", "result"])
-
-    create_table_result()
-
-    insert_table_result(df_result=df)
-=======
     df = read_table_news(company='현대차', s_date=date(2022, 4, 1), e_date=date(2022, 4, 29))
     print(df)
->>>>>>> c85876a (no message)
