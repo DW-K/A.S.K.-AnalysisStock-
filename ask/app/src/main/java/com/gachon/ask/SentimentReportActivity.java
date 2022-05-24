@@ -33,10 +33,10 @@ public class SentimentReportActivity extends AppCompatActivity {
     private ArrayList<Post> myPostList;
     private SentimentReportHotAdapter sentimentReportHotAdapter;
     private RecyclerView RecyclerView_hot_keyword;
-    private TextView originalText, companyName, sentimentPercent;
+    private TextView originalText, companyName, sentimentPercent, predictValue;
     private Button btnTweet, btnNews;
     private Double totalSentiment;
-    private int itemCount;
+    private int itemCount, results;
     String url, selected_media="tweet";
     String stockName;
 
@@ -48,7 +48,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         sentimentPercent = findViewById(R.id.tv_main_sentiment_percent);
         companyName = findViewById(R.id.tv_company_name);
         RecyclerView_hot_keyword = findViewById(R.id.hot_keyword);
-
+        predictValue = findViewById(R.id.tv_stock_prediction_value);
 
         // 모의투자에서 받은 intent data
         Intent intent = getIntent();
@@ -58,6 +58,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         // get data
         getOriginalData(selected_media, stockName);
         getKeywordData();
+        getStockPrediction();
 
 
         // 버튼 클릭 이벤트
@@ -90,7 +91,6 @@ public class SentimentReportActivity extends AppCompatActivity {
     }
 
     public void getKeywordData() {
-        System.out.println("getKeywordData에 진입했습니다.");
         totalSentiment = 0.0;
         String SERVER_URL = BuildConfig.SERVER;
 
@@ -168,17 +168,15 @@ public class SentimentReportActivity extends AppCompatActivity {
 
         JsonPlaceHOlderApi jsonPlaceHOlderApi = retrofit.create(JsonPlaceHOlderApi.class);
 
-        Call<List<Post>> call = jsonPlaceHOlderApi.getNews();
+        Call<List<Post>> call = jsonPlaceHOlderApi.getResult();
         // get data
-
-        call = jsonPlaceHOlderApi.getTweets();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                originalText.setText("");
+                predictValue.setText("");
                 if (!response.isSuccessful())
                 {
-                    originalText.setText("Code:" + response.code());
+                    predictValue.setText("Code:" + response.code());
                     return;
                 }
 
@@ -190,14 +188,24 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                     String company = post.getCompany();
                     String date = post.getDate();
+                    Double result = post.getResult();
 
-                    if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
-                        content += "" + post.getText() + "\n";
+                    if(company.equals(stockName) && (date.equals("2022-04-28"))){ // 회사 이름이 일치해야 가져오도록
                         content += "날짜: " + date + "\n\n";
+                        content += "result: " + result + "\n\n";
 
-                        originalText.append(content);
+                        results = (int)(result*100);
+
+                        if(result >= 1){
+                            predictValue.setText(results +" % 상승");
+                            predictValue.setTextColor(getResources().getColor(R.color.red_up));
+                        }else{
+                            predictValue.setText(results + "% 하락");
+                            predictValue.setTextColor(getResources().getColor(R.color.blue_down));
+                        }
                     }
                 }
+
             }
 
             @Override

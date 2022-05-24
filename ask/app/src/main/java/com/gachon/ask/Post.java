@@ -2,6 +2,7 @@ package com.gachon.ask;
 
 public class Post {
     private int id, news_count_id, rt_count;
+    private double result;
 
 
     private String text, date, company, positive, negative; // 트윗 Meta-data
@@ -40,6 +41,7 @@ public class Post {
     public String getWord() { return word; }
 
     public String getCount() { return count; }
+    public Double getResult() { return result; }
 
     @Override
     public String toString() {
@@ -57,6 +59,7 @@ public class Post {
                 ", text_news='" + text_news + '\'' +
                 ", word='" + word + '\'' +
                 ", count='" + count + '\'' +
+                ", result='" + result + '\'' +
                 '}';
     }
 }

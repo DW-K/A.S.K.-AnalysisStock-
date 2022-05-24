@@ -15,4 +15,7 @@ public interface JsonPlaceHOlderApi {
 
     @GET("crawl_news_count")
     Call<List<Post>> getNewsCount();
+
+    @GET("result")
+    Call<List<Post>> getResult();
 }
