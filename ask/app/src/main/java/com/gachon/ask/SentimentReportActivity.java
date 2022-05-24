@@ -252,6 +252,7 @@ public class SentimentReportActivity extends AppCompatActivity {
                         String company = post.getCompany();
                         String date = post.getDate();
 
+                        if(!compareDate(date)) continue;
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getText() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -289,7 +290,8 @@ public class SentimentReportActivity extends AppCompatActivity {
 
                         String company = post.getCompany();
                         String date = post.getDate();
-
+                        
+                        if(!compareDate(date)) continue;
                         if(company.equals(stockName)){ // 회사 이름이 일치해야 가져오도록
                             content += "" + post.getTitle() + "\n";
                             content += "날짜: " + date + "\n\n";
@@ -323,7 +325,7 @@ public class SentimentReportActivity extends AppCompatActivity {
         showingDate.setTime(new Date());
         showingDate.add(Calendar.DATE, -30);
 
-        Boolean result = inputCalendar.compareTo(showingDate) == 1;
+        Boolean result = inputCalendar.compareTo(showingDate) == 1; // inputCalendar가 더 클 경우 1 리턴.
         return result;
     }
 
