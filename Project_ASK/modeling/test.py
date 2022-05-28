@@ -16,11 +16,13 @@ def test(path, model, test_dl, device):
     loss_func = nn.MSELoss()
     info = torch.load(path)
 
-    try:
-        model.load_state_dict(info["model"])
-    except:
-        os.remove(path)
-        return
+    # try:
+    #     model.load_state_dict(info["model"])
+    # except:
+    #     # os.remove(path)
+    #     print(path)
+    #     return
+    model.load_state_dict(info["model"])
 
     print(f'{company}, {model_name}, {file_name}')
 
@@ -40,7 +42,7 @@ if __name__ == "__main__":
                       lstm_ln_h8_m4(3, 6, 3, device),
                       rnn_ln_h8_m2(3, 6, 3, device), rnn_ln_h8_m4(3, 6, 3, device)]
 
-        model_name_list = ["gru_ln_h8_m2", "gru_ln_h8_m4", "lstm_ln_h8_m2", "lstm_ln_h8_m4","rnn_ln_h8_m2",
+        model_name_list = ["gru_ln_h8_m2", "gru_ln_h8_m4", "lstm_ln_h8_m2", "lstm_ln_h8_m4", "rnn_ln_h8_m2",
                            "rnn_ln_h8_m4"]
 
         for model, model_name in zip(model_list, model_name_list):

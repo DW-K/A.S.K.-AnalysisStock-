@@ -454,3 +454,14 @@ class rnn_ln_h8_m2(nn.Module):
         out = out[:, -1, :].squeeze()
 
         return out
+
+if __name__ == "__main__":
+    md = gru_ln_h8_m4(3,6,3, "cpu")
+
+    pp = 0
+    for p in md.parameters():
+        nn = 1
+        for s in list(p.size()):
+            nn = nn*s
+        pp += nn
+    print(pp)

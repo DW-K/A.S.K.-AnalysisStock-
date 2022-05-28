@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import torch
 
@@ -36,23 +38,38 @@ def preprocessing(company, s_date, e_date, path, is_train=False):
     stock_np = ss_stock.transform(stock_df)
     y = data["target"].values
 
-    return stock_np, sentiment_np, y
+    X_np = {'stock': stock_np, 'sentiment': sentiment_np, 'date': list(stock_df.index)}
+
+    return X_np, y
 
 
 class myDataset(data.Dataset):
-    def __init__(self, company, s_date, e_date, seq_size=5, is_train=False, split_sentiment=False):
+    def __init__(self, company, s_date, e_date, seq_size=5, is_train=False, split_sentiment=False, get_dates=False):
         super(myDataset, self).__init__()
 
         self.seq_size = seq_size
         self.split_sentiment = split_sentiment
+        self.is_train = is_train
+        self.get_dates = get_dates
 
-        path = r'./models/scaler/1'
+        path = fr'./models/scaler'
+        if not os.path.exists(path):
+            os.mkdir(path)
 
-        X_stock, X_sentiment, y = preprocessing(company, s_date, e_date, path, is_train)
+        path = f'{path}/{company}'
+
+        X_np, y = preprocessing(company, s_date, e_date, path, self.is_train)
+
+        X_stock = X_np['stock']
+        X_sentiment = X_np["sentiment"]
 
         X_stock_tensor = torch.FloatTensor(X_stock)
         X_sentiment_tensor = torch.FloatTensor(X_sentiment)
+
         self.y = torch.FloatTensor(y)[self.seq_size:]
+
+        if get_dates:
+            self.dates = X_np['date'][self.seq_size:]
 
         if split_sentiment is False:
             self.X = torch.cat([X_stock_tensor, X_sentiment_tensor], axis=1)
@@ -64,10 +81,13 @@ class myDataset(data.Dataset):
             return self.X[0][index:index+self.seq_size], self.X[1][index:index+self.seq_size], \
                    self.y[index]
 
-        return self.X[index:index+self.seq_size], self.y[index]
+        if self.get_dates:
+            return self.X[index:index+self.seq_size], self.y[index], self.dates[index]
+
+        return self.X[index:index + self.seq_size], self.y[index]
 
     def __len__(self):
-        return self.y.shape[0] - self.seq_size
+        return self.y.shape[0]
 
 
 if __name__ == "__main__":

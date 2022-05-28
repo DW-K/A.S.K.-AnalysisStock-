@@ -16,8 +16,11 @@ meta = MetaData()
 engine = create_engine(db_connection_address)
 
 
-def read_table_stock(company, s_date, e_date):
-    SQL = f'SELECT * FROM crawl_stock_table WHERE company="{company}" AND "{s_date}" <= 날짜 AND 날짜 <= "{e_date}"'
+def read_table_stock(company, s_date, e_date, seq_size=5):
+    if e_date is None:
+        SQL = f'SELECT * FROM crawl_stock_table WHERE company="{company}" AND 날짜 <= "{s_date}" ORDER BY 날짜 DESC LIMIT {seq_size}"'
+    else:
+        SQL = f'SELECT * FROM crawl_stock_table WHERE company="{company}" AND "{s_date}" <= 날짜 AND 날짜 <= "{e_date}"'
     db_connection = create_engine(db_connection_address)
     df = pd.read_sql(SQL, db_connection)
     return df
@@ -46,7 +49,7 @@ def get_table_obj_result(db_meta=meta):
     result_table = Table(
         'result_table', db_meta,
         Column('id', BigInteger, primary_key=True, autoincrement=True),
-        Column('date', DATE, nullable=False),
+        Column('date', DATE, primary_key=True, nullable=False),
         Column('company', VARCHAR(64), nullable=False),
         Column('result', FLOAT),
     )

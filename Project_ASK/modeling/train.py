@@ -22,7 +22,6 @@ class info_manager(object):
     def __init__(self, model_name, company, non_sentiment, seq_size, keep_num=5, allow_increase=5):
         self.info_list = []
         self.keep_num = keep_num
-        # self.last_train_loss = 1e+10
         self.last_val_loss = 1e+10
         self.train_increase_count = 0
         self.val_increase_count = 0
@@ -43,22 +42,16 @@ class info_manager(object):
         else:
             self.base_file_name = f"seq_{seq_size}"
 
-    def add_info(self, info):
-        # if info['train_loss'] > self.last_train_loss:
-        #     self.train_increase_count += 1
-        # else:
-        #     self.last_train_loss = info['train_loss']
-        #     self.train_increase_count = 0
+    def __del__(self):
+        for info in self.info_list:
+            del info
 
+    def add_info(self, info):
         if info['loss'] >= self.last_val_loss and info['epoch'] > 100:
             self.val_increase_count += 1
         else:
             self.val_increase_count = 0
         self.last_val_loss = info['loss']
-
-        # if self.train_increase_count > self.allow_increase:
-        #     print(f"train loss increase {self.train_increase_count} times")
-        #     return False
 
         if self.val_increase_count > self.allow_increase:
             print(f"val loss increase {self.val_increase_count} times")
@@ -87,6 +80,10 @@ class info_manager(object):
 def train(model, opt, loss_func, schedular, train_dl, val_dl, test_dl, epochs, allow_increase, device, model_name, seq_size, non_sentiment, company):
     model.to(device)
     im = info_manager(model_name, company, non_sentiment, seq_size, keep_num=5, allow_increase=allow_increase)
+
+    if len(os.listdir(im.dir_path)) > 0:
+        print(f'{im.dir_path}: {len(os.listdir(im.dir_path))}')
+        return
 
     writer = SummaryWriter()
 
@@ -148,6 +145,8 @@ def train(model, opt, loss_func, schedular, train_dl, val_dl, test_dl, epochs, a
     writer.close()
     im.save_model()
 
+    del im
+
 
 def validation(model, loss_func, val_dl, device):
     with torch.no_grad():
@@ -173,10 +172,10 @@ def validation(model, loss_func, val_dl, device):
             #
             # r2 += r2_score(y.cpu(), output.cpu())
             for out in output:
-                output_list.append(out)
+                output_list.append(out.cpu())
 
             for t in y:
-                y_list.append(t)
+                y_list.append(t.cpu())
 
             val_loss += loss.item()
 
@@ -222,24 +221,29 @@ def main1(model, model_name, company):
           val_dl=val_dl, test_dl=test_dl, epochs=epochs, allow_increase=3, device=device, model_name=model_name,
           seq_size=seq_size, non_sentiment=False, company=company)
 
+    del train_dl, train_ds, val_dl, val_ds, test_dl, test_ds, scheduler
+
 
 def get_h8():
-    model_list = [gru_ln_h8_m2(3, 6, 3, device), gru_ln_h8_m4(3, 6, 3, device), lstm_ln_h8_m2(3, 6, 3, device),
-                  lstm_ln_h8_m4(3, 6, 3, device),
-                  rnn_ln_h8_m2(3, 6, 3, device), rnn_ln_h8_m4(3, 6, 3, device)]
+    model_func_list = [gru_ln_h8_m2, gru_ln_h8_m4, lstm_ln_h8_m2,
+                  lstm_ln_h8_m4,
+                  rnn_ln_h8_m2, rnn_ln_h8_m4]
 
     model_name_list = ["gru_ln_h8_m2", "gru_ln_h8_m4", "lstm_ln_h8_m2", "lstm_ln_h8_m4", "rnn_ln_h8_m2", "rnn_ln_h8_m4"]
 
-    return model_list, model_name_list
+    return model_func_list, model_name_list
 
 
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     company_list = ["현대차", "하이브", "카카오", "LG전자"]
+    # company_list = ["하이브"]
 
     for company in company_list:
-        model_list, model_name_list = get_h8()
+        model_func_list, model_name_list = get_h8()
 
-        for model, model_name in zip(model_list, model_name_list):
+        for model_func, model_name in zip(model_func_list, model_name_list):
+            model = model_func(3, 6, 3, device)
             main1(model, model_name, company)
+            del model

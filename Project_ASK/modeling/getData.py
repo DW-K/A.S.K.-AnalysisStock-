@@ -40,7 +40,7 @@ def get_data(company, s_date, e_date):
             for col in sent_cols:
                 df_sentiment_avg.loc[i, col] = 0
 
-    result = {"sentiment": df_sentiment_avg, "stock": df_stock[stock_cols], "target": df_stock[target_col]}
+    result = {"sentiment": df_sentiment_avg, "stock": df_stock[stock_cols], "target": df_stock[target_col], "date": list(df_stock.index)}
 
     return result
 
