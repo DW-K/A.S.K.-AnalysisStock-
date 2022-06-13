@@ -58,24 +58,30 @@ def getStockPrice(company, stockCode, s_day, e_day=None):
 if __name__ == "__main__":
     print('start getStockPrice code')
 
-    # argList = sys.argv[1:]
+    # argList = sys.argv[1:
+    # ---------------------------------------------------------
+    arg_list1 = ['카카오', '035720', '20220501', '20220530']
+    arg_list2 = ['하이브', '352820', '20220501', '20220530']
+    #arg_list3 = ['카카오', '035720', '20220501', '20220530']
+    #arg_list4 = ['하이브', '352820', '20220501', '20220530']
 
-    argList = ['현대차', '005380', '20210101', '20210201']
+    arg_list_list = [arg_list1, arg_list2]
 
     create_table_stock()
 
-    company = argList[0]
-    stockCode = argList[1]
-    start_date_str = argList[2]
+    for arg_list in arg_list_list:
+        company = arg_list[0]
+        query_list = arg_list[1]
+        start_date_str = arg_list[2]
+        end_date_str = arg_list[3]
 
-    if len(argList) == 3:
-        end_date_str = start_date_str
-    elif len(argList) == 4:
-        end_date_str = argList[3]
+        date_format = "%Y%m%d"
 
-    date_format = "%Y%m%d"
+        start_date = datetime.strptime(start_date_str, date_format)
+        end_date = datetime.strptime(end_date_str, date_format)
 
-    cur_date = datetime.strptime(start_date_str, date_format)
-    end_date = datetime.strptime(end_date_str, date_format)
+        print(company, query_list, start_date, end_date)
 
-    getStockPrice(company, stockCode, cur_date, end_date)
+        getStockPrice(company, query_list, start_date, end_date)
+    # ---------------------------------------------------------
+

@@ -36,7 +36,8 @@ public class SentimentReportActivity extends AppCompatActivity {
     private TextView originalText, companyName, sentimentPercent, predictValue;
     private Button btnTweet, btnNews;
     private Double totalSentiment;
-    private int itemCount, results;
+    private int itemCount;
+    private double results;
     String url, selected_media="tweet";
     String stockName;
 
@@ -194,14 +195,14 @@ public class SentimentReportActivity extends AppCompatActivity {
                         content += "날짜: " + date + "\n\n";
                         content += "result: " + result + "\n\n";
 
-                        results = (int)(result*100);
+                        results = result;
 
                         if(result >= 0){
-                            predictValue.setText(results +" % 상승");
+                            predictValue.setText(String.format("%.2f",results) +" % 상승");
                             predictValue.setTextColor(getResources().getColor(R.color.red_up));
                         }else{
                             results *= -1;
-                            predictValue.setText(results + "% 하락");
+                            predictValue.setText(String.format("%.2f",results) + "% 하락");
                             predictValue.setTextColor(getResources().getColor(R.color.blue_down));
                         }
                     }
